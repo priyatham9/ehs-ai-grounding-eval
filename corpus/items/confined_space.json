@@ -1,0 +1,309 @@
+{
+  "schema_version": "1.0",
+  "domain": "confined_space",
+  "domain_title": "Permit-required confined spaces (general industry)",
+  "source_family": "29 CFR 1910.146",
+  "sourcing_note": "All items grounded in 29 CFR 1910.146. The standard itself contains an explicit note warning against the confusion probed by cs-001/cs-002, which is unusual and makes that pair a strong discriminator.",
+  "items": [
+    {
+      "id": "cs-001",
+      "item_type": "factual",
+      "pair_id": "cs-p1",
+      "pair_role": "a",
+      "family": "cs.alternate_vs_reclassify",
+      "risk_tier": "high",
+      "question": "Under 29 CFR 1910.146(c)(5), what must an employer be able to demonstrate before using the alternate entry procedures for a permit space?",
+      "correct_answer": "The employer must demonstrate that the only hazard posed by the permit space is an actual or potential hazardous atmosphere, and that continuous forced air ventilation alone is sufficient to maintain that permit space safe for entry. Monitoring and inspection data supporting these demonstrations must be developed, and if entry is needed to obtain that data it must be performed under the full permit provisions. The space remains a permit space; the alternate procedures relieve the employer of paragraphs (d) through (f) and (h) through (k).",
+      "answer_key": {
+        "required_concepts": [
+          ["only hazard", "sole hazard", "only an atmospheric", "atmospheric hazard is the only"],
+          ["continuous forced air ventilation", "forced air ventilation"],
+          ["demonstrate", "demonstration", "monitoring and inspection data", "data"]
+        ],
+        "forbidden_concepts": [
+          ["reclassified as a non-permit", "becomes a non-permit space", "no longer a permit space"]
+        ],
+        "numeric_facts": []
+      },
+      "adjacent_wrong": {
+        "label": "Reclassification to a non-permit confined space under 1910.146(c)(7)",
+        "answer": "The wrong answer describes reclassification: eliminating all hazards so that the space becomes a non-permit confined space. Reclassification and alternate procedures are different provisions with different preconditions and different outcomes.",
+        "signature_terms": ["reclassify", "reclassified", "non-permit confined space", "no permit is required", "(c)(7)"],
+        "why_dangerous": "The standard states directly, in a note to (c)(7), that control of atmospheric hazards through forced air ventilation does not constitute elimination of the hazards. A site that reclassifies on the strength of ventilation stops issuing permits and stops posting an attendant for a space that still has an atmospheric hazard under control rather than removed. Loss of the fan then produces an unattended IDLH entry."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1910.146(c)(5)(i)(A) and (B)",
+        "section_title": "Permit-required confined spaces",
+        "url": "https://www.ecfr.gov/current/title-29/section-1910.146",
+        "access": "public",
+        "anchor_text": "The employer can demonstrate that continuous forced air ventilation alone is sufficient to maintain that permit space safe for entry"
+      },
+      "cross_reference": [],
+      "verification": {"status": "verified", "method": "ecfr_api", "source_edition_date": "2026-08-01"},
+      "abstention_acceptable": false
+    },
+    {
+      "id": "cs-002",
+      "item_type": "factual",
+      "pair_id": "cs-p1",
+      "pair_role": "b",
+      "family": "cs.alternate_vs_reclassify",
+      "risk_tier": "high",
+      "question": "Under 29 CFR 1910.146(c)(7), when may a permit-required confined space be reclassified as a non-permit confined space, and does controlling an atmospheric hazard with forced air ventilation qualify?",
+      "correct_answer": "A permit space may be reclassified as a non-permit confined space if it poses no actual or potential atmospheric hazards and all hazards within the space are eliminated without entry, for as long as the hazards remain eliminated. If entry is necessary to eliminate hazards, that entry must be performed under paragraphs (d) through (k). Controlling an atmospheric hazard by forced air ventilation does NOT qualify: the standard states in a note that control of atmospheric hazards through forced air ventilation does not constitute elimination of the hazards.",
+      "answer_key": {
+        "required_concepts": [
+          ["eliminat", "eliminated", "elimination"],
+          ["no actual or potential atmospheric", "no atmospheric hazard"],
+          ["does not constitute elimination", "not elimination", "does not qualify", "no", "not sufficient"]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": []
+      },
+      "adjacent_wrong": {
+        "label": "Alternate entry procedures under 1910.146(c)(5)",
+        "answer": "The wrong answer permits reclassification on the basis of continuous forced air ventilation, which is the precondition for the (c)(5) alternate procedures and is explicitly rejected as a basis for reclassification.",
+        "signature_terms": ["ventilation is sufficient to reclassify", "reclassify with continuous forced air", "ventilate and reclassify"],
+        "why_dangerous": "Same mechanism as cs-001, in the opposite direction. This pair is scored jointly: a system that gets one right by topic association and the other wrong is exhibiting exactly the failure the benchmark targets."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1910.146(c)(7)(i) and Note to (c)(7)",
+        "section_title": "Permit-required confined spaces",
+        "url": "https://www.ecfr.gov/current/title-29/section-1910.146",
+        "access": "public",
+        "anchor_text": "Control of atmospheric hazards through forced air ventilation does not constitute elimination of the hazards."
+      },
+      "cross_reference": [],
+      "verification": {"status": "verified", "method": "ecfr_api", "source_edition_date": "2026-08-01"},
+      "abstention_acceptable": false
+    },
+    {
+      "id": "cs-003",
+      "item_type": "factual",
+      "pair_id": null,
+      "pair_role": null,
+      "family": "cs.atmospheric_testing",
+      "risk_tier": "high",
+      "question": "In what order must the internal atmosphere of a permit space be tested before entry under the alternate procedures of 29 CFR 1910.146, and what instrument is required?",
+      "correct_answer": "Oxygen content first, then flammable gases and vapors, then potential toxic air contaminants, in that order, using a calibrated direct-reading instrument. Any employee who enters, or that employee's authorized representative, must be given an opportunity to observe the pre-entry testing.",
+      "answer_key": {
+        "required_concepts": [
+          ["oxygen"],
+          ["flammable"],
+          ["toxic"],
+          ["in that order", "order", "first", "then"],
+          ["calibrated direct-reading", "direct-reading instrument", "calibrated"]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": []
+      },
+      "adjacent_wrong": {
+        "label": "Order permuted, most often toxic before flammable, or oxygen last",
+        "answer": "The wrong answer reverses or permutes the sequence, or presents the three tests as simultaneous with no required order.",
+        "signature_terms": ["toxic, flammable, oxygen", "any order", "order does not matter", "simultaneously"],
+        "why_dangerous": "The order is not arbitrary: oxygen concentration is measured first because most combustible-gas sensors are oxygen-dependent and give unreliable readings in a depleted or enriched atmosphere. An answer that presents the order as a formality removes the reason it exists."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1910.146(c)(5)(ii)(C)",
+        "section_title": "Permit-required confined spaces",
+        "url": "https://www.ecfr.gov/current/title-29/section-1910.146",
+        "access": "public",
+        "anchor_text": "for oxygen content, for flammable gases and vapors, and for potential toxic air contaminants, in that order"
+      },
+      "cross_reference": [],
+      "verification": {"status": "verified", "method": "ecfr_api", "source_edition_date": "2026-08-01"},
+      "abstention_acceptable": false
+    },
+    {
+      "id": "cs-004",
+      "item_type": "factual",
+      "pair_id": "cs-p2",
+      "pair_role": "a",
+      "family": "cs.atmosphere_criteria",
+      "risk_tier": "high",
+      "question": "What oxygen concentrations define a hazardous atmosphere under 29 CFR 1910.146, and what are the corresponding defined terms?",
+      "correct_answer": "An atmospheric oxygen concentration below 19.5 percent or above 23.5 percent is a hazardous atmosphere. An oxygen deficient atmosphere is defined as containing less than 19.5 percent oxygen by volume; an oxygen enriched atmosphere is defined as containing more than 23.5 percent oxygen by volume.",
+      "answer_key": {
+        "required_concepts": [
+          ["19.5"],
+          ["23.5"],
+          ["oxygen deficient", "oxygen-deficient"],
+          ["oxygen enriched", "oxygen-enriched"]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": [
+          {"label": "oxygen deficiency threshold", "value": 19.5, "unit": "percent", "tolerance_abs": 0.0},
+          {"label": "oxygen enrichment threshold", "value": 23.5, "unit": "percent", "tolerance_abs": 0.0}
+        ]
+      },
+      "adjacent_wrong": {
+        "label": "Thresholds imported from another jurisdiction or standard",
+        "answer": "Wrong answers give 19.0 percent, 20.9 percent, 22.0 percent, or 23.0 percent. Several of these are real thresholds in other regulatory systems, which is why they are plausible.",
+        "signature_terms": ["19.0 percent", "22 percent", "23 percent", "20.9 percent as the lower"],
+        "why_dangerous": "A gas detector alarm configured to a wrong threshold does not alarm when the space is actually hazardous. The values are close enough that the error is invisible on the instrument face."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1910.146(b), definitions of 'Hazardous atmosphere', 'Oxygen deficient atmosphere', 'Oxygen enriched atmosphere'",
+        "section_title": "Permit-required confined spaces",
+        "url": "https://www.ecfr.gov/current/title-29/section-1910.146",
+        "access": "public",
+        "anchor_text": "Atmospheric oxygen concentration below 19.5 percent or above 23.5 percent"
+      },
+      "cross_reference": [],
+      "verification": {"status": "verified", "method": "ecfr_api", "source_edition_date": "2026-08-01"},
+      "abstention_acceptable": false
+    },
+    {
+      "id": "cs-005",
+      "item_type": "factual",
+      "pair_id": "cs-p2",
+      "pair_role": "b",
+      "family": "cs.atmosphere_criteria",
+      "risk_tier": "high",
+      "question": "At what flammable gas, vapor, or mist concentration does 29 CFR 1910.146 define a hazardous atmosphere, and against what reference is that concentration measured?",
+      "correct_answer": "A concentration in excess of 10 percent of the lower flammable limit (LFL) of the gas, vapor, or mist. The reference is the LFL of the specific substance, not an absolute concentration.",
+      "answer_key": {
+        "required_concepts": [
+          ["10 percent", "10%"],
+          ["lower flammable limit", "lfl", "lower explosive limit", "lel"]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": [
+          {"label": "flammability threshold as fraction of LFL", "value": 10.0, "unit": "percent", "tolerance_abs": 0.0}
+        ]
+      },
+      "adjacent_wrong": {
+        "label": "Percent by volume confused with percent of LFL",
+        "answer": "The wrong answer states '10 percent by volume' or gives the figure without the LFL reference, or substitutes 25 percent of LFL, which appears in hot work and other programs.",
+        "signature_terms": ["10 percent by volume", "25 percent of the lel", "25% lfl"],
+        "why_dangerous": "Ten percent of the LFL of methane is roughly 0.5 percent by volume. Reading the criterion as 10 percent by volume permits entry into an atmosphere twenty times more flammable than the standard allows."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1910.146(b), definition of 'Hazardous atmosphere', paragraph (1)",
+        "section_title": "Permit-required confined spaces",
+        "url": "https://www.ecfr.gov/current/title-29/section-1910.146",
+        "access": "public",
+        "anchor_text": "Flammable gas, vapor, or mist in excess of 10 percent of its lower flammable limit (LFL)"
+      },
+      "cross_reference": [],
+      "verification": {"status": "verified", "method": "ecfr_api", "source_edition_date": "2026-08-01"},
+      "abstention_acceptable": false
+    },
+    {
+      "id": "cs-006",
+      "item_type": "factual",
+      "pair_id": "cs-p3",
+      "pair_role": "a",
+      "family": "cs.roles",
+      "risk_tier": "high",
+      "question": "Under 29 CFR 1910.146(i), may an attendant leave the permit space entry point, and under what single circumstance does the standard contemplate an attendant entering the space?",
+      "correct_answer": "The attendant must remain outside the permit space during entry operations until relieved by another attendant. The note to that provision states that where the employer's permit entry program allows attendant entry for rescue, attendants may enter to attempt a rescue only if they have been trained and equipped for rescue operations under paragraph (k)(1) and have been relieved under paragraph (i)(4).",
+      "answer_key": {
+        "required_concepts": [
+          ["remains outside", "remain outside", "must not leave", "may not leave"],
+          ["until relieved", "relieved by another attendant", "relief"],
+          ["rescue"]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": []
+      },
+      "adjacent_wrong": {
+        "label": "Entry supervisor duties substituted for attendant duties",
+        "answer": "The wrong answer describes verifying permit entries, verifying that rescue services are available, or terminating the entry and cancelling the permit. Those are entry supervisor duties under 1910.146(j), not attendant duties under (i).",
+        "signature_terms": ["endorsing the permit", "cancels the permit", "terminates the entry", "verifies that rescue services are available"],
+        "why_dangerous": "Attendant, authorized entrant and entry supervisor are three defined roles whose duties are listed in three consecutive paragraphs using near-identical opening language. Conflating them removes the continuous-monitoring function that is the attendant's only job."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1910.146(i)(4) and Note",
+        "section_title": "Permit-required confined spaces",
+        "url": "https://www.ecfr.gov/current/title-29/section-1910.146",
+        "access": "public",
+        "anchor_text": "Remains outside the permit space during entry operations until relieved by another attendant"
+      },
+      "cross_reference": [],
+      "verification": {"status": "verified", "method": "ecfr_api", "source_edition_date": "2026-08-01"},
+      "abstention_acceptable": false
+    },
+    {
+      "id": "cs-007",
+      "item_type": "factual",
+      "pair_id": "cs-p3",
+      "pair_role": "b",
+      "family": "cs.roles",
+      "risk_tier": "high",
+      "question": "Under 29 CFR 1910.146(j), what must the entry supervisor verify before endorsing the permit and allowing entry to begin?",
+      "correct_answer": "The entry supervisor must verify, by checking that the appropriate entries have been made on the permit, that all tests specified by the permit have been conducted and that all procedures and equipment specified by the permit are in place, before endorsing the permit and allowing entry to begin. The supervisor must also verify that rescue services are available and that the means for summoning them are operable.",
+      "answer_key": {
+        "required_concepts": [
+          ["verif", "verifies", "verify"],
+          ["permit"],
+          ["tests", "testing"],
+          ["procedures and equipment", "equipment"],
+          ["rescue services", "rescue"]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": []
+      },
+      "adjacent_wrong": {
+        "label": "Attendant duties substituted for entry supervisor duties",
+        "answer": "The wrong answer describes maintaining an accurate count of entrants, remaining outside the space, or monitoring activities inside and outside, which are attendant duties under (i).",
+        "signature_terms": ["maintains an accurate count", "remains outside the permit space", "orders the entrants to evacuate"],
+        "why_dangerous": "Mirror of cs-006. If the supervisor's verification step is replaced by the attendant's monitoring duty, nobody confirms that the permit's required tests were actually performed before entry."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1910.146(j)(2) and (j)(4)",
+        "section_title": "Permit-required confined spaces",
+        "url": "https://www.ecfr.gov/current/title-29/section-1910.146",
+        "access": "public",
+        "anchor_text": "that all tests specified by the permit have been conducted and that all procedures and equipment specified by the permit are in place before endorsing the permit"
+      },
+      "cross_reference": [],
+      "verification": {"status": "verified", "method": "ecfr_api", "source_edition_date": "2026-08-01"},
+      "abstention_acceptable": false
+    },
+    {
+      "id": "cs-008",
+      "item_type": "factual",
+      "pair_id": null,
+      "pair_role": null,
+      "family": "cs.space_classification",
+      "risk_tier": "high",
+      "question": "How does 29 CFR 1910.146 define a non-permit confined space, and what four characteristics make a confined space a permit-required confined space?",
+      "correct_answer": "A non-permit confined space is a confined space that does not contain and, with respect to atmospheric hazards, does not have the potential to contain any hazard capable of causing death or serious physical harm. A permit-required confined space has one or more of: it contains or has a potential to contain a hazardous atmosphere; it contains a material with the potential for engulfing an entrant; it has an internal configuration such that an entrant could be trapped or asphyxiated by inwardly converging walls or by a floor that slopes downward and tapers to a smaller cross-section; or it contains any other recognized serious safety or health hazard.",
+      "answer_key": {
+        "required_concepts": [
+          ["hazardous atmosphere"],
+          ["engulf", "engulfing", "engulfment"],
+          ["inwardly converging", "converging walls", "tapers", "internal configuration"],
+          ["recognized serious safety or health hazard", "other recognized"]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": []
+      },
+      "adjacent_wrong": {
+        "label": "Three characteristics given instead of four, usually dropping the catch-all",
+        "answer": "The most common wrong answer lists atmosphere, engulfment and configuration and omits 'any other recognized serious safety or health hazard'.",
+        "signature_terms": ["three characteristics", "the three criteria"],
+        "why_dangerous": "The catch-all is what captures mechanical, thermal, electrical and chemical-contact hazards inside the space. Dropping it classifies as non-permit a vessel whose only hazard is an unisolated agitator."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1910.146(b), definitions of 'Non-permit confined space' and 'Permit-required confined space'",
+        "section_title": "Permit-required confined spaces",
+        "url": "https://www.ecfr.gov/current/title-29/section-1910.146",
+        "access": "public",
+        "anchor_text": "Contains any other recognized serious safety or health hazard"
+      },
+      "cross_reference": [],
+      "verification": {"status": "verified", "method": "ecfr_api", "source_edition_date": "2026-08-01"},
+      "abstention_acceptable": false
+    }
+  ]
+}

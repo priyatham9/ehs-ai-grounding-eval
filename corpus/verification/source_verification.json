@@ -1,0 +1,925 @@
+{
+  "anchor_locality_warnings": [],
+  "generated_utc": "2026-09-04T05:18:56Z",
+  "ecfr_edition_date": "2026-08-01",
+  "api": "https://www.ecfr.gov/api/versioner/v1/full/{date}/title-{title}.xml",
+  "n_items": 68,
+  "n_checked": 68,
+  "n_ok": 68,
+  "n_failed": 0,
+  "unparsed_citations": [],
+  "fetch_errors": [],
+  "sections_fetched": [
+    "29 CFR 1904.39",
+    "29 CFR 1904.7",
+    "29 CFR 1910.106",
+    "29 CFR 1910.119",
+    "29 CFR 1910.1200",
+    "29 CFR 1910.134",
+    "29 CFR 1910.146",
+    "29 CFR 1910.147",
+    "29 CFR 1910.157",
+    "29 CFR 1910.212",
+    "29 CFR 1910.219",
+    "29 CFR 1910.333",
+    "29 CFR 1910.335",
+    "29 CFR 1910.95",
+    "40 CFR 68.42",
+    "40 CFR 68.79",
+    "46 CFR 54.15-10",
+    "46 CFR 54.15-13",
+    "46 CFR 54.15-5"
+  ],
+  "results": [
+    {
+      "item_id": "cs-001",
+      "clause": "29 CFR 1910.146(c)(5)(i)(A) and (B)",
+      "anchor_present": true,
+      "anchor_length": 132,
+      "paragraph_path": [
+        "(c)",
+        "(5)",
+        "(i)",
+        "(A)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "cs-002",
+      "clause": "29 CFR 1910.146(c)(7)(i) and Note to (c)(7)",
+      "anchor_present": true,
+      "anchor_length": 109,
+      "paragraph_path": [
+        "(c)",
+        "(7)",
+        "(i)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "cs-003",
+      "clause": "29 CFR 1910.146(c)(5)(ii)(C)",
+      "anchor_present": true,
+      "anchor_length": 107,
+      "paragraph_path": [
+        "(c)",
+        "(5)",
+        "(ii)",
+        "(C)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "cs-004",
+      "clause": "29 CFR 1910.146(b), definitions of 'Hazardous atmosphere', 'Oxygen deficient atmosphere', 'Oxygen enriched atmosphere'",
+      "anchor_present": true,
+      "anchor_length": 73,
+      "paragraph_path": [
+        "(b)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": null,
+      "ok": true
+    },
+    {
+      "item_id": "cs-005",
+      "clause": "29 CFR 1910.146(b), definition of 'Hazardous atmosphere', paragraph (1)",
+      "anchor_present": true,
+      "anchor_length": 88,
+      "paragraph_path": [
+        "(b)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": null,
+      "ok": true
+    },
+    {
+      "item_id": "cs-006",
+      "clause": "29 CFR 1910.146(i)(4) and Note",
+      "anchor_present": true,
+      "anchor_length": 92,
+      "paragraph_path": [
+        "(i)",
+        "(4)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "cs-007",
+      "clause": "29 CFR 1910.146(j)(2) and (j)(4)",
+      "anchor_present": true,
+      "anchor_length": 161,
+      "paragraph_path": [
+        "(j)",
+        "(2)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "cs-008",
+      "clause": "29 CFR 1910.146(b), definitions of 'Non-permit confined space' and 'Permit-required confined space'",
+      "anchor_present": true,
+      "anchor_length": 61,
+      "paragraph_path": [
+        "(b)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": null,
+      "ok": true
+    },
+    {
+      "item_id": "el-001",
+      "clause": "29 CFR 1910.333(a)(1)",
+      "anchor_present": true,
+      "anchor_length": 176,
+      "paragraph_path": [
+        "(a)",
+        "(1)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "el-002",
+      "clause": "29 CFR 1910.335(a)(1)(iv) and (a)(1)(v)",
+      "anchor_present": true,
+      "anchor_length": 121,
+      "paragraph_path": [
+        "(a)",
+        "(1)",
+        "(iv)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "fe-001",
+      "clause": "29 CFR 1910.157(e)(2) and (e)(3)",
+      "anchor_present": true,
+      "anchor_length": 104,
+      "paragraph_path": [
+        "(e)",
+        "(2)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "fe-002",
+      "clause": "29 CFR 1910.157(d)(6)",
+      "anchor_present": true,
+      "anchor_length": 253,
+      "paragraph_path": [
+        "(d)",
+        "(6)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "fl-001",
+      "clause": "29 CFR 1910.106(a)(19)(i) and (ii)",
+      "anchor_present": true,
+      "anchor_length": 62,
+      "paragraph_path": [
+        "(a)",
+        "(19)",
+        "(i)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "fl-002",
+      "clause": "29 CFR 1910.106(a)(19)(iii) and (iv)",
+      "anchor_present": true,
+      "anchor_length": 61,
+      "paragraph_path": [
+        "(a)",
+        "(19)",
+        "(iii)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "hc-001",
+      "clause": "29 CFR 1910.1200(f)(1) and (f)(3)",
+      "anchor_present": true,
+      "anchor_length": 123,
+      "paragraph_path": [
+        "(f)",
+        "(1)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "hc-002",
+      "clause": "29 CFR 1910.1200(c), definitions of 'Hazard statement' and 'Precautionary statement'",
+      "anchor_present": true,
+      "anchor_length": 114,
+      "paragraph_path": [
+        "(c)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": null,
+      "ok": true
+    },
+    {
+      "item_id": "hc-003",
+      "clause": "29 CFR 1910.1200(c), definition of 'Signal word'",
+      "anchor_present": true,
+      "anchor_length": 82,
+      "paragraph_path": [
+        "(c)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": null,
+      "ok": true
+    },
+    {
+      "item_id": "hc-004",
+      "clause": "29 CFR 1910.1200(g)(2)",
+      "anchor_present": true,
+      "anchor_length": 128,
+      "paragraph_path": [
+        "(g)",
+        "(2)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "hc-005",
+      "clause": "29 CFR 1910.1200(c), definition of 'Pictogram'",
+      "anchor_present": true,
+      "anchor_length": 89,
+      "paragraph_path": [
+        "(c)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": null,
+      "ok": true
+    },
+    {
+      "item_id": "hn-001",
+      "clause": "29 CFR 1910.95(c)(1) and (c)(2)",
+      "anchor_present": true,
+      "anchor_length": 119,
+      "paragraph_path": [
+        "(c)",
+        "(1)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "hn-002",
+      "clause": "29 CFR 1910.95(g)(10)(i)",
+      "anchor_present": true,
+      "anchor_length": 166,
+      "paragraph_path": [
+        "(g)",
+        "(10)",
+        "(i)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "hn-003",
+      "clause": "29 CFR 1910.95(g)(5)(i) and (g)(5)(ii)",
+      "anchor_present": true,
+      "anchor_length": 133,
+      "paragraph_path": [
+        "(g)",
+        "(5)",
+        "(i)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "loto-001",
+      "clause": "29 CFR 1910.147(c)(6)(i)",
+      "anchor_present": true,
+      "anchor_length": 98,
+      "paragraph_path": [
+        "(c)",
+        "(6)",
+        "(i)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "loto-002",
+      "clause": "29 CFR 1910.147(c)(7)(iii)",
+      "anchor_present": true,
+      "anchor_length": 122,
+      "paragraph_path": [
+        "(c)",
+        "(7)",
+        "(iii)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "loto-003",
+      "clause": "29 CFR 1910.147(a)(1)(iii)(A)",
+      "anchor_present": true,
+      "anchor_length": 174,
+      "paragraph_path": [
+        "(a)",
+        "(1)",
+        "(iii)",
+        "(A)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "loto-004",
+      "clause": "29 CFR 1910.147(a)(2)(ii), Note",
+      "anchor_present": true,
+      "anchor_length": 187,
+      "paragraph_path": [
+        "(a)",
+        "(2)",
+        "(ii)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "loto-005",
+      "clause": "29 CFR 1910.147(c)(6)(i)(D)",
+      "anchor_present": true,
+      "anchor_length": 152,
+      "paragraph_path": [
+        "(c)",
+        "(6)",
+        "(i)",
+        "(D)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "loto-006",
+      "clause": "29 CFR 1910.147(b), definition of 'Energy isolating device'",
+      "anchor_present": true,
+      "anchor_length": 104,
+      "paragraph_path": [
+        "(b)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": null,
+      "ok": true
+    },
+    {
+      "item_id": "loto-007",
+      "clause": "29 CFR 1910.147(f)(3)(ii)(D)",
+      "anchor_present": true,
+      "anchor_length": 167,
+      "paragraph_path": [
+        "(f)",
+        "(3)",
+        "(ii)",
+        "(D)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "loto-008",
+      "clause": "29 CFR 1910.147(f)(4)",
+      "anchor_present": true,
+      "anchor_length": 128,
+      "paragraph_path": [
+        "(f)",
+        "(4)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "loto-009",
+      "clause": "29 CFR 1910.147(c)(1)",
+      "anchor_present": true,
+      "anchor_length": 122,
+      "paragraph_path": [
+        "(c)",
+        "(1)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "loto-010",
+      "clause": "29 CFR 1910.147(c)(5) and (c)(6)",
+      "anchor_present": true,
+      "anchor_length": 98,
+      "paragraph_path": [
+        "(c)",
+        "(5)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "mg-001",
+      "clause": "29 CFR 1910.212(a)(3)",
+      "anchor_present": true,
+      "anchor_length": 111,
+      "paragraph_path": [
+        "(a)",
+        "(3)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "mg-002",
+      "clause": "29 CFR 1910.219(a)(1)",
+      "anchor_present": true,
+      "anchor_length": 90,
+      "paragraph_path": [
+        "(a)",
+        "(1)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "prd-001",
+      "clause": "46 CFR 54.15-13(b)(3)",
+      "anchor_present": true,
+      "anchor_length": 104,
+      "paragraph_path": [
+        "(b)",
+        "(3)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "prd-002",
+      "clause": "46 CFR 54.15-10(g)",
+      "anchor_present": true,
+      "anchor_length": 225,
+      "paragraph_path": [
+        "(g)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "prd-003",
+      "clause": "46 CFR 54.15-13(b)(2)",
+      "anchor_present": true,
+      "anchor_length": 63,
+      "paragraph_path": [
+        "(b)",
+        "(2)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "prd-004",
+      "clause": "46 CFR 54.15-5(c)",
+      "anchor_present": true,
+      "anchor_length": 98,
+      "paragraph_path": [
+        "(c)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "prd-005",
+      "clause": "46 CFR 54.15-5(d)",
+      "anchor_present": true,
+      "anchor_length": 126,
+      "paragraph_path": [
+        "(d)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "prd-006",
+      "clause": "46 CFR 54.15-13 and 46 CFR 54.15-10 (section headings)",
+      "anchor_present": true,
+      "anchor_length": 31,
+      "paragraph_path": [],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": null,
+      "ok": true
+    },
+    {
+      "item_id": "prd-007",
+      "clause": "46 CFR 54.15-13(c)",
+      "anchor_present": true,
+      "anchor_length": 170,
+      "paragraph_path": [
+        "(c)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "prd-008",
+      "clause": "46 CFR 54.15-10(c) and (d)",
+      "anchor_present": true,
+      "anchor_length": 132,
+      "paragraph_path": [
+        "(c)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "prd-009",
+      "clause": "46 CFR 54.15-13",
+      "anchor_present": true,
+      "anchor_length": 79,
+      "paragraph_path": [],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": null,
+      "ok": true
+    },
+    {
+      "item_id": "prd-010",
+      "clause": "46 CFR 54.15-13(b)",
+      "anchor_present": true,
+      "anchor_length": 135,
+      "paragraph_path": [
+        "(b)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "prd-011",
+      "clause": "46 CFR 54.15-5(f)",
+      "anchor_present": true,
+      "anchor_length": 151,
+      "paragraph_path": [
+        "(f)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "prd-012",
+      "clause": "46 CFR 54.15-13(a) and (b)",
+      "anchor_present": true,
+      "anchor_length": 90,
+      "paragraph_path": [
+        "(a)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "psm-001",
+      "clause": "29 CFR 1910.119(e)(6)",
+      "anchor_present": true,
+      "anchor_length": 151,
+      "paragraph_path": [
+        "(e)",
+        "(6)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "psm-002",
+      "clause": "29 CFR 1910.119(o)(1) and (o)(5)",
+      "anchor_present": true,
+      "anchor_length": 72,
+      "paragraph_path": [
+        "(o)",
+        "(1)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "psm-003",
+      "clause": "29 CFR 1910.119(g)(2)",
+      "anchor_present": true,
+      "anchor_length": 92,
+      "paragraph_path": [
+        "(g)",
+        "(2)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "psm-004",
+      "clause": "29 CFR 1910.119(m)(1) and (m)(2)",
+      "anchor_present": true,
+      "anchor_length": 121,
+      "paragraph_path": [
+        "(m)",
+        "(1)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "psm-005",
+      "clause": "29 CFR 1910.119(m)(7) and (o)(5)",
+      "anchor_present": true,
+      "anchor_length": 64,
+      "paragraph_path": [
+        "(m)",
+        "(7)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "psm-006",
+      "clause": "29 CFR 1910.119(a)(1)(ii)",
+      "anchor_present": true,
+      "anchor_length": 30,
+      "paragraph_path": [
+        "(a)",
+        "(1)",
+        "(ii)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "psm-007",
+      "clause": "40 CFR 68.42(a)",
+      "anchor_present": true,
+      "anchor_length": 190,
+      "paragraph_path": [
+        "(a)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "psm-008",
+      "clause": "40 CFR 68.79(a)",
+      "anchor_present": true,
+      "anchor_length": 135,
+      "paragraph_path": [
+        "(a)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "rk-001",
+      "clause": "29 CFR 1904.39(a)(1)",
+      "anchor_present": true,
+      "anchor_length": 123,
+      "paragraph_path": [
+        "(a)",
+        "(1)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "rk-002",
+      "clause": "29 CFR 1904.39(a)(2)",
+      "anchor_present": true,
+      "anchor_length": 91,
+      "paragraph_path": [
+        "(a)",
+        "(2)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "rk-003",
+      "clause": "29 CFR 1904.7(b)(3)(vii)",
+      "anchor_present": true,
+      "anchor_length": 40,
+      "paragraph_path": [
+        "(b)",
+        "(3)",
+        "(vii)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "rk-004",
+      "clause": "29 CFR 1904.7(b)(3)(i)",
+      "anchor_present": true,
+      "anchor_length": 86,
+      "paragraph_path": [
+        "(b)",
+        "(3)",
+        "(i)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "rk-005",
+      "clause": "29 CFR 1904.7(a)",
+      "anchor_present": true,
+      "anchor_length": 132,
+      "paragraph_path": [
+        "(a)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "rk-006",
+      "clause": "29 CFR 1904.7(b)(5)(iii)",
+      "anchor_present": true,
+      "anchor_length": 85,
+      "paragraph_path": [
+        "(b)",
+        "(5)",
+        "(iii)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "rk-007",
+      "clause": "29 CFR 1904.7(b)(5)(iv)",
+      "anchor_present": true,
+      "anchor_length": 91,
+      "paragraph_path": [
+        "(b)",
+        "(5)",
+        "(iv)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "rk-008",
+      "clause": "29 CFR 1904.39(b)(3)",
+      "anchor_present": true,
+      "anchor_length": 132,
+      "paragraph_path": [
+        "(b)",
+        "(3)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "rk-009",
+      "clause": "29 CFR 1904.7(b)(7)",
+      "anchor_present": true,
+      "anchor_length": 142,
+      "paragraph_path": [
+        "(b)",
+        "(7)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "rk-010",
+      "clause": "29 CFR 1904.7(a)",
+      "anchor_present": true,
+      "anchor_length": 77,
+      "paragraph_path": [
+        "(a)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "rp-001",
+      "clause": "29 CFR 1910.134(d)(3)(i)(A), Table 1",
+      "anchor_present": true,
+      "anchor_length": 156,
+      "paragraph_path": [
+        "(d)",
+        "(3)",
+        "(i)",
+        "(A)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "rp-002",
+      "clause": "29 CFR 1910.134(d)(3)(i)(A), Table 1",
+      "anchor_present": true,
+      "anchor_length": 191,
+      "paragraph_path": [
+        "(d)",
+        "(3)",
+        "(i)",
+        "(A)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "rp-003",
+      "clause": "29 CFR 1910.134(d)(2)(i)",
+      "anchor_present": true,
+      "anchor_length": 101,
+      "paragraph_path": [
+        "(d)",
+        "(2)",
+        "(i)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    },
+    {
+      "item_id": "rp-004",
+      "clause": "29 CFR 1910.134(d)(2)(iii)",
+      "anchor_present": true,
+      "anchor_length": 58,
+      "paragraph_path": [
+        "(d)",
+        "(2)",
+        "(iii)"
+      ],
+      "paragraph_markers_missing": [],
+      "anchor_in_cited_paragraph": true,
+      "ok": true
+    }
+  ],
+  "note": "Checks provenance only: that the cited section exists in the eCFR, that the item's verbatim anchor_text appears in it, and that the cited paragraph markers appear in it. It does not evaluate whether the answer key is a good answer. Copyrighted standards are never fetched."
+}

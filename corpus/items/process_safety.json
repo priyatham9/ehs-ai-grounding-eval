@@ -1,0 +1,540 @@
+{
+  "schema_version": "1.0",
+  "domain": "process_safety_management",
+  "domain_title": "Process safety management and risk management program intervals and obligations",
+  "source_family": "29 CFR 1910.119 (OSHA PSM) and 40 CFR part 68 (EPA RMP)",
+  "sourcing_note": "OSHA PSM and EPA RMP are close paraphrases of one another for most elements, with different citations, different agencies, and a few substantive differences. This makes them the strongest available test of citation correctness as distinct from answer correctness: a system can produce a correct interval while attributing it to the wrong rule, and the two errors have different operational consequences.",
+  "items": [
+    {
+      "id": "psm-001",
+      "item_type": "factual",
+      "pair_id": "psm-p1",
+      "pair_role": "a",
+      "family": "psm.recurring_intervals",
+      "risk_tier": "high",
+      "question": "Under 29 CFR 1910.119, how often must a process hazard analysis be updated and revalidated, and by whom?",
+      "correct_answer": "At least every five years after completion of the initial process hazard analysis, the PHA must be updated and revalidated by a team meeting the requirements of 1910.119(e)(4), to assure that it is consistent with the current process.",
+      "answer_key": {
+        "required_concepts": [
+          [
+            "five years",
+            "5 years",
+            "five (5) years",
+            "quinquennial"
+          ],
+          [
+            "updated",
+            "revalidated",
+            "revalidation"
+          ],
+          [
+            "team"
+          ]
+        ],
+        "forbidden_concepts": [
+          [
+            "every three years",
+            "every 3 years"
+          ]
+        ],
+        "numeric_facts": [
+          {
+            "label": "PHA revalidation interval",
+            "value": 5.0,
+            "unit": "years",
+            "tolerance_abs": 0.0
+          }
+        ]
+      },
+      "adjacent_wrong": {
+        "label": "Compliance audit interval (three years) substituted for PHA revalidation",
+        "answer": "The wrong answer gives three years, which is the compliance audit interval in 1910.119(o)(1) and also the refresher training interval in 1910.119(g)(2). All three are recurring intervals in the same standard.",
+        "signature_terms": [
+          "every three years",
+          "every 3 years",
+          "triennial"
+        ],
+        "why_dangerous": "1910.119 contains at least three distinct recurring intervals. Retrieval on the phrase 'how often' returns all three, and any of them reads as a plausible answer. A revalidation cycle set to the wrong period either wastes analyst effort or leaves the hazard analysis stale past its regulatory life."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1910.119(e)(6)",
+        "section_title": "Process safety management of highly hazardous chemicals",
+        "url": "https://www.ecfr.gov/current/title-29/section-1910.119",
+        "access": "public",
+        "anchor_text": "At least every five (5) years after the completion of the initial process hazard analysis, the process hazard analysis shall be updated and revalidated"
+      },
+      "cross_reference": [
+        {
+          "standard": "40 CFR",
+          "clause": "40 CFR 68.67(f)",
+          "access": "public",
+          "corroboration": "EPA RMP states the same five-year revalidation requirement in nearly identical language and accepts analyses completed to comply with 29 CFR 1910.119(e)."
+        }
+      ],
+      "verification": {
+        "status": "verified",
+        "method": "ecfr_api",
+        "source_edition_date": "2026-08-01"
+      },
+      "abstention_acceptable": false
+    },
+    {
+      "id": "psm-002",
+      "item_type": "factual",
+      "pair_id": "psm-p1",
+      "pair_role": "b",
+      "family": "psm.recurring_intervals",
+      "risk_tier": "high",
+      "question": "Under 29 CFR 1910.119, how often must an employer certify that it has evaluated compliance with the standard, and how many of those audit reports must be retained?",
+      "correct_answer": "At least every three years. The audit must be conducted by at least one person knowledgeable in the process, a report of findings must be developed, the employer must promptly determine and document a response to each finding and document that deficiencies have been corrected, and the two most recent compliance audit reports must be retained.",
+      "answer_key": {
+        "required_concepts": [
+          [
+            "three years",
+            "3 years",
+            "triennial"
+          ],
+          [
+            "two most recent",
+            "two (2) most recent",
+            "last two",
+            "most recent two"
+          ]
+        ],
+        "forbidden_concepts": [
+          [
+            "every five years",
+            "every 5 years"
+          ]
+        ],
+        "numeric_facts": [
+          {
+            "label": "compliance audit interval",
+            "value": 3.0,
+            "unit": "years",
+            "tolerance_abs": 0.0
+          },
+          {
+            "label": "audit reports retained",
+            "value": 2.0,
+            "unit": "count",
+            "tolerance_abs": 0.0
+          }
+        ]
+      },
+      "adjacent_wrong": {
+        "label": "Five-year PHA interval, or five-year incident report retention, substituted",
+        "answer": "Wrong answers give a five-year audit interval, or state that audit reports must be retained for five years. Five-year retention is the rule for incident investigation reports under 1910.119(m)(7), not for audit reports.",
+        "signature_terms": [
+          "retained for five years",
+          "audit reports for 5 years",
+          "every five years"
+        ],
+        "why_dangerous": "Retention rules and interval rules in this standard are attached to different documents. Retaining only the two most recent audits is a smaller obligation than five-year retention; a site told the wrong rule either destroys records it should hold or holds records it need not, and in an enforcement setting the first is the costly error."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1910.119(o)(1) and (o)(5)",
+        "section_title": "Process safety management of highly hazardous chemicals",
+        "url": "https://www.ecfr.gov/current/title-29/section-1910.119",
+        "access": "public",
+        "anchor_text": "Employers shall retain the two (2) most recent compliance audit reports."
+      },
+      "cross_reference": [
+        {
+          "standard": "40 CFR",
+          "clause": "40 CFR 68.79(a) and (e)",
+          "access": "public",
+          "corroboration": "EPA RMP states the same three-year audit interval and the same two-most-recent retention rule, with an added third-party audit trigger in 68.79(f)."
+        }
+      ],
+      "verification": {
+        "status": "verified",
+        "method": "ecfr_api",
+        "source_edition_date": "2026-08-01"
+      },
+      "abstention_acceptable": false
+    },
+    {
+      "id": "psm-003",
+      "item_type": "factual",
+      "pair_id": null,
+      "pair_role": null,
+      "family": "psm.recurring_intervals",
+      "risk_tier": "medium",
+      "question": "How often must refresher training be provided to employees involved in operating a covered process under 29 CFR 1910.119, and who decides the actual frequency?",
+      "correct_answer": "At least every three years, and more often if necessary. The employer, in consultation with the employees involved in operating the process, determines the appropriate frequency of refresher training.",
+      "answer_key": {
+        "required_concepts": [
+          [
+            "three years",
+            "3 years"
+          ],
+          [
+            "consultation",
+            "in consultation with",
+            "employees involved in operating"
+          ]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": [
+          {
+            "label": "refresher training interval",
+            "value": 3.0,
+            "unit": "years",
+            "tolerance_abs": 0.0
+          }
+        ]
+      },
+      "adjacent_wrong": {
+        "label": "Annual training interval imported from other OSHA standards",
+        "answer": "Wrong answers give 'annually', which is the interval in several other OSHA standards (for example fire extinguisher training under 1910.157(g)), and omit the consultation requirement entirely.",
+        "signature_terms": [
+          "annually",
+          "every year",
+          "annual refresher"
+        ],
+        "why_dangerous": "The consultation requirement is the part most often dropped. It is what makes the interval a floor rather than a ceiling for processes whose operating procedures change frequently."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1910.119(g)(2)",
+        "section_title": "Process safety management of highly hazardous chemicals",
+        "url": "https://www.ecfr.gov/current/title-29/section-1910.119",
+        "access": "public",
+        "anchor_text": "Refresher training shall be provided at least every three years, and more often if necessary"
+      },
+      "cross_reference": [],
+      "verification": {
+        "status": "verified",
+        "method": "ecfr_api",
+        "source_edition_date": "2026-08-01"
+      },
+      "abstention_acceptable": false
+    },
+    {
+      "id": "psm-004",
+      "item_type": "factual",
+      "pair_id": "psm-p2",
+      "pair_role": "a",
+      "family": "psm.incident_investigation",
+      "risk_tier": "high",
+      "question": "Within what time must an incident investigation be initiated under 29 CFR 1910.119, and what triggers the obligation?",
+      "correct_answer": "The investigation must be initiated as promptly as possible, but not later than 48 hours following the incident. The obligation is triggered by each incident which resulted in, or could reasonably have resulted in, a catastrophic release of a highly hazardous chemical in the workplace. Near misses of that severity are therefore in scope.",
+      "answer_key": {
+        "required_concepts": [
+          [
+            "48 hours",
+            "forty-eight hours"
+          ],
+          [
+            "could reasonably have resulted",
+            "near miss",
+            "near-miss",
+            "or could reasonably"
+          ],
+          [
+            "catastrophic release"
+          ]
+        ],
+        "forbidden_concepts": [
+          [
+            "24 hours",
+            "eight hours",
+            "8 hours"
+          ]
+        ],
+        "numeric_facts": [
+          {
+            "label": "investigation initiation deadline",
+            "value": 48.0,
+            "unit": "hours",
+            "tolerance_abs": 0.0
+          }
+        ]
+      },
+      "adjacent_wrong": {
+        "label": "OSHA incident reporting deadlines (8 hours / 24 hours) substituted for the PSM investigation deadline",
+        "answer": "Wrong answers give 8 hours or 24 hours, which are the 29 CFR 1904.39 deadlines for reporting a fatality and for reporting an in-patient hospitalization, amputation or loss of an eye to OSHA. Those are reporting obligations to the agency, not investigation obligations to the employer's own program.",
+        "signature_terms": [
+          "within 8 hours",
+          "within 24 hours",
+          "report to osha within"
+        ],
+        "why_dangerous": "Reporting and investigating are different duties with different triggers, different recipients and different deadlines. A program that collapses them will either notify OSHA of events that are not reportable or fail to start an investigation of a catastrophic near miss, which by definition produced no injury and so triggers no reporting duty at all."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1910.119(m)(1) and (m)(2)",
+        "section_title": "Process safety management of highly hazardous chemicals",
+        "url": "https://www.ecfr.gov/current/title-29/section-1910.119",
+        "access": "public",
+        "anchor_text": "An incident investigation shall be initiated as promptly as possible, but not later than 48 hours following the incident."
+      },
+      "cross_reference": [
+        {
+          "standard": "40 CFR",
+          "clause": "40 CFR 68.81(b)",
+          "access": "public",
+          "corroboration": "EPA RMP states the identical 48-hour initiation requirement."
+        }
+      ],
+      "verification": {
+        "status": "verified",
+        "method": "ecfr_api",
+        "source_edition_date": "2026-08-01"
+      },
+      "abstention_acceptable": false
+    },
+    {
+      "id": "psm-005",
+      "item_type": "factual",
+      "pair_id": "psm-p2",
+      "pair_role": "b",
+      "family": "psm.incident_investigation",
+      "risk_tier": "medium",
+      "question": "How long must incident investigation reports be retained under 29 CFR 1910.119, and how does that differ from the retention rule for compliance audit reports in the same standard?",
+      "correct_answer": "Incident investigation reports must be retained for five years. Compliance audit reports follow a different rule: the employer must retain the two most recent audit reports, which is a count-based rather than a time-based obligation.",
+      "answer_key": {
+        "required_concepts": [
+          [
+            "five years",
+            "5 years"
+          ],
+          [
+            "two most recent",
+            "two (2) most recent",
+            "last two"
+          ],
+          [
+            "incident investigation"
+          ]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": [
+          {
+            "label": "incident report retention",
+            "value": 5.0,
+            "unit": "years",
+            "tolerance_abs": 0.0
+          }
+        ]
+      },
+      "adjacent_wrong": {
+        "label": "Retention rules swapped between the two document types",
+        "answer": "The wrong answer applies five-year retention to audit reports, or the two-most-recent rule to incident reports.",
+        "signature_terms": [
+          "audit reports must be retained for five years",
+          "two most recent incident"
+        ],
+        "why_dangerous": "The two rules sit twenty lines apart in the same standard and use the same sentence shape. Swapping them is the archetypal adjacent substitution: nothing in the answer looks wrong."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1910.119(m)(7) and (o)(5)",
+        "section_title": "Process safety management of highly hazardous chemicals",
+        "url": "https://www.ecfr.gov/current/title-29/section-1910.119",
+        "access": "public",
+        "anchor_text": "Incident investigation reports shall be retained for five years."
+      },
+      "cross_reference": [],
+      "verification": {
+        "status": "verified",
+        "method": "ecfr_api",
+        "source_edition_date": "2026-08-01"
+      },
+      "abstention_acceptable": false
+    },
+    {
+      "id": "psm-006",
+      "item_type": "factual",
+      "pair_id": null,
+      "pair_role": null,
+      "family": "psm.applicability",
+      "risk_tier": "high",
+      "question": "Apart from the appendix A threshold quantities, what quantity of flammable material brings a process within the scope of 29 CFR 1910.119, and what are the two stated exceptions?",
+      "correct_answer": "A process involving a Category 1 flammable gas as defined in 1910.1200(c), or a flammable liquid with a flashpoint below 100 degrees F, on site in one location in a quantity of 10,000 pounds or more. The two exceptions are hydrocarbon fuels used solely for workplace consumption as a fuel, if not part of a process containing another highly hazardous chemical covered by the standard, and flammable liquids with a flashpoint below 100 degrees F stored in atmospheric tanks or transferred which are kept below their normal boiling point without benefit of chilling or refrigeration.",
+      "answer_key": {
+        "required_concepts": [
+          [
+            "10,000",
+            "10000",
+            "ten thousand"
+          ],
+          [
+            "pounds",
+            "lb",
+            "lbs"
+          ],
+          [
+            "atmospheric tank",
+            "atmospheric tanks"
+          ],
+          [
+            "hydrocarbon fuel",
+            "workplace consumption",
+            "fuel"
+          ]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": [
+          {
+            "label": "flammable threshold quantity",
+            "value": 10000.0,
+            "unit": "pounds",
+            "tolerance_abs": 0.0
+          }
+        ]
+      },
+      "adjacent_wrong": {
+        "label": "EPA RMP threshold quantities substituted for the OSHA PSM flammable threshold",
+        "answer": "Wrong answers give an EPA threshold from the 40 CFR 68.130 tables, which are substance-specific and mostly differ from 10,000 pounds, or omit the atmospheric-tank exception, which is the exception that most often determines whether a tank farm is in or out of PSM scope.",
+        "signature_terms": [
+          "40 cfr 68.130",
+          "threshold quantity for the regulated substance",
+          "epa threshold"
+        ],
+        "why_dangerous": "Applicability determines whether fourteen expensive program elements attach to a process. The atmospheric-tank exception is heavily litigated and frequently misstated; dropping it pulls storage tanks into PSM scope, or, in the other direction, keeps them out when they are connected to a covered process."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1910.119(a)(1)(ii)",
+        "section_title": "Process safety management of highly hazardous chemicals",
+        "url": "https://www.ecfr.gov/current/title-29/section-1910.119",
+        "access": "public",
+        "anchor_text": "in a quantity of 10,000 pounds"
+      },
+      "cross_reference": [],
+      "verification": {
+        "status": "verified",
+        "method": "ecfr_api",
+        "source_edition_date": "2026-08-01"
+      },
+      "abstention_acceptable": false,
+      "notes": "The item deliberately does not ask which specific liquids are excluded by name; the standard's exception is a class description, and enumerating members of that class would require judgment outside the cited text."
+    },
+    {
+      "id": "psm-007",
+      "item_type": "factual",
+      "pair_id": "psm-p3",
+      "pair_role": "a",
+      "family": "psm.osha_vs_epa",
+      "risk_tier": "medium",
+      "question": "Which regulation requires a five-year accident history, what must it include, and is this the same as the five-year retention of incident investigation reports?",
+      "correct_answer": "The five-year accident history is an EPA Risk Management Program requirement at 40 CFR 68.42. It must include all accidental releases from covered processes that resulted in deaths, injuries, or significant property damage on site, or known offsite deaths, injuries, evacuations, sheltering in place, property damage, or environmental damage, with specified data for each release. It is not the same as the five-year retention of incident investigation reports under 29 CFR 1910.119(m)(7) or 40 CFR 68.81(g); the accident history is a reporting obligation with defined content, and the retention rule is a records-keeping obligation.",
+      "answer_key": {
+        "required_concepts": [
+          [
+            "40 cfr 68.42",
+            "68.42",
+            "epa",
+            "risk management"
+          ],
+          [
+            "accidental release",
+            "accidental releases"
+          ],
+          [
+            "offsite",
+            "off-site",
+            "on site",
+            "significant property damage"
+          ],
+          [
+            "not the same",
+            "different",
+            "distinct",
+            "differs"
+          ]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": []
+      },
+      "adjacent_wrong": {
+        "label": "Attributed to OSHA PSM, or conflated with report retention",
+        "answer": "The wrong answer attributes the five-year accident history to 29 CFR 1910.119, or treats it as identical to the five-year incident report retention rule. OSHA PSM has no accident history element.",
+        "signature_terms": [
+          "1910.119 requires a five-year accident history",
+          "osha requires an accident history"
+        ],
+        "why_dangerous": "This is a citation-correctness trap rather than a content trap. The content of the answer can be entirely right while the attribution sends a compliance team to the wrong agency, the wrong submission deadline and the wrong enforcement authority."
+      },
+      "source": {
+        "standard": "40 CFR",
+        "clause": "40 CFR 68.42(a)",
+        "section_title": "Five-year accident history",
+        "url": "https://www.ecfr.gov/current/title-40/section-68.42",
+        "access": "public",
+        "anchor_text": "The owner or operator shall include in the five-year accident history all accidental releases from covered processes that resulted in deaths, injuries, or significant property damage on site"
+      },
+      "cross_reference": [],
+      "verification": {
+        "status": "verified",
+        "method": "ecfr_api",
+        "source_edition_date": "2026-08-01"
+      },
+      "abstention_acceptable": false
+    },
+    {
+      "id": "psm-008",
+      "item_type": "factual",
+      "pair_id": "psm-p3",
+      "pair_role": "b",
+      "family": "psm.osha_vs_epa",
+      "risk_tier": "medium",
+      "question": "Both OSHA and EPA require a compliance audit at least every three years for covered processes. Cite each requirement, and state one substantive difference between them.",
+      "correct_answer": "OSHA: 29 CFR 1910.119(o)(1). EPA: 40 CFR 68.79(a). A substantive difference is that the EPA rule provides for a third-party audit when required under 40 CFR 68.79(f); the OSHA rule has no third-party audit trigger and requires only that the audit be conducted by at least one person knowledgeable in the process.",
+      "answer_key": {
+        "required_concepts": [
+          [
+            "1910.119(o)",
+            "1910.119(o)(1)",
+            "119(o)"
+          ],
+          [
+            "68.79"
+          ],
+          [
+            "third-party",
+            "third party"
+          ]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": []
+      },
+      "adjacent_wrong": {
+        "label": "One citation given for both agencies, or the third-party trigger attributed to OSHA",
+        "answer": "The wrong answer supplies a single citation covering both, or attributes the third-party audit provision to OSHA PSM.",
+        "signature_terms": [
+          "osha requires a third-party audit",
+          "1910.119 third party"
+        ],
+        "why_dangerous": "Because the two rules are near-identical in wording, retrieval returns one and the generator presents it as covering both. The third-party trigger is the practical difference that changes who may sign the audit."
+      },
+      "source": {
+        "standard": "40 CFR",
+        "clause": "40 CFR 68.79(a)",
+        "section_title": "Compliance audits",
+        "url": "https://www.ecfr.gov/current/title-40/section-68.79",
+        "access": "public",
+        "anchor_text": "at least every three years to verify that the procedures and practices developed under this subpart are adequate and are being followed"
+      },
+      "cross_reference": [
+        {
+          "standard": "29 CFR",
+          "clause": "29 CFR 1910.119(o)(1)",
+          "access": "public",
+          "corroboration": "OSHA counterpart verified in the same run."
+        }
+      ],
+      "verification": {
+        "status": "verified",
+        "method": "ecfr_api",
+        "source_edition_date": "2026-08-01"
+      },
+      "abstention_acceptable": false,
+      "notes": "This item declares no numeric fact on purpose: the three-year interval is given in the question stem, so requiring it in the answer would score echoing rather than knowledge. The interval is tested by psm-002."
+    }
+  ]
+}

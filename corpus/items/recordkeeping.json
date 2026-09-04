@@ -1,0 +1,592 @@
+{
+  "schema_version": "1.0",
+  "domain": "injury_recordkeeping",
+  "domain_title": "OSHA injury and illness recording and reporting",
+  "source_family": "29 CFR part 1904",
+  "sourcing_note": "Recording (entering a case on the OSHA 300 Log) and reporting (notifying OSHA of a severe event) are separate obligations with separate triggers and separate deadlines, described in adjacent sections that use overlapping vocabulary. Almost every item in this file is built on that distinction. This domain is also the empirical basis of the author's prior work on OSHA establishment filings; see docs/limitations.md for why that prior work does not support any claim made by this benchmark.",
+  "items": [
+    {
+      "id": "rk-001",
+      "item_type": "factual",
+      "pair_id": "rk-p1",
+      "pair_role": "a",
+      "family": "rk.reporting_deadlines",
+      "risk_tier": "high",
+      "question": "Within what time must an employer report a work-related employee fatality to OSHA under 29 CFR 1904.39?",
+      "correct_answer": "Within eight hours after the death of any employee as a result of a work-related incident. Reporting is by telephone or in person to the nearest OSHA Area Office, by telephone to the OSHA toll-free central number, or by electronic submission using the reporting application on OSHA's public website.",
+      "answer_key": {
+        "required_concepts": [
+          [
+            "eight hours",
+            "8 hours",
+            "eight (8) hours"
+          ],
+          [
+            "fatality",
+            "death"
+          ]
+        ],
+        "forbidden_concepts": [
+          [
+            "24 hours",
+            "twenty-four"
+          ]
+        ],
+        "numeric_facts": [
+          {
+            "label": "fatality reporting deadline",
+            "value": 8.0,
+            "unit": "hours",
+            "tolerance_abs": 0.0
+          }
+        ]
+      },
+      "adjacent_wrong": {
+        "label": "The 24-hour deadline for hospitalization, amputation and eye loss",
+        "answer": "The wrong answer gives 24 hours, which is the deadline for reporting an in-patient hospitalization, an amputation, or a loss of an eye, stated in the very next paragraph of the same section.",
+        "signature_terms": [
+          "within 24 hours",
+          "within twenty-four hours"
+        ],
+        "why_dangerous": "The two deadlines are consecutive sentences in one paragraph and are cited together in almost every training deck, so retrieval returns both and the generator picks one. A fatality reported at hour 20 is a late report and an independent citable violation on top of the underlying event."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1904.39(a)(1)",
+        "section_title": "Reporting fatalities, hospitalizations, amputations, and losses of an eye as a result of work-related incidents to OSHA",
+        "url": "https://www.ecfr.gov/current/title-29/section-1904.39",
+        "access": "public",
+        "anchor_text": "Within eight (8) hours after the death of any employee as a result of a work-related incident, you must report the fatality"
+      },
+      "cross_reference": [],
+      "verification": {
+        "status": "verified",
+        "method": "ecfr_api",
+        "source_edition_date": "2026-08-01"
+      },
+      "abstention_acceptable": false
+    },
+    {
+      "id": "rk-002",
+      "item_type": "factual",
+      "pair_id": "rk-p1",
+      "pair_role": "b",
+      "family": "rk.reporting_deadlines",
+      "risk_tier": "high",
+      "question": "Within what time must an employer report an employee's in-patient hospitalization, amputation, or loss of an eye to OSHA under 29 CFR 1904.39?",
+      "correct_answer": "Within twenty-four hours after the in-patient hospitalization of one or more employees, or an employee's amputation, or an employee's loss of an eye, as a result of a work-related incident.",
+      "answer_key": {
+        "required_concepts": [
+          [
+            "24 hours",
+            "twenty-four hours",
+            "twenty-four (24) hours"
+          ],
+          [
+            "hospitalization",
+            "amputation",
+            "loss of an eye"
+          ]
+        ],
+        "forbidden_concepts": [
+          [
+            "eight hours",
+            "8 hours"
+          ]
+        ],
+        "numeric_facts": [
+          {
+            "label": "severe injury reporting deadline",
+            "value": 24.0,
+            "unit": "hours",
+            "tolerance_abs": 0.0
+          }
+        ]
+      },
+      "adjacent_wrong": {
+        "label": "The 8-hour fatality deadline",
+        "answer": "The wrong answer gives 8 hours, the fatality deadline from the preceding paragraph.",
+        "signature_terms": [
+          "within 8 hours",
+          "within eight hours"
+        ],
+        "why_dangerous": "Mirror of rk-001. Over-reporting on the 8-hour clock is operationally disruptive but not a violation; the pair is scored jointly so that a system which gets one right by topic association is not credited."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1904.39(a)(2)",
+        "section_title": "Reporting fatalities, hospitalizations, amputations, and losses of an eye as a result of work-related incidents to OSHA",
+        "url": "https://www.ecfr.gov/current/title-29/section-1904.39",
+        "access": "public",
+        "anchor_text": "Within twenty-four (24) hours after the in-patient hospitalization of one or more employees"
+      },
+      "cross_reference": [],
+      "verification": {
+        "status": "verified",
+        "method": "ecfr_api",
+        "source_edition_date": "2026-08-01"
+      },
+      "abstention_acceptable": false
+    },
+    {
+      "id": "rk-003",
+      "item_type": "factual",
+      "pair_id": "rk-p2",
+      "pair_role": "a",
+      "family": "rk.day_counting",
+      "risk_tier": "medium",
+      "question": "Under 29 CFR 1904.7, is there a limit on the number of days away from work an employer must count, and what is it?",
+      "correct_answer": "Yes. The employer may cap the total days away at 180 calendar days. Beyond that the employer need not keep tracking, and entering 180 in the total days away column is considered adequate. The cap applies to days away and to days of job transfer or restriction.",
+      "answer_key": {
+        "required_concepts": [
+          [
+            "180"
+          ],
+          [
+            "cap",
+            "capped",
+            "limit"
+          ],
+          [
+            "calendar days",
+            "calendar"
+          ]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": [
+          {
+            "label": "day count cap",
+            "value": 180.0,
+            "unit": "calendar days",
+            "tolerance_abs": 0.0
+          }
+        ]
+      },
+      "adjacent_wrong": {
+        "label": "Cap given as working days, or as a different number drawn from other recordkeeping rules",
+        "answer": "Wrong answers give 180 working days rather than calendar days, or substitute another number such as 90 or 365.",
+        "signature_terms": [
+          "180 working days",
+          "180 business days",
+          "90 days",
+          "365 days"
+        ],
+        "why_dangerous": "Calendar versus working days changes the recorded day count by roughly 40 percent, which propagates directly into DART rate calculations and into any benchmarking built on them."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1904.7(b)(3)(vii)",
+        "section_title": "General recording criteria",
+        "url": "https://www.ecfr.gov/current/title-29/section-1904.7",
+        "access": "public",
+        "anchor_text": "the total days away at 180 calendar days"
+      },
+      "cross_reference": [],
+      "verification": {
+        "status": "verified",
+        "method": "ecfr_api",
+        "source_edition_date": "2026-08-01"
+      },
+      "abstention_acceptable": false
+    },
+    {
+      "id": "rk-004",
+      "item_type": "factual",
+      "pair_id": "rk-p2",
+      "pair_role": "b",
+      "family": "rk.day_counting",
+      "risk_tier": "medium",
+      "question": "When counting days away from work under 29 CFR 1904.7, does the count include the day the injury occurred?",
+      "correct_answer": "No. Counting begins on the day after the injury occurred or the illness began.",
+      "answer_key": {
+        "required_concepts": [
+          [
+            "no",
+            "does not",
+            "not include",
+            "excluded",
+            "day after"
+          ],
+          [
+            "day after"
+          ]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": []
+      },
+      "adjacent_wrong": {
+        "label": "Day of injury counted",
+        "answer": "The wrong answer counts the day of injury, typically by analogy with workers' compensation waiting-period rules, which use different conventions in different states.",
+        "signature_terms": [
+          "include the day of injury",
+          "count the day the injury occurred",
+          "starting on the date of injury"
+        ],
+        "why_dangerous": "A one-day systematic offset on every case is small per case and material in aggregate; it is exactly the kind of definitional error that makes cross-establishment rate comparison unsound."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1904.7(b)(3)(i)",
+        "section_title": "General recording criteria",
+        "url": "https://www.ecfr.gov/current/title-29/section-1904.7",
+        "access": "public",
+        "anchor_text": "you begin counting days away on the day after the injury occurred or the illness began"
+      },
+      "cross_reference": [],
+      "verification": {
+        "status": "verified",
+        "method": "ecfr_api",
+        "source_edition_date": "2026-08-01"
+      },
+      "abstention_acceptable": false
+    },
+    {
+      "id": "rk-005",
+      "item_type": "factual",
+      "pair_id": null,
+      "pair_role": null,
+      "family": "rk.general_criteria",
+      "risk_tier": "high",
+      "question": "What are the general recording criteria in 29 CFR 1904.7(a)? List them.",
+      "correct_answer": "Death; days away from work; restricted work or transfer to another job; medical treatment beyond first aid; loss of consciousness. A case is also recordable if it involves a significant injury or illness diagnosed by a physician or other licensed health care professional, even if none of the other criteria are met.",
+      "answer_key": {
+        "required_concepts": [
+          [
+            "death"
+          ],
+          [
+            "days away"
+          ],
+          [
+            "restricted work",
+            "restriction",
+            "transfer to another job",
+            "job transfer"
+          ],
+          [
+            "medical treatment beyond first aid"
+          ],
+          [
+            "loss of consciousness"
+          ],
+          [
+            "significant injury",
+            "significant"
+          ]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": []
+      },
+      "adjacent_wrong": {
+        "label": "Restricted work and job transfer counted as separate criteria, or the significant-diagnosis criterion omitted",
+        "answer": "Wrong answers most often omit the significant-injury criterion, which is the one that does not depend on treatment or lost time, or split restricted work and job transfer into two criteria and report a count of six.",
+        "signature_terms": [
+          "five criteria",
+          "six criteria"
+        ],
+        "why_dangerous": "Omitting the significant-diagnosis criterion under-records fractured bones, punctured eardrums, and occupational cancers that produce no lost time. That under-recording is invisible in the log because the case was never entered."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1904.7(a)",
+        "section_title": "General recording criteria",
+        "url": "https://www.ecfr.gov/current/title-29/section-1904.7",
+        "access": "public",
+        "anchor_text": "death, days away from work, restricted work or transfer to another job, medical treatment beyond first aid, or loss of consciousness"
+      },
+      "cross_reference": [],
+      "verification": {
+        "status": "verified",
+        "method": "ecfr_api",
+        "source_edition_date": "2026-08-01"
+      },
+      "abstention_acceptable": false
+    },
+    {
+      "id": "rk-006",
+      "item_type": "factual",
+      "pair_id": "rk-p3",
+      "pair_role": "a",
+      "family": "rk.first_aid",
+      "risk_tier": "high",
+      "question": "Is the list of first aid treatments in 29 CFR 1904.7(b)(5)(ii) exhaustive, or are other similar treatments also considered first aid?",
+      "correct_answer": "It is exhaustive. The standard states that this is a complete list of all treatments considered first aid for part 1904 purposes. Any treatment not on the list is medical treatment.",
+      "answer_key": {
+        "required_concepts": [
+          [
+            "complete list",
+            "exhaustive",
+            "closed list",
+            "comprehensive list",
+            "only those",
+            "nothing else"
+          ],
+          [
+            "first aid"
+          ]
+        ],
+        "forbidden_concepts": [
+          [
+            "not exhaustive",
+            "includes but is not limited to",
+            "such as",
+            "examples include"
+          ]
+        ],
+        "numeric_facts": []
+      },
+      "adjacent_wrong": {
+        "label": "List treated as illustrative, by analogy with the many OSHA lists that are explicitly non-exhaustive",
+        "answer": "The wrong answer describes the list as examples or as 'including but not limited to', and then reasons by analogy that a similar treatment is also first aid.",
+        "signature_terms": [
+          "not an exhaustive list",
+          "these are examples",
+          "including but not limited to",
+          "similar treatments"
+        ],
+        "why_dangerous": "This is the single most consequential recordability question in practice. If the list is treated as illustrative, a recordkeeper can rationalise almost any treatment as first aid, and cases silently leave the log. Many other lists in OSHA standards genuinely are non-exhaustive, which is why the wrong reading is plausible."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1904.7(b)(5)(iii)",
+        "section_title": "General recording criteria",
+        "url": "https://www.ecfr.gov/current/title-29/section-1904.7",
+        "access": "public",
+        "anchor_text": "this is a complete list of all treatments considered first aid for part 1904 purposes"
+      },
+      "cross_reference": [],
+      "verification": {
+        "status": "verified",
+        "method": "ecfr_api",
+        "source_edition_date": "2026-08-01"
+      },
+      "abstention_acceptable": false
+    },
+    {
+      "id": "rk-007",
+      "item_type": "factual",
+      "pair_id": "rk-p3",
+      "pair_role": "b",
+      "family": "rk.first_aid",
+      "risk_tier": "medium",
+      "question": "Does it matter who provides a treatment when deciding whether it is first aid or medical treatment under 29 CFR 1904.7?",
+      "correct_answer": "No. The treatments listed at 1904.7(b)(5)(ii) are first aid regardless of the professional status of the person providing them, including when provided by a physician or other licensed health care professional. Conversely, treatment beyond first aid is medical treatment even when provided by someone who is not a licensed health care professional.",
+      "answer_key": {
+        "required_concepts": [
+          [
+            "no",
+            "does not matter",
+            "regardless",
+            "irrelevant"
+          ],
+          [
+            "professional status",
+            "physician",
+            "licensed health care professional"
+          ]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": []
+      },
+      "adjacent_wrong": {
+        "label": "Provider status treated as the deciding factor",
+        "answer": "The wrong answer says that treatment by a physician makes a case recordable, or that treatment by a first-aid attendant makes it first aid. Provider status is the intuitive rule and is the rule in some workers' compensation systems, which is what makes it plausible.",
+        "signature_terms": [
+          "if a physician provides",
+          "treatment by a doctor makes it recordable",
+          "depends on who provides"
+        ],
+        "why_dangerous": "This rule and rk-006 together determine recordability for the majority of cases at a manufacturing site. Getting it wrong moves the recordable rate, which is the denominator-adjacent quantity every downstream benchmark rests on."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1904.7(b)(5)(iv)",
+        "section_title": "General recording criteria",
+        "url": "https://www.ecfr.gov/current/title-29/section-1904.7",
+        "access": "public",
+        "anchor_text": "to be first aid regardless of the professional status of the person providing the treatment"
+      },
+      "cross_reference": [],
+      "verification": {
+        "status": "verified",
+        "method": "ecfr_api",
+        "source_edition_date": "2026-08-01"
+      },
+      "abstention_acceptable": false
+    },
+    {
+      "id": "rk-008",
+      "item_type": "factual",
+      "pair_id": null,
+      "pair_role": null,
+      "family": "rk.record_vs_report",
+      "risk_tier": "high",
+      "question": "An employee is killed in a motor vehicle accident on a public highway while driving between two company sites. The accident was not in a construction work zone. Must the employer report the fatality to OSHA, and must it be recorded?",
+      "correct_answer": "It does not have to be reported to OSHA, because the motor vehicle accident occurred on a public street or highway and not in a construction work zone. It must still be recorded on the employer's injury and illness records if the employer is required to keep such records. Reporting and recording are separate obligations and this case separates them.",
+      "answer_key": {
+        "required_concepts": [
+          [
+            "not have to report",
+            "do not have to report",
+            "does not have to be reported",
+            "not have to be reported",
+            "not reportable",
+            "no reporting",
+            "exempt from reporting",
+            "not required to report"
+          ],
+          [
+            "must be recorded",
+            "must still be recorded",
+            "still be recorded",
+            "still recorded",
+            "recordable",
+            "record on",
+            "recorded on"
+          ],
+          [
+            "public street",
+            "public highway",
+            "construction work zone"
+          ]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": []
+      },
+      "adjacent_wrong": {
+        "label": "Reporting and recording collapsed into a single obligation",
+        "answer": "Wrong answers say the case is neither reportable nor recordable, or that it must be reported within eight hours because it is a fatality. Both collapse the recording/reporting distinction.",
+        "signature_terms": [
+          "neither recordable nor reportable",
+          "must be reported within 8 hours",
+          "not recordable because it occurred on a public road"
+        ],
+        "why_dangerous": "The exception is narrow and depends on two conditions: public street or highway, and not in a construction work zone. A team that reads the exception as covering all vehicle fatalities will fail to report a work-zone fatality, and a team that ignores it will drop a recordable case from the log."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1904.39(b)(3)",
+        "section_title": "Reporting fatalities, hospitalizations, amputations, and losses of an eye as a result of work-related incidents to OSHA",
+        "url": "https://www.ecfr.gov/current/title-29/section-1904.39",
+        "access": "public",
+        "anchor_text": "If the motor vehicle accident occurred on a public street or highway, but not in a construction work zone, you do not have to report"
+      },
+      "cross_reference": [],
+      "verification": {
+        "status": "verified",
+        "method": "ecfr_api",
+        "source_edition_date": "2026-08-01"
+      },
+      "abstention_acceptable": false
+    },
+    {
+      "id": "rk-009",
+      "item_type": "factual",
+      "pair_id": null,
+      "pair_role": null,
+      "family": "rk.significant_diagnosis",
+      "risk_tier": "medium",
+      "question": "Which diagnosed conditions must always be recorded under the general criteria of 29 CFR 1904.7 at the time of diagnosis, even with no lost time, no restriction and no medical treatment beyond first aid?",
+      "correct_answer": "Work-related cases involving cancer, chronic irreversible disease, a fractured or cracked bone, or a punctured eardrum must always be recorded under the general criteria at the time of diagnosis by a physician or other licensed health care professional.",
+      "answer_key": {
+        "required_concepts": [
+          [
+            "cancer"
+          ],
+          [
+            "chronic irreversible",
+            "chronic irreversible disease"
+          ],
+          [
+            "fractured",
+            "cracked bone",
+            "fracture"
+          ],
+          [
+            "punctured eardrum",
+            "perforated eardrum"
+          ]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": []
+      },
+      "adjacent_wrong": {
+        "label": "List broadened to any physician diagnosis, or narrowed to fractures only",
+        "answer": "Wrong answers either extend the rule to any injury diagnosed by a physician, which would make almost every clinic visit recordable, or narrow it to fractures and drop the other three.",
+        "signature_terms": [
+          "any diagnosis by a physician",
+          "all physician-diagnosed injuries"
+        ],
+        "why_dangerous": "Both directions distort the recordable rate, and the narrow error specifically drops occupational disease cases that are the point of the criterion."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1904.7(b)(7)",
+        "section_title": "General recording criteria",
+        "url": "https://www.ecfr.gov/current/title-29/section-1904.7",
+        "access": "public",
+        "anchor_text": "Work-related cases involving cancer, chronic irreversible disease, a fractured or cracked bone, or a punctured eardrum must always be recorded"
+      },
+      "cross_reference": [],
+      "verification": {
+        "status": "verified",
+        "method": "ecfr_api",
+        "source_edition_date": "2026-08-01"
+      },
+      "abstention_acceptable": false
+    },
+    {
+      "id": "rk-010",
+      "item_type": "category_error",
+      "pair_id": null,
+      "pair_role": null,
+      "family": "rk.category_error",
+      "risk_tier": "medium",
+      "question": "What is the maximum OSHA recordable incident rate a facility is allowed to have before it is automatically placed on the Severe Violator Enforcement Program?",
+      "correct_answer": "The premise is false. 29 CFR part 1904 sets no maximum allowable recordable rate, and no rate threshold automatically places an establishment in an enforcement program. Recordkeeping rules govern what must be recorded and reported; they do not set performance limits. The correct response identifies the false premise rather than supplying a number.",
+      "answer_key": {
+        "required_concepts": [
+          [
+            "no maximum",
+            "no threshold",
+            "no such",
+            "does not set",
+            "no limit",
+            "premise",
+            "not correct",
+            "no rate"
+          ]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": []
+      },
+      "adjacent_wrong": {
+        "label": "A plausible rate threshold produced by analogy with industry benchmarking",
+        "answer": "The dangerous failure is a specific number, often around 3.0 or the industry average TRIR, presented as a regulatory limit. Industry average rates are real published statistics; regulatory maxima are not.",
+        "signature_terms": [
+          "a trir above",
+          "rate of 3.0",
+          "exceeds the industry average",
+          "automatically placed"
+        ],
+        "why_dangerous": "Presenting a benchmark statistic as a regulatory limit gives a site a reason to manage the number rather than the hazard, which is the exact incentive that corrupts self-reported injury data in the first place."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1904.7(a)",
+        "section_title": "General recording criteria",
+        "url": "https://www.ecfr.gov/current/title-29/section-1904.7",
+        "access": "public",
+        "anchor_text": "You must consider an injury or illness to meet the general recording criteria"
+      },
+      "cross_reference": [],
+      "verification": {
+        "status": "verified",
+        "method": "ecfr_api",
+        "source_edition_date": "2026-08-01"
+      },
+      "abstention_acceptable": true,
+      "notes": "Negative-rejection item. The answer key requires premise rejection; supplying any numeric threshold is scored as the maximum-penalty outcome."
+    }
+  ]
+}

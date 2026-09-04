@@ -1,0 +1,2582 @@
+{
+  "schema": "grounding_eval.run/1",
+  "library_version": "0.1.0",
+  "adapter": {
+    "name": "mock:ungrounded",
+    "arm": "ungrounded",
+    "class": "MockAdapter",
+    "profile": "ungrounded",
+    "profile_description": "Simulates a system with no retrieval: a persona prompt over parametric memory. Weighted towards adjacent substitution and towards citing nothing or citing a plausible wrong clause.",
+    "seed": 20260904,
+    "repeat": 0,
+    "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS",
+    "warning": "Mock responses are composed from the corpus item being answered. They demonstrate that the harness runs. They are not results and say nothing about any real system."
+  },
+  "corpus_digest": "a9fd4f4c2222dfb9f6135ee39a94ca9b92168867b14a56a5a319d16cb3980528",
+  "n_items": 68,
+  "repeat": 0,
+  "seed": 20260904,
+  "scoring_config": {
+    "coverage_threshold": 0.75,
+    "require_full_numeric": true,
+    "adjacent_min_terms": 2,
+    "adjacent_low_coverage": 0.5,
+    "policy": "safety",
+    "policy_weights": {
+      "correct": 1.0,
+      "abstained": 0.25,
+      "abstained_acceptable": 0.9,
+      "other_incorrect": -0.5,
+      "adjacent_substitution": -1.0,
+      "unscorable": 0.0
+    },
+    "risk_weights": {
+      "high": 1.0,
+      "medium": 0.6,
+      "low": 0.3
+    }
+  },
+  "started_utc": "2026-09-04T05:15:35Z",
+  "duration_s": 0.08072495460510254,
+  "environment": {
+    "python": "3.9.6",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "implementation": "CPython"
+  },
+  "is_mock_demonstration": true,
+  "mock_banner": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS",
+  "responses": [
+    {
+      "item_id": "cs-001",
+      "text": "This is governed by the Reclassification to a non-permit confined space under 1910.146(c)(7). The controlling parameters here are (c)(7), reclassify, non-permit confined space, and the value should be selected on that basis. See 29 CFR 1910.146; NFPA 70E Section 130.7.",
+      "citations": [
+        "29 CFR 1910.146",
+        "NFPA 70E Section 130.7"
+      ],
+      "confidence": 0.9076,
+      "latency_s": 6.794929504394531e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "adjacent",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "cs-002",
+      "text": "This is governed by the Alternate entry procedures under 1910.146(c)(5). The controlling parameters here are reclassify with continuous forced air, ventilation is sufficient to reclassify, ventilate and reclassify, and the value should be selected on that basis.",
+      "citations": [],
+      "confidence": 0.8649,
+      "latency_s": 2.7894973754882812e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "adjacent",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "cs-003",
+      "text": "This is governed by the Order permuted, most often toxic before flammable, or oxygen last. The controlling parameters here are any order, simultaneously, toxic, flammable, oxygen, and the value should be selected on that basis.",
+      "citations": [],
+      "confidence": 0.8542,
+      "latency_s": 2.6941299438476562e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "adjacent",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "cs-004",
+      "text": "This is governed by the Thresholds imported from another jurisdiction or standard. The controlling parameters here are 20.9 percent as the lower, 19.0 percent, 22 percent, and the value should be selected on that basis.",
+      "citations": [],
+      "confidence": 0.853,
+      "latency_s": 2.5987625122070312e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "adjacent",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "cs-005",
+      "text": "This is governed by the employer's written program, which should be reviewed by the site safety committee before any determination is made.",
+      "citations": [],
+      "confidence": 0.6317,
+      "latency_s": 2.5033950805664062e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "other",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "cs-006",
+      "text": "This is governed by the Entry supervisor duties substituted for attendant duties. The controlling parameters here are verifies that rescue services are available, endorsing the permit, terminates the entry, and the value should be selected on that basis. See 46 CFR 54.01-1; API 520 Part I Section 5.4.",
+      "citations": [
+        "46 CFR 54.01-1",
+        "API 520 Part I Section 5.4"
+      ],
+      "confidence": 0.802,
+      "latency_s": 2.7894973754882812e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "adjacent",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "cs-007",
+      "text": "This is governed by the Attendant duties substituted for entry supervisor duties. The controlling parameters here are maintains an accurate count, remains outside the permit space, orders the entrants to evacuate, and the value should be selected on that basis.",
+      "citations": [],
+      "confidence": 0.8838,
+      "latency_s": 2.5272369384765625e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "adjacent",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "cs-008",
+      "text": "A non-permit confined space is a confined space that does not contain and, with respect to atmospheric hazards, does not have the potential to contain any hazard capable of causing death or serious physical harm. A permit-required confined space has one or more of: it contains or has a potential to contain a hazardous atmosphere; it contains a material with the potential for engulfing an entrant; it has an internal configuration such that an entrant could be trapped or asphyxiated by inwardly converging walls or by a floor that slopes downward and tapers to a smaller cross-section; or it contains any other recognized serious safety or health hazard. See 29 CFR 1910.146.",
+      "citations": [
+        "29 CFR 1910.146"
+      ],
+      "confidence": 0.8319,
+      "latency_s": 4.696846008300781e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "correct",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "el-001",
+      "text": "This is governed by the 50 volts treated as an unconditional exemption, or the two justifications reduced to one. The controlling parameters here are low voltage is always safe, anything below 50 volts is exempt, if it is not practical, and the value should be selected on that basis.",
+      "citations": [],
+      "confidence": 0.8972,
+      "latency_s": 2.5987625122070312e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "adjacent",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "el-002",
+      "text": "The applicable requirement depends on facility-specific factors and on the jurisdiction, so a general statement would not be meaningful here.",
+      "citations": [],
+      "confidence": 0.7646,
+      "latency_s": 2.384185791015625e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "other",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "fe-001",
+      "text": "This is governed by the The two intervals swapped, or the hydrostatic test interval substituted. The controlling parameters here are hydrostatic test every 5 years, monthly maintenance check, annual visual inspection, and the value should be selected on that basis. See 29 CFR 1910.157; NFPA 70E Section 130.7.",
+      "citations": [
+        "29 CFR 1910.157",
+        "NFPA 70E Section 130.7"
+      ],
+      "confidence": 0.8291,
+      "latency_s": 4.00543212890625e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "adjacent",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "fe-002",
+      "text": "This is governed by the A fabricated NFPA clause number with a fabricated quantity. The controlling parameters here are clause 5.5, nfpa 10 section, per kwh, and the value should be selected on that basis. See 29 CFR 1910.157; API RP 754 Section 4.2.",
+      "citations": [
+        "29 CFR 1910.157",
+        "API RP 754 Section 4.2"
+      ],
+      "confidence": 0.9138,
+      "latency_s": 3.814697265625e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "adjacent",
+        "profile": "ungrounded",
+        "item_type": "category_error"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "fl-001",
+      "text": "This is governed by the Categories distinguished by flashpoint alone. The controlling parameters here are class ia, flashpoint below 73 for category 1 and above for category 2, class ib, and the value should be selected on that basis. See 29 CFR 1910.38(b).",
+      "citations": [
+        "29 CFR 1910.38(b)"
+      ],
+      "confidence": 0.8237,
+      "latency_s": 2.6941299438476562e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "adjacent",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "fl-002",
+      "text": "This is governed by the Heated-liquid rule omitted, or applied to the wrong category. The controlling parameters here are category remains unchanged when heated, no special rule applies, and the value should be selected on that basis. See 29 CFR 1904.35(b)(1).",
+      "citations": [
+        "29 CFR 1904.35(b)(1)"
+      ],
+      "confidence": 0.7618,
+      "latency_s": 2.5987625122070312e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "adjacent",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "hc-001",
+      "text": "This is governed by the Workplace label requirements substituted for shipped-container label requirements. The controlling parameters here are workplace label, alternative labeling, product identifier and words, pictures, symbols, and the value should be selected on that basis. See 29 CFR 1910.1200.",
+      "citations": [
+        "29 CFR 1910.1200"
+      ],
+      "confidence": 0.6684,
+      "latency_s": 3.790855407714844e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "adjacent",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "hc-002",
+      "text": "This is governed by the Definitions swapped, or either confused with the signal word. The controlling parameters here are the signal word indicates the nature of the hazard, danger or warning, and the value should be selected on that basis. See 29 CFR 1910.1200(c), definitions of 'Hazard statement' and 'Precautionary statement'.",
+      "citations": [
+        "29 CFR 1910.1200(c), definitions of 'Hazard statement' and 'Precautionary statement'"
+      ],
+      "confidence": 0.7741,
+      "latency_s": 2.5033950805664062e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "adjacent",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "hc-003",
+      "text": "This is governed by the ANSI Z535 sign hierarchy substituted (danger, warning, caution, notice). The controlling parameters here are notice, caution, danger, warning, caution, and the value should be selected on that basis.",
+      "citations": [],
+      "confidence": 0.8014,
+      "latency_s": 2.47955322265625e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "adjacent",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "hc-004",
+      "text": "This is governed by the MSDS-era structure, or section order permuted. The controlling parameters here are no required order, material safety data sheet, msds, and the value should be selected on that basis.",
+      "citations": [],
+      "confidence": 0.7468,
+      "latency_s": 2.5033950805664062e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "adjacent",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "hc-005",
+      "text": "This is governed by the Nine, from the UN GHS purple book which includes the environmental pictogram. The controlling parameters here are 9 pictograms, environment pictogram is required, nine pictograms, and the value should be selected on that basis. See 40 CFR 68.15(a).",
+      "citations": [
+        "40 CFR 68.15(a)"
+      ],
+      "confidence": 0.6749,
+      "latency_s": 2.5987625122070312e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "adjacent",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "hn-001",
+      "text": "This is governed by the Action level and permissible exposure limit conflated at a single value. The controlling parameters here are the action level is 90, the permissible exposure limit is 85, a single threshold, and the value should be selected on that basis.",
+      "citations": [],
+      "confidence": 0.8231,
+      "latency_s": 2.5272369384765625e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "adjacent",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "hn-002",
+      "text": "This is governed by the Frequency set taken from the audiometric test requirement rather than the STS definition. The controlling parameters here are all test frequencies, 500, 1000, 2000, 6000 hz, and the value should be selected on that basis. See 40 CFR 68.15(a); ASME BPVC UG-131.",
+      "citations": [
+        "40 CFR 68.15(a)",
+        "ASME BPVC UG-131"
+      ],
+      "confidence": 0.8697,
+      "latency_s": 2.7179718017578125e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "adjacent",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "hn-003",
+      "text": "The applicable requirement depends on facility-specific factors and on the jurisdiction, so a general statement would not be meaningful here.",
+      "citations": [],
+      "confidence": 0.742,
+      "latency_s": 2.3603439331054688e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "other",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "loto-001",
+      "text": "This is governed by the Interval imported from another OSHA program (PSM compliance audit, 3 years; PHA revalidation, 5 years). The controlling parameters here are every five years, every 5 years, every 3 years, and the value should be selected on that basis. See 29 CFR 1910.147.",
+      "citations": [
+        "29 CFR 1910.147"
+      ],
+      "confidence": 0.7994,
+      "latency_s": 3.814697265625e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "adjacent",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "loto-002",
+      "text": "This is governed by the Annual retraining, imported from the annual periodic inspection requirement. The controlling parameters here are retraining shall be provided annually, annual retraining, retrain employees every year, and the value should be selected on that basis.",
+      "citations": [],
+      "confidence": 0.8307,
+      "latency_s": 2.47955322265625e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "adjacent",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "loto-003",
+      "text": "The standard does not apply where exposure to the hazards of unexpected energization or start up is controlled by unplugging the equipment from the energy source AND the plug is under the exclusive control of the employee performing the servicing or maintenance. Both conditions must hold. See 29 CFR 1904.35(b)(1).",
+      "citations": [
+        "29 CFR 1904.35(b)(1)"
+      ],
+      "confidence": 0.7855,
+      "latency_s": 2.4080276489257812e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "correct",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "loto-004",
+      "text": "This is governed by the Exception stated as covering all minor or short-duration work. The controlling parameters here are short duration work is exempt, quick jobs do not require lockout, less than a few minutes, and the value should be selected on that basis. See 40 CFR 68.15(a).",
+      "citations": [
+        "40 CFR 68.15(a)"
+      ],
+      "confidence": 0.8161,
+      "latency_s": 2.6941299438476562e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "adjacent",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "loto-005",
+      "text": "Where tagout is used, the periodic inspection must include a review, between the inspector and each authorized AND affected employee, of that employee's responsibilities under the energy control procedure being inspected, and of the elements set forth in 1910.147(c)(7)(ii), which are the limitations of tags. Where lockout is used, the review is with each authorized employee only.",
+      "citations": [],
+      "confidence": 0.8257,
+      "latency_s": 2.288818359375e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "correct",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "loto-006",
+      "text": "This is governed by the employer's written program, which should be reviewed by the site safety committee before any determination is made. See 40 CFR 68.15(a).",
+      "citations": [
+        "40 CFR 68.15(a)"
+      ],
+      "confidence": 0.912,
+      "latency_s": 2.5272369384765625e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "other",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "loto-007",
+      "text": "Industry practice varies. Most facilities handle this through their existing management system rather than by reference to a single provision. See 29 CFR 1904.35(b)(1).",
+      "citations": [
+        "29 CFR 1904.35(b)(1)"
+      ],
+      "confidence": 0.6797,
+      "latency_s": 2.5033950805664062e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "other",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "loto-008",
+      "text": "This is governed by the Group lockbox requirement substituted for shift transfer. The controlling parameters here are each employee must affix a personal lock, required to use a lockbox, must use a group lockbox, and the value should be selected on that basis. See 29 CFR 1910.147; API RP 754 Section 4.2.",
+      "citations": [
+        "29 CFR 1910.147",
+        "API RP 754 Section 4.2"
+      ],
+      "confidence": 0.8249,
+      "latency_s": 3.695487976074219e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "adjacent",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "loto-009",
+      "text": "This is governed by the Program elements borrowed from a different OSHA standard. The controlling parameters here are management of change, hazard assessment, written program, training and recordkeeping, and the value should be selected on that basis. See 29 CFR 1910.147.",
+      "citations": [
+        "29 CFR 1910.147"
+      ],
+      "confidence": 0.8632,
+      "latency_s": 3.504753112792969e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "adjacent",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "loto-010",
+      "text": "The standard contains no such requirement. 1910.147 requires that lockout devices be durable, standardized, substantial, and identifiable, and it requires an annual periodic inspection of the energy control procedure, but it imposes no third-party recertification or load testing of padlocks. The correct response is to say that no such requirement exists rather than to supply an interval.",
+      "citations": [],
+      "confidence": 0.8892,
+      "latency_s": 2.3126602172851562e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "correct",
+        "profile": "ungrounded",
+        "item_type": "category_error"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "mg-001",
+      "text": "Point of operation is the area on a machine where work is actually performed upon the material being processed. The point of operation of machines whose operation exposes an employee to injury must be guarded. Where no applicable specific standard exists, the guarding device must be designed and constructed to prevent the operator from having any part of the body in the danger zone during the operating cycle. Special hand tools for placing and removing material may supplement but may not substitute for that guarding. See 29 CFR 1910.38(b).",
+      "citations": [
+        "29 CFR 1910.38(b)"
+      ],
+      "confidence": 0.8536,
+      "latency_s": 2.47955322265625e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "correct",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "mg-002",
+      "text": "This is governed by the Exclusions stated without the speed condition. The controlling parameters here are all flat belts under one inch are exempt, regardless of speed, and the value should be selected on that basis. See 40 CFR 68.15(a); NFPA 70E Section 130.7.",
+      "citations": [
+        "40 CFR 68.15(a)",
+        "NFPA 70E Section 130.7"
+      ],
+      "confidence": 0.9089,
+      "latency_s": 2.7179718017578125e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "adjacent",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "prd-001",
+      "text": "This is governed by the Spring-loaded pressure relief valve (reclosing device). The controlling parameters here are set pressure, spring, huddling chamber, and the value should be selected on that basis. See 46 CFR 54.15-13.",
+      "citations": [
+        "46 CFR 54.15-13"
+      ],
+      "confidence": 0.793,
+      "latency_s": 3.886222839355469e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "adjacent",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "prd-002",
+      "text": "This is governed by the Rupture disk device (non-reclosing). The controlling parameters here are non-reclosing, nominal burst, manufacturing design range, and the value should be selected on that basis.",
+      "citations": [],
+      "confidence": 0.8679,
+      "latency_s": 2.574920654296875e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "adjacent",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "prd-003",
+      "text": "This is governed by the General non-fire relieving-device limit (10 percent) or supplemental fire device limit (20 percent above MAWP). The controlling parameters here are 10 percent above, 10% above the maximum allowable, and the value should be selected on that basis. See 46 CFR 54.15-13(b)(2).",
+      "citations": [
+        "46 CFR 54.15-13(b)(2)"
+      ],
+      "confidence": 0.8027,
+      "latency_s": 2.6226043701171875e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "adjacent",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "prd-004",
+      "text": "I do not know the answer to this with enough certainty to state it. You should consult the governing standard directly.",
+      "citations": [],
+      "confidence": 0.2003,
+      "latency_s": 2.4080276489257812e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "abstain",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "prd-005",
+      "text": "This is governed by the Non-fire 10 percent limit. The controlling parameters here are 10 percent above the maximum allowable, and the value should be selected on that basis. See 29 CFR 1910.132(d)(1).",
+      "citations": [
+        "29 CFR 1910.132(d)(1)"
+      ],
+      "confidence": 0.8398,
+      "latency_s": 2.47955322265625e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "adjacent",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "prd-006",
+      "text": "This is governed by the Paragraph identifiers swapped between device types. The controlling parameters here are ug-127 covers safety and relief valves, ug-126 covers rupture disks, and the value should be selected on that basis.",
+      "citations": [],
+      "confidence": 0.7326,
+      "latency_s": 2.5272369384765625e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "adjacent",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "prd-007",
+      "text": "This is governed by the Relief valve installation guidance. The controlling parameters here are tailpipe, reaction force on the valve, superimposed backpressure, and the value should be selected on that basis. See 29 CFR 1910.38(b).",
+      "citations": [
+        "29 CFR 1910.38(b)"
+      ],
+      "confidence": 0.9031,
+      "latency_s": 2.5987625122070312e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "adjacent",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "prd-008",
+      "text": "The applicable requirement depends on facility-specific factors and on the jurisdiction, so a general statement would not be meaningful here.",
+      "citations": [],
+      "confidence": 0.6381,
+      "latency_s": 2.3126602172851562e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "other",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "prd-009",
+      "text": "The question does not apply. Blowdown is the difference between set pressure and reseating pressure of a reclosing device; a rupture disk is a non-reclosing, one-shot device with no reseating pressure and therefore no blowdown. The correct response is to reject the premise and, if helpful, state which parameters do govern a disk (marked burst pressure, burst pressure tolerance, manufacturing design range, specified disk temperature) and where they are found.",
+      "citations": [],
+      "confidence": 0.8011,
+      "latency_s": 2.4080276489257812e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "correct",
+        "profile": "ungrounded",
+        "item_type": "category_error"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "prd-010",
+      "text": "This is governed by the employer's written program, which should be reviewed by the site safety committee before any determination is made.",
+      "citations": [],
+      "confidence": 0.7349,
+      "latency_s": 2.4080276489257812e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "other",
+        "profile": "ungrounded",
+        "item_type": "category_error"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "prd-011",
+      "text": "The upper range of the gage must be not less than 1.2 times and not more than 2 times the pressure at which the relieving device is set to function. See 46 CFR 54.15-5(f).",
+      "citations": [
+        "46 CFR 54.15-5(f)"
+      ],
+      "confidence": 0.8397,
+      "latency_s": 2.288818359375e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "correct",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "prd-012",
+      "text": "This is governed by the Blanket prohibition, or collapsing series and parallel into one case. The controlling parameters here are cannot be combined, never be used together, mutually exclusive, and the value should be selected on that basis. See 29 CFR 1904.35(b)(1).",
+      "citations": [
+        "29 CFR 1904.35(b)(1)"
+      ],
+      "confidence": 0.8219,
+      "latency_s": 2.574920654296875e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "adjacent",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "psm-001",
+      "text": "At least every five years after completion of the initial process hazard analysis, the PHA must be updated and revalidated by a team meeting the requirements of 1910.119(e)(4), to assure that it is consistent with the current process. See 29 CFR 1910.119.",
+      "citations": [
+        "29 CFR 1910.119"
+      ],
+      "confidence": 0.8315,
+      "latency_s": 3.409385681152344e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "correct",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "psm-002",
+      "text": "This is governed by the Five-year PHA interval, or five-year incident report retention, substituted. The controlling parameters here are every five years, audit reports for 5 years, retained for five years, and the value should be selected on that basis. See 29 CFR 1910.132(d)(1).",
+      "citations": [
+        "29 CFR 1910.132(d)(1)"
+      ],
+      "confidence": 0.7382,
+      "latency_s": 2.6941299438476562e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "adjacent",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "psm-003",
+      "text": "At least every three years, and more often if necessary. The employer, in consultation with the employees involved in operating the process, determines the appropriate frequency of refresher training. See 29 CFR 1910.119; NFPA 70E Section 130.7.",
+      "citations": [
+        "29 CFR 1910.119",
+        "NFPA 70E Section 130.7"
+      ],
+      "confidence": 0.7538,
+      "latency_s": 3.409385681152344e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "correct",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "psm-004",
+      "text": "This is governed by the OSHA incident reporting deadlines (8 hours / 24 hours) substituted for the PSM investigation deadline. The controlling parameters here are report to osha within, within 24 hours, within 8 hours, and the value should be selected on that basis.",
+      "citations": [],
+      "confidence": 0.9246,
+      "latency_s": 2.9087066650390625e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "adjacent",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "psm-005",
+      "text": "This is governed by the Retention rules swapped between the two document types. The controlling parameters here are two most recent incident, audit reports must be retained for five years, and the value should be selected on that basis.",
+      "citations": [],
+      "confidence": 0.7619,
+      "latency_s": 2.47955322265625e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "adjacent",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "psm-006",
+      "text": "A process involving a Category 1 flammable gas as defined in 1910.1200(c), or a flammable liquid with a flashpoint below 100 degrees F, on site in one location in a quantity of 10,000 pounds or more. The two exceptions are hydrocarbon fuels used solely for workplace consumption as a fuel, if not part of a process containing another highly hazardous chemical covered by the standard, and flammable liquids with a flashpoint below 100 degrees F stored in atmospheric tanks or transferred which are kept below their normal boiling point without benefit of chilling or refrigeration. See 46 CFR 54.01-1.",
+      "citations": [
+        "46 CFR 54.01-1"
+      ],
+      "confidence": 0.8356,
+      "latency_s": 2.4080276489257812e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "correct",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "psm-007",
+      "text": "This is governed by the Attributed to OSHA PSM, or conflated with report retention. The controlling parameters here are osha requires an accident history, 1910.119 requires a five-year accident history, and the value should be selected on that basis.",
+      "citations": [],
+      "confidence": 0.6648,
+      "latency_s": 2.5033950805664062e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "adjacent",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "psm-008",
+      "text": "This is governed by the One citation given for both agencies, or the third-party trigger attributed to OSHA. The controlling parameters here are 1910.119 third party, osha requires a third-party audit, and the value should be selected on that basis. See 40 CFR 68.15(a).",
+      "citations": [
+        "40 CFR 68.15(a)"
+      ],
+      "confidence": 0.764,
+      "latency_s": 2.5033950805664062e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "adjacent",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "rk-001",
+      "text": "This is governed by the employer's written program, which should be reviewed by the site safety committee before any determination is made.",
+      "citations": [],
+      "confidence": 0.7252,
+      "latency_s": 2.3126602172851562e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "other",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "rk-002",
+      "text": "This is governed by the The 8-hour fatality deadline. The controlling parameters here are within 8 hours, within eight hours, and the value should be selected on that basis. See 29 CFR 1904.35(b)(1).",
+      "citations": [
+        "29 CFR 1904.35(b)(1)"
+      ],
+      "confidence": 0.8416,
+      "latency_s": 2.574920654296875e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "adjacent",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "rk-003",
+      "text": "This is governed by the Cap given as working days, or as a different number drawn from other recordkeeping rules. The controlling parameters here are 180 working days, 90 days, 180 business days, and the value should be selected on that basis. See 40 CFR 68.15(a).",
+      "citations": [
+        "40 CFR 68.15(a)"
+      ],
+      "confidence": 0.855,
+      "latency_s": 2.7179718017578125e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "adjacent",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "rk-004",
+      "text": "No. Counting begins on the day after the injury occurred or the illness began. See 29 CFR 1904.7.",
+      "citations": [
+        "29 CFR 1904.7"
+      ],
+      "confidence": 0.8035,
+      "latency_s": 3.504753112792969e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "correct",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "rk-005",
+      "text": "Death; days away from work; restricted work or transfer to another job; medical treatment beyond first aid; loss of consciousness. A case is also recordable if it involves a significant injury or illness diagnosed by a physician or other licensed health care professional, even if none of the other criteria are met.",
+      "citations": [],
+      "confidence": 0.7673,
+      "latency_s": 2.3126602172851562e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "correct",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "rk-006",
+      "text": "This is governed by the List treated as illustrative, by analogy with the many OSHA lists that are explicitly non-exhaustive. The controlling parameters here are similar treatments, not an exhaustive list, these are examples, and the value should be selected on that basis.",
+      "citations": [],
+      "confidence": 0.8165,
+      "latency_s": 2.574920654296875e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "adjacent",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "rk-007",
+      "text": "No. The treatments listed at 1904.7(b)(5)(ii) are first aid regardless of the professional status of the person providing them, including when provided by a physician or other licensed health care professional. Conversely, treatment beyond first aid is medical treatment even when provided by someone who is not a licensed health care professional.",
+      "citations": [],
+      "confidence": 0.8569,
+      "latency_s": 2.4080276489257812e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "correct",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "rk-008",
+      "text": "This is governed by the Reporting and recording collapsed into a single obligation. The controlling parameters here are not recordable because it occurred on a public road, neither recordable nor reportable, must be reported within 8 hours, and the value should be selected on that basis.",
+      "citations": [],
+      "confidence": 0.7404,
+      "latency_s": 2.47955322265625e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "adjacent",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "rk-009",
+      "text": "Industry practice varies. Most facilities handle this through their existing management system rather than by reference to a single provision.",
+      "citations": [],
+      "confidence": 0.6469,
+      "latency_s": 2.4080276489257812e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "other",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "rk-010",
+      "text": "This is governed by the A plausible rate threshold produced by analogy with industry benchmarking. The controlling parameters here are automatically placed, exceeds the industry average, rate of 3.0, and the value should be selected on that basis. See 29 CFR 1904.7.",
+      "citations": [
+        "29 CFR 1904.7"
+      ],
+      "confidence": 0.6349,
+      "latency_s": 3.504753112792969e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "adjacent",
+        "profile": "ungrounded",
+        "item_type": "category_error"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "rp-001",
+      "text": "This is governed by the APF 50, which belongs to a full facepiece APR and also to a half mask PAPR. The controlling parameters here are protection factor of 50, apf of 50, 1,000, and the value should be selected on that basis. See 29 CFR 1910.132(d)(1).",
+      "citations": [
+        "29 CFR 1910.132(d)(1)"
+      ],
+      "confidence": 0.6333,
+      "latency_s": 2.574920654296875e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "adjacent",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "rp-002",
+      "text": "This is governed by the Loose-fitting PAPR credited at 1,000, from the helmet/hood entry. The controlling parameters here are 1000, 1,000, and the value should be selected on that basis. See 29 CFR 1910.134(d)(3)(i)(A), Table 1.",
+      "citations": [
+        "29 CFR 1910.134(d)(3)(i)(A), Table 1"
+      ],
+      "confidence": 0.7518,
+      "latency_s": 2.6226043701171875e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "adjacent",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "rp-003",
+      "text": "This is governed by the High-APF air-purifying respirator offered for IDLH service. The controlling parameters here are full facepiece air-purifying respirator is acceptable, high protection factor is sufficient, papr with an apf of 1,000, and the value should be selected on that basis.",
+      "citations": [],
+      "confidence": 0.7314,
+      "latency_s": 2.5033950805664062e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "adjacent",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    },
+    {
+      "item_id": "rp-004",
+      "text": "This is governed by the Rule stated without the exception, or the exception broadened to permit air-purifying respirators. The controlling parameters here are no exception exists, air-purifying respirators are permitted, any respirator may be used, and the value should be selected on that basis. See 29 CFR 1910.134(d)(2)(iii).",
+      "citations": [
+        "29 CFR 1910.134(d)(2)(iii)"
+      ],
+      "confidence": 0.8417,
+      "latency_s": 2.574920654296875e-05,
+      "error": null,
+      "metadata": {
+        "simulated_branch": "adjacent",
+        "profile": "ungrounded",
+        "item_type": "factual"
+      },
+      "provenance": "MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS"
+    }
+  ],
+  "scores": [
+    {
+      "item_id": "cs-001",
+      "domain": "confined_space",
+      "family": "cs.alternate_vs_reclassify",
+      "item_type": "factual",
+      "risk_tier": "high",
+      "pair_id": "cs-p1",
+      "outcome": "adjacent_substitution",
+      "concept_coverage": 0.0,
+      "forbidden_asserted": [],
+      "numeric_coverage": null,
+      "adjacent_hits": [
+        "(c)(7)",
+        "non-permit confined space",
+        "reclassify"
+      ],
+      "abstained": false,
+      "citation_grade": "correct_section",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [
+        "NFPA 70e"
+      ],
+      "confidence": 0.9076,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "cs-002",
+      "domain": "confined_space",
+      "family": "cs.alternate_vs_reclassify",
+      "item_type": "factual",
+      "risk_tier": "high",
+      "pair_id": "cs-p1",
+      "outcome": "adjacent_substitution",
+      "concept_coverage": 0.0,
+      "forbidden_asserted": [],
+      "numeric_coverage": null,
+      "adjacent_hits": [
+        "reclassify with continuous forced air",
+        "ventilate and reclassify",
+        "ventilation is sufficient to reclassify"
+      ],
+      "abstained": false,
+      "citation_grade": "correct_section",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.8649,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "cs-003",
+      "domain": "confined_space",
+      "family": "cs.atmospheric_testing",
+      "item_type": "factual",
+      "risk_tier": "high",
+      "pair_id": null,
+      "outcome": "correct",
+      "concept_coverage": 0.8,
+      "forbidden_asserted": [],
+      "numeric_coverage": null,
+      "adjacent_hits": [
+        "any order",
+        "simultaneously",
+        "toxic, flammable, oxygen"
+      ],
+      "abstained": false,
+      "citation_grade": "none",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.8542,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "cs-004",
+      "domain": "confined_space",
+      "family": "cs.atmosphere_criteria",
+      "item_type": "factual",
+      "risk_tier": "high",
+      "pair_id": "cs-p2",
+      "outcome": "adjacent_substitution",
+      "concept_coverage": 0.0,
+      "forbidden_asserted": [],
+      "numeric_coverage": 0.0,
+      "adjacent_hits": [
+        "19.0 percent",
+        "20.9 percent as the lower",
+        "22 percent"
+      ],
+      "abstained": false,
+      "citation_grade": "none",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.853,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "cs-005",
+      "domain": "confined_space",
+      "family": "cs.atmosphere_criteria",
+      "item_type": "factual",
+      "risk_tier": "high",
+      "pair_id": "cs-p2",
+      "outcome": "other_incorrect",
+      "concept_coverage": 0.0,
+      "forbidden_asserted": [],
+      "numeric_coverage": 0.0,
+      "adjacent_hits": [],
+      "abstained": false,
+      "citation_grade": "none",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.6317,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "cs-006",
+      "domain": "confined_space",
+      "family": "cs.roles",
+      "item_type": "factual",
+      "risk_tier": "high",
+      "pair_id": "cs-p3",
+      "outcome": "adjacent_substitution",
+      "concept_coverage": 0.3333333333333333,
+      "forbidden_asserted": [],
+      "numeric_coverage": null,
+      "adjacent_hits": [
+        "endorsing the permit",
+        "terminates the entry",
+        "verifies that rescue services are available"
+      ],
+      "abstained": false,
+      "citation_grade": "wrong",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [
+        "API 520"
+      ],
+      "confidence": 0.802,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "cs-007",
+      "domain": "confined_space",
+      "family": "cs.roles",
+      "item_type": "factual",
+      "risk_tier": "high",
+      "pair_id": "cs-p3",
+      "outcome": "adjacent_substitution",
+      "concept_coverage": 0.2,
+      "forbidden_asserted": [],
+      "numeric_coverage": null,
+      "adjacent_hits": [
+        "maintains an accurate count",
+        "orders the entrants to evacuate",
+        "remains outside the permit space"
+      ],
+      "abstained": false,
+      "citation_grade": "none",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.8838,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "cs-008",
+      "domain": "confined_space",
+      "family": "cs.space_classification",
+      "item_type": "factual",
+      "risk_tier": "high",
+      "pair_id": null,
+      "outcome": "correct",
+      "concept_coverage": 1.0,
+      "forbidden_asserted": [],
+      "numeric_coverage": null,
+      "adjacent_hits": [],
+      "abstained": false,
+      "citation_grade": "correct_section",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.8319,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "el-001",
+      "domain": "machine_electrical_fire",
+      "family": "el.deenergized_work",
+      "item_type": "factual",
+      "risk_tier": "high",
+      "pair_id": "el-p1",
+      "outcome": "adjacent_substitution",
+      "concept_coverage": 0.2,
+      "forbidden_asserted": [],
+      "numeric_coverage": 1.0,
+      "adjacent_hits": [
+        "anything below 50 volts is exempt",
+        "if it is not practical",
+        "low voltage is always safe"
+      ],
+      "abstained": false,
+      "citation_grade": "none",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.8972,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "el-002",
+      "domain": "machine_electrical_fire",
+      "family": "el.ppe",
+      "item_type": "factual",
+      "risk_tier": "medium",
+      "pair_id": "el-p1",
+      "outcome": "other_incorrect",
+      "concept_coverage": 0.0,
+      "forbidden_asserted": [],
+      "numeric_coverage": null,
+      "adjacent_hits": [],
+      "abstained": false,
+      "citation_grade": "none",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.7646,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "fe-001",
+      "domain": "machine_electrical_fire",
+      "family": "fe.inspection_intervals",
+      "item_type": "factual",
+      "risk_tier": "medium",
+      "pair_id": null,
+      "outcome": "adjacent_substitution",
+      "concept_coverage": 0.6666666666666666,
+      "forbidden_asserted": [],
+      "numeric_coverage": null,
+      "adjacent_hits": [
+        "annual visual inspection",
+        "hydrostatic test every 5 years",
+        "monthly maintenance check"
+      ],
+      "abstained": false,
+      "citation_grade": "correct_section",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [
+        "NFPA 70e"
+      ],
+      "confidence": 0.8291,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "fe-002",
+      "domain": "machine_electrical_fire",
+      "family": "fe.category_error",
+      "item_type": "category_error",
+      "risk_tier": "medium",
+      "pair_id": null,
+      "outcome": "adjacent_substitution",
+      "concept_coverage": 0.0,
+      "forbidden_asserted": [],
+      "numeric_coverage": null,
+      "adjacent_hits": [
+        "clause 5.5",
+        "nfpa 10 section",
+        "per kwh"
+      ],
+      "abstained": false,
+      "citation_grade": "correct_section",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [
+        "API 754",
+        "NFPA 10"
+      ],
+      "confidence": 0.9138,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "fl-001",
+      "domain": "machine_electrical_fire",
+      "family": "fl.classification",
+      "item_type": "factual",
+      "risk_tier": "medium",
+      "pair_id": "fl-p1",
+      "outcome": "adjacent_substitution",
+      "concept_coverage": 0.25,
+      "forbidden_asserted": [],
+      "numeric_coverage": 0.0,
+      "adjacent_hits": [
+        "class ia",
+        "class ib",
+        "flashpoint below 73 for category 1 and above for category 2"
+      ],
+      "abstained": false,
+      "citation_grade": "wrong",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.8237,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "fl-002",
+      "domain": "machine_electrical_fire",
+      "family": "fl.classification",
+      "item_type": "factual",
+      "risk_tier": "medium",
+      "pair_id": "fl-p1",
+      "outcome": "adjacent_substitution",
+      "concept_coverage": 0.25,
+      "forbidden_asserted": [],
+      "numeric_coverage": 0.0,
+      "adjacent_hits": [
+        "category remains unchanged when heated",
+        "no special rule applies"
+      ],
+      "abstained": false,
+      "citation_grade": "wrong",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.7618,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "hc-001",
+      "domain": "hazard_communication",
+      "family": "hc.label_elements",
+      "item_type": "factual",
+      "risk_tier": "medium",
+      "pair_id": "hc-p1",
+      "outcome": "adjacent_substitution",
+      "concept_coverage": 0.16666666666666666,
+      "forbidden_asserted": [],
+      "numeric_coverage": null,
+      "adjacent_hits": [
+        "alternative labeling",
+        "product identifier and words, pictures, symbols",
+        "workplace label"
+      ],
+      "abstained": false,
+      "citation_grade": "correct_section",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.6684,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "hc-002",
+      "domain": "hazard_communication",
+      "family": "hc.label_elements",
+      "item_type": "factual",
+      "risk_tier": "medium",
+      "pair_id": "hc-p1",
+      "outcome": "adjacent_substitution",
+      "concept_coverage": 0.5,
+      "forbidden_asserted": [],
+      "numeric_coverage": null,
+      "adjacent_hits": [
+        "danger or warning",
+        "the signal word indicates the nature of the hazard"
+      ],
+      "abstained": false,
+      "citation_grade": "correct_clause",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.7741,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "hc-003",
+      "domain": "hazard_communication",
+      "family": "hc.signal_words",
+      "item_type": "factual",
+      "risk_tier": "medium",
+      "pair_id": null,
+      "outcome": "adjacent_substitution",
+      "concept_coverage": 0.6666666666666666,
+      "forbidden_asserted": [
+        "caution",
+        "notice"
+      ],
+      "numeric_coverage": null,
+      "adjacent_hits": [
+        "caution",
+        "danger, warning, caution",
+        "notice"
+      ],
+      "abstained": false,
+      "citation_grade": "none",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.8014,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "hc-004",
+      "domain": "hazard_communication",
+      "family": "hc.sds_structure",
+      "item_type": "factual",
+      "risk_tier": "medium",
+      "pair_id": null,
+      "outcome": "adjacent_substitution",
+      "concept_coverage": 0.14285714285714285,
+      "forbidden_asserted": [],
+      "numeric_coverage": 0.0,
+      "adjacent_hits": [
+        "material safety data sheet",
+        "msds",
+        "no required order"
+      ],
+      "abstained": false,
+      "citation_grade": "none",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.7468,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "hc-005",
+      "domain": "hazard_communication",
+      "family": "hc.pictograms",
+      "item_type": "factual",
+      "risk_tier": "low",
+      "pair_id": null,
+      "outcome": "adjacent_substitution",
+      "concept_coverage": 0.0,
+      "forbidden_asserted": [],
+      "numeric_coverage": 0.0,
+      "adjacent_hits": [
+        "9 pictograms",
+        "environment pictogram is required",
+        "nine pictograms"
+      ],
+      "abstained": false,
+      "citation_grade": "wrong",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.6749,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "hn-001",
+      "domain": "respiratory_protection_and_noise",
+      "family": "hn.thresholds",
+      "item_type": "factual",
+      "risk_tier": "medium",
+      "pair_id": "hn-p1",
+      "outcome": "correct",
+      "concept_coverage": 0.75,
+      "forbidden_asserted": [],
+      "numeric_coverage": 1.0,
+      "adjacent_hits": [
+        "a single threshold",
+        "the action level is 90",
+        "the permissible exposure limit is 85"
+      ],
+      "abstained": false,
+      "citation_grade": "none",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.8231,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "hn-002",
+      "domain": "respiratory_protection_and_noise",
+      "family": "hn.thresholds",
+      "item_type": "factual",
+      "risk_tier": "medium",
+      "pair_id": "hn-p1",
+      "outcome": "adjacent_substitution",
+      "concept_coverage": 0.16666666666666666,
+      "forbidden_asserted": [],
+      "numeric_coverage": 0.0,
+      "adjacent_hits": [
+        "500, 1000, 2000",
+        "6000 hz"
+      ],
+      "abstained": false,
+      "citation_grade": "wrong",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [
+        "ASME UG 131"
+      ],
+      "confidence": 0.8697,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "hn-003",
+      "domain": "respiratory_protection_and_noise",
+      "family": "hn.audiometry_timing",
+      "item_type": "factual",
+      "risk_tier": "medium",
+      "pair_id": null,
+      "outcome": "other_incorrect",
+      "concept_coverage": 0.0,
+      "forbidden_asserted": [],
+      "numeric_coverage": 0.0,
+      "adjacent_hits": [],
+      "abstained": false,
+      "citation_grade": "none",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.742,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "loto-001",
+      "domain": "lockout_tagout",
+      "family": "loto.inspection_vs_training",
+      "item_type": "factual",
+      "risk_tier": "high",
+      "pair_id": "loto-p1",
+      "outcome": "adjacent_substitution",
+      "concept_coverage": 0.0,
+      "forbidden_asserted": [
+        "every 3 years",
+        "every 5 years",
+        "every five years"
+      ],
+      "numeric_coverage": null,
+      "adjacent_hits": [
+        "every 3 years",
+        "every 5 years",
+        "every five years"
+      ],
+      "abstained": false,
+      "citation_grade": "correct_section",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.7994,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "loto-002",
+      "domain": "lockout_tagout",
+      "family": "loto.inspection_vs_training",
+      "item_type": "factual",
+      "risk_tier": "medium",
+      "pair_id": "loto-p1",
+      "outcome": "adjacent_substitution",
+      "concept_coverage": 0.3333333333333333,
+      "forbidden_asserted": [],
+      "numeric_coverage": null,
+      "adjacent_hits": [
+        "annual retraining",
+        "retrain employees every year",
+        "retraining shall be provided annually"
+      ],
+      "abstained": false,
+      "citation_grade": "none",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.8307,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "loto-003",
+      "domain": "lockout_tagout",
+      "family": "loto.scope_exclusions",
+      "item_type": "factual",
+      "risk_tier": "high",
+      "pair_id": "loto-p2",
+      "outcome": "correct",
+      "concept_coverage": 1.0,
+      "forbidden_asserted": [],
+      "numeric_coverage": null,
+      "adjacent_hits": [],
+      "abstained": false,
+      "citation_grade": "wrong",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.7855,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "loto-004",
+      "domain": "lockout_tagout",
+      "family": "loto.scope_exclusions",
+      "item_type": "factual",
+      "risk_tier": "high",
+      "pair_id": "loto-p2",
+      "outcome": "adjacent_substitution",
+      "concept_coverage": 0.0,
+      "forbidden_asserted": [],
+      "numeric_coverage": null,
+      "adjacent_hits": [
+        "quick jobs do not require lockout",
+        "short duration work is exempt"
+      ],
+      "abstained": false,
+      "citation_grade": "wrong",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.8161,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "loto-005",
+      "domain": "lockout_tagout",
+      "family": "loto.lockout_vs_tagout",
+      "item_type": "factual",
+      "risk_tier": "high",
+      "pair_id": "loto-p3",
+      "outcome": "correct",
+      "concept_coverage": 1.0,
+      "forbidden_asserted": [],
+      "numeric_coverage": null,
+      "adjacent_hits": [],
+      "abstained": false,
+      "citation_grade": "correct_section",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.8257,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "loto-006",
+      "domain": "lockout_tagout",
+      "family": "loto.lockout_vs_tagout",
+      "item_type": "factual",
+      "risk_tier": "high",
+      "pair_id": "loto-p3",
+      "outcome": "other_incorrect",
+      "concept_coverage": 0.0,
+      "forbidden_asserted": [],
+      "numeric_coverage": null,
+      "adjacent_hits": [],
+      "abstained": false,
+      "citation_grade": "wrong",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.912,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "loto-007",
+      "domain": "lockout_tagout",
+      "family": "loto.group_vs_shift",
+      "item_type": "factual",
+      "risk_tier": "high",
+      "pair_id": "loto-p4",
+      "outcome": "other_incorrect",
+      "concept_coverage": 0.0,
+      "forbidden_asserted": [],
+      "numeric_coverage": null,
+      "adjacent_hits": [],
+      "abstained": false,
+      "citation_grade": "wrong",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.6797,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "loto-008",
+      "domain": "lockout_tagout",
+      "family": "loto.group_vs_shift",
+      "item_type": "factual",
+      "risk_tier": "medium",
+      "pair_id": "loto-p4",
+      "outcome": "adjacent_substitution",
+      "concept_coverage": 0.3333333333333333,
+      "forbidden_asserted": [],
+      "numeric_coverage": null,
+      "adjacent_hits": [
+        "each employee must affix a personal lock",
+        "must use a group lockbox",
+        "required to use a lockbox"
+      ],
+      "abstained": false,
+      "citation_grade": "correct_section",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [
+        "API 754"
+      ],
+      "confidence": 0.8249,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "loto-009",
+      "domain": "lockout_tagout",
+      "family": "loto.program_elements",
+      "item_type": "factual",
+      "risk_tier": "medium",
+      "pair_id": null,
+      "outcome": "adjacent_substitution",
+      "concept_coverage": 0.3333333333333333,
+      "forbidden_asserted": [],
+      "numeric_coverage": null,
+      "adjacent_hits": [
+        "hazard assessment",
+        "management of change",
+        "written program, training and recordkeeping"
+      ],
+      "abstained": false,
+      "citation_grade": "correct_section",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.8632,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "loto-010",
+      "domain": "lockout_tagout",
+      "family": "loto.category_error",
+      "item_type": "category_error",
+      "risk_tier": "medium",
+      "pair_id": null,
+      "outcome": "correct",
+      "concept_coverage": 1.0,
+      "forbidden_asserted": [],
+      "numeric_coverage": null,
+      "adjacent_hits": [],
+      "abstained": false,
+      "citation_grade": "correct_section",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.8892,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "mg-001",
+      "domain": "machine_electrical_fire",
+      "family": "mg.guarding_scope",
+      "item_type": "factual",
+      "risk_tier": "high",
+      "pair_id": "mg-p1",
+      "outcome": "correct",
+      "concept_coverage": 1.0,
+      "forbidden_asserted": [],
+      "numeric_coverage": null,
+      "adjacent_hits": [],
+      "abstained": false,
+      "citation_grade": "wrong",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.8536,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "mg-002",
+      "domain": "machine_electrical_fire",
+      "family": "mg.guarding_scope",
+      "item_type": "factual",
+      "risk_tier": "medium",
+      "pair_id": "mg-p1",
+      "outcome": "adjacent_substitution",
+      "concept_coverage": 0.25,
+      "forbidden_asserted": [],
+      "numeric_coverage": 0.0,
+      "adjacent_hits": [
+        "all flat belts under one inch are exempt",
+        "regardless of speed"
+      ],
+      "abstained": false,
+      "citation_grade": "wrong",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [
+        "NFPA 70e"
+      ],
+      "confidence": 0.9089,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "prd-001",
+      "domain": "pressure_relief_devices",
+      "family": "prd.operating_margin",
+      "item_type": "factual",
+      "risk_tier": "high",
+      "pair_id": "prd-p1",
+      "outcome": "adjacent_substitution",
+      "concept_coverage": 0.0,
+      "forbidden_asserted": [],
+      "numeric_coverage": 0.0,
+      "adjacent_hits": [
+        "huddling chamber",
+        "set pressure",
+        "spring"
+      ],
+      "abstained": false,
+      "citation_grade": "correct_section",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.793,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "prd-002",
+      "domain": "pressure_relief_devices",
+      "family": "prd.operating_margin",
+      "item_type": "factual",
+      "risk_tier": "high",
+      "pair_id": "prd-p1",
+      "outcome": "adjacent_substitution",
+      "concept_coverage": 0.0,
+      "forbidden_asserted": [
+        "manufacturing design range",
+        "non-reclosing"
+      ],
+      "numeric_coverage": 0.0,
+      "adjacent_hits": [
+        "manufacturing design range",
+        "nominal burst",
+        "non-reclosing"
+      ],
+      "abstained": false,
+      "citation_grade": "none",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.8679,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "prd-003",
+      "domain": "pressure_relief_devices",
+      "family": "prd.fire_case_capacity",
+      "item_type": "factual",
+      "risk_tier": "high",
+      "pair_id": "prd-p2",
+      "outcome": "adjacent_substitution",
+      "concept_coverage": 0.6666666666666666,
+      "forbidden_asserted": [],
+      "numeric_coverage": 0.0,
+      "adjacent_hits": [
+        "10 percent above",
+        "10% above the maximum allowable"
+      ],
+      "abstained": false,
+      "citation_grade": "correct_clause",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.8027,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "prd-004",
+      "domain": "pressure_relief_devices",
+      "family": "prd.fire_case_capacity",
+      "item_type": "factual",
+      "risk_tier": "high",
+      "pair_id": "prd-p2",
+      "outcome": "abstained",
+      "concept_coverage": 0.0,
+      "forbidden_asserted": [],
+      "numeric_coverage": 0.0,
+      "adjacent_hits": [],
+      "abstained": true,
+      "citation_grade": "none",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.2003,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "prd-005",
+      "domain": "pressure_relief_devices",
+      "family": "prd.fire_case_capacity",
+      "item_type": "factual",
+      "risk_tier": "high",
+      "pair_id": null,
+      "outcome": "adjacent_substitution",
+      "concept_coverage": 0.3333333333333333,
+      "forbidden_asserted": [],
+      "numeric_coverage": 0.0,
+      "adjacent_hits": [
+        "10 percent above the maximum allowable"
+      ],
+      "abstained": false,
+      "citation_grade": "wrong",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.8398,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "prd-006",
+      "domain": "pressure_relief_devices",
+      "family": "prd.asme_paragraph_mapping",
+      "item_type": "factual",
+      "risk_tier": "medium",
+      "pair_id": "prd-p3",
+      "outcome": "correct",
+      "concept_coverage": 1.0,
+      "forbidden_asserted": [],
+      "numeric_coverage": null,
+      "adjacent_hits": [
+        "ug-126 covers rupture disks",
+        "ug-127 covers safety and relief valves"
+      ],
+      "abstained": false,
+      "citation_grade": "wrong",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [
+        "ASME UG 126",
+        "ASME UG 127"
+      ],
+      "confidence": 0.7326,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "prd-007",
+      "domain": "pressure_relief_devices",
+      "family": "prd.installation_orientation",
+      "item_type": "factual",
+      "risk_tier": "high",
+      "pair_id": "prd-p3",
+      "outcome": "adjacent_substitution",
+      "concept_coverage": 0.0,
+      "forbidden_asserted": [],
+      "numeric_coverage": null,
+      "adjacent_hits": [
+        "reaction force on the valve",
+        "superimposed backpressure",
+        "tailpipe"
+      ],
+      "abstained": false,
+      "citation_grade": "wrong",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.9031,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "prd-008",
+      "domain": "pressure_relief_devices",
+      "family": "prd.lifting_device",
+      "item_type": "factual",
+      "risk_tier": "medium",
+      "pair_id": null,
+      "outcome": "other_incorrect",
+      "concept_coverage": 0.0,
+      "forbidden_asserted": [],
+      "numeric_coverage": 0.0,
+      "adjacent_hits": [],
+      "abstained": false,
+      "citation_grade": "none",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.6381,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "prd-009",
+      "domain": "pressure_relief_devices",
+      "family": "prd.category_error",
+      "item_type": "category_error",
+      "risk_tier": "high",
+      "pair_id": null,
+      "outcome": "correct",
+      "concept_coverage": 1.0,
+      "forbidden_asserted": [],
+      "numeric_coverage": null,
+      "adjacent_hits": [],
+      "abstained": false,
+      "citation_grade": "none",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.8011,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "prd-010",
+      "domain": "pressure_relief_devices",
+      "family": "prd.category_error",
+      "item_type": "category_error",
+      "risk_tier": "high",
+      "pair_id": null,
+      "outcome": "other_incorrect",
+      "concept_coverage": 0.0,
+      "forbidden_asserted": [],
+      "numeric_coverage": null,
+      "adjacent_hits": [],
+      "abstained": false,
+      "citation_grade": "none",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.7349,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "prd-011",
+      "domain": "pressure_relief_devices",
+      "family": "prd.instrumentation",
+      "item_type": "factual",
+      "risk_tier": "medium",
+      "pair_id": null,
+      "outcome": "correct",
+      "concept_coverage": 1.0,
+      "forbidden_asserted": [],
+      "numeric_coverage": 1.0,
+      "adjacent_hits": [],
+      "abstained": false,
+      "citation_grade": "correct_clause",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.8397,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "prd-012",
+      "domain": "pressure_relief_devices",
+      "family": "prd.combination_installation",
+      "item_type": "factual",
+      "risk_tier": "medium",
+      "pair_id": null,
+      "outcome": "other_incorrect",
+      "concept_coverage": 0.5,
+      "forbidden_asserted": [],
+      "numeric_coverage": null,
+      "adjacent_hits": [
+        "cannot be combined"
+      ],
+      "abstained": false,
+      "citation_grade": "wrong",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.8219,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "psm-001",
+      "domain": "process_safety_management",
+      "family": "psm.recurring_intervals",
+      "item_type": "factual",
+      "risk_tier": "high",
+      "pair_id": "psm-p1",
+      "outcome": "correct",
+      "concept_coverage": 1.0,
+      "forbidden_asserted": [],
+      "numeric_coverage": 1.0,
+      "adjacent_hits": [],
+      "abstained": false,
+      "citation_grade": "correct_section",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.8315,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "psm-002",
+      "domain": "process_safety_management",
+      "family": "psm.recurring_intervals",
+      "item_type": "factual",
+      "risk_tier": "high",
+      "pair_id": "psm-p1",
+      "outcome": "adjacent_substitution",
+      "concept_coverage": 0.0,
+      "forbidden_asserted": [
+        "every five years"
+      ],
+      "numeric_coverage": 0.0,
+      "adjacent_hits": [
+        "audit reports for 5 years",
+        "every five years",
+        "retained for five years"
+      ],
+      "abstained": false,
+      "citation_grade": "wrong",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.7382,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "psm-003",
+      "domain": "process_safety_management",
+      "family": "psm.recurring_intervals",
+      "item_type": "factual",
+      "risk_tier": "medium",
+      "pair_id": null,
+      "outcome": "correct",
+      "concept_coverage": 1.0,
+      "forbidden_asserted": [],
+      "numeric_coverage": 1.0,
+      "adjacent_hits": [],
+      "abstained": false,
+      "citation_grade": "correct_section",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [
+        "NFPA 70e"
+      ],
+      "confidence": 0.7538,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "psm-004",
+      "domain": "process_safety_management",
+      "family": "psm.incident_investigation",
+      "item_type": "factual",
+      "risk_tier": "high",
+      "pair_id": "psm-p2",
+      "outcome": "adjacent_substitution",
+      "concept_coverage": 0.0,
+      "forbidden_asserted": [
+        "24 hours",
+        "8 hours"
+      ],
+      "numeric_coverage": 0.0,
+      "adjacent_hits": [
+        "report to osha within",
+        "within 24 hours",
+        "within 8 hours"
+      ],
+      "abstained": false,
+      "citation_grade": "none",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.9246,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "psm-005",
+      "domain": "process_safety_management",
+      "family": "psm.incident_investigation",
+      "item_type": "factual",
+      "risk_tier": "medium",
+      "pair_id": "psm-p2",
+      "outcome": "adjacent_substitution",
+      "concept_coverage": 0.6666666666666666,
+      "forbidden_asserted": [],
+      "numeric_coverage": 1.0,
+      "adjacent_hits": [
+        "audit reports must be retained for five years",
+        "two most recent incident"
+      ],
+      "abstained": false,
+      "citation_grade": "none",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.7619,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "psm-006",
+      "domain": "process_safety_management",
+      "family": "psm.applicability",
+      "item_type": "factual",
+      "risk_tier": "high",
+      "pair_id": null,
+      "outcome": "correct",
+      "concept_coverage": 1.0,
+      "forbidden_asserted": [],
+      "numeric_coverage": 1.0,
+      "adjacent_hits": [],
+      "abstained": false,
+      "citation_grade": "wrong",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.8356,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "psm-007",
+      "domain": "process_safety_management",
+      "family": "psm.osha_vs_epa",
+      "item_type": "factual",
+      "risk_tier": "medium",
+      "pair_id": "psm-p3",
+      "outcome": "adjacent_substitution",
+      "concept_coverage": 0.0,
+      "forbidden_asserted": [],
+      "numeric_coverage": null,
+      "adjacent_hits": [
+        "1910.119 requires a five-year accident history",
+        "osha requires an accident history"
+      ],
+      "abstained": false,
+      "citation_grade": "wrong",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.6648,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "psm-008",
+      "domain": "process_safety_management",
+      "family": "psm.osha_vs_epa",
+      "item_type": "factual",
+      "risk_tier": "medium",
+      "pair_id": "psm-p3",
+      "outcome": "adjacent_substitution",
+      "concept_coverage": 0.3333333333333333,
+      "forbidden_asserted": [],
+      "numeric_coverage": null,
+      "adjacent_hits": [
+        "1910.119 third party",
+        "osha requires a third-party audit"
+      ],
+      "abstained": false,
+      "citation_grade": "wrong",
+      "cited_cross_reference": true,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.764,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "rk-001",
+      "domain": "injury_recordkeeping",
+      "family": "rk.reporting_deadlines",
+      "item_type": "factual",
+      "risk_tier": "high",
+      "pair_id": "rk-p1",
+      "outcome": "other_incorrect",
+      "concept_coverage": 0.0,
+      "forbidden_asserted": [],
+      "numeric_coverage": 0.0,
+      "adjacent_hits": [],
+      "abstained": false,
+      "citation_grade": "none",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.7252,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "rk-002",
+      "domain": "injury_recordkeeping",
+      "family": "rk.reporting_deadlines",
+      "item_type": "factual",
+      "risk_tier": "high",
+      "pair_id": "rk-p1",
+      "outcome": "adjacent_substitution",
+      "concept_coverage": 0.0,
+      "forbidden_asserted": [
+        "8 hours",
+        "eight hours"
+      ],
+      "numeric_coverage": 0.0,
+      "adjacent_hits": [
+        "within 8 hours",
+        "within eight hours"
+      ],
+      "abstained": false,
+      "citation_grade": "wrong",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.8416,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "rk-003",
+      "domain": "injury_recordkeeping",
+      "family": "rk.day_counting",
+      "item_type": "factual",
+      "risk_tier": "medium",
+      "pair_id": "rk-p2",
+      "outcome": "adjacent_substitution",
+      "concept_coverage": 0.6666666666666666,
+      "forbidden_asserted": [],
+      "numeric_coverage": 1.0,
+      "adjacent_hits": [
+        "180 business days",
+        "180 working days",
+        "90 days"
+      ],
+      "abstained": false,
+      "citation_grade": "wrong",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.855,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "rk-004",
+      "domain": "injury_recordkeeping",
+      "family": "rk.day_counting",
+      "item_type": "factual",
+      "risk_tier": "medium",
+      "pair_id": "rk-p2",
+      "outcome": "correct",
+      "concept_coverage": 1.0,
+      "forbidden_asserted": [],
+      "numeric_coverage": null,
+      "adjacent_hits": [],
+      "abstained": false,
+      "citation_grade": "correct_section",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.8035,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "rk-005",
+      "domain": "injury_recordkeeping",
+      "family": "rk.general_criteria",
+      "item_type": "factual",
+      "risk_tier": "high",
+      "pair_id": null,
+      "outcome": "correct",
+      "concept_coverage": 1.0,
+      "forbidden_asserted": [],
+      "numeric_coverage": null,
+      "adjacent_hits": [],
+      "abstained": false,
+      "citation_grade": "none",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.7673,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "rk-006",
+      "domain": "injury_recordkeeping",
+      "family": "rk.first_aid",
+      "item_type": "factual",
+      "risk_tier": "high",
+      "pair_id": "rk-p3",
+      "outcome": "adjacent_substitution",
+      "concept_coverage": 0.5,
+      "forbidden_asserted": [],
+      "numeric_coverage": null,
+      "adjacent_hits": [
+        "not an exhaustive list",
+        "similar treatments"
+      ],
+      "abstained": false,
+      "citation_grade": "none",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.8165,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "rk-007",
+      "domain": "injury_recordkeeping",
+      "family": "rk.first_aid",
+      "item_type": "factual",
+      "risk_tier": "medium",
+      "pair_id": "rk-p3",
+      "outcome": "correct",
+      "concept_coverage": 1.0,
+      "forbidden_asserted": [],
+      "numeric_coverage": null,
+      "adjacent_hits": [],
+      "abstained": false,
+      "citation_grade": "correct_section",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.8569,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "rk-008",
+      "domain": "injury_recordkeeping",
+      "family": "rk.record_vs_report",
+      "item_type": "factual",
+      "risk_tier": "high",
+      "pair_id": null,
+      "outcome": "adjacent_substitution",
+      "concept_coverage": 0.3333333333333333,
+      "forbidden_asserted": [],
+      "numeric_coverage": null,
+      "adjacent_hits": [
+        "must be reported within 8 hours",
+        "not recordable because it occurred on a public road"
+      ],
+      "abstained": false,
+      "citation_grade": "none",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.7404,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "rk-009",
+      "domain": "injury_recordkeeping",
+      "family": "rk.significant_diagnosis",
+      "item_type": "factual",
+      "risk_tier": "medium",
+      "pair_id": null,
+      "outcome": "other_incorrect",
+      "concept_coverage": 0.0,
+      "forbidden_asserted": [],
+      "numeric_coverage": null,
+      "adjacent_hits": [],
+      "abstained": false,
+      "citation_grade": "none",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.6469,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "rk-010",
+      "domain": "injury_recordkeeping",
+      "family": "rk.category_error",
+      "item_type": "category_error",
+      "risk_tier": "medium",
+      "pair_id": null,
+      "outcome": "adjacent_substitution",
+      "concept_coverage": 0.0,
+      "forbidden_asserted": [],
+      "numeric_coverage": null,
+      "adjacent_hits": [
+        "automatically placed",
+        "exceeds the industry average",
+        "rate of 3.0"
+      ],
+      "abstained": false,
+      "citation_grade": "correct_section",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.6349,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "rp-001",
+      "domain": "respiratory_protection_and_noise",
+      "family": "rp.assigned_protection_factors",
+      "item_type": "factual",
+      "risk_tier": "high",
+      "pair_id": "rp-p1",
+      "outcome": "adjacent_substitution",
+      "concept_coverage": 0.6666666666666666,
+      "forbidden_asserted": [],
+      "numeric_coverage": 0.0,
+      "adjacent_hits": [
+        "1,000",
+        "apf of 50",
+        "protection factor of 50"
+      ],
+      "abstained": false,
+      "citation_grade": "wrong",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.6333,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "rp-002",
+      "domain": "respiratory_protection_and_noise",
+      "family": "rp.assigned_protection_factors",
+      "item_type": "factual",
+      "risk_tier": "high",
+      "pair_id": "rp-p1",
+      "outcome": "adjacent_substitution",
+      "concept_coverage": 0.3333333333333333,
+      "forbidden_asserted": [],
+      "numeric_coverage": 0.0,
+      "adjacent_hits": [
+        "1,000",
+        "1000"
+      ],
+      "abstained": false,
+      "citation_grade": "correct_clause",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.7518,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "rp-003",
+      "domain": "respiratory_protection_and_noise",
+      "family": "rp.idlh",
+      "item_type": "factual",
+      "risk_tier": "high",
+      "pair_id": "rp-p2",
+      "outcome": "adjacent_substitution",
+      "concept_coverage": 0.2,
+      "forbidden_asserted": [
+        "air-purifying respirator is acceptable"
+      ],
+      "numeric_coverage": 0.0,
+      "adjacent_hits": [
+        "full facepiece air-purifying respirator is acceptable",
+        "high protection factor is sufficient",
+        "papr with an apf of 1,000"
+      ],
+      "abstained": false,
+      "citation_grade": "none",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.7314,
+      "unscorable_reason": null
+    },
+    {
+      "item_id": "rp-004",
+      "domain": "respiratory_protection_and_noise",
+      "family": "rp.idlh",
+      "item_type": "factual",
+      "risk_tier": "high",
+      "pair_id": "rp-p2",
+      "outcome": "adjacent_substitution",
+      "concept_coverage": 0.25,
+      "forbidden_asserted": [],
+      "numeric_coverage": null,
+      "adjacent_hits": [
+        "air-purifying respirators are permitted",
+        "any respirator may be used",
+        "no exception exists"
+      ],
+      "abstained": false,
+      "citation_grade": "correct_clause",
+      "cited_cross_reference": false,
+      "unsupported_paywalled_citations": [],
+      "confidence": 0.8417,
+      "unscorable_reason": null
+    }
+  ]
+}

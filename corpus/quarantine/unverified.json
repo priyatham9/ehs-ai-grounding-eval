@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0",
+  "status": "EXCLUDED_FROM_SCORING",
+  "purpose": "Items drafted for this benchmark whose answer depends on the text of a copyrighted consensus standard that could not be verified against a primary source during corpus construction. They are recorded here so the exclusion is visible and auditable, not deleted. The corpus loader never returns these items, and no scoring path reads this file.",
+  "policy": "An item enters the scored corpus only if the clause identifier AND the substantive content of its answer key can be checked against a public primary source that the reader can also check. Federal regulations retrieved from the eCFR API meet that test. ASME, API, NFPA and ISO documents are copyrighted, were not purchased or read for this work, and their clause numbers are therefore not asserted. Where a federal regulation incorporates a consensus standard by reference and names the paragraph it modifies, that paragraph identifier is treated as corroborated and may appear as a cross_reference on a scored item, but never as the sole source of an answer.",
+  "how_to_promote_an_item": "Obtain the standard through a licensed channel, confirm the clause identifier and the substantive content, replace verification.status with 'verified', record the edition and date, move the item into corpus/items/, and re-run tools/verify_clauses.py. Do not paste standard text into this repository; cite the clause identifier and paraphrase.",
+  "items": [
+    {
+      "id": "q-nfpa70e-001",
+      "intended_domain": "electrical_safety",
+      "draft_question": "Distinguish the arc flash boundary from the limited approach boundary, and state which is determined by incident energy.",
+      "why_excluded": "The substantive distinction is well established in practice, but the NFPA 70E article and section numbers, and the specific numeric boundary values, vary by edition. No public primary source was available in this work to confirm either the clause identifiers or the current edition's values. OSHA does not incorporate NFPA 70E by reference into 29 CFR part 1910 subpart S, so there is no federal corroboration path of the kind used for the ASME paragraph identifiers in corpus/items/pressure_relief.json.",
+      "verification": {"status": "unverified", "blocking_reason": "paywalled_standard_no_public_corroboration"}
+    },
+    {
+      "id": "q-nfpa70e-002",
+      "intended_domain": "electrical_safety",
+      "draft_question": "What are the steps for establishing an electrically safe work condition, and at which step does verification of absence of voltage occur?",
+      "why_excluded": "Same as q-nfpa70e-001. The step count and their numbering changed between editions, so an answer key would be edition-specific and could not be verified.",
+      "verification": {"status": "unverified", "blocking_reason": "paywalled_standard_no_public_corroboration"}
+    },
+    {
+      "id": "q-api520-001",
+      "intended_domain": "pressure_relief_devices",
+      "draft_question": "In API 520 Part I, which clause gives the effective discharge area basis used in the vapour sizing equation, and how does it differ from the actual orifice area?",
+      "why_excluded": "API 520 Part I is copyrighted and was not read for this work. Clause identifiers and equation numbers are not asserted. Note also that the ninth edition (July 2014) and the current edition are not interchangeable for numeric content, so any item here would need an explicit edition pin.",
+      "verification": {"status": "unverified", "blocking_reason": "paywalled_standard_no_public_corroboration"}
+    },
+    {
+      "id": "q-api520-002",
+      "intended_domain": "pressure_relief_devices",
+      "draft_question": "What burst pressure tolerance applies to a rupture disk with a marked burst pressure at or below 40 psi, and what applies above 40 psi?",
+      "why_excluded": "This is the single most useful item that could not be included. The tolerance values are widely republished in secondary sources, but the governing text is in ASME BPVC Section VIII Division 1, and secondary republication is not verification. 46 CFR subpart 54.15 modifies UG-127 but does not restate the tolerance, so the federal corroboration path that supports the scored rupture-disk items does not reach this fact.",
+      "verification": {"status": "unverified", "blocking_reason": "value_available_only_from_secondary_sources"}
+    },
+    {
+      "id": "q-api754-001",
+      "intended_domain": "process_safety_indicators",
+      "draft_question": "Under API RP 754, what distinguishes a Tier 1 process safety event from a Tier 2, and what do Tier 3 and Tier 4 indicators measure?",
+      "why_excluded": "API RP 754 is copyrighted. The tier structure is described in publicly available API summary material, but the threshold quantities and release criteria that actually separate Tier 1 from Tier 2 are in the recommended practice itself. The edition also matters: the practice has been revised more than once and the tier criteria are not identical across editions.",
+      "verification": {"status": "unverified", "blocking_reason": "paywalled_standard_edition_sensitive"}
+    },
+    {
+      "id": "q-iso4126-001",
+      "intended_domain": "pressure_relief_devices",
+      "draft_question": "ISO 4126 splits safety valves and bursting discs into separate parts while ASME and API co-locate them. Which ISO part covers bursting disc safety devices, and which covers their application, selection and installation?",
+      "why_excluded": "The structural claim, that ISO separates the two device families across parts while ASME and API document them together, is the reason this item was drafted: which standards family a retrieval corpus is built from determines how lexically adjacent the two device types are. But the ISO part numbering and titles were not confirmed against ISO's own catalogue in this work, and ISO documents are copyrighted.",
+      "verification": {"status": "unverified", "blocking_reason": "catalogue_not_directly_confirmed"},
+      "note": "If this item is ever promoted, the interesting version is not the part numbering. It is a paired comparison: build one retrieval index over an ASME/API-shaped corpus and one over an ISO-shaped corpus, and measure whether wrong-device retrieval rate differs. That is an experiment, not a question, and belongs in the harness rather than the corpus."
+    }
+  ]
+}

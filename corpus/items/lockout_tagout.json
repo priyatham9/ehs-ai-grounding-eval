@@ -1,0 +1,376 @@
+{
+  "schema_version": "1.0",
+  "domain": "lockout_tagout",
+  "domain_title": "The control of hazardous energy (lockout/tagout)",
+  "source_family": "29 CFR 1910.147",
+  "sourcing_note": "All items in this file are grounded in the text of 29 CFR 1910.147 as published by the eCFR. Lockout and tagout are the canonical adjacent pair in this domain: they appear in the same sentences throughout the standard, share most of their requirements, and diverge on the requirements that matter most.",
+  "items": [
+    {
+      "id": "loto-001",
+      "item_type": "factual",
+      "pair_id": "loto-p1",
+      "pair_role": "a",
+      "family": "loto.inspection_vs_training",
+      "risk_tier": "high",
+      "question": "How often must an employer conduct the periodic inspection of an energy control procedure under 29 CFR 1910.147, and who is permitted to perform it?",
+      "correct_answer": "At least annually. The inspection must be performed by an authorized employee other than the one or ones utilizing the energy control procedure being inspected. The employer must certify that the inspection was performed, identifying the machine or equipment, the date, the employees included, and the person performing the inspection.",
+      "answer_key": {
+        "required_concepts": [
+          ["annually", "at least annually", "once a year", "every year", "annual"],
+          ["authorized employee"],
+          ["other than", "not the same", "someone else", "different"]
+        ],
+        "forbidden_concepts": [
+          ["every three years", "every 3 years"],
+          ["every five years", "every 5 years"],
+          ["biennial", "every two years"]
+        ],
+        "numeric_facts": []
+      },
+      "adjacent_wrong": {
+        "label": "Interval imported from another OSHA program (PSM compliance audit, 3 years; PHA revalidation, 5 years)",
+        "answer": "Wrong answers commonly give a three-year or five-year interval, which are the OSHA process safety management compliance-audit and process-hazard-analysis revalidation intervals, and are not the LOTO periodic inspection interval.",
+        "signature_terms": ["every three years", "every 3 years", "every five years", "every 5 years", "triennial"],
+        "why_dangerous": "A site that inspects its energy control procedures on a three-year cycle is out of compliance and, more importantly, will not detect procedure drift on machines that changed in the interim. Because several OSHA programs use recurring intervals, the wrong number is drawn from a genuinely adjacent requirement rather than invented."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1910.147(c)(6)(i)",
+        "section_title": "The control of hazardous energy (lockout/tagout)",
+        "url": "https://www.ecfr.gov/current/title-29/section-1910.147",
+        "access": "public",
+        "anchor_text": "The employer shall conduct a periodic inspection of the energy control procedure at least annually"
+      },
+      "cross_reference": [],
+      "verification": {"status": "verified", "method": "ecfr_api", "source_edition_date": "2026-08-01"},
+      "abstention_acceptable": false
+    },
+    {
+      "id": "loto-002",
+      "item_type": "factual",
+      "pair_id": "loto-p1",
+      "pair_role": "b",
+      "family": "loto.inspection_vs_training",
+      "risk_tier": "medium",
+      "question": "Under 29 CFR 1910.147, what triggers retraining of authorized and affected employees? Is there a fixed calendar interval?",
+      "correct_answer": "There is no fixed calendar interval for retraining. Retraining is triggered by a change in job assignments, a change in machines, equipment or processes that presents a new hazard, or a change in the energy control procedures. Additional retraining is required whenever a periodic inspection reveals, or the employer has reason to believe, that there are deviations from or inadequacies in the employee's knowledge or use of the energy control procedures.",
+      "answer_key": {
+        "required_concepts": [
+          ["no fixed", "not on a fixed", "no calendar", "event-driven", "triggered by", "whenever there is a change", "no specified interval", "no set interval"],
+          ["change in job assignment", "job assignments", "change in machines", "change in the energy control procedures", "new hazard"],
+          ["periodic inspection", "deviations", "inadequacies"]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": []
+      },
+      "adjacent_wrong": {
+        "label": "Annual retraining, imported from the annual periodic inspection requirement",
+        "answer": "The characteristic wrong answer is 'annually', borrowed from 1910.147(c)(6)(i), which sets an annual interval for the periodic inspection of the procedure, not for retraining of employees.",
+        "signature_terms": ["retraining shall be provided annually", "annual retraining", "retrain employees every year"],
+        "why_dangerous": "Substituting a calendar interval for the event triggers means retraining is not delivered when a procedure actually changes. An employee then applies last year's isolation steps to this year's machine."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1910.147(c)(7)(iii)",
+        "section_title": "The control of hazardous energy (lockout/tagout)",
+        "url": "https://www.ecfr.gov/current/title-29/section-1910.147",
+        "access": "public",
+        "anchor_text": "Retraining shall be provided for all authorized and affected employees whenever there is a change in their job assignments"
+      },
+      "cross_reference": [],
+      "verification": {"status": "verified", "method": "ecfr_api", "source_edition_date": "2026-08-01"},
+      "abstention_acceptable": false,
+      "notes": "Minimal-pair counterpart to loto-001. Both questions are about 'how often' in the same standard; one has a calendar answer and one does not."
+    },
+    {
+      "id": "loto-003",
+      "item_type": "factual",
+      "pair_id": "loto-p2",
+      "pair_role": "a",
+      "family": "loto.scope_exclusions",
+      "risk_tier": "high",
+      "question": "Under what conditions does 29 CFR 1910.147 not apply to work on cord and plug connected electric equipment?",
+      "correct_answer": "The standard does not apply where exposure to the hazards of unexpected energization or start up is controlled by unplugging the equipment from the energy source AND the plug is under the exclusive control of the employee performing the servicing or maintenance. Both conditions must hold.",
+      "answer_key": {
+        "required_concepts": [
+          ["unplug", "unplugging", "unplugged", "disconnected from the energy source"],
+          ["exclusive control"],
+          ["employee performing the servicing", "person doing the work", "servicing or maintenance"]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": []
+      },
+      "adjacent_wrong": {
+        "label": "Exclusion stated without the exclusive-control condition",
+        "answer": "The common wrong answer says cord-and-plug equipment is exempt from lockout because it can be unplugged, dropping the requirement that the plug remain under the exclusive control of the person doing the work.",
+        "signature_terms": ["cord and plug equipment is exempt", "simply unplug", "no lockout is required for plug-connected"],
+        "why_dangerous": "The exclusive-control condition is the entire protection. Without it, a plug lying on the floor is reinserted by a second person while the first is inside the machine. Dropping half of a conjunctive test is the most common way a correct-sounding compliance answer becomes unsafe."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1910.147(a)(1)(iii)(A)",
+        "section_title": "The control of hazardous energy (lockout/tagout)",
+        "url": "https://www.ecfr.gov/current/title-29/section-1910.147",
+        "access": "public",
+        "anchor_text": "controlled by the unplugging of the equipment from the energy source and by the plug being under the exclusive control of the employee performing the servicing or maintenance"
+      },
+      "cross_reference": [],
+      "verification": {"status": "verified", "method": "ecfr_api", "source_edition_date": "2026-08-01"},
+      "abstention_acceptable": false
+    },
+    {
+      "id": "loto-004",
+      "item_type": "factual",
+      "pair_id": "loto-p2",
+      "pair_role": "b",
+      "family": "loto.scope_exclusions",
+      "risk_tier": "high",
+      "question": "What are the conditions of the minor servicing exception in 29 CFR 1910.147, and what does the standard require in place of lockout when the exception applies?",
+      "correct_answer": "Minor tool changes and adjustments, and other minor servicing activities, taking place during normal production operations are not covered if they are routine, repetitive, and integral to the use of the equipment for production, provided the work is performed using alternative measures which provide effective protection. All three characteristics plus the alternative measures are required; the exception appears as a note to 1910.147(a)(2)(ii).",
+      "answer_key": {
+        "required_concepts": [
+          ["routine"],
+          ["repetitive"],
+          ["integral"],
+          ["alternative measures", "effective protection", "alternative protection"],
+          ["normal production operations"]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": []
+      },
+      "adjacent_wrong": {
+        "label": "Exception stated as covering all minor or short-duration work",
+        "answer": "The wrong answer generalises the exception to any short, quick, or minor task, or drops the requirement for alternative measures providing effective protection.",
+        "signature_terms": ["any minor task", "short duration work is exempt", "quick jobs do not require lockout", "less than a few minutes"],
+        "why_dangerous": "This exception is one of the most frequently misapplied provisions in the standard, and misapplication puts employees into machines under power with no substitute control in place."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1910.147(a)(2)(ii), Note",
+        "section_title": "The control of hazardous energy (lockout/tagout)",
+        "url": "https://www.ecfr.gov/current/title-29/section-1910.147",
+        "access": "public",
+        "anchor_text": "if they are routine, repetitive, and integral to the use of the equipment for production, provided that the work is performed using alternative measures which provide effective protection"
+      },
+      "cross_reference": [],
+      "verification": {"status": "verified", "method": "ecfr_api", "source_edition_date": "2026-08-01"},
+      "abstention_acceptable": false
+    },
+    {
+      "id": "loto-005",
+      "item_type": "factual",
+      "pair_id": "loto-p3",
+      "pair_role": "a",
+      "family": "loto.lockout_vs_tagout",
+      "risk_tier": "high",
+      "question": "When tagout rather than lockout is used for energy control, what additional elements must the annual periodic inspection cover under 29 CFR 1910.147?",
+      "correct_answer": "Where tagout is used, the periodic inspection must include a review, between the inspector and each authorized AND affected employee, of that employee's responsibilities under the energy control procedure being inspected, and of the elements set forth in 1910.147(c)(7)(ii), which are the limitations of tags. Where lockout is used, the review is with each authorized employee only.",
+      "answer_key": {
+        "required_concepts": [
+          ["authorized"],
+          ["affected"],
+          ["limitations of tags", "(c)(7)(ii)", "c7ii", "tag limitations"]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": []
+      },
+      "adjacent_wrong": {
+        "label": "Lockout inspection scope applied to tagout",
+        "answer": "The wrong answer describes the lockout case, reviewing responsibilities with authorized employees only, and omits both affected employees and the tag-limitation elements.",
+        "signature_terms": ["authorized employees only", "same as for lockout", "no additional elements"],
+        "why_dangerous": "Tagout depends entirely on employees understanding that a tag provides no physical restraint. Dropping the tag-limitation review from the inspection removes the only recurring check that this understanding still exists."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1910.147(c)(6)(i)(D)",
+        "section_title": "The control of hazardous energy (lockout/tagout)",
+        "url": "https://www.ecfr.gov/current/title-29/section-1910.147",
+        "access": "public",
+        "anchor_text": "Where tagout is used for energy control, the periodic inspection shall include a review, between the inspector and each authorized and affected employee"
+      },
+      "cross_reference": [],
+      "verification": {"status": "verified", "method": "ecfr_api", "source_edition_date": "2026-08-01"},
+      "abstention_acceptable": false
+    },
+    {
+      "id": "loto-006",
+      "item_type": "factual",
+      "pair_id": "loto-p3",
+      "pair_role": "b",
+      "family": "loto.lockout_vs_tagout",
+      "risk_tier": "high",
+      "question": "According to the definition in 29 CFR 1910.147(b), are push buttons and selector switches energy isolating devices?",
+      "correct_answer": "No. The definition of energy isolating device explicitly states that push buttons, selector switches and other control circuit type devices are not energy isolating devices. An energy isolating device is a mechanical device that physically prevents the transmission or release of energy, such as a manually operated circuit breaker, a disconnect switch, a line valve, or a block.",
+      "answer_key": {
+        "required_concepts": [
+          ["not", "are not", "no"],
+          ["push button", "push buttons", "pushbutton"],
+          ["selector switch", "control circuit"],
+          ["mechanical device", "physically prevents", "disconnect switch", "circuit breaker", "line valve"]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": []
+      },
+      "adjacent_wrong": {
+        "label": "Control device accepted as an isolation device",
+        "answer": "The wrong answer treats an E-stop, push button, selector switch, or PLC-driven safe state as an acceptable isolation point, sometimes on the basis that it is 'lockable'.",
+        "signature_terms": ["e-stop can be locked out", "emergency stop is acceptable", "selector switch may be used as", "push button can serve as"],
+        "why_dangerous": "This is a direct mechanism for fatal injury. A control-circuit device can be defeated by a fault or a program change while an employee is inside the machine; that is precisely why the definition excludes it."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1910.147(b), definition of 'Energy isolating device'",
+        "section_title": "The control of hazardous energy (lockout/tagout)",
+        "url": "https://www.ecfr.gov/current/title-29/section-1910.147",
+        "access": "public",
+        "anchor_text": "Push buttons, selector switches and other control circuit type devices are not energy isolating devices."
+      },
+      "cross_reference": [],
+      "verification": {"status": "verified", "method": "ecfr_api", "source_edition_date": "2026-08-01"},
+      "abstention_acceptable": false
+    },
+    {
+      "id": "loto-007",
+      "item_type": "factual",
+      "pair_id": "loto-p4",
+      "pair_role": "a",
+      "family": "loto.group_vs_shift",
+      "risk_tier": "high",
+      "question": "Under 29 CFR 1910.147(f)(3), what must each authorized employee do when working under a group lockout or tagout device?",
+      "correct_answer": "Each authorized employee must affix a personal lockout or tagout device to the group lockout device, group lockbox, or comparable mechanism when he or she begins work, and must remove that device when he or she stops working on the machine or equipment being serviced or maintained. Primary responsibility is also vested in an authorized employee for a set number of employees working under the group device.",
+      "answer_key": {
+        "required_concepts": [
+          ["personal lock", "personal lockout", "personal device", "own lock"],
+          ["group lockbox", "group lockout device", "lockbox", "comparable mechanism"],
+          ["begins work", "when starting", "removes", "when he or she stops"]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": []
+      },
+      "adjacent_wrong": {
+        "label": "Shift-change continuity provision substituted for group lockout",
+        "answer": "The wrong answer describes orderly transfer of device protection between off-going and oncoming employees, which is 1910.147(f)(4) shift or personnel changes, not the group lockout requirement of (f)(3).",
+        "signature_terms": ["off-going", "oncoming", "orderly transfer", "shift change"],
+        "why_dangerous": "The two provisions solve different problems. Group lockout guarantees that no individual's protection is removed while they are still exposed; shift transfer guarantees that protection is never absent between crews. Substituting one for the other leaves the other gap open."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1910.147(f)(3)(ii)(D)",
+        "section_title": "The control of hazardous energy (lockout/tagout)",
+        "url": "https://www.ecfr.gov/current/title-29/section-1910.147",
+        "access": "public",
+        "anchor_text": "Each authorized employee shall affix a personal lockout or tagout device to the group lockout device, group lockbox, or comparable mechanism when he or she begins work"
+      },
+      "cross_reference": [],
+      "verification": {"status": "verified", "method": "ecfr_api", "source_edition_date": "2026-08-01"},
+      "abstention_acceptable": false
+    },
+    {
+      "id": "loto-008",
+      "item_type": "factual",
+      "pair_id": "loto-p4",
+      "pair_role": "b",
+      "family": "loto.group_vs_shift",
+      "risk_tier": "medium",
+      "question": "What does 29 CFR 1910.147(f)(4) require for shift or personnel changes, and does it prescribe a specific method?",
+      "correct_answer": "Specific procedures must be used during shift or personnel changes to ensure the continuity of lockout or tagout protection, including provision for the orderly transfer of lockout or tagout device protection between off-going and oncoming employees, to minimize exposure to hazards from unexpected energization, start-up, or release of stored energy. The standard requires that specific procedures exist and that continuity be maintained; it does not prescribe a particular mechanism.",
+      "answer_key": {
+        "required_concepts": [
+          ["continuity", "continuous protection", "uninterrupted"],
+          ["orderly transfer", "transfer"],
+          ["off-going", "oncoming", "outgoing", "incoming", "shift change", "personnel change"]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": []
+      },
+      "adjacent_wrong": {
+        "label": "Group lockbox requirement substituted for shift transfer",
+        "answer": "The wrong answer prescribes a group lockbox procedure with personal locks, which is the (f)(3) group lockout mechanism, and presents it as the required shift-change method.",
+        "signature_terms": ["must use a group lockbox", "each employee must affix a personal lock", "required to use a lockbox"],
+        "why_dangerous": "Overstating the requirement as a single prescribed mechanism is a smaller safety risk than the reverse error, but it is the mirror image of loto-007 and is included so that the pair tests substitution in both directions."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1910.147(f)(4)",
+        "section_title": "The control of hazardous energy (lockout/tagout)",
+        "url": "https://www.ecfr.gov/current/title-29/section-1910.147",
+        "access": "public",
+        "anchor_text": "Specific procedures shall be utilized during shift or personnel changes to ensure the continuity of lockout or tagout protection"
+      },
+      "cross_reference": [],
+      "verification": {"status": "verified", "method": "ecfr_api", "source_edition_date": "2026-08-01"},
+      "abstention_acceptable": false
+    },
+    {
+      "id": "loto-009",
+      "item_type": "factual",
+      "pair_id": null,
+      "pair_role": null,
+      "family": "loto.program_elements",
+      "risk_tier": "medium",
+      "question": "What three components make up the energy control program required by 29 CFR 1910.147(c)(1)?",
+      "correct_answer": "Energy control procedures, employee training, and periodic inspections.",
+      "answer_key": {
+        "required_concepts": [
+          ["energy control procedure", "procedures"],
+          ["training"],
+          ["periodic inspection", "inspections"]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": []
+      },
+      "adjacent_wrong": {
+        "label": "Program elements borrowed from a different OSHA standard",
+        "answer": "Wrong answers substitute elements from a neighbouring program, for example hazard assessment, PPE selection and recordkeeping, or the fourteen elements of process safety management.",
+        "signature_terms": ["hazard assessment", "written program, training and recordkeeping", "management of change"],
+        "why_dangerous": "The three components define the audit scope. A program built to the wrong element list will be missing the annual inspection, which is the only feedback loop in the standard."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1910.147(c)(1)",
+        "section_title": "The control of hazardous energy (lockout/tagout)",
+        "url": "https://www.ecfr.gov/current/title-29/section-1910.147",
+        "access": "public",
+        "anchor_text": "The employer shall establish a program consisting of energy control procedures, employee training and periodic inspections"
+      },
+      "cross_reference": [],
+      "verification": {"status": "verified", "method": "ecfr_api", "source_edition_date": "2026-08-01"},
+      "abstention_acceptable": false
+    },
+    {
+      "id": "loto-010",
+      "item_type": "category_error",
+      "pair_id": null,
+      "pair_role": null,
+      "family": "loto.category_error",
+      "risk_tier": "medium",
+      "question": "How often does 29 CFR 1910.147 require lockout padlocks to be recertified or load-tested by an accredited third party?",
+      "correct_answer": "The standard contains no such requirement. 1910.147 requires that lockout devices be durable, standardized, substantial, and identifiable, and it requires an annual periodic inspection of the energy control procedure, but it imposes no third-party recertification or load testing of padlocks. The correct response is to say that no such requirement exists rather than to supply an interval.",
+      "answer_key": {
+        "required_concepts": [
+          ["no such requirement", "does not require", "no requirement", "not required", "no recertification", "does not exist", "no provision"]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": []
+      },
+      "adjacent_wrong": {
+        "label": "Interval invented by analogy to equipment inspection regimes",
+        "answer": "The dangerous failure is producing an interval, typically annual or every six months, by analogy with fall-protection equipment inspection, crane inspection, or the annual periodic inspection that does exist in the same standard for procedures rather than devices.",
+        "signature_terms": ["must be recertified annually", "load tested every", "third-party certification is required"],
+        "why_dangerous": "Fabricated requirements consume audit and maintenance effort and, worse, teach a compliance team that the model is a reliable source of requirements it cannot check."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1910.147(c)(5) and (c)(6)",
+        "section_title": "The control of hazardous energy (lockout/tagout)",
+        "url": "https://www.ecfr.gov/current/title-29/section-1910.147",
+        "access": "public",
+        "anchor_text": "The employer shall conduct a periodic inspection of the energy control procedure at least annually"
+      },
+      "cross_reference": [],
+      "verification": {"status": "verified", "method": "ecfr_api", "source_edition_date": "2026-08-01"},
+      "abstention_acceptable": true,
+      "notes": "Negative-rejection item. The anchor text is the requirement most likely to be misgeneralised into the fabricated one."
+    }
+  ]
+}

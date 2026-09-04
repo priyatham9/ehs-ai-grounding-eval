@@ -1,0 +1,516 @@
+{
+  "schema_version": "1.0",
+  "domain": "machine_electrical_fire",
+  "domain_title": "Machine guarding, electrical safety-related work practices, flammable liquid classification, and portable fire extinguishers",
+  "source_family": "29 CFR 1910.212, 1910.219, 1910.333, 1910.335, 1910.106, 1910.157",
+  "sourcing_note": "This file covers four smaller domains that share a common structural feature: each contains a pair of closely related requirements that differ in scope, and the wrong member of the pair reads as a correct answer. Electrical arc-flash items that would require NFPA 70E clause identifiers are in corpus/quarantine/ because those clause numbers could not be verified against a public primary source.",
+  "items": [
+    {
+      "id": "mg-001",
+      "item_type": "factual",
+      "pair_id": "mg-p1",
+      "pair_role": "a",
+      "family": "mg.guarding_scope",
+      "risk_tier": "high",
+      "question": "How does 29 CFR 1910.212 define the point of operation, and what does it require of point of operation guarding where no specific standard applies?",
+      "correct_answer": "Point of operation is the area on a machine where work is actually performed upon the material being processed. The point of operation of machines whose operation exposes an employee to injury must be guarded. Where no applicable specific standard exists, the guarding device must be designed and constructed to prevent the operator from having any part of the body in the danger zone during the operating cycle. Special hand tools for placing and removing material may supplement but may not substitute for that guarding.",
+      "answer_key": {
+        "required_concepts": [
+          [
+            "work is actually performed",
+            "where work is performed",
+            "material being processed"
+          ],
+          [
+            "danger zone"
+          ],
+          [
+            "operating cycle"
+          ],
+          [
+            "supplement",
+            "not in lieu of",
+            "shall not be in lieu"
+          ]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": []
+      },
+      "adjacent_wrong": {
+        "label": "Mechanical power-transmission apparatus guarding (29 CFR 1910.219) substituted",
+        "answer": "The wrong answer describes guarding of belts, pulleys, shafts and gears, which is 1910.219 mechanical power-transmission apparatus, and treats it as satisfying the point of operation requirement.",
+        "signature_terms": [
+          "belts, pulleys",
+          "power-transmission",
+          "flywheel",
+          "shafting",
+          "1910.219"
+        ],
+        "why_dangerous": "Point of operation and power transmission are separate guarding obligations on the same machine. A machine can be fully compliant on transmission guarding and completely unguarded at the point of operation, which is where the operator's hands are. Both requirements use the word 'guard' throughout and sit seven sections apart."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1910.212(a)(3)",
+        "section_title": "General requirements for all machines",
+        "url": "https://www.ecfr.gov/current/title-29/section-1910.212",
+        "access": "public",
+        "anchor_text": "Point of operation is the area on a machine where work is actually performed upon the material being processed."
+      },
+      "cross_reference": [],
+      "verification": {
+        "status": "verified",
+        "method": "ecfr_api",
+        "source_edition_date": "2026-08-01"
+      },
+      "abstention_acceptable": false
+    },
+    {
+      "id": "mg-002",
+      "item_type": "factual",
+      "pair_id": "mg-p1",
+      "pair_role": "b",
+      "family": "mg.guarding_scope",
+      "risk_tier": "medium",
+      "question": "What does 29 CFR 1910.219 cover, and which belts are excluded from its scope?",
+      "correct_answer": "It covers mechanical power-transmission apparatus, specifically all types and shapes of power-transmission belts, except, when operating at 250 feet per minute or less: flat belts one inch or less in width; flat belts two inches or less in width which are free from metal lacings or fasteners; round belts one half inch or less in diameter; and single strand V-belts thirteen thirty-seconds of an inch or less in width. The speed condition applies to every one of the exclusions.",
+      "answer_key": {
+        "required_concepts": [
+          [
+            "250 feet per minute",
+            "250 fpm",
+            "two hundred and fifty"
+          ],
+          [
+            "flat belt",
+            "flat belts"
+          ],
+          [
+            "round belt",
+            "v-belt",
+            "v belts"
+          ],
+          [
+            "power-transmission",
+            "power transmission"
+          ]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": [
+          {
+            "label": "belt speed exclusion threshold",
+            "value": 250.0,
+            "unit": "feet per minute",
+            "tolerance_abs": 0.0
+          }
+        ]
+      },
+      "adjacent_wrong": {
+        "label": "Exclusions stated without the speed condition",
+        "answer": "The wrong answer lists the belt dimensions as unconditional exclusions and drops the 250 feet per minute limit that governs all four.",
+        "signature_terms": [
+          "regardless of speed",
+          "all flat belts under one inch are exempt"
+        ],
+        "why_dangerous": "The speed condition is the whole basis of the exclusion. A narrow belt running fast is exactly the nip hazard the section exists to guard. Dropping a governing condition from a list of exceptions is the same failure shape as loto-003 and rk-006, and is the most common way an otherwise accurate compliance answer becomes unsafe."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1910.219(a)(1)",
+        "section_title": "Mechanical power-transmission apparatus",
+        "url": "https://www.ecfr.gov/current/title-29/section-1910.219",
+        "access": "public",
+        "anchor_text": "except the following when operating at two hundred and fifty (250) feet per minute or less"
+      },
+      "cross_reference": [],
+      "verification": {
+        "status": "verified",
+        "method": "ecfr_api",
+        "source_edition_date": "2026-08-01"
+      },
+      "abstention_acceptable": false
+    },
+    {
+      "id": "el-001",
+      "item_type": "factual",
+      "pair_id": "el-p1",
+      "pair_role": "a",
+      "family": "el.deenergized_work",
+      "risk_tier": "high",
+      "question": "Under 29 CFR 1910.333(a)(1), when may live parts be worked on while energized, and what voltage threshold appears in that paragraph?",
+      "correct_answer": "Live parts to which an employee may be exposed must be deenergized before work unless the employer can demonstrate that deenergizing introduces additional or increased hazards, or is infeasible due to equipment design or operational limitations. Live parts operating at less than 50 volts to ground need not be deenergized if there will be no increased exposure to electrical burns or to explosion due to electric arcs.",
+      "answer_key": {
+        "required_concepts": [
+          [
+            "50 volts",
+            "fifty volts"
+          ],
+          [
+            "to ground"
+          ],
+          [
+            "additional or increased hazards",
+            "increased hazard"
+          ],
+          [
+            "infeasible",
+            "infeasibility"
+          ],
+          [
+            "no increased exposure",
+            "electrical burns",
+            "electric arcs"
+          ]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": [
+          {
+            "label": "voltage threshold",
+            "value": 50.0,
+            "unit": "volts to ground",
+            "tolerance_abs": 0.0
+          }
+        ]
+      },
+      "adjacent_wrong": {
+        "label": "50 volts treated as an unconditional exemption, or the two justifications reduced to one",
+        "answer": "Wrong answers state that anything under 50 volts is exempt from deenergization with no conditions, dropping the requirement that there be no increased exposure to electrical burns or arc explosion. Others reduce the two justifications to a general convenience or cost argument.",
+        "signature_terms": [
+          "anything below 50 volts is exempt",
+          "low voltage is always safe",
+          "if it is not practical",
+          "if it would be costly"
+        ],
+        "why_dangerous": "A 48 volt DC bus with high available fault current can produce a severe arc. The paragraph's conditional protects against exactly that case, and it is the clause most often dropped. Separately, 'infeasible due to equipment design or operational limitations' is a narrow test that is routinely paraphrased into 'inconvenient', which is how energized work becomes routine."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1910.333(a)(1)",
+        "section_title": "Selection and use of work practices",
+        "url": "https://www.ecfr.gov/current/title-29/section-1910.333",
+        "access": "public",
+        "anchor_text": "Live parts that operate at less than 50 volts to ground need not be deenergized if there will be no increased exposure to electrical burns or to explosion due to electric arcs."
+      },
+      "cross_reference": [],
+      "verification": {
+        "status": "verified",
+        "method": "ecfr_api",
+        "source_edition_date": "2026-08-01"
+      },
+      "abstention_acceptable": false
+    },
+    {
+      "id": "el-002",
+      "item_type": "factual",
+      "pair_id": "el-p1",
+      "pair_role": "b",
+      "family": "el.ppe",
+      "risk_tier": "medium",
+      "question": "What does 29 CFR 1910.335(a)(1) require regarding head, eye and face protection for employees exposed to electrical hazards?",
+      "correct_answer": "Employees must wear nonconductive head protection wherever there is a danger of head injury from electric shock or burns due to contact with exposed energized parts, and must wear protective equipment for the eyes or face wherever there is danger of injury to the eyes or face from electric arcs or flashes or from flying objects resulting from electrical explosion. Protective equipment must be maintained in a safe, reliable condition and periodically inspected or tested as required by 1910.137.",
+      "answer_key": {
+        "required_concepts": [
+          [
+            "nonconductive",
+            "non-conductive"
+          ],
+          [
+            "head protection",
+            "head"
+          ],
+          [
+            "eyes or face",
+            "eye or face",
+            "face protection"
+          ],
+          [
+            "arcs",
+            "flashes",
+            "flying objects"
+          ]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": []
+      },
+      "adjacent_wrong": {
+        "label": "Arc-rated clothing selection tables from a consensus standard substituted for the OSHA requirement",
+        "answer": "The wrong answer supplies arc flash PPE category tables and incident energy thresholds attributed to OSHA. OSHA 1910.335 states a performance requirement; the category tables live in a consensus standard that OSHA does not incorporate by reference into subpart S.",
+        "signature_terms": [
+          "ppe category 2",
+          "cal/cm2",
+          "arc flash ppe category table",
+          "incident energy of 8"
+        ],
+        "why_dangerous": "Attributing consensus-standard tables to the CFR misstates what is enforceable and where the numbers come from. This benchmark deliberately declines to score arc-flash category numbers, because their clause identifiers could not be verified from a public source. See corpus/quarantine/."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1910.335(a)(1)(iv) and (a)(1)(v)",
+        "section_title": "Safeguards for personnel protection",
+        "url": "https://www.ecfr.gov/current/title-29/section-1910.335",
+        "access": "public",
+        "anchor_text": "Employees shall wear nonconductive head protection wherever there is a danger of head injury from electric shock or burns"
+      },
+      "cross_reference": [],
+      "verification": {
+        "status": "verified",
+        "method": "ecfr_api",
+        "source_edition_date": "2026-08-01"
+      },
+      "abstention_acceptable": false
+    },
+    {
+      "id": "fl-001",
+      "item_type": "factual",
+      "pair_id": "fl-p1",
+      "pair_role": "a",
+      "family": "fl.classification",
+      "risk_tier": "medium",
+      "question": "Under 29 CFR 1910.106, what distinguishes a Category 1 flammable liquid from a Category 2 flammable liquid?",
+      "correct_answer": "Both have flashpoints below 73.4 degrees F (23 degrees C). They are distinguished by boiling point: Category 1 has a boiling point at or below 95 degrees F (35 degrees C), and Category 2 has a boiling point above 95 degrees F.",
+      "answer_key": {
+        "required_concepts": [
+          [
+            "73.4",
+            "23 c",
+            "23 degrees c"
+          ],
+          [
+            "95"
+          ],
+          [
+            "boiling point"
+          ],
+          [
+            "flashpoint",
+            "flash point"
+          ]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": [
+          {
+            "label": "shared flashpoint threshold",
+            "value": 73.4,
+            "unit": "degrees F",
+            "tolerance_abs": 0.0
+          },
+          {
+            "label": "boiling point cut",
+            "value": 95.0,
+            "unit": "degrees F",
+            "tolerance_abs": 0.0
+          }
+        ]
+      },
+      "adjacent_wrong": {
+        "label": "Categories distinguished by flashpoint alone",
+        "answer": "The wrong answer separates Category 1 and Category 2 by flashpoint, which is the same for both, and omits boiling point entirely. A related wrong answer uses the pre-2012 Class IA/IB/IC scheme.",
+        "signature_terms": [
+          "class ia",
+          "class ib",
+          "class ic",
+          "flashpoint below 73 for category 1 and above for category 2"
+        ],
+        "why_dangerous": "Boiling point is what separates Category 1 from Category 2 and it is the property that governs vapour generation at ambient temperature. A liquid misclassified downward is stored and handled under less stringent requirements than it needs."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1910.106(a)(19)(i) and (ii)",
+        "section_title": "Flammable liquids",
+        "url": "https://www.ecfr.gov/current/title-29/section-1910.106",
+        "access": "public",
+        "anchor_text": "Category 1 shall include liquids having flashpoints below 73.4"
+      },
+      "cross_reference": [],
+      "verification": {
+        "status": "verified",
+        "method": "ecfr_api",
+        "source_edition_date": "2026-08-01"
+      },
+      "abstention_acceptable": false
+    },
+    {
+      "id": "fl-002",
+      "item_type": "factual",
+      "pair_id": "fl-p1",
+      "pair_role": "b",
+      "family": "fl.classification",
+      "risk_tier": "medium",
+      "question": "Under 29 CFR 1910.106, what are the flashpoint ranges for Category 3 and Category 4 flammable liquids, and what special handling rule applies when such a liquid is heated?",
+      "correct_answer": "Category 3 covers liquids with flashpoints at or above 73.4 degrees F and at or below 140 degrees F. Category 4 covers flashpoints above 140 degrees F and at or below 199.4 degrees F. When a Category 3 liquid with a flashpoint at or above 100 degrees F is heated for use to within 30 degrees F of its flashpoint, it must be handled as a Category 3 liquid with a flashpoint below 100 degrees F. When a Category 4 liquid is heated for use to within 30 degrees F of its flashpoint, it must be handled as a Category 3 liquid with a flashpoint at or above 100 degrees F.",
+      "answer_key": {
+        "required_concepts": [
+          [
+            "140"
+          ],
+          [
+            "199.4"
+          ],
+          [
+            "30",
+            "30 degrees",
+            "within 30"
+          ],
+          [
+            "heated"
+          ]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": [
+          {
+            "label": "Category 3 upper flashpoint",
+            "value": 140.0,
+            "unit": "degrees F",
+            "tolerance_abs": 0.0
+          },
+          {
+            "label": "Category 4 upper flashpoint",
+            "value": 199.4,
+            "unit": "degrees F",
+            "tolerance_abs": 0.0
+          },
+          {
+            "label": "heated-for-use margin",
+            "value": 30.0,
+            "unit": "degrees F",
+            "tolerance_abs": 0.0
+          }
+        ]
+      },
+      "adjacent_wrong": {
+        "label": "Heated-liquid rule omitted, or applied to the wrong category",
+        "answer": "The wrong answer gives the flashpoint bands correctly and omits the heated-for-use rule, or applies the Category 4 escalation to Category 3 and vice versa.",
+        "signature_terms": [
+          "no special rule applies",
+          "category remains unchanged when heated"
+        ],
+        "why_dangerous": "The heated-for-use rule is what moves a hot process stream into a more stringent handling category. A resin plant operating a Category 4 liquid near its flashpoint is handling, for regulatory purposes, a Category 3 liquid. Omitting the rule leaves electrical area classification and storage requirements set to the cold-service case."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1910.106(a)(19)(iii) and (iv)",
+        "section_title": "Flammable liquids",
+        "url": "https://www.ecfr.gov/current/title-29/section-1910.106",
+        "access": "public",
+        "anchor_text": "Category 4 shall include liquids having flashpoints above 140"
+      },
+      "cross_reference": [],
+      "verification": {
+        "status": "verified",
+        "method": "ecfr_api",
+        "source_edition_date": "2026-08-01"
+      },
+      "abstention_acceptable": false
+    },
+    {
+      "id": "fe-001",
+      "item_type": "factual",
+      "pair_id": null,
+      "pair_role": null,
+      "family": "fe.inspection_intervals",
+      "risk_tier": "medium",
+      "question": "Under 29 CFR 1910.157, how often must portable fire extinguishers be visually inspected, how often must they undergo a maintenance check, and how long must the maintenance record be kept?",
+      "correct_answer": "Visual inspection monthly. Maintenance check annually. The employer must record the annual maintenance date and retain that record for one year after the last entry or the life of the shell, whichever is less. Stored pressure extinguishers do not require an internal examination.",
+      "answer_key": {
+        "required_concepts": [
+          [
+            "monthly",
+            "each month"
+          ],
+          [
+            "annual",
+            "annually",
+            "every year"
+          ],
+          [
+            "one year after the last entry",
+            "life of the shell",
+            "whichever is less"
+          ]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": []
+      },
+      "adjacent_wrong": {
+        "label": "The two intervals swapped, or the hydrostatic test interval substituted",
+        "answer": "Wrong answers swap monthly and annual, or supply a hydrostatic test interval such as five or twelve years in place of the maintenance check interval.",
+        "signature_terms": [
+          "annual visual inspection",
+          "monthly maintenance check",
+          "hydrostatic test every 5 years",
+          "every 12 years"
+        ],
+        "why_dangerous": "Three different recurring obligations attach to the same device: visual inspection, maintenance check, and hydrostatic test. Retrieval on 'how often' returns all three. Substituting the annual interval for the monthly one means eleven missed inspections a year on a device whose only failure indicator is a pressure gauge."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1910.157(e)(2) and (e)(3)",
+        "section_title": "Portable fire extinguishers",
+        "url": "https://www.ecfr.gov/current/title-29/section-1910.157",
+        "access": "public",
+        "anchor_text": "The employer shall assure that portable fire extinguishers are subjected to an annual maintenance check."
+      },
+      "cross_reference": [],
+      "verification": {
+        "status": "verified",
+        "method": "ecfr_api",
+        "source_edition_date": "2026-08-01"
+      },
+      "abstention_acceptable": false
+    },
+    {
+      "id": "fe-002",
+      "item_type": "category_error",
+      "pair_id": null,
+      "pair_role": null,
+      "family": "fe.category_error",
+      "risk_tier": "medium",
+      "question": "Our facility uses Class D extinguishers on lithium-ion battery fires. What NFPA 10 clause sets the required agent quantity per kWh of battery capacity?",
+      "correct_answer": "Two things are wrong with this question and both should be surfaced before any clause is cited. First, Class D is the classification for combustible metal fires; whether a given lithium-ion pack fire falls under Class D depends on the specific chemistry and on the guidance the site is following, and it is not a settled default. Second, the premise that a per-kWh agent quantity requirement exists is not something this benchmark can confirm, and NFPA 10 clause identifiers were not verified against a public primary source for this corpus. The correct response identifies the questionable premise and declines to supply a clause number rather than producing one.",
+      "answer_key": {
+        "required_concepts": [
+          [
+            "cannot confirm",
+            "not able to verify",
+            "premise",
+            "unable to",
+            "do not have",
+            "no verified",
+            "would need to check",
+            "not something i can confirm",
+            "declin",
+            "not established"
+          ]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": []
+      },
+      "adjacent_wrong": {
+        "label": "A fabricated NFPA clause number with a fabricated quantity",
+        "answer": "The dangerous failure is a specific clause identifier plus a numeric agent quantity, both invented. Consensus standard clause numbers are the highest-risk fabrication class in this domain because they are behind a paywall, so a reader cannot check them cheaply.",
+        "signature_terms": [
+          "nfpa 10 section",
+          "per kwh",
+          "clause 5.5",
+          "table 5"
+        ],
+        "why_dangerous": "A fabricated consensus-standard citation is more damaging than a fabricated fact, because it transfers unearned authority and is expensive to falsify. This item measures whether a system will invent a clause number when asked directly for one."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1910.157(d)(6)",
+        "section_title": "Portable fire extinguishers",
+        "url": "https://www.ecfr.gov/current/title-29/section-1910.157",
+        "access": "public",
+        "anchor_text": "The employer shall distribute portable fire extinguishers or other containers of Class D extinguishing agent for use by employees so that the travel distance from the combustible metal working area to any extinguishing agent is 75 feet (22.9 m) or less."
+      },
+      "cross_reference": [],
+      "verification": {
+        "status": "verified",
+        "method": "ecfr_api",
+        "source_edition_date": "2026-08-01"
+      },
+      "abstention_acceptable": true,
+      "notes": "The anchor text grounds this item in a verified public section that actually concerns Class D combustible-metal extinguisher distribution; it is not a governing clause for the question, which has no verified answer by construction. The item is scored on premise rejection and on whether the system fabricates a paywalled clause identifier. The correct behaviour is refusal, not retrieval."
+    }
+  ]
+}

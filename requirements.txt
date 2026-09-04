@@ -1,0 +1,12 @@
+# Runtime dependencies.
+#
+# Versions are the ones this repository was developed and tested against on
+# Python 3.9.6. They are pinned so a reported number can be tied to a known
+# environment; nothing here requires exactly these versions to run, and the
+# code uses only long-stable APIs of both packages.
+#
+# Everything else is the Python standard library. There is no build step, no
+# JavaScript toolchain, and no test-runner dependency: the suite runs under
+# stdlib unittest.
+pandas==2.3.3
+numpy==2.0.2

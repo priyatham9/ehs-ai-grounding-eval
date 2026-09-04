@@ -1,0 +1,832 @@
+{
+  "schema_version": "1.0",
+  "domain": "pressure_relief_devices",
+  "domain_title": "Overpressure protection: rupture disk devices vs. spring-loaded safety and relief valves",
+  "source_family": "46 CFR part 54 subpart 54.15 (US Coast Guard, unfired pressure vessels)",
+  "sourcing_note": "Rupture disks and pressure relief valves are the seed confusion pair for this benchmark. The governing consensus standards (ASME BPVC Section VIII Division 1, API 520/521) are copyrighted and were not accessible for clause-level verification. 46 CFR subpart 54.15 is a public federal regulation that (a) contains device-specific substantive requirements for both device types and (b) names the ASME paragraphs it modifies, which lets ASME paragraph identifiers be cross-referenced with a public corroborating source rather than asserted. Items whose answer depends on ASME or API clause text that could not be verified are in corpus/quarantine/.",
+  "items": [
+    {
+      "id": "prd-001",
+      "item_type": "factual",
+      "pair_id": "prd-p1",
+      "pair_role": "a",
+      "family": "prd.operating_margin",
+      "risk_tier": "high",
+      "question": "For a rupture disk installed as the overpressure protection device on an unfired pressure vessel under 46 CFR subpart 54.15, what relationship must hold between the normal maximum operating pressure of the vessel and the nominal burst pressure of the disk, and why does that relationship exist?",
+      "correct_answer": "The normal maximum operating pressure multiplied by 1.3 must not exceed the nominal disk burst pressure. The requirement exists so the disk is not operated close enough to its burst pressure to accumulate fatigue damage; 46 CFR 54.15-13(b)(3) notes that this restriction will usually require the vessel to be operated below its maximum allowable working pressure, which must be accounted for in design.",
+      "answer_key": {
+        "required_concepts": [
+          [
+            "1.3",
+            "1.3x",
+            "130 percent",
+            "130%"
+          ],
+          [
+            "burst pressure",
+            "bursting pressure",
+            "nominal disk burst"
+          ],
+          [
+            "operating pressure"
+          ],
+          [
+            "fatigue",
+            "fatigue failure",
+            "cyclic"
+          ]
+        ],
+        "forbidden_concepts": [
+          [
+            "blowdown"
+          ],
+          [
+            "reseat",
+            "reseating",
+            "reseat pressure"
+          ],
+          [
+            "set pressure of the valve",
+            "valve set pressure"
+          ]
+        ],
+        "numeric_facts": [
+          {
+            "label": "operating margin multiplier",
+            "value": 1.3,
+            "unit": "ratio",
+            "tolerance_abs": 0.0
+          }
+        ]
+      },
+      "adjacent_wrong": {
+        "label": "Spring-loaded pressure relief valve (reclosing device)",
+        "answer": "A common wrong answer describes valve behaviour instead: it gives a set pressure at or below the maximum allowable working pressure, quotes a blowdown percentage, and describes the device reseating after the overpressure event. None of these quantities exist for a rupture disk, which is a one-shot non-reclosing device.",
+        "signature_terms": [
+          "blowdown",
+          "set pressure",
+          "reseating",
+          "reseat",
+          "huddling chamber",
+          "chatter",
+          "spring",
+          "lift of the disc from its seat",
+          "reclose",
+          "recloses"
+        ],
+        "why_dangerous": "A rupture disk sized and installed against valve parameters has no defined operating margin. Running a disk at or near its marked burst pressure produces fatigue cracking and premature burst, which on a reactor is an uncontrolled release rather than a controlled relief event. The substituted answer is fluent, internally consistent, and contains no quantity that can be applied to the real device."
+      },
+      "source": {
+        "standard": "46 CFR",
+        "clause": "46 CFR 54.15-13(b)(3)",
+        "section_title": "Rupture disks (modifies UG-127)",
+        "url": "https://www.ecfr.gov/current/title-46/section-54.15-13",
+        "access": "public",
+        "anchor_text": "The normal maximum operating pressure multiplied by 1.3 must not exceed the nominal disk burst pressure."
+      },
+      "cross_reference": [
+        {
+          "standard": "ASME BPVC Section VIII Division 1",
+          "clause": "UG-127",
+          "access": "paywalled",
+          "corroboration": "The title of 46 CFR 54.15-13 is 'Rupture disks (modifies UG-127)', and 54.15-13(a) states that UG-127 provides for the use of rupture disks in series with spring loaded safety or relief valves. The paragraph identifier is therefore corroborated by a public federal source; the ASME text itself was not read."
+        }
+      ],
+      "verification": {
+        "status": "verified",
+        "method": "ecfr_api",
+        "source_edition_date": "2026-08-01"
+      },
+      "abstention_acceptable": false,
+      "notes": "Seed item for the benchmark. The failure this benchmark was built around is a system answering a rupture-disk question with pressure-relief-valve content."
+    },
+    {
+      "id": "prd-002",
+      "item_type": "factual",
+      "pair_id": "prd-p1",
+      "pair_role": "b",
+      "family": "prd.operating_margin",
+      "risk_tier": "high",
+      "question": "For a spring-loaded relief valve in service at pressures up to and including 250 pounds per square inch under 46 CFR subpart 54.15, what limit applies to resetting the valve spring relative to the pressure for which the valve is marked?",
+      "correct_answer": "The spring must not be reset for any pressure more than 10 percent above or 10 percent below the pressure for which the relief valve is marked. Above 250 psi the limit tightens to 5 percent above or below.",
+      "answer_key": {
+        "required_concepts": [
+          [
+            "10 percent",
+            "10%",
+            "ten percent"
+          ],
+          [
+            "spring"
+          ],
+          [
+            "reset",
+            "resetting",
+            "re-set"
+          ],
+          [
+            "marked",
+            "marking",
+            "nameplate"
+          ]
+        ],
+        "forbidden_concepts": [
+          [
+            "burst pressure",
+            "bursting pressure"
+          ],
+          [
+            "manufacturing design range"
+          ],
+          [
+            "one-shot",
+            "non-reclosing"
+          ]
+        ],
+        "numeric_facts": [
+          {
+            "label": "spring reset tolerance at or below 250 psi",
+            "value": 10.0,
+            "unit": "percent",
+            "tolerance_abs": 0.0
+          }
+        ]
+      },
+      "adjacent_wrong": {
+        "label": "Rupture disk device (non-reclosing)",
+        "answer": "A wrong answer imports rupture-disk vocabulary: burst pressure tolerance, manufacturing design range, or specified disk temperature. Those govern a one-shot disk, not the reset of a valve spring.",
+        "signature_terms": [
+          "burst pressure tolerance",
+          "manufacturing design range",
+          "nominal burst",
+          "one-shot",
+          "non-reclosing",
+          "bursting disc"
+        ],
+        "why_dangerous": "Applying disk tolerances to a valve spring produces a valve set outside its certified band, so the relieving pressure no longer matches the vessel it protects."
+      },
+      "source": {
+        "standard": "46 CFR",
+        "clause": "46 CFR 54.15-10(g)",
+        "section_title": "Safety and relief valves (modifies UG-126)",
+        "url": "https://www.ecfr.gov/current/title-46/section-54.15-10",
+        "access": "public",
+        "anchor_text": "The spring in a relief valve in service for pressures up to and including 250 pounds per square inch must not be reset for any pressure more than 10 percent above or 10 percent below that for which the relief valve is marked."
+      },
+      "cross_reference": [
+        {
+          "standard": "ASME BPVC Section VIII Division 1",
+          "clause": "UG-126",
+          "access": "paywalled",
+          "corroboration": "The title of 46 CFR 54.15-10 is 'Safety and relief valves (modifies UG-126)'. Paragraph identifier corroborated by a public federal source; ASME text not read."
+        }
+      ],
+      "verification": {
+        "status": "verified",
+        "method": "ecfr_api",
+        "source_edition_date": "2026-08-01"
+      },
+      "abstention_acceptable": false,
+      "notes": "Minimal-pair counterpart to prd-001. The two questions share topic, register and regulation, and differ only in device type."
+    },
+    {
+      "id": "prd-003",
+      "item_type": "factual",
+      "pair_id": "prd-p2",
+      "pair_role": "a",
+      "family": "prd.fire_case_capacity",
+      "risk_tier": "high",
+      "question": "Under 46 CFR 54.15-13, what discharge capacity must a rupture disk have when it is authorized in parallel with or in lieu of a spring-loaded safety or relief valve, expressed relative to the maximum allowable working pressure of the vessel under fire conditions?",
+      "correct_answer": "The disk must have a capacity for discharge such that the volume of release is sufficient to prevent the internal pressure from exceeding 120 percent of the maximum allowable working pressure with the pressure vessel exposed to fire conditions.",
+      "answer_key": {
+        "required_concepts": [
+          [
+            "120 percent",
+            "120%"
+          ],
+          [
+            "maximum allowable working pressure",
+            "mawp"
+          ],
+          [
+            "fire"
+          ]
+        ],
+        "forbidden_concepts": [
+          [
+            "blowdown"
+          ],
+          [
+            "reseating",
+            "reseat"
+          ]
+        ],
+        "numeric_facts": [
+          {
+            "label": "fire-case accumulation limit for authorized rupture disk",
+            "value": 120.0,
+            "unit": "percent",
+            "tolerance_abs": 0.0
+          }
+        ]
+      },
+      "adjacent_wrong": {
+        "label": "General non-fire relieving-device limit (10 percent) or supplemental fire device limit (20 percent above MAWP)",
+        "answer": "A wrong answer quotes the general 10 percent accumulation limit of 54.15-5(c), or restates the supplemental fire-exposure device requirement of 54.15-5(d) as '20 percent above MAWP' without recognising that 54.15-13(b)(2) states the same limit as '120 percent of MAWP' for the disk case.",
+        "signature_terms": [
+          "10 percent above",
+          "10% above the maximum allowable"
+        ],
+        "why_dangerous": "Sizing to the wrong accumulation limit under-sizes or over-sizes the disk. Under-sizing means the vessel exceeds its design accumulation during a fire; over-sizing moves the failure into the downstream piping."
+      },
+      "source": {
+        "standard": "46 CFR",
+        "clause": "46 CFR 54.15-13(b)(2)",
+        "section_title": "Rupture disks (modifies UG-127)",
+        "url": "https://www.ecfr.gov/current/title-46/section-54.15-13",
+        "access": "public",
+        "anchor_text": "prevent the internal pressure from exceeding 120 percent of the"
+      },
+      "cross_reference": [],
+      "verification": {
+        "status": "verified",
+        "method": "ecfr_api",
+        "source_edition_date": "2026-08-01"
+      },
+      "abstention_acceptable": false,
+      "notes": "20 percent above MAWP and 120 percent of MAWP are the same quantity stated two ways in two adjacent sections. An answer that gives the right number under the wrong framing is scored correct on the numeric fact and is caught, if at all, only by citation grading."
+    },
+    {
+      "id": "prd-004",
+      "item_type": "factual",
+      "pair_id": "prd-p2",
+      "pair_role": "b",
+      "family": "prd.fire_case_capacity",
+      "risk_tier": "high",
+      "question": "Under 46 CFR 54.15-5, by how much may pressure rise above the maximum allowable working pressure of a pressure vessel other than an unfired steam boiler, when the overpressure is NOT caused by fire or another unexpected source of heat?",
+      "correct_answer": "Not more than 10 percent above the maximum allowable working pressure. That limit applies except when the excess pressure is caused by exposure to fire or another unexpected source of heat, which 46 CFR 54.15-5 treats as a separate case with its own supplemental-device requirement.",
+      "answer_key": {
+        "required_concepts": [
+          [
+            "10 percent",
+            "10%"
+          ],
+          [
+            "maximum allowable working pressure",
+            "mawp"
+          ]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": [
+          {
+            "label": "non-fire accumulation limit",
+            "value": 10.0,
+            "unit": "percent",
+            "tolerance_abs": 0.0
+          }
+        ]
+      },
+      "adjacent_wrong": {
+        "label": "Fire-case supplemental device limit (20 percent)",
+        "answer": "A wrong answer gives 20 percent, which is the supplemental fire-exposure figure from 54.15-5(d), or 120 percent, which is the disk fire-case figure from 54.15-13(b)(2).",
+        "signature_terms": [
+          "20 percent above",
+          "120 percent"
+        ],
+        "why_dangerous": "Permitting 20 percent accumulation on a non-fire relief case doubles the design accumulation the vessel was qualified for."
+      },
+      "source": {
+        "standard": "46 CFR",
+        "clause": "46 CFR 54.15-5(c)",
+        "section_title": "Protective devices (modifies UG-125)",
+        "url": "https://www.ecfr.gov/current/title-46/section-54.15-5",
+        "access": "public",
+        "anchor_text": "prevent the pressure from rising more than 10 percent above the maximum allowable working pressure"
+      },
+      "cross_reference": [
+        {
+          "standard": "ASME BPVC Section VIII Division 1",
+          "clause": "UG-125",
+          "access": "paywalled",
+          "corroboration": "The title of 46 CFR 54.15-5 is 'Protective devices (modifies UG-125)'."
+        }
+      ],
+      "verification": {
+        "status": "verified",
+        "method": "ecfr_api",
+        "source_edition_date": "2026-08-01"
+      },
+      "abstention_acceptable": false,
+      "notes": "The reference answer deliberately does not restate the fire-case percentage. That figure belongs to the paired item prd-005, and repeating it here would put the adjacent-wrong signature inside this item's own correct answer, which would cause a correct response to be scored as an adjacent substitution."
+    },
+    {
+      "id": "prd-005",
+      "item_type": "factual",
+      "pair_id": null,
+      "pair_role": null,
+      "family": "prd.fire_case_capacity",
+      "risk_tier": "high",
+      "question": "Under 46 CFR 54.15-5, when a pressure vessel can be exposed to fire or another unexpected source of external heat, what additional protection is required and to what pressure limit must it hold the vessel?",
+      "correct_answer": "Supplemental pressure-relieving devices must be installed, capable of preventing the pressure from rising more than 20 percent above the maximum allowable working pressure of the vessel. A single relieving device may satisfy both the fire case and the general 10 percent case if it meets both requirements.",
+      "answer_key": {
+        "required_concepts": [
+          [
+            "20 percent",
+            "20%"
+          ],
+          [
+            "supplemental",
+            "additional device",
+            "additional pressure-relieving"
+          ],
+          [
+            "fire",
+            "external heat"
+          ]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": [
+          {
+            "label": "fire-case accumulation limit",
+            "value": 20.0,
+            "unit": "percent",
+            "tolerance_abs": 0.0
+          }
+        ]
+      },
+      "adjacent_wrong": {
+        "label": "Non-fire 10 percent limit",
+        "answer": "A wrong answer applies the general 10 percent accumulation limit to the fire case.",
+        "signature_terms": [
+          "10 percent above the maximum allowable"
+        ],
+        "why_dangerous": "Under-sizing fire-case relief is the classical mechanism for a BLEVE on a liquefied-gas vessel."
+      },
+      "source": {
+        "standard": "46 CFR",
+        "clause": "46 CFR 54.15-5(d)",
+        "section_title": "Protective devices (modifies UG-125)",
+        "url": "https://www.ecfr.gov/current/title-46/section-54.15-5",
+        "access": "public",
+        "anchor_text": "capable of preventing the pressure from rising more than 20 percent above the maximum allowable working pressure of the vessel"
+      },
+      "cross_reference": [],
+      "verification": {
+        "status": "verified",
+        "method": "ecfr_api",
+        "source_edition_date": "2026-08-01"
+      },
+      "abstention_acceptable": false
+    },
+    {
+      "id": "prd-006",
+      "item_type": "factual",
+      "pair_id": "prd-p3",
+      "pair_role": "a",
+      "family": "prd.asme_paragraph_mapping",
+      "risk_tier": "medium",
+      "question": "46 CFR subpart 54.15 modifies specific paragraphs of ASME Boiler and Pressure Vessel Code Section VIII. Which ASME paragraph does the Coast Guard's rupture disk section modify, and which does its safety and relief valve section modify?",
+      "correct_answer": "46 CFR 54.15-13, 'Rupture disks', modifies UG-127. 46 CFR 54.15-10, 'Safety and relief valves', modifies UG-126. 46 CFR 54.15-5, 'Protective devices', modifies UG-125.",
+      "answer_key": {
+        "required_concepts": [
+          [
+            "ug-127",
+            "ug 127"
+          ],
+          [
+            "ug-126",
+            "ug 126"
+          ],
+          [
+            "rupture disk",
+            "rupture disc"
+          ],
+          [
+            "relief valve",
+            "safety valve"
+          ]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": []
+      },
+      "adjacent_wrong": {
+        "label": "Paragraph identifiers swapped between device types",
+        "answer": "The characteristic wrong answer swaps the two, assigning UG-126 to rupture disks and UG-127 to relief valves, or attributes both to a single paragraph.",
+        "signature_terms": [
+          "ug-127 covers safety and relief valves",
+          "ug-126 covers rupture disks"
+        ],
+        "why_dangerous": "A design reviewer sent to the wrong code paragraph reads acceptance criteria for the other device class. Because both paragraphs are in the same code section and use overlapping vocabulary, the error survives a quick read."
+      },
+      "source": {
+        "standard": "46 CFR",
+        "clause": "46 CFR 54.15-13 and 46 CFR 54.15-10 (section headings)",
+        "section_title": "Rupture disks (modifies UG-127); Safety and relief valves (modifies UG-126)",
+        "url": "https://www.ecfr.gov/current/title-46/subpart-54.15",
+        "access": "public",
+        "anchor_text": "Rupture disks (modifies UG-127)"
+      },
+      "cross_reference": [
+        {
+          "standard": "ASME BPVC Section VIII Division 1",
+          "clause": "UG-125 through UG-137",
+          "access": "paywalled",
+          "corroboration": "46 CFR 54.15-1 is titled 'General (modifies UG-125 through UG-137)' while its paragraph (a) text says 'UG-125 through UG-136'. This internal inconsistency in the CFR is reproduced here rather than resolved, because resolving it would require the ASME text."
+        }
+      ],
+      "verification": {
+        "status": "verified",
+        "method": "ecfr_api",
+        "source_edition_date": "2026-08-01"
+      },
+      "abstention_acceptable": false,
+      "notes": "The heading/body discrepancy in 46 CFR 54.15-1 (UG-137 vs UG-136) is real and is recorded rather than smoothed over. Items depending on which of the two is correct are excluded."
+    },
+    {
+      "id": "prd-007",
+      "item_type": "factual",
+      "pair_id": "prd-p3",
+      "pair_role": "b",
+      "family": "prd.installation_orientation",
+      "risk_tier": "high",
+      "question": "What does 46 CFR 54.15-13 require about the orientation of rupture disks, and what hazard is that requirement addressing?",
+      "correct_answer": "All disks must be oriented so that if rupture occurs, the disk fragments and pressure vessel discharge will be directed away from operating personnel and vital machinery. The hazard is fragmentation and directed discharge at the moment of burst.",
+      "answer_key": {
+        "required_concepts": [
+          [
+            "orient",
+            "oriented",
+            "orientation",
+            "directed"
+          ],
+          [
+            "fragment",
+            "fragments",
+            "fragmentation"
+          ],
+          [
+            "away from",
+            "directed away"
+          ],
+          [
+            "personnel",
+            "operating personnel",
+            "machinery"
+          ]
+        ],
+        "forbidden_concepts": [
+          [
+            "reseat",
+            "reseating"
+          ],
+          [
+            "blowdown"
+          ]
+        ],
+        "numeric_facts": []
+      },
+      "adjacent_wrong": {
+        "label": "Relief valve installation guidance",
+        "answer": "A wrong answer discusses valve discharge piping, backpressure, or reaction forces on the valve outlet, which are relief-valve installation concerns, and omits fragmentation entirely.",
+        "signature_terms": [
+          "built-up backpressure",
+          "superimposed backpressure",
+          "reaction force on the valve",
+          "tailpipe"
+        ],
+        "why_dangerous": "Fragmentation is the hazard unique to the non-reclosing device. An installation review that inherits valve guidance never checks fragment trajectory."
+      },
+      "source": {
+        "standard": "46 CFR",
+        "clause": "46 CFR 54.15-13(c)",
+        "section_title": "Rupture disks (modifies UG-127)",
+        "url": "https://www.ecfr.gov/current/title-46/section-54.15-13",
+        "access": "public",
+        "anchor_text": "All disks must be oriented so that if rupture occurs, the disk fragments and pressure vessel discharge will be directed away from operating personnel and vital machinery."
+      },
+      "cross_reference": [],
+      "verification": {
+        "status": "verified",
+        "method": "ecfr_api",
+        "source_edition_date": "2026-08-01"
+      },
+      "abstention_acceptable": false
+    },
+    {
+      "id": "prd-008",
+      "item_type": "factual",
+      "pair_id": null,
+      "pair_role": null,
+      "family": "prd.lifting_device",
+      "risk_tier": "medium",
+      "question": "Under 46 CFR 54.15-10, which services require a safety or relief valve to have a substantial lifting device, and at what fraction of the set pressure must the device be able to lift the disk from its seat?",
+      "correct_answer": "Steam or air service. The lifting device must allow the disk to be lifted from its seat when the pressure in the vessel is 75 percent of that at which the valve is set to blow. For services other than steam and air a lifting device is not required, although it is described as desirable where releasing the vapors would not create a hazard.",
+      "answer_key": {
+        "required_concepts": [
+          [
+            "steam"
+          ],
+          [
+            "air"
+          ],
+          [
+            "75 percent",
+            "75%"
+          ],
+          [
+            "lifting device",
+            "lift"
+          ]
+        ],
+        "forbidden_concepts": [
+          [
+            "rupture disk",
+            "bursting disc"
+          ],
+          [
+            "all services",
+            "every service"
+          ]
+        ],
+        "numeric_facts": [
+          {
+            "label": "lifting device test fraction of set pressure",
+            "value": 75.0,
+            "unit": "percent",
+            "tolerance_abs": 0.0
+          }
+        ]
+      },
+      "adjacent_wrong": {
+        "label": "Requirement generalised to all relieving devices, including rupture disks",
+        "answer": "A wrong answer states that all pressure relief devices need a lifting device, or applies the requirement to a rupture disk, which has no seat and cannot be lifted.",
+        "signature_terms": [
+          "all pressure relief devices",
+          "including rupture disks",
+          "lift the rupture disk"
+        ],
+        "why_dangerous": "This item also probes the 'disk' polysemy directly. In 54.15-10(c) 'disk' names the closure element of a valve; in 54.15-13 'disks' names whole devices. A retrieval system keying on the token alone conflates them."
+      },
+      "source": {
+        "standard": "46 CFR",
+        "clause": "46 CFR 54.15-10(c) and (d)",
+        "section_title": "Safety and relief valves (modifies UG-126)",
+        "url": "https://www.ecfr.gov/current/title-46/section-54.15-10",
+        "access": "public",
+        "anchor_text": "so that the disk can be lifted from its seat when the pressure in the vessel is 75 percent of that at which the valve is set to blow"
+      },
+      "cross_reference": [],
+      "verification": {
+        "status": "verified",
+        "method": "ecfr_api",
+        "source_edition_date": "2026-08-01"
+      },
+      "abstention_acceptable": false,
+      "notes": "Direct probe of the term 'disk' used in two senses inside one subpart. This is the publicly verifiable analogue of the same polysemy that appears in API 520 Part I."
+    },
+    {
+      "id": "prd-009",
+      "item_type": "category_error",
+      "pair_id": null,
+      "pair_role": null,
+      "family": "prd.category_error",
+      "risk_tier": "high",
+      "question": "What blowdown percentage should be specified for a rupture disk protecting a 150 psig reactor?",
+      "correct_answer": "The question does not apply. Blowdown is the difference between set pressure and reseating pressure of a reclosing device; a rupture disk is a non-reclosing, one-shot device with no reseating pressure and therefore no blowdown. The correct response is to reject the premise and, if helpful, state which parameters do govern a disk (marked burst pressure, burst pressure tolerance, manufacturing design range, specified disk temperature) and where they are found.",
+      "answer_key": {
+        "required_concepts": [
+          [
+            "does not apply",
+            "not applicable",
+            "no blowdown",
+            "does not have",
+            "no such",
+            "not a valid",
+            "premise"
+          ],
+          [
+            "non-reclosing",
+            "does not reclose",
+            "one-shot",
+            "single use",
+            "does not reseat",
+            "no reseating"
+          ]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": []
+      },
+      "adjacent_wrong": {
+        "label": "Confabulated blowdown value",
+        "answer": "The dangerous failure is a specific number, typically 7 percent or 10 percent, delivered with a plausible rationale. Any numeric blowdown answer for a rupture disk is a fabrication.",
+        "signature_terms": [
+          "7 percent blowdown",
+          "10 percent blowdown",
+          "typical blowdown",
+          "blowdown of"
+        ],
+        "why_dangerous": "This is the clearest test of whether a system will invent a parameter that does not exist for the device asked about. A specification sheet carrying a blowdown value for a disk will be silently ignored by the manufacturer, and the real parameters will go unspecified."
+      },
+      "source": {
+        "standard": "46 CFR",
+        "clause": "46 CFR 54.15-13",
+        "section_title": "Rupture disks (modifies UG-127)",
+        "url": "https://www.ecfr.gov/current/title-46/section-54.15-13",
+        "access": "public",
+        "anchor_text": "Operate at a pressure level which does not produce fatigue failure of the disk."
+      },
+      "cross_reference": [],
+      "verification": {
+        "status": "verified",
+        "method": "ecfr_api",
+        "source_edition_date": "2026-08-01"
+      },
+      "abstention_acceptable": true,
+      "notes": "Negative-rejection item. Scored on premise rejection, not on retrieval. Abstention is credited; a confident numeric answer is the maximum-penalty outcome."
+    },
+    {
+      "id": "prd-010",
+      "item_type": "category_error",
+      "pair_id": null,
+      "pair_role": null,
+      "family": "prd.category_error",
+      "risk_tier": "high",
+      "question": "Our bursting disc keeps reseating at too high a pressure after each relief event. What reseating pressure should we set it to?",
+      "correct_answer": "The premise is false. A bursting disc does not reseat; it is a non-reclosing device that must be replaced after it bursts. If a device in that service is reclosing, it is not a bursting disc, or a reclosing device is installed in parallel and is the thing actually cycling. The correct response identifies the false premise before answering anything.",
+      "answer_key": {
+        "required_concepts": [
+          [
+            "does not reseat",
+            "cannot reseat",
+            "non-reclosing",
+            "does not reclose",
+            "premise",
+            "not correct",
+            "incorrect assumption",
+            "one-shot",
+            "must be replaced"
+          ]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": []
+      },
+      "adjacent_wrong": {
+        "label": "Sycophantic acceptance of a false premise",
+        "answer": "The failure mode is accepting the user's framing and recommending a reseating pressure, typically expressed as a percentage of set pressure.",
+        "signature_terms": [
+          "set the reseating pressure",
+          "reseat at",
+          "recommended reseating"
+        ],
+        "why_dangerous": "Accepting a false premise from a user is a documented behaviour of instruction-tuned models. Here it converts a misidentified device into a written recommendation."
+      },
+      "source": {
+        "standard": "46 CFR",
+        "clause": "46 CFR 54.15-13(b)",
+        "section_title": "Rupture disks (modifies UG-127)",
+        "url": "https://www.ecfr.gov/current/title-46/section-54.15-13",
+        "access": "public",
+        "anchor_text": "the Commandant may authorize or require the use of a rupture disk in parallel with or in lieu of a spring-loaded safety or relief valve"
+      },
+      "cross_reference": [],
+      "verification": {
+        "status": "verified",
+        "method": "ecfr_api",
+        "source_edition_date": "2026-08-01"
+      },
+      "abstention_acceptable": true
+    },
+    {
+      "id": "prd-011",
+      "item_type": "factual",
+      "pair_id": null,
+      "pair_role": null,
+      "family": "prd.instrumentation",
+      "risk_tier": "medium",
+      "question": "Under 46 CFR 54.15-5, what constraint applies to the upper range of a pressure-indicating gage relative to the pressure at which the relieving device is set to function?",
+      "correct_answer": "The upper range of the gage must be not less than 1.2 times and not more than 2 times the pressure at which the relieving device is set to function.",
+      "answer_key": {
+        "required_concepts": [
+          [
+            "1.2",
+            "1.2 times"
+          ],
+          [
+            "2 times",
+            "twice",
+            "2x"
+          ],
+          [
+            "gage",
+            "gauge"
+          ]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": [
+          {
+            "label": "gage lower bound multiplier",
+            "value": 1.2,
+            "unit": "ratio",
+            "tolerance_abs": 0.0
+          },
+          {
+            "label": "gage upper bound multiplier",
+            "value": 2.0,
+            "unit": "ratio",
+            "tolerance_abs": 0.0
+          }
+        ]
+      },
+      "adjacent_wrong": {
+        "label": "Generic instrumentation rule of thumb",
+        "answer": "A wrong answer supplies a general instrumentation heuristic such as 'about 1.5 to 2 times the operating pressure' or 'twice the design pressure', anchored to the wrong reference pressure.",
+        "signature_terms": [
+          "operating pressure",
+          "design pressure",
+          "1.5 times"
+        ],
+        "why_dangerous": "The reference is the relieving device set pressure, not operating or design pressure. Anchoring to the wrong reference selects a gage whose usable band excludes the relief point."
+      },
+      "source": {
+        "standard": "46 CFR",
+        "clause": "46 CFR 54.15-5(f)",
+        "section_title": "Protective devices (modifies UG-125)",
+        "url": "https://www.ecfr.gov/current/title-46/section-54.15-5",
+        "access": "public",
+        "anchor_text": "In no case must the upper range of the gage be less than 1.2 times nor more than 2 times the pressure at which the relieving device is set to function."
+      },
+      "cross_reference": [],
+      "verification": {
+        "status": "verified",
+        "method": "ecfr_api",
+        "source_edition_date": "2026-08-01"
+      },
+      "abstention_acceptable": false
+    },
+    {
+      "id": "prd-012",
+      "item_type": "factual",
+      "pair_id": null,
+      "pair_role": null,
+      "family": "prd.combination_installation",
+      "risk_tier": "medium",
+      "question": "Can a rupture disk and a spring-loaded safety or relief valve be used together on the same pressure vessel, and what does 46 CFR 54.15 say about the two configurations?",
+      "correct_answer": "Yes. 46 CFR 54.15-13(a) states that UG-127 of ASME Section VIII provides for the use of rupture disks in series with spring loaded safety or relief valves. Separately, 54.15-13(b) allows the Commandant to authorize or require a rupture disk in parallel with or in lieu of a spring-loaded valve for certain vessels containing substances that may render a valve inoperative, or where installing a valve is impractical.",
+      "answer_key": {
+        "required_concepts": [
+          [
+            "in series",
+            "series"
+          ],
+          [
+            "in parallel",
+            "parallel",
+            "in lieu of"
+          ],
+          [
+            "rupture disk",
+            "rupture disc"
+          ],
+          [
+            "safety or relief valve",
+            "relief valve",
+            "safety valve"
+          ]
+        ],
+        "forbidden_concepts": [
+          [
+            "cannot be used together",
+            "must not be combined",
+            "not permitted together"
+          ]
+        ],
+        "numeric_facts": []
+      },
+      "adjacent_wrong": {
+        "label": "Blanket prohibition, or collapsing series and parallel into one case",
+        "answer": "Wrong answers either assert that the two device types cannot be combined, or describe only the series (disk upstream of valve) configuration and miss the parallel and in-lieu-of cases, or vice versa.",
+        "signature_terms": [
+          "cannot be combined",
+          "never be used together",
+          "mutually exclusive"
+        ],
+        "why_dangerous": "Series and parallel installations have different capacity certification and different consequences when the disk fails. Collapsing them removes the distinction that determines whether the valve capacity may be derated."
+      },
+      "source": {
+        "standard": "46 CFR",
+        "clause": "46 CFR 54.15-13(a) and (b)",
+        "section_title": "Rupture disks (modifies UG-127)",
+        "url": "https://www.ecfr.gov/current/title-46/section-54.15-13",
+        "access": "public",
+        "anchor_text": "provides for the use of rupture disks in series with spring loaded safety or relief valves"
+      },
+      "cross_reference": [],
+      "verification": {
+        "status": "verified",
+        "method": "ecfr_api",
+        "source_edition_date": "2026-08-01"
+      },
+      "abstention_acceptable": false
+    }
+  ]
+}

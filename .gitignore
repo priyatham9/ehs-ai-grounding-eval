@@ -1,0 +1,47 @@
+# Byte-compiled / optimized
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Environments
+.venv/
+venv/
+env/
+.python-version
+
+# Testing / coverage
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+.tox/
+
+# Editors / OS
+.idea/
+.vscode/
+.DS_Store
+
+# Run outputs. Results are reproducible from the harness; do not commit them.
+results/*
+!results/.gitkeep
+
+# Locally cached primary-source snapshots pulled by tools/verify_sources.py.
+# These are re-fetchable; the committed verification report is the durable
+# record. The report itself (corpus/verification/) IS committed.
+corpus/_source_cache/
+
+# The synthetic demonstration run IS committed on purpose: it shows the run-file
+# format and the labelling, and the test suite checks that every stored run
+# carries its mock banner. Do not add synthetic/demo_run/ here.
+
+# Real-system response captures may contain vendor output subject to terms of
+# use. Keep them out of the repository by default.
+captures/
+*.responses.jsonl

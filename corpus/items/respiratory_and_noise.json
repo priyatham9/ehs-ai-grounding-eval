@@ -1,0 +1,475 @@
+{
+  "schema_version": "1.0",
+  "domain": "respiratory_protection_and_noise",
+  "domain_title": "Respiratory protection assigned protection factors, IDLH provisions, and hearing conservation thresholds",
+  "source_family": "29 CFR 1910.134 and 29 CFR 1910.95",
+  "sourcing_note": "Assigned protection factors are the clearest numeric co-hyponym trap in OSHA health standards: the value 50 belongs both to a full-facepiece air-purifying respirator and to a half-mask powered air-purifying respirator, so the number alone does not identify the device. Values taken from Table 1 to 1910.134 were transcribed from the eCFR XML table; the anchor text verified by tools/verify_clauses.py is the governing paragraph, and the numbers are additionally checked for presence in the section.",
+  "items": [
+    {
+      "id": "rp-001",
+      "item_type": "factual",
+      "pair_id": "rp-p1",
+      "pair_role": "a",
+      "family": "rp.assigned_protection_factors",
+      "risk_tier": "high",
+      "question": "What assigned protection factor does Table 1 to 29 CFR 1910.134 give for a half mask air-purifying respirator, and what does that number mean operationally?",
+      "correct_answer": "10. The assigned protection factor is the workplace level of respiratory protection the respirator is expected to provide to properly fitted and trained users, so a half mask air-purifying respirator is credited with reducing the contaminant concentration reaching the wearer by a factor of ten. Employers must use the APFs in Table 1 to select a respirator that meets or exceeds the required level of protection.",
+      "answer_key": {
+        "required_concepts": [
+          [
+            "10",
+            "ten"
+          ],
+          [
+            "half mask",
+            "half-mask",
+            "half facepiece"
+          ],
+          [
+            "air-purifying",
+            "air purifying",
+            "apr"
+          ]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": [
+          {
+            "label": "APF half mask APR",
+            "value": 10.0,
+            "unit": "factor",
+            "tolerance_abs": 0.0
+          }
+        ]
+      },
+      "adjacent_wrong": {
+        "label": "APF 50, which belongs to a full facepiece APR and also to a half mask PAPR",
+        "answer": "The wrong answer gives 50. That value is correct for a full facepiece air-purifying respirator and for a half mask powered air-purifying respirator, both of which are siblings of the queried device in the same table.",
+        "signature_terms": [
+          "apf of 50",
+          "protection factor of 50",
+          "1,000"
+        ],
+        "why_dangerous": "Selecting a respirator with an APF of 10 for an exposure that requires 50 means the wearer is exposed at five times the level assumed by the selection calculation. The failure is silent: the respirator fits, functions and passes its fit test."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1910.134(d)(3)(i)(A), Table 1",
+        "section_title": "Respiratory protection",
+        "url": "https://www.ecfr.gov/current/title-29/section-1910.134",
+        "access": "public",
+        "anchor_text": "Employers must use the assigned protection factors listed in Table 1 to select a respirator that meets or exceeds the required level of employee protection.",
+        "value_from": "table"
+      },
+      "cross_reference": [],
+      "verification": {
+        "status": "verified",
+        "method": "ecfr_api+human_table_read",
+        "source_edition_date": "2026-08-01"
+      },
+      "abstention_acceptable": false,
+      "notes": "Verification caveat: the numeric values in this item come from Table 1 of 1910.134, which the eCFR XML renders as a flattened run of cells whose row/column alignment is not machine-recoverable. The automated check confirms the mandatory-use sentence and the paragraph path; the specific APF values were read from the table by a human and are stated here as a human-verified reading, not a machine-verified one."
+    },
+    {
+      "id": "rp-002",
+      "item_type": "factual",
+      "pair_id": "rp-p1",
+      "pair_role": "b",
+      "family": "rp.assigned_protection_factors",
+      "risk_tier": "high",
+      "question": "Two different respirator configurations in Table 1 to 29 CFR 1910.134 carry an assigned protection factor of 50. Which are they, and what APF applies to a loose-fitting facepiece powered air-purifying respirator?",
+      "correct_answer": "A full facepiece air-purifying respirator has an APF of 50, and a half mask powered air-purifying respirator also has an APF of 50. A loose-fitting facepiece powered air-purifying respirator has an APF of 25.",
+      "answer_key": {
+        "required_concepts": [
+          [
+            "full facepiece"
+          ],
+          [
+            "powered air-purifying",
+            "papr",
+            "powered air purifying"
+          ],
+          [
+            "25",
+            "twenty-five"
+          ]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": [
+          {
+            "label": "APF loose-fitting PAPR",
+            "value": 25.0,
+            "unit": "factor",
+            "tolerance_abs": 0.0
+          },
+          {
+            "label": "APF full facepiece APR",
+            "value": 50.0,
+            "unit": "factor",
+            "tolerance_abs": 0.0
+          }
+        ]
+      },
+      "adjacent_wrong": {
+        "label": "Loose-fitting PAPR credited at 1,000, from the helmet/hood entry",
+        "answer": "The wrong answer gives the loose-fitting facepiece PAPR an APF of 1,000, which is the value for a full facepiece PAPR and, conditionally, for a helmet or hood PAPR where the manufacturer has evidence supporting it. Table 1 records the helmet/hood PAPR value as 25/1,000 with a footnote, which is itself a source of confusion.",
+        "signature_terms": [
+          "1,000",
+          "1000"
+        ],
+        "why_dangerous": "A loose-fitting hood credited at forty times its actual assigned protection factor will be selected for exposures far beyond its capability. This item exists because the ambiguity is in the source table itself, not only in the model."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1910.134(d)(3)(i)(A), Table 1",
+        "section_title": "Respiratory protection",
+        "url": "https://www.ecfr.gov/current/title-29/section-1910.134",
+        "access": "public",
+        "anchor_text": "When using a combination respirator (e.g., airline respirators with an air-purifying filter), employers must ensure that the assigned protection factor is appropriate to the mode of operation",
+        "value_from": "table"
+      },
+      "cross_reference": [],
+      "verification": {
+        "status": "verified",
+        "method": "ecfr_api+human_table_read",
+        "source_edition_date": "2026-08-01"
+      },
+      "abstention_acceptable": false,
+      "notes": "The 25/1,000 helmet/hood entry carries footnote 4 in the source table. This item does not ask about the footnote's conditions, because reproducing them accurately would require the footnote text and it is not included in the anchor. Verification caveat: the numeric values in this item come from Table 1 of 1910.134, which the eCFR XML renders as a flattened run of cells whose row/column alignment is not machine-recoverable. The automated check confirms the mandatory-use sentence and the paragraph path; the specific APF values were read from the table by a human and are stated here as a human-verified reading, not a machine-verified one."
+    },
+    {
+      "id": "rp-003",
+      "item_type": "factual",
+      "pair_id": "rp-p2",
+      "pair_role": "a",
+      "family": "rp.idlh",
+      "risk_tier": "high",
+      "question": "What respirators does 29 CFR 1910.134(d)(2) require the employer to provide for use in IDLH atmospheres?",
+      "correct_answer": "Either a full facepiece pressure demand self-contained breathing apparatus certified by NIOSH for a minimum service life of thirty minutes, or a combination full facepiece pressure demand supplied-air respirator with an auxiliary self-contained air supply. Respirators provided only for escape from IDLH atmospheres must be NIOSH-certified for escape from the atmosphere in which they will be used.",
+      "answer_key": {
+        "required_concepts": [
+          [
+            "full facepiece"
+          ],
+          [
+            "pressure demand",
+            "pressure-demand"
+          ],
+          [
+            "scba",
+            "self-contained breathing apparatus",
+            "self contained"
+          ],
+          [
+            "thirty minutes",
+            "30 minutes"
+          ],
+          [
+            "auxiliary",
+            "combination",
+            "supplied-air",
+            "supplied air",
+            "sar"
+          ]
+        ],
+        "forbidden_concepts": [
+          [
+            "air-purifying respirator is acceptable",
+            "papr may be used in idlh"
+          ]
+        ],
+        "numeric_facts": [
+          {
+            "label": "minimum SCBA service life",
+            "value": 30.0,
+            "unit": "minutes",
+            "tolerance_abs": 0.0
+          }
+        ]
+      },
+      "adjacent_wrong": {
+        "label": "High-APF air-purifying respirator offered for IDLH service",
+        "answer": "The wrong answer permits a full facepiece PAPR with an APF of 1,000, reasoning from the protection factor. Assigned protection factors do not authorise use in IDLH atmospheres; an air-purifying device supplies no oxygen and depends on a cartridge matched to a known contaminant.",
+        "signature_terms": [
+          "papr with an apf of 1,000",
+          "full facepiece air-purifying respirator is acceptable",
+          "high protection factor is sufficient"
+        ],
+        "why_dangerous": "This is the most consequential adjacent substitution in the respiratory standard. Selecting on APF alone is an arithmetically coherent argument that kills people, because in an IDLH atmosphere the failure mode is oxygen deficiency or cartridge breakthrough, neither of which the APF describes."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1910.134(d)(2)(i)",
+        "section_title": "Respiratory protection",
+        "url": "https://www.ecfr.gov/current/title-29/section-1910.134",
+        "access": "public",
+        "anchor_text": "A full facepiece pressure demand SCBA certified by NIOSH for a minimum service life of thirty minutes"
+      },
+      "cross_reference": [],
+      "verification": {
+        "status": "verified",
+        "method": "ecfr_api",
+        "source_edition_date": "2026-08-01"
+      },
+      "abstention_acceptable": false
+    },
+    {
+      "id": "rp-004",
+      "item_type": "factual",
+      "pair_id": "rp-p2",
+      "pair_role": "b",
+      "family": "rp.idlh",
+      "risk_tier": "high",
+      "question": "How does 29 CFR 1910.134 treat oxygen-deficient atmospheres for the purpose of respirator selection, and is there any exception?",
+      "correct_answer": "All oxygen-deficient atmospheres are considered IDLH. There is one exception: if the employer demonstrates that under all foreseeable conditions the oxygen concentration can be maintained within the ranges specified in Table II of the section, for the altitudes set out in that table, then any atmosphere-supplying respirator may be used.",
+      "answer_key": {
+        "required_concepts": [
+          [
+            "all oxygen-deficient",
+            "all oxygen deficient",
+            "considered idlh",
+            "treated as idlh"
+          ],
+          [
+            "exception"
+          ],
+          [
+            "table ii",
+            "table 2",
+            "altitude"
+          ],
+          [
+            "atmosphere-supplying",
+            "atmosphere supplying",
+            "supplied air",
+            "airline"
+          ]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": []
+      },
+      "adjacent_wrong": {
+        "label": "Rule stated without the exception, or the exception broadened to permit air-purifying respirators",
+        "answer": "The wrong answer either omits the Table II exception entirely, or states the exception as permitting any respirator rather than any atmosphere-supplying respirator.",
+        "signature_terms": [
+          "any respirator may be used",
+          "no exception exists",
+          "air-purifying respirators are permitted"
+        ],
+        "why_dangerous": "Broadening the exception from atmosphere-supplying to any respirator authorises a cartridge respirator in an oxygen-deficient space. The word dropped between the correct and incorrect answer is a single adjective."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1910.134(d)(2)(iii)",
+        "section_title": "Respiratory protection",
+        "url": "https://www.ecfr.gov/current/title-29/section-1910.134",
+        "access": "public",
+        "anchor_text": "All oxygen-deficient atmospheres shall be considered IDLH."
+      },
+      "cross_reference": [],
+      "verification": {
+        "status": "verified",
+        "method": "ecfr_api",
+        "source_edition_date": "2026-08-01"
+      },
+      "abstention_acceptable": false
+    },
+    {
+      "id": "hn-001",
+      "item_type": "factual",
+      "pair_id": "hn-p1",
+      "pair_role": "a",
+      "family": "hn.thresholds",
+      "risk_tier": "medium",
+      "question": "What is the action level in 29 CFR 1910.95, and how does it differ from the permissible noise exposure the standard uses for engineering and administrative controls?",
+      "correct_answer": "The action level is an 8-hour time-weighted average sound level of 85 decibels on the A scale, equivalently a dose of fifty percent; it triggers the hearing conservation program under paragraphs (c) through (n). The permissible exposures for which feasible administrative or engineering controls must be used are those in Table G-16, whose 8-hour value is 90 dBA. Exposures for the hearing conservation program are computed without regard to any attenuation provided by hearing protectors.",
+      "answer_key": {
+        "required_concepts": [
+          [
+            "85"
+          ],
+          [
+            "action level"
+          ],
+          [
+            "fifty percent",
+            "50 percent",
+            "50%",
+            "dose"
+          ],
+          [
+            "table g-16",
+            "90"
+          ]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": [
+          {
+            "label": "action level",
+            "value": 85.0,
+            "unit": "dBA TWA",
+            "tolerance_abs": 0.0
+          }
+        ]
+      },
+      "adjacent_wrong": {
+        "label": "Action level and permissible exposure limit conflated at a single value",
+        "answer": "The wrong answer treats 85 dBA as the exposure limit, or 90 dBA as the action level, or reports a single threshold for both purposes.",
+        "signature_terms": [
+          "the permissible exposure limit is 85",
+          "the action level is 90",
+          "a single threshold"
+        ],
+        "why_dangerous": "The two thresholds trigger different obligations: 85 dBA starts monitoring, audiometry and protector availability; 90 dBA obliges feasible engineering and administrative controls. Collapsing them removes the controls obligation, which is the only one that reduces the hazard rather than managing exposure to it."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1910.95(c)(1) and (c)(2)",
+        "section_title": "Occupational noise exposure",
+        "url": "https://www.ecfr.gov/current/title-29/section-1910.95",
+        "access": "public",
+        "anchor_text": "an 8-hour time-weighted average of 85 decibels or a dose of fifty percent shall also be referred to as the action level"
+      },
+      "cross_reference": [],
+      "verification": {
+        "status": "verified",
+        "method": "ecfr_api",
+        "source_edition_date": "2026-08-01"
+      },
+      "abstention_acceptable": false
+    },
+    {
+      "id": "hn-002",
+      "item_type": "factual",
+      "pair_id": "hn-p1",
+      "pair_role": "b",
+      "family": "hn.thresholds",
+      "risk_tier": "medium",
+      "question": "How does 29 CFR 1910.95 define a standard threshold shift, and at which frequencies is it evaluated?",
+      "correct_answer": "A standard threshold shift is a change in hearing threshold relative to the baseline audiogram of an average of 10 dB or more at 2000, 3000, and 4000 Hz in either ear. Allowance may be made for the contribution of aging by correcting the annual audiogram according to appendix F.",
+      "answer_key": {
+        "required_concepts": [
+          [
+            "10 db",
+            "10 decibels",
+            "average of 10"
+          ],
+          [
+            "2000"
+          ],
+          [
+            "3000"
+          ],
+          [
+            "4000"
+          ],
+          [
+            "baseline"
+          ],
+          [
+            "either ear"
+          ]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": [
+          {
+            "label": "STS magnitude",
+            "value": 10.0,
+            "unit": "dB",
+            "tolerance_abs": 0.0
+          }
+        ]
+      },
+      "adjacent_wrong": {
+        "label": "Frequency set taken from the audiometric test requirement rather than the STS definition",
+        "answer": "The wrong answer evaluates the shift across 500, 1000, 2000, 3000, 4000 and 6000 Hz, which is the set of frequencies at which audiometric tests must be performed under 1910.95(h)(1), not the set at which a standard threshold shift is computed.",
+        "signature_terms": [
+          "500, 1000, 2000",
+          "6000 hz",
+          "all test frequencies"
+        ],
+        "why_dangerous": "Averaging over six frequencies instead of three dilutes the high-frequency loss that noise causes first. A program computing STS the wrong way systematically fails to detect early noise-induced hearing loss, which is the entire purpose of the audiometric program. Both frequency sets appear in the same standard a few paragraphs apart."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1910.95(g)(10)(i)",
+        "section_title": "Occupational noise exposure",
+        "url": "https://www.ecfr.gov/current/title-29/section-1910.95",
+        "access": "public",
+        "anchor_text": "a standard threshold shift is a change in hearing threshold relative to the baseline audiogram of an average of 10 dB or more at 2000, 3000, and 4000 Hz in either ear"
+      },
+      "cross_reference": [],
+      "verification": {
+        "status": "verified",
+        "method": "ecfr_api",
+        "source_edition_date": "2026-08-01"
+      },
+      "abstention_acceptable": false
+    },
+    {
+      "id": "hn-003",
+      "item_type": "factual",
+      "pair_id": null,
+      "pair_role": null,
+      "family": "hn.audiometry_timing",
+      "risk_tier": "medium",
+      "question": "Within what period must a baseline audiogram be established under 29 CFR 1910.95, and what changes if mobile test vans are used?",
+      "correct_answer": "Within 6 months of an employee's first exposure at or above the action level. Where mobile test vans are used, the employer must obtain a valid baseline audiogram within 1 year, and where baselines are obtained more than 6 months after first exposure, employees must wear hearing protectors for any period exceeding six months after first exposure until the baseline is obtained.",
+      "answer_key": {
+        "required_concepts": [
+          [
+            "6 months",
+            "six months"
+          ],
+          [
+            "1 year",
+            "one year",
+            "12 months"
+          ],
+          [
+            "mobile",
+            "mobile test van",
+            "van"
+          ],
+          [
+            "hearing protector",
+            "protectors"
+          ]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": [
+          {
+            "label": "baseline audiogram deadline",
+            "value": 6.0,
+            "unit": "months",
+            "tolerance_abs": 0.0
+          }
+        ]
+      },
+      "adjacent_wrong": {
+        "label": "Annual audiogram interval substituted for the baseline deadline",
+        "answer": "The wrong answer gives 'annually', which is the interval for subsequent audiograms under 1910.95(g)(6), not the deadline for establishing the baseline, or gives the mobile-van period without the compensating protector requirement.",
+        "signature_terms": [
+          "annually",
+          "within one year of hire",
+          "every 12 months"
+        ],
+        "why_dangerous": "Without a valid baseline there is nothing to compute a standard threshold shift against, so the entire audiometric program produces no usable signal for that employee. The protector requirement is the compensating control and is the part most often dropped."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1910.95(g)(5)(i) and (g)(5)(ii)",
+        "section_title": "Occupational noise exposure",
+        "url": "https://www.ecfr.gov/current/title-29/section-1910.95",
+        "access": "public",
+        "anchor_text": "Within 6 months of an employee's first exposure at or above the action level, the employer shall establish a valid baseline audiogram"
+      },
+      "cross_reference": [],
+      "verification": {
+        "status": "verified",
+        "method": "ecfr_api",
+        "source_edition_date": "2026-08-01"
+      },
+      "abstention_acceptable": false
+    }
+  ]
+}

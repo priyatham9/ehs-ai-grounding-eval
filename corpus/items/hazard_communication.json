@@ -1,0 +1,204 @@
+{
+  "schema_version": "1.0",
+  "domain": "hazard_communication",
+  "domain_title": "Hazard communication: labels, safety data sheets, and GHS elements",
+  "source_family": "29 CFR 1910.1200",
+  "sourcing_note": "The GHS label elements are a set of closely related, similarly named artifacts (signal word, hazard statement, precautionary statement, pictogram, product identifier). They are co-hyponyms in the strict sense: siblings under one parent with near-identical distributional context, which is precisely the class this benchmark targets.",
+  "items": [
+    {
+      "id": "hc-001",
+      "item_type": "factual",
+      "pair_id": "hc-p1",
+      "pair_role": "a",
+      "family": "hc.label_elements",
+      "risk_tier": "medium",
+      "question": "What information must appear on the label of a container of hazardous chemicals leaving the workplace, under 29 CFR 1910.1200(f)(1)? Which of those elements must be located together on the label?",
+      "correct_answer": "Product identifier; signal word; hazard statement(s); pictogram(s); precautionary statement(s); and the name, U.S. address and U.S. telephone number of the chemical manufacturer, importer or other responsible party. The signal word, hazard statements and pictograms, that is the elements at (f)(1)(ii) through (iv), must be located together on the label, tag or mark.",
+      "answer_key": {
+        "required_concepts": [
+          ["product identifier"],
+          ["signal word"],
+          ["hazard statement"],
+          ["pictogram"],
+          ["precautionary statement"],
+          ["located together", "together on the label", "grouped"]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": []
+      },
+      "adjacent_wrong": {
+        "label": "Workplace label requirements substituted for shipped-container label requirements",
+        "answer": "The wrong answer describes the reduced alternative workplace labelling permitted under 1910.1200(f)(6), or omits the together-on-the-label requirement, or drops the responsible-party contact information.",
+        "signature_terms": ["workplace label", "alternative labeling", "product identifier and words, pictures, symbols"],
+        "why_dangerous": "Shipped-container and in-plant labels have different requirements. A shipped container labelled to the in-plant rule arrives at a customer without the elements a downstream user needs to classify the hazard."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1910.1200(f)(1) and (f)(3)",
+        "section_title": "Hazard communication",
+        "url": "https://www.ecfr.gov/current/title-29/section-1910.1200",
+        "access": "public",
+        "anchor_text": "Where the chemical manufacturer, importer, or distributor is required to label, tag or mark the following shall be provided"
+      },
+      "cross_reference": [],
+      "verification": {"status": "verified", "method": "ecfr_api", "source_edition_date": "2026-08-01"},
+      "abstention_acceptable": false
+    },
+    {
+      "id": "hc-002",
+      "item_type": "factual",
+      "pair_id": "hc-p1",
+      "pair_role": "b",
+      "family": "hc.label_elements",
+      "risk_tier": "medium",
+      "question": "Under 29 CFR 1910.1200(c), what is the difference between a hazard statement and a precautionary statement?",
+      "correct_answer": "A hazard statement is assigned to a hazard class and category and describes the nature of the hazard of a chemical, including where appropriate the degree of hazard. A precautionary statement is a phrase describing recommended measures that should be taken to minimize or prevent adverse effects resulting from exposure, or from improper storage or handling. One describes the hazard; the other describes what to do about it.",
+      "answer_key": {
+        "required_concepts": [
+          ["nature of the hazard", "describes the hazard", "hazard class and category"],
+          ["recommended measures", "measures", "minimize or prevent", "what to do"]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": []
+      },
+      "adjacent_wrong": {
+        "label": "Definitions swapped, or either confused with the signal word",
+        "answer": "The wrong answer swaps the two definitions, or describes one of them as the word 'danger' or 'warning', which is the signal word.",
+        "signature_terms": ["danger or warning", "the signal word indicates the nature of the hazard"],
+        "why_dangerous": "Label authoring tools take these as separate fields. Content placed in the wrong field produces a label that is syntactically valid and semantically wrong, and label review rarely catches it."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1910.1200(c), definitions of 'Hazard statement' and 'Precautionary statement'",
+        "section_title": "Hazard communication",
+        "url": "https://www.ecfr.gov/current/title-29/section-1910.1200",
+        "access": "public",
+        "anchor_text": "Hazard statement means a statement assigned to a hazard class and category that describes the nature of the hazard"
+      },
+      "cross_reference": [],
+      "verification": {"status": "verified", "method": "ecfr_api", "source_edition_date": "2026-08-01"},
+      "abstention_acceptable": false
+    },
+    {
+      "id": "hc-003",
+      "item_type": "factual",
+      "pair_id": null,
+      "pair_role": null,
+      "family": "hc.signal_words",
+      "risk_tier": "medium",
+      "question": "Which signal words are used under 29 CFR 1910.1200, and which indicates the more severe hazard?",
+      "correct_answer": "Only two: danger and warning. Danger is used for the more severe hazards and warning for the less severe.",
+      "answer_key": {
+        "required_concepts": [
+          ["danger"],
+          ["warning"],
+          ["more severe", "most severe", "higher severity"]
+        ],
+        "forbidden_concepts": [
+          ["caution"],
+          ["notice"],
+          ["three signal words"]
+        ],
+        "numeric_facts": []
+      },
+      "adjacent_wrong": {
+        "label": "ANSI Z535 sign hierarchy substituted (danger, warning, caution, notice)",
+        "answer": "The wrong answer adds 'caution' and sometimes 'notice'. Those are levels in the ANSI Z535 safety sign hierarchy, which is a real and widely used standard for facility signage but is not the GHS label signal-word set.",
+        "signature_terms": ["caution", "notice", "three levels", "danger, warning, caution"],
+        "why_dangerous": "The two systems coexist in the same plant, on signs and on drums, and use overlapping words. A label built with 'caution' is not GHS compliant, and a chemical classified as a severe hazard can end up carrying a signal word that does not exist in the classification system."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1910.1200(c), definition of 'Signal word'",
+        "section_title": "Hazard communication",
+        "url": "https://www.ecfr.gov/current/title-29/section-1910.1200",
+        "access": "public",
+        "anchor_text": "Signal word means a word used to indicate the relative level of severity of hazard"
+      },
+      "cross_reference": [],
+      "verification": {"status": "verified", "method": "ecfr_api", "source_edition_date": "2026-08-01"},
+      "abstention_acceptable": false
+    },
+    {
+      "id": "hc-004",
+      "item_type": "factual",
+      "pair_id": null,
+      "pair_role": null,
+      "family": "hc.sds_structure",
+      "risk_tier": "medium",
+      "question": "How many sections must a safety data sheet contain under 29 CFR 1910.1200(g)(2), must they be in a prescribed order, and what are sections 1 through 5?",
+      "correct_answer": "Sixteen sections, in the order listed in the standard. Sections 1 through 5 are: 1 Identification; 2 Hazard(s) identification; 3 Composition/information on ingredients; 4 First-aid measures; 5 Fire-fighting measures. Appendix D to 1910.1200 gives the specific content of each section.",
+      "answer_key": {
+        "required_concepts": [
+          ["16", "sixteen"],
+          ["order", "in the order listed", "prescribed order"],
+          ["identification"],
+          ["hazard", "hazards identification"],
+          ["composition"],
+          ["first-aid", "first aid"],
+          ["fire-fighting", "firefighting", "fire fighting"]
+        ],
+        "forbidden_concepts": [
+          ["any order", "order is not prescribed"]
+        ],
+        "numeric_facts": [
+          {"label": "SDS section count", "value": 16.0, "unit": "count", "tolerance_abs": 0.0}
+        ]
+      },
+      "adjacent_wrong": {
+        "label": "MSDS-era structure, or section order permuted",
+        "answer": "Wrong answers give the pre-GHS material safety data sheet structure, or an incorrect section count such as 9 or 12, or permute the early sections by putting composition before hazard identification.",
+        "signature_terms": ["material safety data sheet", "msds", "nine sections", "no required order"],
+        "why_dangerous": "Emergency responders and plant operators are trained to go to a fixed section number under time pressure. Section 4 being first-aid is a trained reflex; a document that puts something else there costs time at the moment it matters most."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1910.1200(g)(2)",
+        "section_title": "Hazard communication",
+        "url": "https://www.ecfr.gov/current/title-29/section-1910.1200",
+        "access": "public",
+        "anchor_text": "includes at least the following section numbers and headings, and associated information under each heading, in the order listed"
+      },
+      "cross_reference": [],
+      "verification": {"status": "verified", "method": "ecfr_api", "source_edition_date": "2026-08-01"},
+      "abstention_acceptable": false
+    },
+    {
+      "id": "hc-005",
+      "item_type": "factual",
+      "pair_id": null,
+      "pair_role": null,
+      "family": "hc.pictograms",
+      "risk_tier": "low",
+      "question": "How many pictograms are designated under 29 CFR 1910.1200 for application to a hazard category?",
+      "correct_answer": "Eight.",
+      "answer_key": {
+        "required_concepts": [
+          ["eight", "8"]
+        ],
+        "forbidden_concepts": [],
+        "numeric_facts": [
+          {"label": "designated pictograms", "value": 8.0, "unit": "count", "tolerance_abs": 0.0}
+        ]
+      },
+      "adjacent_wrong": {
+        "label": "Nine, from the UN GHS purple book which includes the environmental pictogram",
+        "answer": "The common wrong answer is nine, which counts the environmental hazard pictogram. The UN GHS includes it; the OSHA standard designates eight for application to a hazard category, because OSHA does not regulate environmental hazards.",
+        "signature_terms": ["nine pictograms", "9 pictograms", "environment pictogram is required"],
+        "why_dangerous": "Low direct safety consequence, included as a calibrated low-risk item. It is a good test of whether a system distinguishes the UN model regulation from the US adoption of it, a distinction that matters much more in other parts of the standard."
+      },
+      "source": {
+        "standard": "29 CFR",
+        "clause": "29 CFR 1910.1200(c), definition of 'Pictogram'",
+        "section_title": "Hazard communication",
+        "url": "https://www.ecfr.gov/current/title-29/section-1910.1200",
+        "access": "public",
+        "anchor_text": "Eight pictograms are designated under this standard for application to a hazard category."
+      },
+      "cross_reference": [],
+      "verification": {"status": "verified", "method": "ecfr_api", "source_edition_date": "2026-08-01"},
+      "abstention_acceptable": false,
+      "notes": "Risk tier 'low'. Included deliberately so that risk-weighted scoring has a range to work over and is not degenerate."
+    }
+  ]
+}
