@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Grounding evaluation for safety-critical QA - ehs-ai-grounding-eval</title>
+<meta name="description" content="A benchmark for whether AI answers to safety-critical technical questions are bound to authoritative sources." />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="theme-color" content="#F7F7F3" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0A0C10" media="(prefers-color-scheme: dark)" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%231E40AF'/%3E%3Ctext x='8' y='12' font-family='monospace' font-size='11' font-weight='700' text-anchor='middle' fill='white'%3EG%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" />
+<style>
+/* ============ tokens ============ */
+:root {
+ --paper:#F7F7F3; --surface:#FFFFFF; --surface-2:#EFEFE9;
+ --ink:#101311; --ink-2:#3A403C; --muted:#666D68;
+ --rule:#101311; --rule-soft:#D6D7CE;
+ --accent:#1E40AF; --accent-2:#17307F; --accent-ink:#FFFFFF; --accent-wash:#E2E8FB;
+ --warn:#8A5A00; --warn-wash:#FBF0DC;
+ --grid-dot:rgba(16,19,17,.10); --shadow:rgba(16,19,17,.08);
+ --font-sans:"Archivo",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+ --font-mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+ --maxw:1180px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+ --paper:#0A0C10; --surface:#12151C; --surface-2:#171B24;
+ --ink:#EAECF2; --ink-2:#BFC4CF; --muted:#838A99;
+ --rule:#EAECF2; --rule-soft:#262B36;
+ --accent:#7C9EFF; --accent-2:#5B7FE8; --accent-ink:#06101F; --accent-wash:#151C33;
+ --warn:#E3B25F; --warn-wash:#241C0C;
+ --grid-dot:rgba(234,236,242,.09); --shadow:rgba(0,0,0,.4);
+  }
+}
+:root[data-theme="dark"] {
+ --paper:#0A0C10; --surface:#12151C; --surface-2:#171B24;
+ --ink:#EAECF2; --ink-2:#BFC4CF; --muted:#838A99;
+ --rule:#EAECF2; --rule-soft:#262B36;
+ --accent:#7C9EFF; --accent-2:#5B7FE8; --accent-ink:#06101F; --accent-wash:#151C33;
+ --warn:#E3B25F; --warn-wash:#241C0C;
+ --grid-dot:rgba(234,236,242,.09); --shadow:rgba(0,0,0,.4);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font-sans);font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased}
+h1,h2,h3{margin:0;line-height:1.06;letter-spacing:-.01em}
+p{margin:0 0 1em}
+a{color:var(--accent)}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 30px}
+.display{font-stretch:125%;font-weight:900;text-transform:uppercase}
+.label{font-family:var(--font-mono);font-size:.6875rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.mono{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* ============ topbar ============ */
+.topbar{position:sticky;top:0;z-index:40;background:var(--paper);border-bottom:2px solid var(--rule)}
+.topbar-inner{max-width:var(--maxw);margin:0 auto;padding:13px 30px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:.8125rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--ink);text-decoration:none}
+.brand-mark{width:14px;height:14px;background:var(--accent);flex:none}
+.topnav{display:flex;align-items:center;gap:2px}
+.topnav a{text-decoration:none;padding:7px 11px;font-family:var(--font-mono);font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);transition:color .15s,background .15s}
+.topnav a:hover{color:var(--ink);background:var(--surface-2)}
+.toggle{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;flex:none;background:var(--paper);border:2px solid var(--rule);border-radius:0;color:var(--ink);cursor:pointer}
+.toggle:hover{background:var(--surface-2)}
+.icon-moon{display:none}
+:root[data-theme="dark"] .icon-sun{display:none}
+:root[data-theme="dark"] .icon-moon{display:block}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .icon-sun{display:none}:root:not([data-theme="light"]) .icon-moon{display:block}}
+
+/* ============ hero ============ */
+.hero{position:relative;padding:74px 0 56px;border-bottom:2px solid var(--rule);background-image:radial-gradient(var(--grid-dot) 1px,transparent 1px);background-size:22px 22px}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:9px;margin-bottom:24px}
+.pulse{width:7px;height:7px;background:var(--accent);flex:none;animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+@media (prefers-reduced-motion:reduce){.pulse{animation:none}}
+.hero h1{font-size:clamp(2.4rem,6.4vw,4.6rem);max-width:16ch}
+.hero-role{margin-top:18px;font-size:1.05rem;color:var(--ink-2);max-width:62ch}
+.hero-lede{margin-top:14px;font-size:1rem;color:var(--muted);max-width:66ch}
+.hero-links{display:flex;flex-wrap:wrap;margin-top:30px}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:13px 19px;border:2px solid var(--rule);margin:0 -2px -2px 0;font-family:var(--font-mono);font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;text-decoration:none;color:var(--ink);background:var(--surface);transition:background .15s,color .15s}
+.btn:hover{background:var(--surface-2)}
+.btn-primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn-primary:hover{background:var(--accent-2);color:var(--accent-ink)}
+
+/* ============ status strip ============ */
+.status{display:grid;grid-template-columns:repeat(4,1fr);border:2px solid var(--rule);background:var(--surface);margin-top:34px;max-width:940px}
+.st-cell{padding:13px 16px;border-left:2px solid var(--rule-soft);min-width:0}
+.st-cell:first-child{border-left:0}
+.st-k{font-family:var(--font-mono);font-size:.5625rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:4px}
+.st-v{font-family:var(--font-mono);font-size:1.05rem;font-weight:700;font-variant-numeric:tabular-nums}
+.st-v.accent{color:var(--accent)}
+@media(max-width:760px){.status{grid-template-columns:1fr 1fr}.st-cell:nth-child(3){border-left:0}.st-cell:nth-child(n+3){border-top:2px solid var(--rule-soft)}}
+
+/* ============ sections ============ */
+.section{padding:66px 0;border-bottom:2px solid var(--rule)}
+.rail-head{display:flex;align-items:baseline;gap:16px;margin-bottom:34px;flex-wrap:wrap}
+.rail-head h2{font-size:clamp(1.5rem,3vw,2.1rem)}
+.rail-num{font-family:var(--font-mono);font-size:.6875rem;color:var(--accent);font-weight:700;letter-spacing:.16em}
+
+/* ============ findings ============ */
+.findings{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));border:2px solid var(--rule);background:var(--surface)}
+.finding{padding:26px 24px;border-left:2px solid var(--rule-soft)}
+.finding:first-child{border-left:0}
+.f-num{font-family:var(--font-mono);font-size:2.3rem;font-weight:700;color:var(--accent);line-height:1;font-variant-numeric:tabular-nums}
+.f-unit{font-size:.9rem;color:var(--muted);font-weight:600}
+.f-title{margin-top:12px;font-weight:700;font-size:.95rem}
+.f-body{margin-top:8px;font-size:.875rem;color:var(--ink-2);line-height:1.55}
+.f-src{margin-top:12px;font-family:var(--font-mono);font-size:.625rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+@media(max-width:900px){.finding{border-left:0;border-top:2px solid var(--rule-soft)}.finding:first-child{border-top:0}}
+
+/* ============ projects ============ */
+.projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:0;border:2px solid var(--rule)}
+.project{padding:28px 26px;border-left:2px solid var(--rule-soft);background:var(--surface);display:flex;flex-direction:column}
+.project:first-child{border-left:0}
+.project-kicker{font-family:var(--font-mono);font-size:.625rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:700}
+.project h3{margin-top:10px;font-size:1.05rem;font-family:var(--font-mono);font-weight:700}
+.project p{margin-top:10px;font-size:.875rem;color:var(--ink-2);line-height:1.58;flex:1}
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:14px}
+.chip{font-family:var(--font-mono);font-size:.5625rem;letter-spacing:.1em;text-transform:uppercase;padding:4px 8px;border:1px solid var(--rule-soft);color:var(--muted)}
+.p-links{margin-top:16px;display:flex;gap:14px}
+.p-links a{font-family:var(--font-mono);font-size:.6875rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;text-decoration:none;border-bottom:2px solid var(--accent);padding-bottom:2px}
+@media(max-width:900px){.project{border-left:0;border-top:2px solid var(--rule-soft)}.project:first-child{border-top:0}}
+
+/* ============ notice ============ */
+.notice{border:2px solid var(--warn);background:var(--warn-wash);padding:24px 26px}
+.notice h3{font-family:var(--font-mono);font-size:.8125rem;letter-spacing:.1em;text-transform:uppercase;color:var(--warn);font-weight:700}
+.notice p{margin-top:12px;font-size:.9rem;color:var(--ink-2)}
+.notice ul{margin:12px 0 0;padding-left:20px;font-size:.875rem;color:var(--ink-2)}
+.notice li{margin-bottom:6px}
+
+/* ============ paper ============ */
+.paper-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:0;border:2px solid var(--rule);background:var(--surface)}
+.paper-main{padding:32px 30px}
+.paper-side{padding:32px 30px;border-left:2px solid var(--rule-soft);background:var(--surface-2)}
+.paper-main h3{font-size:1.35rem;line-height:1.2;max-width:24ch}
+.paper-main p{margin-top:14px;font-size:.9rem;color:var(--ink-2)}
+.toc{list-style:none;margin:14px 0 0;padding:0}
+.toc li{font-family:var(--font-mono);font-size:.75rem;padding:7px 0;border-bottom:1px solid var(--rule-soft);color:var(--ink-2);display:flex;gap:10px}
+.toc span{color:var(--accent);font-weight:700}
+@media(max-width:820px){.paper-grid{grid-template-columns:1fr}.paper-side{border-left:0;border-top:2px solid var(--rule-soft)}}
+
+/* ============ footer ============ */
+.footer{padding:54px 0 66px}
+.footer-links{display:flex;flex-wrap:wrap;gap:18px;margin-top:14px}
+.footer-links a{font-family:var(--font-mono);font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;color:var(--muted)}
+.footer-links a:hover{color:var(--accent)}
+
+.tbl-wrap{overflow-x:auto;border:2px solid var(--rule);background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-family:var(--font-mono);font-size:.75rem}
+th{text-align:left;padding:10px 13px;border-bottom:2px solid var(--rule);font-size:.625rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+td{padding:9px 13px;border-bottom:1px solid var(--rule-soft);font-variant-numeric:tabular-nums;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+.fig{border:2px solid var(--rule);background:var(--surface);padding:20px;margin-bottom:22px}
+.fig img{width:100%;height:auto;display:block}
+.fig figcaption{margin-top:14px;font-size:.8125rem;color:var(--ink-2);line-height:1.55}
+.fig .label{display:block;margin-bottom:10px}
+.prose{max-width:74ch}
+.prose h3{margin-top:30px;font-size:1.05rem}
+.prose p{margin-top:10px;font-size:.9rem;color:var(--ink-2)}
+.prose ul{font-size:.9rem;color:var(--ink-2);padding-left:20px}
+.prose li{margin-bottom:7px}
+.prose code{font-family:var(--font-mono);font-size:.8125em;background:var(--surface-2);padding:2px 5px}
+.backlink{font-family:var(--font-mono);font-size:.6875rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:var(--muted)}
+.backlink:hover{color:var(--accent)}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="#top"><span class="brand-mark"></span> ehs-ai-grounding-eval</a>
+    <nav class="topnav"><a href="#premise">Premise</a><a href="#methodology">Method</a><a href="#preregistration">Prereg</a><a href="#status">Status</a></nav>
+    <button class="toggle" id="themeToggle" aria-label="Toggle colour scheme">
+      <svg class="icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg>
+      <svg class="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>
+    </button>
+  </div>
+</header>
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-eyebrow"><span class="pulse"></span><span class="label">Benchmark - apparatus contributed, results pending</span></div>
+    <h1 class="display">Measuring whether an answer is grounded or merely plausible</h1>
+    <p class="hero-role">A question corpus built around plausible-but-dangerous adjacent answers in pressure relief, lockout/tagout, confined space and process safety management, with scoring that rewards abstention over confabulation.</p>
+    <div class="hero-links">
+      <a class="btn btn-primary" href="https://github.com/priyatham9/ehs-ai-grounding-eval">Repository</a>
+      <a class="btn" href="#premise">The premise</a>
+    </div>
+    <div class="status"><div class="st-cell"><span class="st-k">Corpus items</span><span class="st-v">68</span></div><div class="st-cell"><span class="st-k">Arms</span><span class="st-v">3</span></div><div class="st-cell"><span class="st-k">Baseline results</span><span class="st-v accent">None yet</span></div><div class="st-cell"><span class="st-k">Status</span><span class="st-v">Preregistered</span></div></div>
+  </div>
+</section>
+<section class="section" id="premise"><div class="wrap"><div class="rail-head"><span class="rail-num">01</span><h2 class="display">The premise</h2></div><div class="prose"><p>An assistant asked about overpressure protection for chemical reactors returned pressure relief valve data when rupture disks were requested. Both are overpressure devices. They are not interchangeable, and the substitution is invisible to anyone without the domain background to catch it.</p><p>This is the structurally expected output of retrieval with no authoritative binding. The model produces the statistically likelier neighbour of the correct answer. It will do so again, and the next reader may not catch it.</p><h3>What is measured</h3><ul><li><strong>Adjacent substitution</strong> - did the system return a semantically close but operationally wrong entity</li><li><strong>Citation presence and correctness</strong> - is a source given, and is it the right one</li><li><strong>Abstention credit</strong> - a system that declines scores above one that confabulates</li></ul></div></div></section><section class="section" id="methodology"><div class="wrap"><div class="rail-head"><span class="rail-num">02</span><h2 class="display">Methodology</h2></div><div class="prose"><p>This document states how the benchmark is constructed and scored, in enough
+detail that a reader who disagrees with a score can reconstruct it by hand and
+say exactly which decision they would have made differently.</p><p>The object of measurement is whether a system's answer to a safety-critical
+technical question is attributable to an authoritative source, and in
+particular whether the system distinguishes between entities that are taxonomic
+siblings in the governing standard.</p><p>The specific error class is co-hyponym substitution: answering about the
+semantically adjacent wrong entity. A rupture disk and a spring-loaded pressure
+relief valve are both "pressure relief devices." They share sentences, tables and
+regulatory verbs. Their parameter spaces do not intersect. An answer that
+substitutes one for the other is fluent, well-formed, and categorically
+inapplicable.</p><p>This is not the same as measuring hallucination in general, and the benchmark
+should not be described as if it were.</p><p>Each item was built by the following procedure.</p><p>1. Identify a pair of entities or conditions that a governing regulation treats
+   separately and that share vocabulary - rupture disk and relief valve; the
+   non-fire and fire-case accumulation limits; lockout and tagout periodic
+   inspection requirements; reporting and recording obligations.
+2. Locate a public federal clause that states a substantive requirement for each
+   member.
+3. Write two question stems that differ only in which member they ask about.
+4. Write the reference answer from the clause text.
+5. Write the adjacent wrong answer, with the signature vocabulary that would
+   ap</p><p><a class="backlink" href="https://github.com/priyatham9/ehs-ai-grounding-eval/blob/main/docs/methodology.md">Full document in the repository</a></p></div></div></section><section class="section" id="preregistration"><div class="wrap"><div class="rail-head"><span class="rail-num">03</span><h2 class="display">Preregistration</h2></div><div class="prose"><p>This file fixes the analysis plan before any real system is evaluated on this
+corpus. It exists so that a later result cannot be the product of choices made
+after seeing the data.</p><p>Status: no system has been evaluated. Only the mock demonstration fixture has
+been run. Nothing in this repository is a result.</p><p>If any item below is changed after a real system has been run, the change must be
+recorded in the Amendments section with its date and reason, and any affected
+number must be reported as exploratory rather than confirmatory.</p><p>---</p><p>- 68 items; 63 factual, 5 category-error; 23 complete minimal pairs; 44 families.
+- Corpus digest at freeze:
+  a9fd4f4c2222dfb9f6135ee39a94ca9b92168867b14a56a5a319d16cb3980528
+  (recomputed by python3 -m groundingeval.cli corpus; the digest changes if any
+  identity-bearing field changes, and a run file recording a different digest is
+  not comparable).
+- Source verification: eCFR edition date 2026-08-01, 68/68 verified, 0 failures.
+- The 6 quarantined items are excluded and will not be added mid-study.</p><p>| Parameter | Value |
+|---|---|
+| coveragethreshold | 0.75 |
+| requirefullnumeric | true |
+| adjacentminterms | 2 |
+| adjacentlowcoverage | 0.5 |
+| policy | safety |
+| Contrast window | 70 characters |</p><p><a class="backlink" href="https://github.com/priyatham9/ehs-ai-grounding-eval/blob/main/docs/preregistration.md">Full document in the repository</a></p></div></div></section><section class="section" id="limitations"><div class="wrap"><div class="rail-head"><span class="rail-num">04</span><h2 class="display">Limitations</h2></div><div class="prose"><p>Written to be read by someone deciding whether to trust a number produced with
+this apparatus. Ordered roughly by how likely each is to change a conclusion.</p><p>Concept coverage is substring and prefix matching over explicit alternation lists.
+There are no embeddings anywhere in the scoring path.</p><p>Consequence: a correct answer that paraphrases around every listed alternative
+is scored as a miss. Measured accuracy is therefore a lower bound on
+substantive correctness, and the size of the gap is unknown and varies by system - 
+a verbose system that restates regulatory phrasing will be scored more generously
+than a terse one that paraphrases, independent of correctness.</p><p>Why it was accepted: the benchmark's subject is whether a system distinguishes
+near-synonymous technical entities. Using an embedding model as the scorer would
+make the measuring instrument the same mechanism whose failure is under study, and
+a scoring disagreement would be uninterpretable.</p><p>Mitigation: answer keys use alternation groups with several surface forms, and
+the invariant that every reference answer must satisfy its own key catches the
+worst cases. It does not catch keys that are merely narrow.</p><p>Adjacency and forbidden-concept detection distinguish assertion from mention by
+looking for a contrast cue in a 70-character left window.</p><p><a class="backlink" href="https://github.com/priyatham9/ehs-ai-grounding-eval/blob/main/docs/limitations.md">Full document in the repository</a></p></div></div></section><section class="section" id="status"><div class="wrap"><div class="rail-head"><span class="rail-num">05</span><h2 class="display">Status</h2></div><div class="notice"><h3>Apparatus only - no results yet</h3><p>This repository contributes a question corpus and a scoring harness. No system has been evaluated on it. An internal review was blunt about what that means: a benchmark with zero baselines is a preregistration, not a result, and cannot be assessed for whether its items discriminate.</p><ul><li>Running two or three systems across the three arms is the immediate next step.</li><li>The demonstration run under <span class="mono">synthetic/</span> uses mock adapters and exists only to prove the harness executes. It is not a finding.</li></ul></div></div></section>
+<footer class="footer">
+  <div class="wrap">
+    <span class="label">Priyatham Chimmani &middot; EHS data infrastructure, analytics and applied AI</span>
+    <div class="footer-links">
+      <a href="https://github.com/priyatham9/ehs-ai-grounding-eval">Repository</a>
+      <a href="https://github.com/priyatham9">GitHub</a>
+      <a href="https://linkedin.com/in/priyatham9">LinkedIn</a>
+    </div>
+  </div>
+</footer>
+<script>
+(function () {
+  var root = document.documentElement, KEY = 'ehs-ai-theme';
+  try { var s = localStorage.getItem(KEY); if (s) root.setAttribute('data-theme', s); } catch (e) {}
+  document.getElementById('themeToggle').addEventListener('click', function () {
+    var c = root.getAttribute('data-theme');
+    if (!c) c = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    var n = c === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', n);
+    try { localStorage.setItem(KEY, n); } catch (e) {}
+  });
+})();
+</script>
+</body>
+</html>
