@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generate the synthetic demonstration run.
 
-SYNTHETIC DATA GENERATOR — THE OUTPUT OF THIS SCRIPT IS NOT A RESULT.
+SYNTHETIC DATA GENERATOR - THE OUTPUT OF THIS SCRIPT IS NOT A RESULT.
 
 This runs the mock adapter over the real question corpus and writes run files to
 ``synthetic/demo_run/``. The mock adapter composes its answers from the corpus

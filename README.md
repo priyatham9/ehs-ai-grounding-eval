@@ -77,7 +77,7 @@ semantically adjacent wrong answer is plausible and dangerous.
 | Complete minimal pairs | 23 |
 | Domains | 8 |
 | Question families | 44 |
-| Primary sources | 29 CFR, 40 CFR, 46 CFR — all public |
+| Primary sources | 29 CFR, 40 CFR, 46 CFR - all public |
 | Items whose source could not be verified | 0 (6 drafts quarantined) |
 
 Domains: pressure relief devices, lockout/tagout, confined space, process safety
@@ -124,7 +124,7 @@ governing clause with a verbatim anchor span:
 
 ### Minimal pairs
 
-Items are built in pairs whose stems differ only in the entity asked about — the
+Items are built in pairs whose stems differ only in the entity asked about - the
 rupture disk member and the relief valve member, the 10 percent non-fire
 accumulation limit and the 20 percent fire-case limit. Lexical overlap is
 near-total, so a system that succeeds through topical similarity alone fails
@@ -136,13 +136,13 @@ pressure-relief question with generic pressure-relief content can score
 respectably on per-item accuracy while getting the distinction wrong every time.
 Requiring both members strips that strategy of its reward. In the synthetic
 demonstration run, paired accuracy falls well below per-item accuracy for every
-simulated arm, and the gap widens as per-item accuracy drops — which is the
+simulated arm, and the gap widens as per-item accuracy drops - which is the
 behaviour the statistic exists to expose. (Those are simulation figures and
 measure nothing; see `synthetic/README.md`.)
 
 ### Category-error items
 
-Five items rest on a false premise — asking for the blowdown of a rupture disk,
+Five items rest on a false premise - asking for the blowdown of a rupture disk,
 or the set pressure of a bursting disc. The correct behaviour is to reject the
 premise. These are scored and reported separately and are **never folded into
 overall accuracy**, because a system that confidently answers everything would
@@ -182,7 +182,7 @@ answer key is a *good* answer; it tells you the citation is real.
 ASME BPVC, API 520/521, NFPA 70E and ISO 4126 are copyrighted and are not
 redistributed here. No item's answer key depends on their text. Where an ASME
 paragraph is named, it appears as a `cross_reference` whose identifier is
-corroborated by a public federal source — for example, 46 CFR 54.15-13 is titled
+corroborated by a public federal source - for example, 46 CFR 54.15-13 is titled
 "Rupture disks (modifies UG-127)" and its paragraph (a) states that UG-127
 provides for rupture disks in series with spring-loaded valves, which
 corroborates the UG-127 identifier from a public source without reading ASME's
@@ -208,7 +208,7 @@ the ASME paragraph identifiers in `corpus/items/pressure_relief.json`.
 
 They are excluded from scoring by construction: the loader never reads that file,
 and each entry stores its text under `draft_question` rather than `question` so it
-cannot be picked up as an item. None of them asserts a clause identifier — the
+cannot be picked up as an item. None of them asserts a clause identifier - the
 `source` field is null in every case, precisely because the identifier is the part
 that could not be checked. They are kept in the repository so the exclusions are
 visible rather than silent.
@@ -232,18 +232,18 @@ mechanism whose failure is under study.
 
 Five outcomes, in a fixed order:
 
-1. **UNSCORABLE** — adapter error or empty response. Never counted as wrong: an
+1. **UNSCORABLE** - adapter error or empty response. Never counted as wrong: an
    infrastructure failure and a confabulation are different events, and mixing
    them corrupts both rates.
-2. **ABSTAINED** — an explicit decline with no substantive commitment. Hedging
+2. **ABSTAINED** - an explicit decline with no substantive commitment. Hedging
    and then answering is answering, not abstaining.
-3. **CORRECT** — required concept coverage at or above threshold, no forbidden
+3. **CORRECT** - required concept coverage at or above threshold, no forbidden
    concept asserted, and every declared numeric fact present. A wrong number in a
    safety answer is not a partial-credit situation.
-4. **ADJACENT_SUBSTITUTION** — not correct, and asserts the adjacent entity's
+4. **ADJACENT_SUBSTITUTION** - not correct, and asserts the adjacent entity's
    signature vocabulary. This is the failure class the benchmark exists to
    measure, reported separately because its consequences differ.
-5. **OTHER_INCORRECT** — everything else.
+5. **OTHER_INCORRECT** - everything else.
 
 Assertion is distinguished from mention. "A rupture disk has no blowdown and does
 not reseat" is a correct answer that names what it rules out, and it is not scored
@@ -311,11 +311,11 @@ than a system under test. That rule is enforced socially, not mechanically.
 
 ### The three-arm design this is built for
 
-1. **Ungrounded** — persona prompt over parametric memory. The actual observed
+1. **Ungrounded** - persona prompt over parametric memory. The actual observed
    failure case.
-2. **Pseudo-grounded** — retrieval over a plausible but unauthoritative corpus:
+2. **Pseudo-grounded** - retrieval over a plausible but unauthoritative corpus:
    vendor pages, blog posts, an internal wiki.
-3. **Grounded** — retrieval over a version-pinned authoritative corpus with
+3. **Grounded** - retrieval over a version-pinned authoritative corpus with
    device-type metadata filtering.
 
 Arm 2 is the one that makes this worth running. It is where most enterprise
@@ -349,7 +349,7 @@ python3 -m unittest discover -s tests -v  # 114 tests
 ```
 
 The demo prints the mock banner, a per-adapter summary and a paired comparison.
-Suppressing that banner raises an exception rather than printing quietly — the one
+Suppressing that banner raises an exception rather than printing quietly - the one
 way this repository could mislead someone is by having a fixture run read as a
 result, so it is made impossible rather than merely discouraged. Renaming the mock
 adapter does not strip the label either, because the flag reads the responses
@@ -387,7 +387,7 @@ should be read as implying otherwise.
   lexical, its contrast heuristic misfires in both directions, and any reported
   adjacent-substitution rate should be checked against a human-adjudicated
   subsample with inter-rater agreement reported. This repository takes the
-  position that an automatic attribution score — lexical or LLM-judged — is a
+  position that an automatic attribution score - lexical or LLM-judged - is a
   screen rather than a result, and it has not been validated against human
   judgement here. No human adjudication has been performed.
 - **That an ungrounded arm's failures are not partly memorisation.** Portions of
@@ -409,8 +409,8 @@ item set, not on the story.
 This repository measures whether answers are *attributable to an authoritative
 source*, using a lexical scorer over an explicit answer key. It does not verify
 sources are authoritative, does not perform entailment, and makes no formal
-guarantee. A protocol that standardises how a model reaches a source — MCP, for
-instance — makes the binding auditable and swappable, which is genuinely valuable
+guarantee. A protocol that standardises how a model reaches a source - MCP, for
+instance - makes the binding auditable and swappable, which is genuinely valuable
 in a regulated deployment. It does not establish that a source is authoritative,
 that the retrieved passage is the right one, or that the model used what it
 retrieved. Corpus curation, metadata filtering and evaluation do that work.
@@ -442,7 +442,7 @@ synthetic/               the demonstration fixture generator and its output
 tests/                   114 tests
 ```
 
-Four mock profiles are available — `ungrounded`, `pseudo_grounded`, `grounded`,
+Four mock profiles are available - `ungrounded`, `pseudo_grounded`, `grounded`,
 and `abstainer`. The last is a floor case that declines everything: it scores zero
 accuracy and declines every false-premise item, which is the behaviour the
 `safety` utility policy is designed to rank above confabulation.

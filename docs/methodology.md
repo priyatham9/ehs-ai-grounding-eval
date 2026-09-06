@@ -26,7 +26,7 @@ should not be described as if it were.
 Each item was built by the following procedure.
 
 1. Identify a pair of entities or conditions that a governing regulation treats
-   separately and that share vocabulary — rupture disk and relief valve; the
+   separately and that share vocabulary - rupture disk and relief valve; the
    non-fire and fire-case accumulation limits; lockout and tagout periodic
    inspection requirements; reporting and recording obligations.
 2. Locate a public federal clause that states a substantive requirement for each
@@ -78,7 +78,7 @@ The last check was added after the preceding three passed an item that cited
 `1910.157(d)` but anchored on text belonging to `(e)(2)`. Marker presence alone
 is too weak to catch that: `(d)` occurs somewhere in almost every section that
 has a paragraph (d). Locality is reported as a tri-state and is `null` where the
-question does not apply — a citation into an alphabetical definitions block has
+question does not apply - a citation into an alphabetical definitions block has
 no numbered paragraph to be inside. Any item whose locality is `false` is listed
 in `anchor_locality_warnings`, and the test suite fails when that list is
 non-empty.

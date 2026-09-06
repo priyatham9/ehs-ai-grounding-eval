@@ -60,14 +60,14 @@ silently included.
 
 ### Arms
 
-1. **Ungrounded** — instruction/persona prompt over parametric memory, no retrieval.
-2. **Pseudo-grounded** — retrieval over a plausible but unauthoritative corpus.
-3. **Grounded** — retrieval over a version-pinned authoritative corpus with
+1. **Ungrounded** - instruction/persona prompt over parametric memory, no retrieval.
+2. **Pseudo-grounded** - retrieval over a plausible but unauthoritative corpus.
+3. **Grounded** - retrieval over a version-pinned authoritative corpus with
    device-type metadata filtering.
 
 Primary comparison: grounded versus ungrounded on paired accuracy.
 Secondary comparison of interest: pseudo-grounded versus ungrounded, where the
-direction is **not predicted** — retrieval over unauthoritative sources may
+direction is **not predicted** - retrieval over unauthoritative sources may
 plausibly perform worse than no retrieval.
 
 ---
@@ -132,4 +132,4 @@ None. No system has been evaluated.
 
 | Date | Change | Reason | Affected outcomes |
 |---|---|---|---|
-| — | — | — | — |
+| - | - | - | - |

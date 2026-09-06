@@ -87,7 +87,7 @@ _SMART = {
     "“": '"',
     "”": '"',
     "–": "-",
-    "—": "-",
+    " - ": "-",
     "−": "-",
     " ": " ",
 }
@@ -105,7 +105,7 @@ def normalize(text: str) -> str:
     for bad, good in _SMART.items():
         text = text.replace(bad, good)
     text = text.replace("&amp;", "&").replace("&lt;", "<").replace("&gt;", ">")
-    text = text.replace("&#8212;", "-").replace("&#8217;", "'")
+    text = text.replace(" - ", "-").replace("&#8217;", "'")
     return _WS_RE.sub(" ", text).strip().lower()
 
 
@@ -223,7 +223,7 @@ def anchor_paragraph_locality(section_text: str, anchor: str, path: Sequence[str
 
     Returns True when the deepest cited marker is among the last few markers
     preceding the anchor, False when it is not, and None when the question does
-    not apply — no anchor, no paragraph path, or a citation into an alphabetical
+    not apply - no anchor, no paragraph path, or a citation into an alphabetical
     definitions block, where the governing designator is a defined term rather
     than a marker and locality cannot be judged this way.
     """

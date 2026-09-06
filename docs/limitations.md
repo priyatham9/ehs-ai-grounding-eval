@@ -10,7 +10,7 @@ There are no embeddings anywhere in the scoring path.
 
 **Consequence:** a correct answer that paraphrases around every listed alternative
 is scored as a miss. Measured accuracy is therefore a **lower bound** on
-substantive correctness, and the size of the gap is unknown and varies by system —
+substantive correctness, and the size of the gap is unknown and varies by system -
 a verbose system that restates regulatory phrasing will be scored more generously
 than a terse one that paraphrases, independent of correctness.
 
@@ -30,8 +30,8 @@ looking for a contrast cue in a 70-character left window.
 
 **It misfires in both directions.** "This is not a relief valve, so blowdown does
 not apply, and the blowdown would be 7 percent" would be under-penalised. A
-correct contrast phrased at longer range — cue and term separated by more than 70
-characters — would be over-penalised.
+correct contrast phrased at longer range - cue and term separated by more than 70
+characters - would be over-penalised.
 
 **Consequence:** the adjacent-substitution rate, which is the benchmark's headline
 error class, is the number most exposed to scorer error.
@@ -60,8 +60,8 @@ Results do not transfer to ASME or API practice without further work.
 68 items, hand-built by one author, with the failure mode in mind.
 
 **Consequence:** there is no sampling frame and no basis for generalising to "the
-questions a safety engineer asks." Item selection is adversarial by design — items
-were chosen because a confusable neighbour exists — so error rates here should be
+questions a safety engineer asks." Item selection is adversarial by design - items
+were chosen because a confusable neighbour exists - so error rates here should be
 expected to exceed those on a naturally occurring question distribution, by an
 unknown amount.
 
@@ -95,7 +95,7 @@ are the author's, and they are not independently reviewed.
 The verification passing is weaker evidence than it looks, and the record here
 shows why. An independent audit re-ran the verifier against live eCFR and
 reproduced 68/68, then found that `fe-002` cited `1910.157(d)` while its anchor
-text belonged to `(e)(2)` — a defect the 68/68 result did not expose, because the
+text belonged to `(e)(2)` - a defect the 68/68 result did not expose, because the
 checks then in place could not. The item has been repointed to `(d)(6)` with an
 anchor that is genuinely in that paragraph, and the locality check that catches
 this class was added. The general lesson stands: a verifier only refutes the
@@ -131,7 +131,7 @@ edition-specific values is required before publication.
 
 Citation grading parses clause identifiers and compares them to the item's source.
 It confirms that a system named the right clause. **It does not confirm that the
-system retrieved that clause, read it, or used it** — a system that emits a
+system retrieved that clause, read it, or used it** - a system that emits a
 plausible clause identifier from parametric memory scores the same as one that
 retrieved it. Distinguishing those requires instrumenting the retrieval step, which
 is the adapter author's responsibility.

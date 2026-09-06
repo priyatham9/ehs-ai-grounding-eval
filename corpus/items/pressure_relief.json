@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "domain": "pressure_relief_devices",
   "domain_title": "Overpressure protection: rupture disk devices vs. spring-loaded safety and relief valves",
-  "source_family": "46 CFR part 54 subpart 54.15 (US Coast Guard, unfired pressure vessels)",
+  "source_family": "46 CFR part 54 (Pressure Vessels), subpart 54.15 (Pressure-Relief Devices), US Coast Guard",
   "sourcing_note": "Rupture disks and pressure relief valves are the seed confusion pair for this benchmark. The governing consensus standards (ASME BPVC Section VIII Division 1, API 520/521) are copyrighted and were not accessible for clause-level verification. 46 CFR subpart 54.15 is a public federal regulation that (a) contains device-specific substantive requirements for both device types and (b) names the ASME paragraphs it modifies, which lets ASME paragraph identifiers be cross-referenced with a public corroborating source rather than asserted. Items whose answer depends on ASME or API clause text that could not be verified are in corpus/quarantine/.",
   "items": [
     {
