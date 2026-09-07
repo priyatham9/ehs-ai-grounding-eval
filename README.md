@@ -4,12 +4,13 @@ A benchmark for measuring whether an AI system's answers to safety-critical
 technical questions are grounded in authoritative sources, or generated from
 parametric memory and merely sound authoritative.
 
-**This repository contains no experimental results.** It contains a question
-corpus, a scoring harness, an adapter interface, and a mock adapter that produces
-a labelled demonstration run. No system has been evaluated here. Every number the
-code can print out of the box comes from a simulation whose outcome probabilities
-were fixed in advance, and every artifact it writes carries the string
-`MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS`.
+**This repository contains no experimental results for any language model.** It
+contains a question corpus, a scoring harness, an adapter interface, a mock
+adapter that produces a labelled demonstration run, and three non-LLM baselines
+(random floor, TF-IDF retrieval, oracle ceiling; see Results below). No language
+model or vendor product has been evaluated here. The mock adapter's numbers come
+from a simulation whose outcome probabilities were fixed in advance, and every
+artifact it writes carries the string `MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS`.
 
 ---
 
@@ -469,3 +470,12 @@ are generally not subject to copyright under 17 U.S.C. 105.
 ## License
 
 MIT. See `LICENSE`.
+
+## Results
+
+Three non-LLM baselines have been run over the 68 items: a seeded random floor,
+a TF-IDF retriever over the verified source excerpts, and an oracle ceiling.
+They show the items discriminate (floor and ceiling CIs do not overlap on any
+axis) and where plain retrieval lands. No language model has been evaluated
+yet. See [docs/results.md](docs/results.md) and `results/`; regenerate with
+`python3 -m grounding_eval.run_baselines`.

@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "ehs-ai-grounding-eval: a benchmark for grounding of AI answers to safety-critical questions"
+authors:
+  - family-names: Chimmani
+    given-names: Priyatham
+    email: priyatham9@gmail.com
+repository-code: "https://github.com/priyatham9/ehs-ai-grounding-eval"
+url: "https://priyatham9.github.io/ehs-ai-grounding-eval/"
+license: MIT
+date-released: "2026-09-07"
+version: 0.1.0

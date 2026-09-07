@@ -26,6 +26,10 @@ RUN_ARTIFACT_DIRS = (
     os.path.join(REPO_ROOT, "synthetic", "demo_run"),
 )
 
+#: Provenance labels a non-LLM baseline run may carry. Anything else stored
+#: under a run directory must be a labelled mock demonstration.
+BASELINE_PROVENANCES = {"random_floor_baseline", "retrieval_tfidf_baseline", "oracle_ceiling"}
+
 #: Standards bodies whose text may not be redistributed. Naming a clause is
 #: fine and necessary; reproducing its text is not.
 COPYRIGHTED_BODIES = ("ASME", "API", "NFPA", "ISO", "ANSI", "IEC")
@@ -95,6 +99,24 @@ class TestNoResultsClaimed(unittest.TestCase):
                     with open(path, "r", encoding="utf-8") as handle:
                         payload = json.load(handle)
                     checked += 1
+                    if payload.get("schema") == "grounding_eval.baselines/1":
+                        # Non-LLM baseline runs (random floor, TF-IDF retrieval,
+                        # oracle ceiling) are honest runs, not mock demonstrations.
+                        # They must say so on every response and never claim to
+                        # be a language-model result.
+                        self.assertTrue(name.startswith("baselines_"), msg=path)
+                        runs = payload.get("runs", [])
+                        self.assertTrue(runs, msg=path)
+                        provenances = set()
+                        for run in runs:
+                            self.assertFalse(run.get("is_mock_demonstration"), msg=path)
+                            provenances |= {r.get("provenance") for r in run.get("responses", [])}
+                        self.assertTrue(provenances, msg=path)
+                        self.assertTrue(
+                            provenances <= BASELINE_PROVENANCES,
+                            msg="%s carries a provenance outside the non-LLM baseline set: %s" % (path, provenances),
+                        )
+                        continue
                     self.assertTrue(
                         payload.get("is_mock_demonstration"),
                         msg="%s is a stored run not labelled as a demonstration" % path,

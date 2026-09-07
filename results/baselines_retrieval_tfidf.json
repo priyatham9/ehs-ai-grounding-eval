@@ -1,0 +1,2457 @@
+{
+ "adapter": "retrieval_tfidf",
+ "runs": [
+  {
+   "adapter": {
+    "arm": "grounded",
+    "class": "RetrievalAdapter",
+    "method": "tfidf_cosine",
+    "n_documents": 68,
+    "name": "retrieval_tfidf",
+    "vocab_size": 615
+   },
+   "corpus_digest": "a9fd4f4c2222dfb9f6135ee39a94ca9b92168867b14a56a5a319d16cb3980528",
+   "duration_s": 0.04607081413269043,
+   "environment": {
+    "implementation": "CPython",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "python": "3.9.6"
+   },
+   "is_mock_demonstration": false,
+   "library_version": "0.1.0",
+   "mock_banner": null,
+   "n_items": 68,
+   "repeat": 0,
+   "responses": [
+    {
+     "citations": [
+      "29 CFR 1910.146(c)(5)(i)(A) and (B)"
+     ],
+     "confidence": 0.4429,
+     "error": null,
+     "item_id": "cs-001",
+     "latency_s": 0.0001468658447265625,
+     "metadata": {
+      "matched_item": "cs-001",
+      "self_match": true,
+      "similarity": 0.4428798088881202
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1910.146(c)(5)(i)(A) and (B), Permit-required confined spaces) states: The employer can demonstrate that continuous forced air ventilation alone is sufficient to maintain that permit space safe for entry See 29 CFR 1910.146(c)(5)(i)(A) and (B)."
+    },
+    {
+     "citations": [
+      "29 CFR 1910.146(b), definitions of 'Non-permit confined space' and 'Permit-required confined space'"
+     ],
+     "confidence": 0.4851,
+     "error": null,
+     "item_id": "cs-002",
+     "latency_s": 5.1021575927734375e-05,
+     "metadata": {
+      "matched_item": "cs-008",
+      "self_match": false,
+      "similarity": 0.485097593195683
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1910.146(b), definitions of 'Non-permit confined space' and 'Permit-required confined space', Permit-required confined spaces) states: Contains any other recognized serious safety or health hazard See 29 CFR 1910.146(b), definitions of 'Non-permit confined space' and 'Permit-required confined space'."
+    },
+    {
+     "citations": [
+      "29 CFR 1910.146(c)(5)(i)(A) and (B)"
+     ],
+     "confidence": 0.3039,
+     "error": null,
+     "item_id": "cs-003",
+     "latency_s": 4.506111145019531e-05,
+     "metadata": {
+      "matched_item": "cs-001",
+      "self_match": false,
+      "similarity": 0.30394213610397813
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1910.146(c)(5)(i)(A) and (B), Permit-required confined spaces) states: The employer can demonstrate that continuous forced air ventilation alone is sufficient to maintain that permit space safe for entry See 29 CFR 1910.146(c)(5)(i)(A) and (B)."
+    },
+    {
+     "citations": [
+      "29 CFR 1910.146(b), definitions of 'Hazardous atmosphere', 'Oxygen deficient atmosphere', 'Oxygen enriched atmosphere'"
+     ],
+     "confidence": 0.4848,
+     "error": null,
+     "item_id": "cs-004",
+     "latency_s": 4.100799560546875e-05,
+     "metadata": {
+      "matched_item": "cs-004",
+      "self_match": true,
+      "similarity": 0.48484315354888186
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1910.146(b), definitions of 'Hazardous atmosphere', 'Oxygen deficient atmosphere', 'Oxygen enriched atmosphere', Permit-required confined spaces) states: Atmospheric oxygen concentration below 19.5 percent or above 23.5 percent See 29 CFR 1910.146(b), definitions of 'Hazardous atmosphere', 'Oxygen deficient atmosphere', 'Oxygen enriched atmosphere'."
+    },
+    {
+     "citations": [
+      "29 CFR 1910.146(b), definition of 'Hazardous atmosphere', paragraph (1)"
+     ],
+     "confidence": 0.4493,
+     "error": null,
+     "item_id": "cs-005",
+     "latency_s": 4.8160552978515625e-05,
+     "metadata": {
+      "matched_item": "cs-005",
+      "self_match": true,
+      "similarity": 0.4493320974194016
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1910.146(b), definition of 'Hazardous atmosphere', paragraph (1), Permit-required confined spaces) states: Flammable gas, vapor, or mist in excess of 10 percent of its lower flammable limit (LFL) See 29 CFR 1910.146(b), definition of 'Hazardous atmosphere', paragraph (1)."
+    },
+    {
+     "citations": [
+      "29 CFR 1910.146(i)(4) and Note"
+     ],
+     "confidence": 0.3963,
+     "error": null,
+     "item_id": "cs-006",
+     "latency_s": 4.267692565917969e-05,
+     "metadata": {
+      "matched_item": "cs-006",
+      "self_match": true,
+      "similarity": 0.39634476548605324
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1910.146(i)(4) and Note, Permit-required confined spaces) states: Remains outside the permit space during entry operations until relieved by another attendant See 29 CFR 1910.146(i)(4) and Note."
+    },
+    {
+     "citations": [
+      "29 CFR 1910.146(j)(2) and (j)(4)"
+     ],
+     "confidence": 0.3772,
+     "error": null,
+     "item_id": "cs-007",
+     "latency_s": 4.029273986816406e-05,
+     "metadata": {
+      "matched_item": "cs-007",
+      "self_match": true,
+      "similarity": 0.37722568170377346
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1910.146(j)(2) and (j)(4), Permit-required confined spaces) states: that all tests specified by the permit have been conducted and that all procedures and equipment specified by the permit are in place before endorsing the permit See 29 CFR 1910.146(j)(2) and (j)(4)."
+    },
+    {
+     "citations": [
+      "29 CFR 1910.146(b), definitions of 'Non-permit confined space' and 'Permit-required confined space'"
+     ],
+     "confidence": 0.6298,
+     "error": null,
+     "item_id": "cs-008",
+     "latency_s": 3.981590270996094e-05,
+     "metadata": {
+      "matched_item": "cs-008",
+      "self_match": true,
+      "similarity": 0.6298038751031634
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1910.146(b), definitions of 'Non-permit confined space' and 'Permit-required confined space', Permit-required confined spaces) states: Contains any other recognized serious safety or health hazard See 29 CFR 1910.146(b), definitions of 'Non-permit confined space' and 'Permit-required confined space'."
+    },
+    {
+     "citations": [
+      "29 CFR 1910.333(a)(1)"
+     ],
+     "confidence": 0.2821,
+     "error": null,
+     "item_id": "el-001",
+     "latency_s": 4.00543212890625e-05,
+     "metadata": {
+      "matched_item": "el-001",
+      "self_match": true,
+      "similarity": 0.2820680121326897
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1910.333(a)(1), Selection and use of work practices) states: Live parts that operate at less than 50 volts to ground need not be deenergized if there will be no increased exposure to electrical burns or to explosion due to electric arcs. See 29 CFR 1910.333(a)(1)."
+    },
+    {
+     "citations": [
+      "29 CFR 1910.335(a)(1)(iv) and (a)(1)(v)"
+     ],
+     "confidence": 0.4087,
+     "error": null,
+     "item_id": "el-002",
+     "latency_s": 4.1961669921875e-05,
+     "metadata": {
+      "matched_item": "el-002",
+      "self_match": true,
+      "similarity": 0.40872526670030584
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1910.335(a)(1)(iv) and (a)(1)(v), Safeguards for personnel protection) states: Employees shall wear nonconductive head protection wherever there is a danger of head injury from electric shock or burns See 29 CFR 1910.335(a)(1)(iv) and (a)(1)(v)."
+    },
+    {
+     "citations": [
+      "29 CFR 1910.157(e)(2) and (e)(3)"
+     ],
+     "confidence": 0.487,
+     "error": null,
+     "item_id": "fe-001",
+     "latency_s": 4.506111145019531e-05,
+     "metadata": {
+      "matched_item": "fe-001",
+      "self_match": true,
+      "similarity": 0.48703438608435357
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1910.157(e)(2) and (e)(3), Portable fire extinguishers) states: The employer shall assure that portable fire extinguishers are subjected to an annual maintenance check. See 29 CFR 1910.157(e)(2) and (e)(3)."
+    },
+    {
+     "citations": [
+      "29 CFR 1910.157(d)(6)"
+     ],
+     "confidence": 0.3221,
+     "error": null,
+     "item_id": "fe-002",
+     "latency_s": 4.00543212890625e-05,
+     "metadata": {
+      "matched_item": "fe-002",
+      "self_match": true,
+      "similarity": 0.3220833357727598
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1910.157(d)(6), Portable fire extinguishers) states: The employer shall distribute portable fire extinguishers or other containers of Class D extinguishing agent for use by employees so that the travel distance from the combustible metal working area to any extinguishing agent is 75 feet (22.9 m) or less. See 29 CFR 1910.157(d)(6)."
+    },
+    {
+     "citations": [
+      "29 CFR 1910.106(a)(19)(i) and (ii)"
+     ],
+     "confidence": 0.4276,
+     "error": null,
+     "item_id": "fl-001",
+     "latency_s": 3.910064697265625e-05,
+     "metadata": {
+      "matched_item": "fl-001",
+      "self_match": true,
+      "similarity": 0.42761782025724504
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1910.106(a)(19)(i) and (ii), Flammable liquids) states: Category 1 shall include liquids having flashpoints below 73.4 See 29 CFR 1910.106(a)(19)(i) and (ii)."
+    },
+    {
+     "citations": [
+      "29 CFR 1910.106(a)(19)(iii) and (iv)"
+     ],
+     "confidence": 0.5173,
+     "error": null,
+     "item_id": "fl-002",
+     "latency_s": 3.886222839355469e-05,
+     "metadata": {
+      "matched_item": "fl-002",
+      "self_match": true,
+      "similarity": 0.5173085572131865
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1910.106(a)(19)(iii) and (iv), Flammable liquids) states: Category 4 shall include liquids having flashpoints above 140 See 29 CFR 1910.106(a)(19)(iii) and (iv)."
+    },
+    {
+     "citations": [
+      "29 CFR 1910.1200(f)(1) and (f)(3)"
+     ],
+     "confidence": 0.3258,
+     "error": null,
+     "item_id": "hc-001",
+     "latency_s": 4.100799560546875e-05,
+     "metadata": {
+      "matched_item": "hc-001",
+      "self_match": true,
+      "similarity": 0.32575896148968697
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1910.1200(f)(1) and (f)(3), Hazard communication) states: Where the chemical manufacturer, importer, or distributor is required to label, tag or mark the following shall be provided See 29 CFR 1910.1200(f)(1) and (f)(3)."
+    },
+    {
+     "citations": [
+      "29 CFR 1910.1200(c), definitions of 'Hazard statement' and 'Precautionary statement'"
+     ],
+     "confidence": 0.6576,
+     "error": null,
+     "item_id": "hc-002",
+     "latency_s": 4.100799560546875e-05,
+     "metadata": {
+      "matched_item": "hc-002",
+      "self_match": true,
+      "similarity": 0.6575858382879525
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1910.1200(c), definitions of 'Hazard statement' and 'Precautionary statement', Hazard communication) states: Hazard statement means a statement assigned to a hazard class and category that describes the nature of the hazard See 29 CFR 1910.1200(c), definitions of 'Hazard statement' and 'Precautionary statement'."
+    },
+    {
+     "citations": [
+      "29 CFR 1910.1200(c), definition of 'Signal word'"
+     ],
+     "confidence": 0.4006,
+     "error": null,
+     "item_id": "hc-003",
+     "latency_s": 3.910064697265625e-05,
+     "metadata": {
+      "matched_item": "hc-003",
+      "self_match": true,
+      "similarity": 0.4005533149775372
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1910.1200(c), definition of 'Signal word', Hazard communication) states: Signal word means a word used to indicate the relative level of severity of hazard See 29 CFR 1910.1200(c), definition of 'Signal word'."
+    },
+    {
+     "citations": [
+      "29 CFR 1910.1200(g)(2)"
+     ],
+     "confidence": 0.314,
+     "error": null,
+     "item_id": "hc-004",
+     "latency_s": 4.100799560546875e-05,
+     "metadata": {
+      "matched_item": "hc-004",
+      "self_match": true,
+      "similarity": 0.3140429229732271
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1910.1200(g)(2), Hazard communication) states: includes at least the following section numbers and headings, and associated information under each heading, in the order listed See 29 CFR 1910.1200(g)(2)."
+    },
+    {
+     "citations": [
+      "29 CFR 1910.1200(c), definition of 'Pictogram'"
+     ],
+     "confidence": 0.7663,
+     "error": null,
+     "item_id": "hc-005",
+     "latency_s": 3.790855407714844e-05,
+     "metadata": {
+      "matched_item": "hc-005",
+      "self_match": true,
+      "similarity": 0.766298983979425
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1910.1200(c), definition of 'Pictogram', Hazard communication) states: Eight pictograms are designated under this standard for application to a hazard category. See 29 CFR 1910.1200(c), definition of 'Pictogram'."
+    },
+    {
+     "citations": [
+      "29 CFR 1910.95(g)(5)(i) and (g)(5)(ii)"
+     ],
+     "confidence": 0.387,
+     "error": null,
+     "item_id": "hn-001",
+     "latency_s": 4.00543212890625e-05,
+     "metadata": {
+      "matched_item": "hn-003",
+      "self_match": false,
+      "similarity": 0.3870269710014155
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1910.95(g)(5)(i) and (g)(5)(ii), Occupational noise exposure) states: Within 6 months of an employee's first exposure at or above the action level, the employer shall establish a valid baseline audiogram See 29 CFR 1910.95(g)(5)(i) and (g)(5)(ii)."
+    },
+    {
+     "citations": [
+      "29 CFR 1910.95(g)(10)(i)"
+     ],
+     "confidence": 0.4299,
+     "error": null,
+     "item_id": "hn-002",
+     "latency_s": 3.814697265625e-05,
+     "metadata": {
+      "matched_item": "hn-002",
+      "self_match": true,
+      "similarity": 0.4299369552551196
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1910.95(g)(10)(i), Occupational noise exposure) states: a standard threshold shift is a change in hearing threshold relative to the baseline audiogram of an average of 10 dB or more at 2000, 3000, and 4000 Hz in either ear See 29 CFR 1910.95(g)(10)(i)."
+    },
+    {
+     "citations": [
+      "29 CFR 1910.95(g)(5)(i) and (g)(5)(ii)"
+     ],
+     "confidence": 0.2874,
+     "error": null,
+     "item_id": "hn-003",
+     "latency_s": 3.790855407714844e-05,
+     "metadata": {
+      "matched_item": "hn-003",
+      "self_match": true,
+      "similarity": 0.287422727751716
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1910.95(g)(5)(i) and (g)(5)(ii), Occupational noise exposure) states: Within 6 months of an employee's first exposure at or above the action level, the employer shall establish a valid baseline audiogram See 29 CFR 1910.95(g)(5)(i) and (g)(5)(ii)."
+    },
+    {
+     "citations": [
+      "29 CFR 1910.147(c)(6)(i)"
+     ],
+     "confidence": 0.5764,
+     "error": null,
+     "item_id": "loto-001",
+     "latency_s": 3.981590270996094e-05,
+     "metadata": {
+      "matched_item": "loto-001",
+      "self_match": true,
+      "similarity": 0.5764307526139331
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1910.147(c)(6)(i), The control of hazardous energy (lockout/tagout)) states: The employer shall conduct a periodic inspection of the energy control procedure at least annually See 29 CFR 1910.147(c)(6)(i)."
+    },
+    {
+     "citations": [
+      "29 CFR 1910.147(c)(7)(iii)"
+     ],
+     "confidence": 0.5041,
+     "error": null,
+     "item_id": "loto-002",
+     "latency_s": 3.814697265625e-05,
+     "metadata": {
+      "matched_item": "loto-002",
+      "self_match": true,
+      "similarity": 0.5041143205115935
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1910.147(c)(7)(iii), The control of hazardous energy (lockout/tagout)) states: Retraining shall be provided for all authorized and affected employees whenever there is a change in their job assignments See 29 CFR 1910.147(c)(7)(iii)."
+    },
+    {
+     "citations": [
+      "29 CFR 1910.147(a)(1)(iii)(A)"
+     ],
+     "confidence": 0.2803,
+     "error": null,
+     "item_id": "loto-003",
+     "latency_s": 3.790855407714844e-05,
+     "metadata": {
+      "matched_item": "loto-003",
+      "self_match": true,
+      "similarity": 0.2803037966266408
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1910.147(a)(1)(iii)(A), The control of hazardous energy (lockout/tagout)) states: controlled by the unplugging of the equipment from the energy source and by the plug being under the exclusive control of the employee performing the servicing or maintenance See 29 CFR 1910.147(a)(1)(iii)(A)."
+    },
+    {
+     "citations": [
+      "29 CFR 1910.147(a)(1)(iii)(A)"
+     ],
+     "confidence": 0.2412,
+     "error": null,
+     "item_id": "loto-004",
+     "latency_s": 4.792213439941406e-05,
+     "metadata": {
+      "matched_item": "loto-003",
+      "self_match": false,
+      "similarity": 0.2411731413325975
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1910.147(a)(1)(iii)(A), The control of hazardous energy (lockout/tagout)) states: controlled by the unplugging of the equipment from the energy source and by the plug being under the exclusive control of the employee performing the servicing or maintenance See 29 CFR 1910.147(a)(1)(iii)(A)."
+    },
+    {
+     "citations": [
+      "29 CFR 1910.147(c)(6)(i)(D)"
+     ],
+     "confidence": 0.4975,
+     "error": null,
+     "item_id": "loto-005",
+     "latency_s": 3.910064697265625e-05,
+     "metadata": {
+      "matched_item": "loto-005",
+      "self_match": true,
+      "similarity": 0.49751545668909
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1910.147(c)(6)(i)(D), The control of hazardous energy (lockout/tagout)) states: Where tagout is used for energy control, the periodic inspection shall include a review, between the inspector and each authorized and affected employee See 29 CFR 1910.147(c)(6)(i)(D)."
+    },
+    {
+     "citations": [
+      "29 CFR 1910.147(b), definition of 'Energy isolating device'"
+     ],
+     "confidence": 0.7666,
+     "error": null,
+     "item_id": "loto-006",
+     "latency_s": 4.100799560546875e-05,
+     "metadata": {
+      "matched_item": "loto-006",
+      "self_match": true,
+      "similarity": 0.7665994312134488
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1910.147(b), definition of 'Energy isolating device', The control of hazardous energy (lockout/tagout)) states: Push buttons, selector switches and other control circuit type devices are not energy isolating devices. See 29 CFR 1910.147(b), definition of 'Energy isolating device'."
+    },
+    {
+     "citations": [
+      "29 CFR 1910.147(f)(3)(ii)(D)"
+     ],
+     "confidence": 0.5611,
+     "error": null,
+     "item_id": "loto-007",
+     "latency_s": 4.506111145019531e-05,
+     "metadata": {
+      "matched_item": "loto-007",
+      "self_match": true,
+      "similarity": 0.5610703270946795
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1910.147(f)(3)(ii)(D), The control of hazardous energy (lockout/tagout)) states: Each authorized employee shall affix a personal lockout or tagout device to the group lockout device, group lockbox, or comparable mechanism when he or she begins work See 29 CFR 1910.147(f)(3)(ii)(D)."
+    },
+    {
+     "citations": [
+      "29 CFR 1910.147(f)(4)"
+     ],
+     "confidence": 0.4772,
+     "error": null,
+     "item_id": "loto-008",
+     "latency_s": 3.790855407714844e-05,
+     "metadata": {
+      "matched_item": "loto-008",
+      "self_match": true,
+      "similarity": 0.4772292926593827
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1910.147(f)(4), The control of hazardous energy (lockout/tagout)) states: Specific procedures shall be utilized during shift or personnel changes to ensure the continuity of lockout or tagout protection See 29 CFR 1910.147(f)(4)."
+    },
+    {
+     "citations": [
+      "29 CFR 1910.147(c)(1)"
+     ],
+     "confidence": 0.4297,
+     "error": null,
+     "item_id": "loto-009",
+     "latency_s": 3.814697265625e-05,
+     "metadata": {
+      "matched_item": "loto-009",
+      "self_match": true,
+      "similarity": 0.42970576275017625
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1910.147(c)(1), The control of hazardous energy (lockout/tagout)) states: The employer shall establish a program consisting of energy control procedures, employee training and periodic inspections See 29 CFR 1910.147(c)(1)."
+    },
+    {
+     "citations": [
+      "29 CFR 1910.147(f)(4)"
+     ],
+     "confidence": 0.2264,
+     "error": null,
+     "item_id": "loto-010",
+     "latency_s": 3.719329833984375e-05,
+     "metadata": {
+      "matched_item": "loto-008",
+      "self_match": false,
+      "similarity": 0.22641492070869892
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1910.147(f)(4), The control of hazardous energy (lockout/tagout)) states: Specific procedures shall be utilized during shift or personnel changes to ensure the continuity of lockout or tagout protection See 29 CFR 1910.147(f)(4)."
+    },
+    {
+     "citations": [
+      "29 CFR 1910.212(a)(3)"
+     ],
+     "confidence": 0.3454,
+     "error": null,
+     "item_id": "mg-001",
+     "latency_s": 3.886222839355469e-05,
+     "metadata": {
+      "matched_item": "mg-001",
+      "self_match": true,
+      "similarity": 0.3453748513086163
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1910.212(a)(3), General requirements for all machines) states: Point of operation is the area on a machine where work is actually performed upon the material being processed. See 29 CFR 1910.212(a)(3)."
+    },
+    {
+     "citations": [
+      "46 CFR 54.15-10(c) and (d)"
+     ],
+     "confidence": 0.217,
+     "error": null,
+     "item_id": "mg-002",
+     "latency_s": 3.719329833984375e-05,
+     "metadata": {
+      "matched_item": "prd-008",
+      "self_match": false,
+      "similarity": 0.2170207242257324
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "46 CFR (46 CFR 54.15-10(c) and (d), Safety and relief valves (modifies UG-126)) states: so that the disk can be lifted from its seat when the pressure in the vessel is 75 percent of that at which the valve is set to blow See 46 CFR 54.15-10(c) and (d)."
+    },
+    {
+     "citations": [
+      "46 CFR 54.15-13(b)(3)"
+     ],
+     "confidence": 0.5192,
+     "error": null,
+     "item_id": "prd-001",
+     "latency_s": 4.410743713378906e-05,
+     "metadata": {
+      "matched_item": "prd-001",
+      "self_match": true,
+      "similarity": 0.5191887858902787
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "46 CFR (46 CFR 54.15-13(b)(3), Rupture disks (modifies UG-127)) states: The normal maximum operating pressure multiplied by 1.3 must not exceed the nominal disk burst pressure. See 46 CFR 54.15-13(b)(3)."
+    },
+    {
+     "citations": [
+      "46 CFR 54.15-10(g)"
+     ],
+     "confidence": 0.6838,
+     "error": null,
+     "item_id": "prd-002",
+     "latency_s": 4.291534423828125e-05,
+     "metadata": {
+      "matched_item": "prd-002",
+      "self_match": true,
+      "similarity": 0.6838042128242976
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "46 CFR (46 CFR 54.15-10(g), Safety and relief valves (modifies UG-126)) states: The spring in a relief valve in service for pressures up to and including 250 pounds per square inch must not be reset for any pressure more than 10 percent above or 10 percent below that for which the relief valve is marked. See 46 CFR 54.15-10(g)."
+    },
+    {
+     "citations": [
+      "46 CFR 54.15-13(b)"
+     ],
+     "confidence": 0.5553,
+     "error": null,
+     "item_id": "prd-003",
+     "latency_s": 4.696846008300781e-05,
+     "metadata": {
+      "matched_item": "prd-010",
+      "self_match": false,
+      "similarity": 0.5552546903105056
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "46 CFR (46 CFR 54.15-13(b), Rupture disks (modifies UG-127)) states: the Commandant may authorize or require the use of a rupture disk in parallel with or in lieu of a spring-loaded safety or relief valve See 46 CFR 54.15-13(b)."
+    },
+    {
+     "citations": [
+      "46 CFR 54.15-5(d)"
+     ],
+     "confidence": 0.4602,
+     "error": null,
+     "item_id": "prd-004",
+     "latency_s": 4.291534423828125e-05,
+     "metadata": {
+      "matched_item": "prd-005",
+      "self_match": false,
+      "similarity": 0.4601981706679632
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "46 CFR (46 CFR 54.15-5(d), Protective devices (modifies UG-125)) states: capable of preventing the pressure from rising more than 20 percent above the maximum allowable working pressure of the vessel See 46 CFR 54.15-5(d)."
+    },
+    {
+     "citations": [
+      "46 CFR 54.15-10(c) and (d)"
+     ],
+     "confidence": 0.3617,
+     "error": null,
+     "item_id": "prd-005",
+     "latency_s": 4.100799560546875e-05,
+     "metadata": {
+      "matched_item": "prd-008",
+      "self_match": false,
+      "similarity": 0.36170182187233324
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "46 CFR (46 CFR 54.15-10(c) and (d), Safety and relief valves (modifies UG-126)) states: so that the disk can be lifted from its seat when the pressure in the vessel is 75 percent of that at which the valve is set to blow See 46 CFR 54.15-10(c) and (d)."
+    },
+    {
+     "citations": [
+      "46 CFR 54.15-10(c) and (d)"
+     ],
+     "confidence": 0.3704,
+     "error": null,
+     "item_id": "prd-006",
+     "latency_s": 4.100799560546875e-05,
+     "metadata": {
+      "matched_item": "prd-008",
+      "self_match": false,
+      "similarity": 0.3704024218619826
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "46 CFR (46 CFR 54.15-10(c) and (d), Safety and relief valves (modifies UG-126)) states: so that the disk can be lifted from its seat when the pressure in the vessel is 75 percent of that at which the valve is set to blow See 46 CFR 54.15-10(c) and (d)."
+    },
+    {
+     "citations": [
+      "46 CFR 54.15-13"
+     ],
+     "confidence": 0.4321,
+     "error": null,
+     "item_id": "prd-007",
+     "latency_s": 0.00010800361633300781,
+     "metadata": {
+      "matched_item": "prd-009",
+      "self_match": false,
+      "similarity": 0.4321258094829323
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "46 CFR (46 CFR 54.15-13, Rupture disks (modifies UG-127)) states: Operate at a pressure level which does not produce fatigue failure of the disk. See 46 CFR 54.15-13."
+    },
+    {
+     "citations": [
+      "46 CFR 54.15-10(c) and (d)"
+     ],
+     "confidence": 0.5348,
+     "error": null,
+     "item_id": "prd-008",
+     "latency_s": 0.00012683868408203125,
+     "metadata": {
+      "matched_item": "prd-008",
+      "self_match": true,
+      "similarity": 0.5348177438305824
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "46 CFR (46 CFR 54.15-10(c) and (d), Safety and relief valves (modifies UG-126)) states: so that the disk can be lifted from its seat when the pressure in the vessel is 75 percent of that at which the valve is set to blow See 46 CFR 54.15-10(c) and (d)."
+    },
+    {
+     "citations": [
+      "46 CFR 54.15-13(b)"
+     ],
+     "confidence": 0.2316,
+     "error": null,
+     "item_id": "prd-009",
+     "latency_s": 6.985664367675781e-05,
+     "metadata": {
+      "matched_item": "prd-010",
+      "self_match": false,
+      "similarity": 0.23156672640787782
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "46 CFR (46 CFR 54.15-13(b), Rupture disks (modifies UG-127)) states: the Commandant may authorize or require the use of a rupture disk in parallel with or in lieu of a spring-loaded safety or relief valve See 46 CFR 54.15-13(b)."
+    },
+    {
+     "citations": [
+      "46 CFR 54.15-10(c) and (d)"
+     ],
+     "confidence": 0.2646,
+     "error": null,
+     "item_id": "prd-010",
+     "latency_s": 5.91278076171875e-05,
+     "metadata": {
+      "matched_item": "prd-008",
+      "self_match": false,
+      "similarity": 0.26458534737645895
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "46 CFR (46 CFR 54.15-10(c) and (d), Safety and relief valves (modifies UG-126)) states: so that the disk can be lifted from its seat when the pressure in the vessel is 75 percent of that at which the valve is set to blow See 46 CFR 54.15-10(c) and (d)."
+    },
+    {
+     "citations": [
+      "46 CFR 54.15-5(f)"
+     ],
+     "confidence": 0.5988,
+     "error": null,
+     "item_id": "prd-011",
+     "latency_s": 5.1021575927734375e-05,
+     "metadata": {
+      "matched_item": "prd-011",
+      "self_match": true,
+      "similarity": 0.598836701620698
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "46 CFR (46 CFR 54.15-5(f), Protective devices (modifies UG-125)) states: In no case must the upper range of the gage be less than 1.2 times nor more than 2 times the pressure at which the relieving device is set to function. See 46 CFR 54.15-5(f)."
+    },
+    {
+     "citations": [
+      "46 CFR 54.15-13(b)"
+     ],
+     "confidence": 0.4483,
+     "error": null,
+     "item_id": "prd-012",
+     "latency_s": 4.506111145019531e-05,
+     "metadata": {
+      "matched_item": "prd-010",
+      "self_match": false,
+      "similarity": 0.44833493123334356
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "46 CFR (46 CFR 54.15-13(b), Rupture disks (modifies UG-127)) states: the Commandant may authorize or require the use of a rupture disk in parallel with or in lieu of a spring-loaded safety or relief valve See 46 CFR 54.15-13(b)."
+    },
+    {
+     "citations": [
+      "29 CFR 1910.119(e)(6)"
+     ],
+     "confidence": 0.5405,
+     "error": null,
+     "item_id": "psm-001",
+     "latency_s": 4.1961669921875e-05,
+     "metadata": {
+      "matched_item": "psm-001",
+      "self_match": true,
+      "similarity": 0.540502755748672
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1910.119(e)(6), Process safety management of highly hazardous chemicals) states: At least every five (5) years after the completion of the initial process hazard analysis, the process hazard analysis shall be updated and revalidated See 29 CFR 1910.119(e)(6)."
+    },
+    {
+     "citations": [
+      "29 CFR 1910.119(o)(1) and (o)(5)"
+     ],
+     "confidence": 0.2981,
+     "error": null,
+     "item_id": "psm-002",
+     "latency_s": 4.506111145019531e-05,
+     "metadata": {
+      "matched_item": "psm-002",
+      "self_match": true,
+      "similarity": 0.29807804506748237
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1910.119(o)(1) and (o)(5), Process safety management of highly hazardous chemicals) states: Employers shall retain the two (2) most recent compliance audit reports. See 29 CFR 1910.119(o)(1) and (o)(5)."
+    },
+    {
+     "citations": [
+      "29 CFR 1910.119(g)(2)"
+     ],
+     "confidence": 0.4587,
+     "error": null,
+     "item_id": "psm-003",
+     "latency_s": 4.1961669921875e-05,
+     "metadata": {
+      "matched_item": "psm-003",
+      "self_match": true,
+      "similarity": 0.45869015481779163
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1910.119(g)(2), Process safety management of highly hazardous chemicals) states: Refresher training shall be provided at least every three years, and more often if necessary See 29 CFR 1910.119(g)(2)."
+    },
+    {
+     "citations": [
+      "29 CFR 1910.119(m)(1) and (m)(2)"
+     ],
+     "confidence": 0.396,
+     "error": null,
+     "item_id": "psm-004",
+     "latency_s": 3.981590270996094e-05,
+     "metadata": {
+      "matched_item": "psm-004",
+      "self_match": true,
+      "similarity": 0.39603273359838104
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1910.119(m)(1) and (m)(2), Process safety management of highly hazardous chemicals) states: An incident investigation shall be initiated as promptly as possible, but not later than 48 hours following the incident. See 29 CFR 1910.119(m)(1) and (m)(2)."
+    },
+    {
+     "citations": [
+      "29 CFR 1910.119(m)(7) and (o)(5)"
+     ],
+     "confidence": 0.4515,
+     "error": null,
+     "item_id": "psm-005",
+     "latency_s": 4.506111145019531e-05,
+     "metadata": {
+      "matched_item": "psm-005",
+      "self_match": true,
+      "similarity": 0.45152050338215005
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1910.119(m)(7) and (o)(5), Process safety management of highly hazardous chemicals) states: Incident investigation reports shall be retained for five years. See 29 CFR 1910.119(m)(7) and (o)(5)."
+    },
+    {
+     "citations": [
+      "29 CFR 1910.119(a)(1)(ii)"
+     ],
+     "confidence": 0.338,
+     "error": null,
+     "item_id": "psm-006",
+     "latency_s": 4.1961669921875e-05,
+     "metadata": {
+      "matched_item": "psm-006",
+      "self_match": true,
+      "similarity": 0.3380154530966332
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1910.119(a)(1)(ii), Process safety management of highly hazardous chemicals) states: in a quantity of 10,000 pounds See 29 CFR 1910.119(a)(1)(ii)."
+    },
+    {
+     "citations": [
+      "40 CFR 68.42(a)"
+     ],
+     "confidence": 0.4501,
+     "error": null,
+     "item_id": "psm-007",
+     "latency_s": 4.1961669921875e-05,
+     "metadata": {
+      "matched_item": "psm-007",
+      "self_match": true,
+      "similarity": 0.450063403212611
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "40 CFR (40 CFR 68.42(a), Five-year accident history) states: The owner or operator shall include in the five-year accident history all accidental releases from covered processes that resulted in deaths, injuries, or significant property damage on site See 40 CFR 68.42(a)."
+    },
+    {
+     "citations": [
+      "40 CFR 68.79(a)"
+     ],
+     "confidence": 0.2811,
+     "error": null,
+     "item_id": "psm-008",
+     "latency_s": 4.076957702636719e-05,
+     "metadata": {
+      "matched_item": "psm-008",
+      "self_match": true,
+      "similarity": 0.2811298982686704
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "40 CFR (40 CFR 68.79(a), Compliance audits) states: at least every three years to verify that the procedures and practices developed under this subpart are adequate and are being followed See 40 CFR 68.79(a)."
+    },
+    {
+     "citations": [
+      "29 CFR 1904.39(a)(1)"
+     ],
+     "confidence": 0.5166,
+     "error": null,
+     "item_id": "rk-001",
+     "latency_s": 4.00543212890625e-05,
+     "metadata": {
+      "matched_item": "rk-001",
+      "self_match": true,
+      "similarity": 0.5165916942621506
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1904.39(a)(1), Reporting fatalities, hospitalizations, amputations, and losses of an eye as a result of work-related incidents to OSHA) states: Within eight (8) hours after the death of any employee as a result of a work-related incident, you must report the fatality See 29 CFR 1904.39(a)(1)."
+    },
+    {
+     "citations": [
+      "29 CFR 1904.39(a)(2)"
+     ],
+     "confidence": 0.4066,
+     "error": null,
+     "item_id": "rk-002",
+     "latency_s": 4.100799560546875e-05,
+     "metadata": {
+      "matched_item": "rk-002",
+      "self_match": true,
+      "similarity": 0.40660899748940255
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1904.39(a)(2), Reporting fatalities, hospitalizations, amputations, and losses of an eye as a result of work-related incidents to OSHA) states: Within twenty-four (24) hours after the in-patient hospitalization of one or more employees See 29 CFR 1904.39(a)(2)."
+    },
+    {
+     "citations": [
+      "29 CFR 1904.7(b)(3)(vii)"
+     ],
+     "confidence": 0.287,
+     "error": null,
+     "item_id": "rk-003",
+     "latency_s": 4.100799560546875e-05,
+     "metadata": {
+      "matched_item": "rk-003",
+      "self_match": true,
+      "similarity": 0.2869599122610789
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1904.7(b)(3)(vii), General recording criteria) states: the total days away at 180 calendar days See 29 CFR 1904.7(b)(3)(vii)."
+    },
+    {
+     "citations": [
+      "29 CFR 1904.7(b)(3)(i)"
+     ],
+     "confidence": 0.5286,
+     "error": null,
+     "item_id": "rk-004",
+     "latency_s": 3.981590270996094e-05,
+     "metadata": {
+      "matched_item": "rk-004",
+      "self_match": true,
+      "similarity": 0.5286245088405404
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1904.7(b)(3)(i), General recording criteria) states: you begin counting days away on the day after the injury occurred or the illness began See 29 CFR 1904.7(b)(3)(i)."
+    },
+    {
+     "citations": [
+      "29 CFR 1904.7(a)"
+     ],
+     "confidence": 0.5063,
+     "error": null,
+     "item_id": "rk-005",
+     "latency_s": 7.128715515136719e-05,
+     "metadata": {
+      "matched_item": "rk-010",
+      "self_match": false,
+      "similarity": 0.5063043300204415
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1904.7(a), General recording criteria) states: You must consider an injury or illness to meet the general recording criteria See 29 CFR 1904.7(a)."
+    },
+    {
+     "citations": [
+      "29 CFR 1904.7(b)(5)(iii)"
+     ],
+     "confidence": 0.5546,
+     "error": null,
+     "item_id": "rk-006",
+     "latency_s": 5.888938903808594e-05,
+     "metadata": {
+      "matched_item": "rk-006",
+      "self_match": true,
+      "similarity": 0.5545530130867824
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1904.7(b)(5)(iii), General recording criteria) states: this is a complete list of all treatments considered first aid for part 1904 purposes See 29 CFR 1904.7(b)(5)(iii)."
+    },
+    {
+     "citations": [
+      "29 CFR 1904.7(a)"
+     ],
+     "confidence": 0.3963,
+     "error": null,
+     "item_id": "rk-007",
+     "latency_s": 5.030632019042969e-05,
+     "metadata": {
+      "matched_item": "rk-005",
+      "self_match": false,
+      "similarity": 0.3962924086365768
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1904.7(a), General recording criteria) states: death, days away from work, restricted work or transfer to another job, medical treatment beyond first aid, or loss of consciousness See 29 CFR 1904.7(a)."
+    },
+    {
+     "citations": [
+      "29 CFR 1904.39(b)(3)"
+     ],
+     "confidence": 0.5432,
+     "error": null,
+     "item_id": "rk-008",
+     "latency_s": 4.458427429199219e-05,
+     "metadata": {
+      "matched_item": "rk-008",
+      "self_match": true,
+      "similarity": 0.5431823338561341
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1904.39(b)(3), Reporting fatalities, hospitalizations, amputations, and losses of an eye as a result of work-related incidents to OSHA) states: If the motor vehicle accident occurred on a public street or highway, but not in a construction work zone, you do not have to report See 29 CFR 1904.39(b)(3)."
+    },
+    {
+     "citations": [
+      "29 CFR 1904.7(a)"
+     ],
+     "confidence": 0.3448,
+     "error": null,
+     "item_id": "rk-009",
+     "latency_s": 6.127357482910156e-05,
+     "metadata": {
+      "matched_item": "rk-005",
+      "self_match": false,
+      "similarity": 0.34480083077325197
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1904.7(a), General recording criteria) states: death, days away from work, restricted work or transfer to another job, medical treatment beyond first aid, or loss of consciousness See 29 CFR 1904.7(a)."
+    },
+    {
+     "citations": [
+      "29 CFR 1904.39(b)(3)"
+     ],
+     "confidence": 0.1977,
+     "error": null,
+     "item_id": "rk-010",
+     "latency_s": 4.100799560546875e-05,
+     "metadata": {
+      "matched_item": "rk-008",
+      "self_match": false,
+      "similarity": 0.1977405968149285
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1904.39(b)(3), Reporting fatalities, hospitalizations, amputations, and losses of an eye as a result of work-related incidents to OSHA) states: If the motor vehicle accident occurred on a public street or highway, but not in a construction work zone, you do not have to report See 29 CFR 1904.39(b)(3)."
+    },
+    {
+     "citations": [
+      "29 CFR 1910.134(d)(3)(i)(A), Table 1"
+     ],
+     "confidence": 0.4997,
+     "error": null,
+     "item_id": "rp-001",
+     "latency_s": 9.608268737792969e-05,
+     "metadata": {
+      "matched_item": "rp-002",
+      "self_match": false,
+      "similarity": 0.49974401340012414
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1910.134(d)(3)(i)(A), Table 1, Respiratory protection) states: When using a combination respirator (e.g., airline respirators with an air-purifying filter), employers must ensure that the assigned protection factor is appropriate to the mode of operation See 29 CFR 1910.134(d)(3)(i)(A), Table 1."
+    },
+    {
+     "citations": [
+      "29 CFR 1910.134(d)(3)(i)(A), Table 1"
+     ],
+     "confidence": 0.4614,
+     "error": null,
+     "item_id": "rp-002",
+     "latency_s": 4.792213439941406e-05,
+     "metadata": {
+      "matched_item": "rp-002",
+      "self_match": true,
+      "similarity": 0.4613921825825466
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1910.134(d)(3)(i)(A), Table 1, Respiratory protection) states: When using a combination respirator (e.g., airline respirators with an air-purifying filter), employers must ensure that the assigned protection factor is appropriate to the mode of operation See 29 CFR 1910.134(d)(3)(i)(A), Table 1."
+    },
+    {
+     "citations": [
+      "29 CFR 1910.134(d)(2)(iii)"
+     ],
+     "confidence": 0.3993,
+     "error": null,
+     "item_id": "rp-003",
+     "latency_s": 4.291534423828125e-05,
+     "metadata": {
+      "matched_item": "rp-004",
+      "self_match": false,
+      "similarity": 0.39929210636993084
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1910.134(d)(2)(iii), Respiratory protection) states: All oxygen-deficient atmospheres shall be considered IDLH. See 29 CFR 1910.134(d)(2)(iii)."
+    },
+    {
+     "citations": [
+      "29 CFR 1910.134(d)(2)(iii)"
+     ],
+     "confidence": 0.3989,
+     "error": null,
+     "item_id": "rp-004",
+     "latency_s": 3.981590270996094e-05,
+     "metadata": {
+      "matched_item": "rp-004",
+      "self_match": true,
+      "similarity": 0.39892704445397065
+     },
+     "provenance": "retrieval_tfidf_baseline",
+     "text": "29 CFR (29 CFR 1910.134(d)(2)(iii), Respiratory protection) states: All oxygen-deficient atmospheres shall be considered IDLH. See 29 CFR 1910.134(d)(2)(iii)."
+    }
+   ],
+   "schema": "grounding_eval.run/1",
+   "scores": [
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.6666666666666666,
+     "confidence": 0.4429,
+     "domain": "confined_space",
+     "family": "cs.alternate_vs_reclassify",
+     "forbidden_asserted": [],
+     "item_id": "cs-001",
+     "item_type": "factual",
+     "numeric_coverage": null,
+     "outcome": "other_incorrect",
+     "pair_id": "cs-p1",
+     "risk_tier": "high",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_section",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.3333333333333333,
+     "confidence": 0.4851,
+     "domain": "confined_space",
+     "family": "cs.alternate_vs_reclassify",
+     "forbidden_asserted": [],
+     "item_id": "cs-002",
+     "item_type": "factual",
+     "numeric_coverage": null,
+     "outcome": "other_incorrect",
+     "pair_id": "cs-p1",
+     "risk_tier": "high",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_section",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.0,
+     "confidence": 0.3039,
+     "domain": "confined_space",
+     "family": "cs.atmospheric_testing",
+     "forbidden_asserted": [],
+     "item_id": "cs-003",
+     "item_type": "factual",
+     "numeric_coverage": null,
+     "outcome": "other_incorrect",
+     "pair_id": null,
+     "risk_tier": "high",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": false,
+     "concept_coverage": 1.0,
+     "confidence": 0.4848,
+     "domain": "confined_space",
+     "family": "cs.atmosphere_criteria",
+     "forbidden_asserted": [],
+     "item_id": "cs-004",
+     "item_type": "factual",
+     "numeric_coverage": 1.0,
+     "outcome": "correct",
+     "pair_id": "cs-p2",
+     "risk_tier": "high",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": false,
+     "concept_coverage": 1.0,
+     "confidence": 0.4493,
+     "domain": "confined_space",
+     "family": "cs.atmosphere_criteria",
+     "forbidden_asserted": [],
+     "item_id": "cs-005",
+     "item_type": "factual",
+     "numeric_coverage": 1.0,
+     "outcome": "correct",
+     "pair_id": "cs-p2",
+     "risk_tier": "high",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.6666666666666666,
+     "confidence": 0.3963,
+     "domain": "confined_space",
+     "family": "cs.roles",
+     "forbidden_asserted": [],
+     "item_id": "cs-006",
+     "item_type": "factual",
+     "numeric_coverage": null,
+     "outcome": "other_incorrect",
+     "pair_id": "cs-p3",
+     "risk_tier": "high",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.6,
+     "confidence": 0.3772,
+     "domain": "confined_space",
+     "family": "cs.roles",
+     "forbidden_asserted": [],
+     "item_id": "cs-007",
+     "item_type": "factual",
+     "numeric_coverage": null,
+     "outcome": "other_incorrect",
+     "pair_id": "cs-p3",
+     "risk_tier": "high",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.25,
+     "confidence": 0.6298,
+     "domain": "confined_space",
+     "family": "cs.space_classification",
+     "forbidden_asserted": [],
+     "item_id": "cs-008",
+     "item_type": "factual",
+     "numeric_coverage": null,
+     "outcome": "other_incorrect",
+     "pair_id": null,
+     "risk_tier": "high",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.6,
+     "confidence": 0.2821,
+     "domain": "machine_electrical_fire",
+     "family": "el.deenergized_work",
+     "forbidden_asserted": [],
+     "item_id": "el-001",
+     "item_type": "factual",
+     "numeric_coverage": 1.0,
+     "outcome": "other_incorrect",
+     "pair_id": "el-p1",
+     "risk_tier": "high",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.5,
+     "confidence": 0.4087,
+     "domain": "machine_electrical_fire",
+     "family": "el.ppe",
+     "forbidden_asserted": [],
+     "item_id": "el-002",
+     "item_type": "factual",
+     "numeric_coverage": null,
+     "outcome": "other_incorrect",
+     "pair_id": "el-p1",
+     "risk_tier": "medium",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.3333333333333333,
+     "confidence": 0.487,
+     "domain": "machine_electrical_fire",
+     "family": "fe.inspection_intervals",
+     "forbidden_asserted": [],
+     "item_id": "fe-001",
+     "item_type": "factual",
+     "numeric_coverage": null,
+     "outcome": "other_incorrect",
+     "pair_id": null,
+     "risk_tier": "medium",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.0,
+     "confidence": 0.3221,
+     "domain": "machine_electrical_fire",
+     "family": "fe.category_error",
+     "forbidden_asserted": [],
+     "item_id": "fe-002",
+     "item_type": "category_error",
+     "numeric_coverage": null,
+     "outcome": "other_incorrect",
+     "pair_id": null,
+     "risk_tier": "medium",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.5,
+     "confidence": 0.4276,
+     "domain": "machine_electrical_fire",
+     "family": "fl.classification",
+     "forbidden_asserted": [],
+     "item_id": "fl-001",
+     "item_type": "factual",
+     "numeric_coverage": 0.5,
+     "outcome": "other_incorrect",
+     "pair_id": "fl-p1",
+     "risk_tier": "medium",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.25,
+     "confidence": 0.5173,
+     "domain": "machine_electrical_fire",
+     "family": "fl.classification",
+     "forbidden_asserted": [],
+     "item_id": "fl-002",
+     "item_type": "factual",
+     "numeric_coverage": 0.3333333333333333,
+     "outcome": "other_incorrect",
+     "pair_id": "fl-p1",
+     "risk_tier": "medium",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.0,
+     "confidence": 0.3258,
+     "domain": "hazard_communication",
+     "family": "hc.label_elements",
+     "forbidden_asserted": [],
+     "item_id": "hc-001",
+     "item_type": "factual",
+     "numeric_coverage": null,
+     "outcome": "other_incorrect",
+     "pair_id": "hc-p1",
+     "risk_tier": "medium",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.5,
+     "confidence": 0.6576,
+     "domain": "hazard_communication",
+     "family": "hc.label_elements",
+     "forbidden_asserted": [],
+     "item_id": "hc-002",
+     "item_type": "factual",
+     "numeric_coverage": null,
+     "outcome": "other_incorrect",
+     "pair_id": "hc-p1",
+     "risk_tier": "medium",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.0,
+     "confidence": 0.4006,
+     "domain": "hazard_communication",
+     "family": "hc.signal_words",
+     "forbidden_asserted": [],
+     "item_id": "hc-003",
+     "item_type": "factual",
+     "numeric_coverage": null,
+     "outcome": "other_incorrect",
+     "pair_id": null,
+     "risk_tier": "medium",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.2857142857142857,
+     "confidence": 0.314,
+     "domain": "hazard_communication",
+     "family": "hc.sds_structure",
+     "forbidden_asserted": [],
+     "item_id": "hc-004",
+     "item_type": "factual",
+     "numeric_coverage": 0.0,
+     "outcome": "other_incorrect",
+     "pair_id": null,
+     "risk_tier": "medium",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": false,
+     "concept_coverage": 1.0,
+     "confidence": 0.7663,
+     "domain": "hazard_communication",
+     "family": "hc.pictograms",
+     "forbidden_asserted": [],
+     "item_id": "hc-005",
+     "item_type": "factual",
+     "numeric_coverage": 1.0,
+     "outcome": "correct",
+     "pair_id": null,
+     "risk_tier": "low",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_section",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.25,
+     "confidence": 0.387,
+     "domain": "respiratory_protection_and_noise",
+     "family": "hn.thresholds",
+     "forbidden_asserted": [],
+     "item_id": "hn-001",
+     "item_type": "factual",
+     "numeric_coverage": 0.0,
+     "outcome": "other_incorrect",
+     "pair_id": "hn-p1",
+     "risk_tier": "medium",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": false,
+     "concept_coverage": 1.0,
+     "confidence": 0.4299,
+     "domain": "respiratory_protection_and_noise",
+     "family": "hn.thresholds",
+     "forbidden_asserted": [],
+     "item_id": "hn-002",
+     "item_type": "factual",
+     "numeric_coverage": 1.0,
+     "outcome": "correct",
+     "pair_id": "hn-p1",
+     "risk_tier": "medium",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.25,
+     "confidence": 0.2874,
+     "domain": "respiratory_protection_and_noise",
+     "family": "hn.audiometry_timing",
+     "forbidden_asserted": [],
+     "item_id": "hn-003",
+     "item_type": "factual",
+     "numeric_coverage": 1.0,
+     "outcome": "other_incorrect",
+     "pair_id": null,
+     "risk_tier": "medium",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.3333333333333333,
+     "confidence": 0.5764,
+     "domain": "lockout_tagout",
+     "family": "loto.inspection_vs_training",
+     "forbidden_asserted": [],
+     "item_id": "loto-001",
+     "item_type": "factual",
+     "numeric_coverage": null,
+     "outcome": "other_incorrect",
+     "pair_id": "loto-p1",
+     "risk_tier": "high",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.6666666666666666,
+     "confidence": 0.5041,
+     "domain": "lockout_tagout",
+     "family": "loto.inspection_vs_training",
+     "forbidden_asserted": [],
+     "item_id": "loto-002",
+     "item_type": "factual",
+     "numeric_coverage": null,
+     "outcome": "other_incorrect",
+     "pair_id": "loto-p1",
+     "risk_tier": "medium",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": false,
+     "concept_coverage": 1.0,
+     "confidence": 0.2803,
+     "domain": "lockout_tagout",
+     "family": "loto.scope_exclusions",
+     "forbidden_asserted": [],
+     "item_id": "loto-003",
+     "item_type": "factual",
+     "numeric_coverage": null,
+     "outcome": "correct",
+     "pair_id": "loto-p2",
+     "risk_tier": "high",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_section",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.0,
+     "confidence": 0.2412,
+     "domain": "lockout_tagout",
+     "family": "loto.scope_exclusions",
+     "forbidden_asserted": [],
+     "item_id": "loto-004",
+     "item_type": "factual",
+     "numeric_coverage": null,
+     "outcome": "other_incorrect",
+     "pair_id": "loto-p2",
+     "risk_tier": "high",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.6666666666666666,
+     "confidence": 0.4975,
+     "domain": "lockout_tagout",
+     "family": "loto.lockout_vs_tagout",
+     "forbidden_asserted": [],
+     "item_id": "loto-005",
+     "item_type": "factual",
+     "numeric_coverage": null,
+     "outcome": "other_incorrect",
+     "pair_id": "loto-p3",
+     "risk_tier": "high",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.75,
+     "confidence": 0.7666,
+     "domain": "lockout_tagout",
+     "family": "loto.lockout_vs_tagout",
+     "forbidden_asserted": [],
+     "item_id": "loto-006",
+     "item_type": "factual",
+     "numeric_coverage": null,
+     "outcome": "correct",
+     "pair_id": "loto-p3",
+     "risk_tier": "high",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": false,
+     "concept_coverage": 1.0,
+     "confidence": 0.5611,
+     "domain": "lockout_tagout",
+     "family": "loto.group_vs_shift",
+     "forbidden_asserted": [],
+     "item_id": "loto-007",
+     "item_type": "factual",
+     "numeric_coverage": null,
+     "outcome": "correct",
+     "pair_id": "loto-p4",
+     "risk_tier": "high",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.6666666666666666,
+     "confidence": 0.4772,
+     "domain": "lockout_tagout",
+     "family": "loto.group_vs_shift",
+     "forbidden_asserted": [],
+     "item_id": "loto-008",
+     "item_type": "factual",
+     "numeric_coverage": null,
+     "outcome": "other_incorrect",
+     "pair_id": "loto-p4",
+     "risk_tier": "medium",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": false,
+     "concept_coverage": 1.0,
+     "confidence": 0.4297,
+     "domain": "lockout_tagout",
+     "family": "loto.program_elements",
+     "forbidden_asserted": [],
+     "item_id": "loto-009",
+     "item_type": "factual",
+     "numeric_coverage": null,
+     "outcome": "correct",
+     "pair_id": null,
+     "risk_tier": "medium",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_section",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.0,
+     "confidence": 0.2264,
+     "domain": "lockout_tagout",
+     "family": "loto.category_error",
+     "forbidden_asserted": [],
+     "item_id": "loto-010",
+     "item_type": "category_error",
+     "numeric_coverage": null,
+     "outcome": "other_incorrect",
+     "pair_id": null,
+     "risk_tier": "medium",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.25,
+     "confidence": 0.3454,
+     "domain": "machine_electrical_fire",
+     "family": "mg.guarding_scope",
+     "forbidden_asserted": [],
+     "item_id": "mg-001",
+     "item_type": "factual",
+     "numeric_coverage": null,
+     "outcome": "other_incorrect",
+     "pair_id": "mg-p1",
+     "risk_tier": "high",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "wrong",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.0,
+     "confidence": 0.217,
+     "domain": "machine_electrical_fire",
+     "family": "mg.guarding_scope",
+     "forbidden_asserted": [],
+     "item_id": "mg-002",
+     "item_type": "factual",
+     "numeric_coverage": 0.0,
+     "outcome": "other_incorrect",
+     "pair_id": "mg-p1",
+     "risk_tier": "medium",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": [
+      "ASME UG 126"
+     ]
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": true,
+     "concept_coverage": 0.75,
+     "confidence": 0.5192,
+     "domain": "pressure_relief_devices",
+     "family": "prd.operating_margin",
+     "forbidden_asserted": [],
+     "item_id": "prd-001",
+     "item_type": "factual",
+     "numeric_coverage": 1.0,
+     "outcome": "correct",
+     "pair_id": "prd-p1",
+     "risk_tier": "high",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": true,
+     "concept_coverage": 1.0,
+     "confidence": 0.6838,
+     "domain": "pressure_relief_devices",
+     "family": "prd.operating_margin",
+     "forbidden_asserted": [],
+     "item_id": "prd-002",
+     "item_type": "factual",
+     "numeric_coverage": 1.0,
+     "outcome": "correct",
+     "pair_id": "prd-p1",
+     "risk_tier": "high",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_section",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.0,
+     "confidence": 0.5553,
+     "domain": "pressure_relief_devices",
+     "family": "prd.fire_case_capacity",
+     "forbidden_asserted": [],
+     "item_id": "prd-003",
+     "item_type": "factual",
+     "numeric_coverage": 0.0,
+     "outcome": "other_incorrect",
+     "pair_id": "prd-p2",
+     "risk_tier": "high",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": [
+      "ASME UG 127"
+     ]
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [
+      "20 percent above"
+     ],
+     "citation_grade": "correct_section",
+     "cited_cross_reference": true,
+     "concept_coverage": 0.5,
+     "confidence": 0.4602,
+     "domain": "pressure_relief_devices",
+     "family": "prd.fire_case_capacity",
+     "forbidden_asserted": [],
+     "item_id": "prd-004",
+     "item_type": "factual",
+     "numeric_coverage": 0.0,
+     "outcome": "other_incorrect",
+     "pair_id": "prd-p2",
+     "risk_tier": "high",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "wrong",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.0,
+     "confidence": 0.3617,
+     "domain": "pressure_relief_devices",
+     "family": "prd.fire_case_capacity",
+     "forbidden_asserted": [],
+     "item_id": "prd-005",
+     "item_type": "factual",
+     "numeric_coverage": 0.0,
+     "outcome": "other_incorrect",
+     "pair_id": null,
+     "risk_tier": "high",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": [
+      "ASME UG 126"
+     ]
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_section",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.5,
+     "confidence": 0.3704,
+     "domain": "pressure_relief_devices",
+     "family": "prd.asme_paragraph_mapping",
+     "forbidden_asserted": [],
+     "item_id": "prd-006",
+     "item_type": "factual",
+     "numeric_coverage": null,
+     "outcome": "other_incorrect",
+     "pair_id": "prd-p3",
+     "risk_tier": "medium",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": [
+      "ASME UG 126"
+     ]
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_section",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.0,
+     "confidence": 0.4321,
+     "domain": "pressure_relief_devices",
+     "family": "prd.installation_orientation",
+     "forbidden_asserted": [],
+     "item_id": "prd-007",
+     "item_type": "factual",
+     "numeric_coverage": null,
+     "outcome": "other_incorrect",
+     "pair_id": "prd-p3",
+     "risk_tier": "high",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": [
+      "ASME UG 127"
+     ]
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.5,
+     "confidence": 0.5348,
+     "domain": "pressure_relief_devices",
+     "family": "prd.lifting_device",
+     "forbidden_asserted": [],
+     "item_id": "prd-008",
+     "item_type": "factual",
+     "numeric_coverage": 1.0,
+     "outcome": "other_incorrect",
+     "pair_id": null,
+     "risk_tier": "medium",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": [
+      "ASME UG 126"
+     ]
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_section",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.0,
+     "confidence": 0.2316,
+     "domain": "pressure_relief_devices",
+     "family": "prd.category_error",
+     "forbidden_asserted": [],
+     "item_id": "prd-009",
+     "item_type": "category_error",
+     "numeric_coverage": null,
+     "outcome": "other_incorrect",
+     "pair_id": null,
+     "risk_tier": "high",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": [
+      "ASME UG 127"
+     ]
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "wrong",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.0,
+     "confidence": 0.2646,
+     "domain": "pressure_relief_devices",
+     "family": "prd.category_error",
+     "forbidden_asserted": [],
+     "item_id": "prd-010",
+     "item_type": "category_error",
+     "numeric_coverage": null,
+     "outcome": "other_incorrect",
+     "pair_id": null,
+     "risk_tier": "high",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": [
+      "ASME UG 126"
+     ]
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": false,
+     "concept_coverage": 1.0,
+     "confidence": 0.5988,
+     "domain": "pressure_relief_devices",
+     "family": "prd.instrumentation",
+     "forbidden_asserted": [],
+     "item_id": "prd-011",
+     "item_type": "factual",
+     "numeric_coverage": 1.0,
+     "outcome": "correct",
+     "pair_id": null,
+     "risk_tier": "medium",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": [
+      "ASME UG 125"
+     ]
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_section",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.75,
+     "confidence": 0.4483,
+     "domain": "pressure_relief_devices",
+     "family": "prd.combination_installation",
+     "forbidden_asserted": [],
+     "item_id": "prd-012",
+     "item_type": "factual",
+     "numeric_coverage": null,
+     "outcome": "correct",
+     "pair_id": null,
+     "risk_tier": "medium",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": [
+      "ASME UG 127"
+     ]
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.6666666666666666,
+     "confidence": 0.5405,
+     "domain": "process_safety_management",
+     "family": "psm.recurring_intervals",
+     "forbidden_asserted": [],
+     "item_id": "psm-001",
+     "item_type": "factual",
+     "numeric_coverage": 1.0,
+     "outcome": "other_incorrect",
+     "pair_id": "psm-p1",
+     "risk_tier": "high",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.5,
+     "confidence": 0.2981,
+     "domain": "process_safety_management",
+     "family": "psm.recurring_intervals",
+     "forbidden_asserted": [],
+     "item_id": "psm-002",
+     "item_type": "factual",
+     "numeric_coverage": 0.5,
+     "outcome": "other_incorrect",
+     "pair_id": "psm-p1",
+     "risk_tier": "high",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.5,
+     "confidence": 0.4587,
+     "domain": "process_safety_management",
+     "family": "psm.recurring_intervals",
+     "forbidden_asserted": [],
+     "item_id": "psm-003",
+     "item_type": "factual",
+     "numeric_coverage": 1.0,
+     "outcome": "other_incorrect",
+     "pair_id": null,
+     "risk_tier": "medium",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.3333333333333333,
+     "confidence": 0.396,
+     "domain": "process_safety_management",
+     "family": "psm.incident_investigation",
+     "forbidden_asserted": [],
+     "item_id": "psm-004",
+     "item_type": "factual",
+     "numeric_coverage": 1.0,
+     "outcome": "other_incorrect",
+     "pair_id": "psm-p2",
+     "risk_tier": "high",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.6666666666666666,
+     "confidence": 0.4515,
+     "domain": "process_safety_management",
+     "family": "psm.incident_investigation",
+     "forbidden_asserted": [],
+     "item_id": "psm-005",
+     "item_type": "factual",
+     "numeric_coverage": 1.0,
+     "outcome": "other_incorrect",
+     "pair_id": "psm-p2",
+     "risk_tier": "medium",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.5,
+     "confidence": 0.338,
+     "domain": "process_safety_management",
+     "family": "psm.applicability",
+     "forbidden_asserted": [],
+     "item_id": "psm-006",
+     "item_type": "factual",
+     "numeric_coverage": 1.0,
+     "outcome": "other_incorrect",
+     "pair_id": null,
+     "risk_tier": "high",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.75,
+     "confidence": 0.4501,
+     "domain": "process_safety_management",
+     "family": "psm.osha_vs_epa",
+     "forbidden_asserted": [],
+     "item_id": "psm-007",
+     "item_type": "factual",
+     "numeric_coverage": null,
+     "outcome": "correct",
+     "pair_id": "psm-p3",
+     "risk_tier": "medium",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.3333333333333333,
+     "confidence": 0.2811,
+     "domain": "process_safety_management",
+     "family": "psm.osha_vs_epa",
+     "forbidden_asserted": [],
+     "item_id": "psm-008",
+     "item_type": "factual",
+     "numeric_coverage": null,
+     "outcome": "other_incorrect",
+     "pair_id": "psm-p3",
+     "risk_tier": "medium",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": false,
+     "concept_coverage": 1.0,
+     "confidence": 0.5166,
+     "domain": "injury_recordkeeping",
+     "family": "rk.reporting_deadlines",
+     "forbidden_asserted": [],
+     "item_id": "rk-001",
+     "item_type": "factual",
+     "numeric_coverage": 1.0,
+     "outcome": "correct",
+     "pair_id": "rk-p1",
+     "risk_tier": "high",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": false,
+     "concept_coverage": 1.0,
+     "confidence": 0.4066,
+     "domain": "injury_recordkeeping",
+     "family": "rk.reporting_deadlines",
+     "forbidden_asserted": [],
+     "item_id": "rk-002",
+     "item_type": "factual",
+     "numeric_coverage": 1.0,
+     "outcome": "correct",
+     "pair_id": "rk-p1",
+     "risk_tier": "high",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.6666666666666666,
+     "confidence": 0.287,
+     "domain": "injury_recordkeeping",
+     "family": "rk.day_counting",
+     "forbidden_asserted": [],
+     "item_id": "rk-003",
+     "item_type": "factual",
+     "numeric_coverage": 1.0,
+     "outcome": "other_incorrect",
+     "pair_id": "rk-p2",
+     "risk_tier": "medium",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": false,
+     "concept_coverage": 1.0,
+     "confidence": 0.5286,
+     "domain": "injury_recordkeeping",
+     "family": "rk.day_counting",
+     "forbidden_asserted": [],
+     "item_id": "rk-004",
+     "item_type": "factual",
+     "numeric_coverage": null,
+     "outcome": "correct",
+     "pair_id": "rk-p2",
+     "risk_tier": "medium",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.0,
+     "confidence": 0.5063,
+     "domain": "injury_recordkeeping",
+     "family": "rk.general_criteria",
+     "forbidden_asserted": [],
+     "item_id": "rk-005",
+     "item_type": "factual",
+     "numeric_coverage": null,
+     "outcome": "other_incorrect",
+     "pair_id": null,
+     "risk_tier": "high",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": false,
+     "concept_coverage": 1.0,
+     "confidence": 0.5546,
+     "domain": "injury_recordkeeping",
+     "family": "rk.first_aid",
+     "forbidden_asserted": [],
+     "item_id": "rk-006",
+     "item_type": "factual",
+     "numeric_coverage": null,
+     "outcome": "correct",
+     "pair_id": "rk-p3",
+     "risk_tier": "high",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_section",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.0,
+     "confidence": 0.3963,
+     "domain": "injury_recordkeeping",
+     "family": "rk.first_aid",
+     "forbidden_asserted": [],
+     "item_id": "rk-007",
+     "item_type": "factual",
+     "numeric_coverage": null,
+     "outcome": "other_incorrect",
+     "pair_id": "rk-p3",
+     "risk_tier": "medium",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.6666666666666666,
+     "confidence": 0.5432,
+     "domain": "injury_recordkeeping",
+     "family": "rk.record_vs_report",
+     "forbidden_asserted": [],
+     "item_id": "rk-008",
+     "item_type": "factual",
+     "numeric_coverage": null,
+     "outcome": "other_incorrect",
+     "pair_id": null,
+     "risk_tier": "high",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_section",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.0,
+     "confidence": 0.3448,
+     "domain": "injury_recordkeeping",
+     "family": "rk.significant_diagnosis",
+     "forbidden_asserted": [],
+     "item_id": "rk-009",
+     "item_type": "factual",
+     "numeric_coverage": null,
+     "outcome": "other_incorrect",
+     "pair_id": null,
+     "risk_tier": "medium",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "wrong",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.0,
+     "confidence": 0.1977,
+     "domain": "injury_recordkeeping",
+     "family": "rk.category_error",
+     "forbidden_asserted": [],
+     "item_id": "rk-010",
+     "item_type": "category_error",
+     "numeric_coverage": null,
+     "outcome": "other_incorrect",
+     "pair_id": null,
+     "risk_tier": "medium",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.3333333333333333,
+     "confidence": 0.4997,
+     "domain": "respiratory_protection_and_noise",
+     "family": "rp.assigned_protection_factors",
+     "forbidden_asserted": [],
+     "item_id": "rp-001",
+     "item_type": "factual",
+     "numeric_coverage": 0.0,
+     "outcome": "other_incorrect",
+     "pair_id": "rp-p1",
+     "risk_tier": "high",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.0,
+     "confidence": 0.4614,
+     "domain": "respiratory_protection_and_noise",
+     "family": "rp.assigned_protection_factors",
+     "forbidden_asserted": [],
+     "item_id": "rp-002",
+     "item_type": "factual",
+     "numeric_coverage": 0.0,
+     "outcome": "other_incorrect",
+     "pair_id": "rp-p1",
+     "risk_tier": "high",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_section",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.0,
+     "confidence": 0.3993,
+     "domain": "respiratory_protection_and_noise",
+     "family": "rp.idlh",
+     "forbidden_asserted": [],
+     "item_id": "rp-003",
+     "item_type": "factual",
+     "numeric_coverage": 0.0,
+     "outcome": "other_incorrect",
+     "pair_id": "rp-p2",
+     "risk_tier": "high",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    },
+    {
+     "abstained": false,
+     "adjacent_hits": [],
+     "citation_grade": "correct_clause",
+     "cited_cross_reference": false,
+     "concept_coverage": 0.25,
+     "confidence": 0.3989,
+     "domain": "respiratory_protection_and_noise",
+     "family": "rp.idlh",
+     "forbidden_asserted": [],
+     "item_id": "rp-004",
+     "item_type": "factual",
+     "numeric_coverage": null,
+     "outcome": "other_incorrect",
+     "pair_id": "rp-p2",
+     "risk_tier": "high",
+     "unscorable_reason": null,
+     "unsupported_paywalled_citations": []
+    }
+   ],
+   "scoring_config": {
+    "adjacent_low_coverage": 0.5,
+    "adjacent_min_terms": 2,
+    "coverage_threshold": 0.75,
+    "policy": "safety",
+    "policy_weights": {
+     "abstained": 0.25,
+     "abstained_acceptable": 0.9,
+     "adjacent_substitution": -1.0,
+     "correct": 1.0,
+     "other_incorrect": -0.5,
+     "unscorable": 0.0
+    },
+    "require_full_numeric": true,
+    "risk_weights": {
+     "high": 1.0,
+     "low": 0.3,
+     "medium": 0.6
+    }
+   },
+   "seed": null,
+   "started_utc": "2026-09-07T21:34:56Z"
+  }
+ ],
+ "schema": "grounding_eval.baselines/1"
+}
