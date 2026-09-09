@@ -1,5 +1,7 @@
 # ehs-ai-grounding-eval
 
+[![tests](https://github.com/priyatham9/ehs-ai-grounding-eval/actions/workflows/tests.yml/badge.svg)](https://github.com/priyatham9/ehs-ai-grounding-eval/actions/workflows/tests.yml)
+
 A benchmark for measuring whether an AI system's answers to safety-critical
 technical questions are grounded in authoritative sources, or generated from
 parametric memory and merely sound authoritative.
@@ -346,7 +348,7 @@ Python 3.9+, pandas and numpy. No other dependencies, no build step.
 python3 -m grounding_eval.cli corpus      # describe the corpus
 python3 -m grounding_eval.cli validate    # corpus + stored source verification
 python3 -m grounding_eval.cli demo        # labelled demonstration run
-python3 -m unittest discover -s tests -v  # 114 tests
+python3 -m unittest discover -s tests -v  # 121 tests
 ```
 
 The demo prints the mock banner, a per-adapter summary and a paired comparison.
@@ -440,7 +442,7 @@ docs/methodology.md      construction and scoring, in reconstructable detail
 docs/preregistration.md  analysis plan, frozen before any real evaluation
 docs/limitations.md      what could change a conclusion, ordered by likelihood
 synthetic/               the demonstration fixture generator and its output
-tests/                   114 tests
+tests/                   121 tests
 ```
 
 Four mock profiles are available - `ungrounded`, `pseudo_grounded`, `grounded`,
