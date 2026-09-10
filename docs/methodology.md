@@ -216,6 +216,27 @@ the pseudo-grounded arm retrieves over a plausible but unauthoritative corpus.
 That arm is the one worth running: it is where most deployments sit, it is the
 least studied, and it is where retrieval may perform worse than none.
 
+### Running a real system
+
+`grounding_eval/adapters/anthropic_api.py` calls the Anthropic Messages API over
+`urllib.request` and implements the `ungrounded` and `grounded` arms above (the
+pseudo-grounded arm is not implemented by this adapter; it would need a
+plausible-but-unauthoritative corpus, which this repository does not carry).
+It reads only `item.question`, and in the grounded arm, retrieved excerpts from
+the corpus's own source text via `RetrievalAdapter`. It never reads the answer
+key.
+
+```bash
+export ANTHROPIC_API_KEY=sk-...
+python3 -m grounding_eval.cli run --adapter anthropic --dry-run   # no network call
+python3 -m grounding_eval.cli run --adapter anthropic --model claude-opus-5
+python3 -m grounding_eval.cli run --adapter anthropic --model claude-opus-5 --grounded
+```
+
+A run made this way is a real result, not a demonstration: its responses carry
+provenance `anthropic_messages_api`, not the mock banner, and `results/` is
+gitignored so it is not committed unless added explicitly with `git add -f`.
+
 ## 8. Reporting rules
 
 - Outcome composition, never a single accuracy number. Adjacent substitutions and

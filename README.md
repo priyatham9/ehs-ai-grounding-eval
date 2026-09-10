@@ -348,7 +348,7 @@ Python 3.9+, pandas and numpy. No other dependencies, no build step.
 python3 -m grounding_eval.cli corpus      # describe the corpus
 python3 -m grounding_eval.cli validate    # corpus + stored source verification
 python3 -m grounding_eval.cli demo        # labelled demonstration run
-python3 -m unittest discover -s tests -v  # 121 tests
+python3 -m unittest discover -s tests -v  # 147 tests
 ```
 
 The demo prints the mock banner, a per-adapter summary and a paired comparison.
@@ -361,6 +361,53 @@ rather than the adapter's self-reported name.
 Reproducibility: fixed seeds recorded in every run file, deterministic scoring, a
 corpus digest that changes when any identity-bearing field changes, and a refusal
 to report two runs together if they were scored against different corpus versions.
+
+---
+
+## Running a real system
+
+`grounding_eval/adapters/anthropic_api.py` calls the real Anthropic Messages API
+using only `urllib.request` from the standard library. It is a real system under
+test, not a fixture: its responses do not carry the mock provenance string, and a
+run file it produces is never written with the `mock__` filename prefix or the
+demonstration banner.
+
+Set an API key and run:
+
+```bash
+export ANTHROPIC_API_KEY=sk-...
+
+# See what will be sent, with no network calls and no key required:
+python3 -m grounding_eval.cli run --adapter anthropic --dry-run
+python3 -m grounding_eval.cli run --adapter anthropic --grounded --dry-run
+
+# Ungrounded arm: the question with no supporting context.
+python3 -m grounding_eval.cli run --adapter anthropic --model claude-opus-5
+
+# Grounded arm: the best-matching retrieved excerpt is placed in the prompt,
+# with an instruction to answer only from it.
+python3 -m grounding_eval.cli run --adapter anthropic --model claude-opus-5 --grounded
+```
+
+Both arms use only `item.question` (and, in the grounded arm, the corpus's own
+source text via the same TF-IDF retriever `retrieval_tfidf` uses) - never the
+answer key, per the rule in `adapters/base.py` and methodology section 7.
+
+Cost estimate: the corpus has 68 items. `--dry-run` reports the actual estimate
+for whatever arm and model you pass; as of writing, the ungrounded arm is about
+2,900 estimated input tokens across the whole corpus and the grounded arm is
+about 6,900, both trivial next to `claude-opus-5` pricing ($5/$25 per 1M
+tokens) - a full run costs a few cents. Re-run `--dry-run` before a real run
+if the corpus, model, or arm has changed; do not treat the numbers above as
+current.
+
+`results/` is gitignored (`results/*` in `.gitignore`), so a real run is not
+committed by default. To keep a run file, add it explicitly:
+
+```bash
+git add -f results/anthropic_api-ungrounded__repeat00.json
+git commit -m "Record a real run"
+```
 
 ---
 

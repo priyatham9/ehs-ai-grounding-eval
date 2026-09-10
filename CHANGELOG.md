@@ -3,6 +3,13 @@
 All notable changes to this project are documented here. The format follows
 Keep a Changelog and this project uses semantic versioning.
 
+## [Unreleased]
+
+### Added
+- Anthropic Messages API adapter (`grounding_eval/adapters/anthropic_api.py`), using only `urllib.request`, with ungrounded and grounded arms, bounded retry with backoff, and a `--dry-run` mode
+- `python3 -m grounding_eval.cli run --adapter anthropic` for running a real system under test; run files are not labelled as mock demonstrations
+- Tests for the adapter (`tests/test_anthropic_adapter.py`), all network access mocked
+
 ## [0.1.0] - 2026-09-09
 
 ### Added

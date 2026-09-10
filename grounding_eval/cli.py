@@ -3,10 +3,14 @@
     python3 -m grounding_eval.cli corpus            # describe the corpus
     python3 -m grounding_eval.cli validate          # validate corpus + verification report
     python3 -m grounding_eval.cli demo              # run the mock fixture end to end
+    python3 -m grounding_eval.cli run --adapter anthropic --model <id> [--grounded]
+                                                      # run a real system under test
     python3 -m grounding_eval.cli report <dir>      # re-report stored run files
 
-The ``demo`` subcommand is the only one that produces numbers, and everything it
-writes is labelled as a demonstration fixture.
+The ``demo`` subcommand is the only one that produces numbers from a fixture, and
+everything it writes is labelled as a demonstration. The ``run`` subcommand
+produces numbers from a real system under test (currently only ``--adapter
+anthropic``) and is never labelled as a mock.
 """
 
 from __future__ import annotations
@@ -26,6 +30,7 @@ from .schema import AdapterResponse, ItemScore, ItemType, Outcome
 from .scoring import ScoringConfig
 
 DEFAULT_RESULTS_DIR = os.path.join(REPO_ROOT, "results", "demo")
+DEFAULT_REAL_RESULTS_DIR = os.path.join(REPO_ROOT, "results")
 
 
 def _cmd_corpus(args: argparse.Namespace) -> int:
@@ -120,6 +125,70 @@ def _cmd_demo(args: argparse.Namespace) -> int:
     return 0
 
 
+def _build_adapter(args: argparse.Namespace, corpus):
+    if args.adapter == "anthropic":
+        from .adapters.anthropic_api import DEFAULT_MODEL, AnthropicAdapter
+
+        return AnthropicAdapter(
+            model=args.model or DEFAULT_MODEL,
+            arm="grounded" if args.grounded else "ungrounded",
+            corpus=corpus,
+        )
+    raise ValueError("unknown adapter %r" % args.adapter)
+
+
+def _cmd_run(args: argparse.Namespace) -> int:
+    """Run a real system under test (currently only the Anthropic adapter).
+
+    Unlike ``demo``, this never produces a mock-labelled run: the adapter's
+    responses carry a real provenance string, so ``RunResult.is_mock`` is
+    false and the run file omits the demonstration banner.
+    """
+    corpus = load_corpus()
+    adapter = _build_adapter(args, corpus)
+
+    if args.dry_run:
+        from .adapters.anthropic_api import estimate_input_tokens
+
+        prompts = [adapter.build_prompt(item) for item in corpus]
+        total_estimated_input_tokens = sum(
+            estimate_input_tokens(p) + estimate_input_tokens(adapter.describe().get("model", ""))
+            for p in prompts
+        )
+        print("dry run: adapter=%s model=%s grounded=%s" % (adapter.name, adapter.model, args.grounded))
+        print("items: %d" % len(prompts))
+        print("estimated input tokens (chars/4, prompts only): %d" % total_estimated_input_tokens)
+        print()
+        print("first prompt:")
+        print("-" * 72)
+        print(prompts[0] if prompts else "(corpus is empty)")
+        print("-" * 72)
+        return 0
+
+    config = ScoringConfig()
+
+    def factory(repeat: int) -> object:
+        return _build_adapter(args, corpus)
+
+    runs = run_repeats(
+        factory,
+        n_runs=args.runs,
+        corpus=corpus,
+        config=config,
+        progress=not args.quiet,
+    )
+
+    out_dir = args.out or DEFAULT_REAL_RESULTS_DIR
+    for run in runs:
+        path = write_run(run, out_dir, label=run.adapter["name"])
+        if not args.quiet:
+            sys.stderr.write("wrote %s\n" % path)
+
+    frame = runs_frame(runs)
+    print(format_summary(frame, corpus))
+    return 0
+
+
 def _cmd_report(args: argparse.Namespace) -> int:
     corpus = load_corpus()
     paths = sorted(
@@ -191,6 +260,33 @@ def build_parser() -> argparse.ArgumentParser:
     )
     demo_parser.add_argument("--quiet", action="store_true")
     demo_parser.set_defaults(func=_cmd_demo)
+
+    run_parser = subparsers.add_parser("run", help="run a real system under test")
+    run_parser.add_argument(
+        "--adapter", choices=["anthropic"], default="anthropic", help="which adapter to run"
+    )
+    run_parser.add_argument(
+        "--model", default=None, help="model id (defaults to the adapter's own default)"
+    )
+    run_parser.add_argument(
+        "--grounded", action="store_true", help="use the grounded arm (retrieved source excerpt in prompt)"
+    )
+    run_parser.add_argument("--runs", type=int, default=1, help="repeats")
+    run_parser.add_argument(
+        "--out",
+        nargs="?",
+        const=DEFAULT_REAL_RESULTS_DIR,
+        default=None,
+        help="write run files to this directory (default: results/)",
+    )
+    run_parser.add_argument("--quiet", action="store_true")
+    run_parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="build every prompt and print the first one plus a count and estimated "
+        "input tokens; makes no network calls",
+    )
+    run_parser.set_defaults(func=_cmd_run)
 
     report_parser = subparsers.add_parser("report", help="re-report stored run files")
     report_parser.add_argument("directory")
