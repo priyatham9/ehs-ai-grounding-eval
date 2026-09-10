@@ -389,6 +389,12 @@ python3 -m grounding_eval.cli run --adapter anthropic --model claude-opus-5
 python3 -m grounding_eval.cli run --adapter anthropic --model claude-opus-5 --grounded
 ```
 
+`scripts/run_baselines.sh` runs both models (Claude Haiku 4.5 and Claude Sonnet 5) in both
+arms as one command and writes a markdown summary; it refuses to run without
+`ANTHROPIC_API_KEY`. Finished runs it produces belong in `results/published/`,
+which is tracked in git (see `results/published/README.md` for what a
+published run file must carry).
+
 Both arms use only `item.question` (and, in the grounded arm, the corpus's own
 source text via the same TF-IDF retriever `retrieval_tfidf` uses) - never the
 answer key, per the rule in `adapters/base.py` and methodology section 7.

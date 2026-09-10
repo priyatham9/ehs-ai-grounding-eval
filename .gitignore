@@ -32,6 +32,12 @@ htmlcov/
 results/*
 !results/.gitkeep
 
+# ...except published real-system runs: scripts/run_baselines.sh copies
+# finished, real (non-mock) run files here so they can be committed and cited.
+!results/published/
+!results/published/*.json
+!results/published/README.md
+
 # Locally cached primary-source snapshots pulled by tools/verify_sources.py.
 # These are re-fetchable; the committed verification report is the durable
 # record. The report itself (corpus/verification/) IS committed.
