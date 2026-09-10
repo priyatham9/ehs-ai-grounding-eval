@@ -177,12 +177,26 @@ class AnthropicAdapter(Adapter):
         reuses :class:`~grounding_eval.adapters.retrieval.RetrievalAdapter`
         rather than re-implementing TF-IDF retrieval.
     temperature, max_tokens:
-        Passed straight through to the Messages API. Defaults are 0 (the
-        benchmark scores single most-likely answers, not sampled variety)
-        and a modest 512 (answers are one or two sentences plus a citation).
+        Defaults are 0 (the benchmark scores single most-likely answers, not
+        sampled variety) and a modest 512 (answers are one or two sentences
+        plus a citation). Claude Opus 5, Sonnet 5 and the 4.7 and later
+        families reject sampling parameters with a 400, so ``temperature`` is
+        only sent to models that still accept it (Haiku 4.5, the 4.6 and 4.5
+        families, and Claude 3.x). ``describe()`` records whether it was sent.
     """
 
     name = "anthropic_api"
+
+    @staticmethod
+    def supports_sampling(model: str) -> bool:
+        """Whether the Messages API accepts ``temperature`` for this model."""
+        m = model.lower()
+        return (
+            "haiku" in m
+            or "-4-6" in m
+            or "-4-5" in m
+            or m.startswith("claude-3")
+        )
 
     def __init__(
         self,
@@ -250,6 +264,7 @@ class AnthropicAdapter(Adapter):
                 "model": self.model,
                 "arm": self.arm,
                 "temperature": self.temperature,
+                "temperature_sent": self.supports_sampling(self.model),
                 "max_tokens": self.max_tokens,
                 "system_prompt_sha256_16": _prompt_hash(self._system_prompt),
                 "anthropic_version_header": ANTHROPIC_VERSION,
@@ -262,13 +277,15 @@ class AnthropicAdapter(Adapter):
     # -- request/response ----------------------------------------------------
 
     def _request_body(self, item: Item) -> Dict[str, Any]:
-        return {
+        body: Dict[str, Any] = {
             "model": self.model,
             "max_tokens": self.max_tokens,
-            "temperature": self.temperature,
             "system": self._system_prompt,
             "messages": [{"role": "user", "content": self.build_prompt(item)}],
         }
+        if self.supports_sampling(self.model):
+            body["temperature"] = self.temperature
+        return body
 
     def _headers(self, api_key: str) -> Dict[str, str]:
         return {

@@ -77,7 +77,7 @@ class TestRequestShape(unittest.TestCase):
 
         body = captured["body"]
         self.assertEqual(body["model"], "claude-opus-5")
-        self.assertEqual(body["temperature"], 0)
+        self.assertNotIn("temperature", body, "Opus 5 rejects sampling parameters")
         self.assertIn("system", body)
         self.assertEqual(len(body["messages"]), 1)
         self.assertEqual(body["messages"][0]["role"], "user")
@@ -94,9 +94,19 @@ class TestRequestShape(unittest.TestCase):
         self.assertEqual(meta["model"], "claude-opus-5")
         self.assertEqual(meta["arm"], "ungrounded")
         self.assertEqual(meta["temperature"], 0.0)
+        self.assertFalse(meta["temperature_sent"])
         self.assertIn("system_prompt_sha256_16", meta)
         self.assertIn("anthropic_version_header", meta)
         self.assertIn("timestamp_utc", meta)
+
+    def test_temperature_sent_only_where_accepted(self) -> None:
+        self.assertTrue(AnthropicAdapter.supports_sampling("claude-haiku-4-5"))
+        self.assertTrue(AnthropicAdapter.supports_sampling("claude-sonnet-4-6"))
+        self.assertFalse(AnthropicAdapter.supports_sampling("claude-sonnet-5"))
+        self.assertFalse(AnthropicAdapter.supports_sampling("claude-opus-5"))
+        haiku = AnthropicAdapter(api_key="sk-test-key", model="claude-haiku-4-5")
+        self.assertEqual(haiku._request_body(self.item)["temperature"], 0.0)
+        self.assertTrue(haiku.describe()["temperature_sent"])
 
 
 class TestResponseParsing(unittest.TestCase):
