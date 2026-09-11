@@ -8,7 +8,7 @@
     "name": "oracle"
    },
    "corpus_digest": "a9fd4f4c2222dfb9f6135ee39a94ca9b92168867b14a56a5a319d16cb3980528",
-   "duration_s": 0.0397181510925293,
+   "duration_s": 0.07365107536315918,
    "environment": {
     "implementation": "CPython",
     "platform": "macOS-26.6.2-arm64-arm-64bit",
@@ -27,7 +27,7 @@
      "confidence": null,
      "error": null,
      "item_id": "cs-001",
-     "latency_s": 3.0994415283203125e-06,
+     "latency_s": 4.76837158203125e-06,
      "metadata": {},
      "provenance": "oracle_ceiling",
      "text": "The employer must demonstrate that the only hazard posed by the permit space is an actual or potential hazardous atmosphere, and that continuous forced air ventilation alone is sufficient to maintain that permit space safe for entry. Monitoring and inspection data supporting these demonstrations must be developed, and if entry is needed to obtain that data it must be performed under the full permit provisions. The space remains a permit space; the alternate procedures relieve the employer of paragraphs (d) through (f) and (h) through (k). See 29 CFR 1910.146(c)(5)(i)(A) and (B)."
@@ -39,7 +39,7 @@
      "confidence": null,
      "error": null,
      "item_id": "cs-002",
-     "latency_s": 9.5367431640625e-07,
+     "latency_s": 2.1457672119140625e-06,
      "metadata": {},
      "provenance": "oracle_ceiling",
      "text": "A permit space may be reclassified as a non-permit confined space if it poses no actual or potential atmospheric hazards and all hazards within the space are eliminated without entry, for as long as the hazards remain eliminated. If entry is necessary to eliminate hazards, that entry must be performed under paragraphs (d) through (k). Controlling an atmospheric hazard by forced air ventilation does NOT qualify: the standard states in a note that control of atmospheric hazards through forced air ventilation does not constitute elimination of the hazards. See 29 CFR 1910.146(c)(7)(i) and Note to (c)(7)."
@@ -51,7 +51,7 @@
      "confidence": null,
      "error": null,
      "item_id": "cs-003",
-     "latency_s": 0.0,
+     "latency_s": 1.9073486328125e-06,
      "metadata": {},
      "provenance": "oracle_ceiling",
      "text": "Oxygen content first, then flammable gases and vapors, then potential toxic air contaminants, in that order, using a calibrated direct-reading instrument. Any employee who enters, or that employee's authorized representative, must be given an opportunity to observe the pre-entry testing. See 29 CFR 1910.146(c)(5)(ii)(C)."
@@ -63,7 +63,7 @@
      "confidence": null,
      "error": null,
      "item_id": "cs-004",
-     "latency_s": 9.5367431640625e-07,
+     "latency_s": 1.1920928955078125e-06,
      "metadata": {},
      "provenance": "oracle_ceiling",
      "text": "An atmospheric oxygen concentration below 19.5 percent or above 23.5 percent is a hazardous atmosphere. An oxygen deficient atmosphere is defined as containing less than 19.5 percent oxygen by volume; an oxygen enriched atmosphere is defined as containing more than 23.5 percent oxygen by volume. See 29 CFR 1910.146(b), definitions of 'Hazardous atmosphere', 'Oxygen deficient atmosphere', 'Oxygen enriched atmosphere'."
@@ -75,7 +75,7 @@
      "confidence": null,
      "error": null,
      "item_id": "cs-005",
-     "latency_s": 1.1920928955078125e-06,
+     "latency_s": 9.5367431640625e-07,
      "metadata": {},
      "provenance": "oracle_ceiling",
      "text": "A concentration in excess of 10 percent of the lower flammable limit (LFL) of the gas, vapor, or mist. The reference is the LFL of the specific substance, not an absolute concentration. See 29 CFR 1910.146(b), definition of 'Hazardous atmosphere', paragraph (1)."
@@ -87,7 +87,7 @@
      "confidence": null,
      "error": null,
      "item_id": "cs-006",
-     "latency_s": 9.5367431640625e-07,
+     "latency_s": 1.1920928955078125e-06,
      "metadata": {},
      "provenance": "oracle_ceiling",
      "text": "The attendant must remain outside the permit space during entry operations until relieved by another attendant. The note to that provision states that where the employer's permit entry program allows attendant entry for rescue, attendants may enter to attempt a rescue only if they have been trained and equipped for rescue operations under paragraph (k)(1) and have been relieved under paragraph (i)(4). See 29 CFR 1910.146(i)(4) and Note."
@@ -111,7 +111,7 @@
      "confidence": null,
      "error": null,
      "item_id": "cs-008",
-     "latency_s": 9.5367431640625e-07,
+     "latency_s": 2.1457672119140625e-06,
      "metadata": {},
      "provenance": "oracle_ceiling",
      "text": "A non-permit confined space is a confined space that does not contain and, with respect to atmospheric hazards, does not have the potential to contain any hazard capable of causing death or serious physical harm. A permit-required confined space has one or more of: it contains or has a potential to contain a hazardous atmosphere; it contains a material with the potential for engulfing an entrant; it has an internal configuration such that an entrant could be trapped or asphyxiated by inwardly converging walls or by a floor that slopes downward and tapers to a smaller cross-section; or it contains any other recognized serious safety or health hazard. See 29 CFR 1910.146(b), definitions of 'Non-permit confined space' and 'Permit-required confined space'."
@@ -123,7 +123,7 @@
      "confidence": null,
      "error": null,
      "item_id": "el-001",
-     "latency_s": 0.0,
+     "latency_s": 9.5367431640625e-07,
      "metadata": {},
      "provenance": "oracle_ceiling",
      "text": "Live parts to which an employee may be exposed must be deenergized before work unless the employer can demonstrate that deenergizing introduces additional or increased hazards, or is infeasible due to equipment design or operational limitations. Live parts operating at less than 50 volts to ground need not be deenergized if there will be no increased exposure to electrical burns or to explosion due to electric arcs. See 29 CFR 1910.333(a)(1)."
@@ -147,7 +147,7 @@
      "confidence": null,
      "error": null,
      "item_id": "fe-001",
-     "latency_s": 9.5367431640625e-07,
+     "latency_s": 1.1920928955078125e-06,
      "metadata": {},
      "provenance": "oracle_ceiling",
      "text": "Visual inspection monthly. Maintenance check annually. The employer must record the annual maintenance date and retain that record for one year after the last entry or the life of the shell, whichever is less. Stored pressure extinguishers do not require an internal examination. See 29 CFR 1910.157(e)(2) and (e)(3)."
@@ -159,7 +159,7 @@
      "confidence": null,
      "error": null,
      "item_id": "fe-002",
-     "latency_s": 9.5367431640625e-07,
+     "latency_s": 7.152557373046875e-07,
      "metadata": {},
      "provenance": "oracle_ceiling",
      "text": "Two things are wrong with this question and both should be surfaced before any clause is cited. First, Class D is the classification for combustible metal fires; whether a given lithium-ion pack fire falls under Class D depends on the specific chemistry and on the guidance the site is following, and it is not a settled default. Second, the premise that a per-kWh agent quantity requirement exists is not something this benchmark can confirm, and NFPA 10 clause identifiers were not verified against a public primary source for this corpus. The correct response identifies the questionable premise and declines to supply a clause number rather than producing one. See 29 CFR 1910.157(d)(6)."
@@ -171,7 +171,7 @@
      "confidence": null,
      "error": null,
      "item_id": "fl-001",
-     "latency_s": 1.1920928955078125e-06,
+     "latency_s": 2.1457672119140625e-06,
      "metadata": {},
      "provenance": "oracle_ceiling",
      "text": "Both have flashpoints below 73.4 degrees F (23 degrees C). They are distinguished by boiling point: Category 1 has a boiling point at or below 95 degrees F (35 degrees C), and Category 2 has a boiling point above 95 degrees F. See 29 CFR 1910.106(a)(19)(i) and (ii)."
@@ -183,7 +183,7 @@
      "confidence": null,
      "error": null,
      "item_id": "fl-002",
-     "latency_s": 0.0,
+     "latency_s": 9.5367431640625e-07,
      "metadata": {},
      "provenance": "oracle_ceiling",
      "text": "Category 3 covers liquids with flashpoints at or above 73.4 degrees F and at or below 140 degrees F. Category 4 covers flashpoints above 140 degrees F and at or below 199.4 degrees F. When a Category 3 liquid with a flashpoint at or above 100 degrees F is heated for use to within 30 degrees F of its flashpoint, it must be handled as a Category 3 liquid with a flashpoint below 100 degrees F. When a Category 4 liquid is heated for use to within 30 degrees F of its flashpoint, it must be handled as a Category 3 liquid with a flashpoint at or above 100 degrees F. See 29 CFR 1910.106(a)(19)(iii) and (iv)."
@@ -195,7 +195,7 @@
      "confidence": null,
      "error": null,
      "item_id": "hc-001",
-     "latency_s": 0.0,
+     "latency_s": 9.5367431640625e-07,
      "metadata": {},
      "provenance": "oracle_ceiling",
      "text": "Product identifier; signal word; hazard statement(s); pictogram(s); precautionary statement(s); and the name, U.S. address and U.S. telephone number of the chemical manufacturer, importer or other responsible party. The signal word, hazard statements and pictograms, that is the elements at (f)(1)(ii) through (iv), must be located together on the label, tag or mark. See 29 CFR 1910.1200(f)(1) and (f)(3)."
@@ -207,7 +207,7 @@
      "confidence": null,
      "error": null,
      "item_id": "hc-002",
-     "latency_s": 9.5367431640625e-07,
+     "latency_s": 1.1920928955078125e-06,
      "metadata": {},
      "provenance": "oracle_ceiling",
      "text": "A hazard statement is assigned to a hazard class and category and describes the nature of the hazard of a chemical, including where appropriate the degree of hazard. A precautionary statement is a phrase describing recommended measures that should be taken to minimize or prevent adverse effects resulting from exposure, or from improper storage or handling. One describes the hazard; the other describes what to do about it. See 29 CFR 1910.1200(c), definitions of 'Hazard statement' and 'Precautionary statement'."
@@ -219,7 +219,7 @@
      "confidence": null,
      "error": null,
      "item_id": "hc-003",
-     "latency_s": 1.1920928955078125e-06,
+     "latency_s": 9.5367431640625e-07,
      "metadata": {},
      "provenance": "oracle_ceiling",
      "text": "Only two: danger and warning. Danger is used for the more severe hazards and warning for the less severe. See 29 CFR 1910.1200(c), definition of 'Signal word'."
@@ -243,7 +243,7 @@
      "confidence": null,
      "error": null,
      "item_id": "hc-005",
-     "latency_s": 0.0,
+     "latency_s": 9.5367431640625e-07,
      "metadata": {},
      "provenance": "oracle_ceiling",
      "text": "Eight. See 29 CFR 1910.1200(c), definition of 'Pictogram'."
@@ -255,7 +255,7 @@
      "confidence": null,
      "error": null,
      "item_id": "hn-001",
-     "latency_s": 9.5367431640625e-07,
+     "latency_s": 7.152557373046875e-07,
      "metadata": {},
      "provenance": "oracle_ceiling",
      "text": "The action level is an 8-hour time-weighted average sound level of 85 decibels on the A scale, equivalently a dose of fifty percent; it triggers the hearing conservation program under paragraphs (c) through (n). The permissible exposures for which feasible administrative or engineering controls must be used are those in Table G-16, whose 8-hour value is 90 dBA. Exposures for the hearing conservation program are computed without regard to any attenuation provided by hearing protectors. See 29 CFR 1910.95(c)(1) and (c)(2)."
@@ -267,7 +267,7 @@
      "confidence": null,
      "error": null,
      "item_id": "hn-002",
-     "latency_s": 0.0,
+     "latency_s": 1.1920928955078125e-06,
      "metadata": {},
      "provenance": "oracle_ceiling",
      "text": "A standard threshold shift is a change in hearing threshold relative to the baseline audiogram of an average of 10 dB or more at 2000, 3000, and 4000 Hz in either ear. Allowance may be made for the contribution of aging by correcting the annual audiogram according to appendix F. See 29 CFR 1910.95(g)(10)(i)."
@@ -291,7 +291,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-001",
-     "latency_s": 9.5367431640625e-07,
+     "latency_s": 2.1457672119140625e-06,
      "metadata": {},
      "provenance": "oracle_ceiling",
      "text": "At least annually. The inspection must be performed by an authorized employee other than the one or ones utilizing the energy control procedure being inspected. The employer must certify that the inspection was performed, identifying the machine or equipment, the date, the employees included, and the person performing the inspection. See 29 CFR 1910.147(c)(6)(i)."
@@ -315,7 +315,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-003",
-     "latency_s": 0.0,
+     "latency_s": 9.5367431640625e-07,
      "metadata": {},
      "provenance": "oracle_ceiling",
      "text": "The standard does not apply where exposure to the hazards of unexpected energization or start up is controlled by unplugging the equipment from the energy source AND the plug is under the exclusive control of the employee performing the servicing or maintenance. Both conditions must hold. See 29 CFR 1910.147(a)(1)(iii)(A)."
@@ -327,7 +327,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-004",
-     "latency_s": 0.0,
+     "latency_s": 2.1457672119140625e-06,
      "metadata": {},
      "provenance": "oracle_ceiling",
      "text": "Minor tool changes and adjustments, and other minor servicing activities, taking place during normal production operations are not covered if they are routine, repetitive, and integral to the use of the equipment for production, provided the work is performed using alternative measures which provide effective protection. All three characteristics plus the alternative measures are required; the exception appears as a note to 1910.147(a)(2)(ii). See 29 CFR 1910.147(a)(2)(ii), Note."
@@ -351,7 +351,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-006",
-     "latency_s": 9.5367431640625e-07,
+     "latency_s": 1.9073486328125e-06,
      "metadata": {},
      "provenance": "oracle_ceiling",
      "text": "No. The definition of energy isolating device explicitly states that push buttons, selector switches and other control circuit type devices are not energy isolating devices. An energy isolating device is a mechanical device that physically prevents the transmission or release of energy, such as a manually operated circuit breaker, a disconnect switch, a line valve, or a block. See 29 CFR 1910.147(b), definition of 'Energy isolating device'."
@@ -375,7 +375,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-008",
-     "latency_s": 0.0,
+     "latency_s": 9.5367431640625e-07,
      "metadata": {},
      "provenance": "oracle_ceiling",
      "text": "Specific procedures must be used during shift or personnel changes to ensure the continuity of lockout or tagout protection, including provision for the orderly transfer of lockout or tagout device protection between off-going and oncoming employees, to minimize exposure to hazards from unexpected energization, start-up, or release of stored energy. The standard requires that specific procedures exist and that continuity be maintained; it does not prescribe a particular mechanism. See 29 CFR 1910.147(f)(4)."
@@ -387,7 +387,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-009",
-     "latency_s": 1.1920928955078125e-06,
+     "latency_s": 9.5367431640625e-07,
      "metadata": {},
      "provenance": "oracle_ceiling",
      "text": "Energy control procedures, employee training, and periodic inspections. See 29 CFR 1910.147(c)(1)."
@@ -411,7 +411,7 @@
      "confidence": null,
      "error": null,
      "item_id": "mg-001",
-     "latency_s": 0.0,
+     "latency_s": 9.5367431640625e-07,
      "metadata": {},
      "provenance": "oracle_ceiling",
      "text": "Point of operation is the area on a machine where work is actually performed upon the material being processed. The point of operation of machines whose operation exposes an employee to injury must be guarded. Where no applicable specific standard exists, the guarding device must be designed and constructed to prevent the operator from having any part of the body in the danger zone during the operating cycle. Special hand tools for placing and removing material may supplement but may not substitute for that guarding. See 29 CFR 1910.212(a)(3)."
@@ -423,7 +423,7 @@
      "confidence": null,
      "error": null,
      "item_id": "mg-002",
-     "latency_s": 0.0,
+     "latency_s": 2.1457672119140625e-06,
      "metadata": {},
      "provenance": "oracle_ceiling",
      "text": "It covers mechanical power-transmission apparatus, specifically all types and shapes of power-transmission belts, except, when operating at 250 feet per minute or less: flat belts one inch or less in width; flat belts two inches or less in width which are free from metal lacings or fasteners; round belts one half inch or less in diameter; and single strand V-belts thirteen thirty-seconds of an inch or less in width. The speed condition applies to every one of the exclusions. See 29 CFR 1910.219(a)(1)."
@@ -435,7 +435,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-001",
-     "latency_s": 9.5367431640625e-07,
+     "latency_s": 7.152557373046875e-07,
      "metadata": {},
      "provenance": "oracle_ceiling",
      "text": "The normal maximum operating pressure multiplied by 1.3 must not exceed the nominal disk burst pressure. The requirement exists so the disk is not operated close enough to its burst pressure to accumulate fatigue damage; 46 CFR 54.15-13(b)(3) notes that this restriction will usually require the vessel to be operated below its maximum allowable working pressure, which must be accounted for in design. See 46 CFR 54.15-13(b)(3)."
@@ -471,7 +471,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-004",
-     "latency_s": 0.0,
+     "latency_s": 9.5367431640625e-07,
      "metadata": {},
      "provenance": "oracle_ceiling",
      "text": "Not more than 10 percent above the maximum allowable working pressure. That limit applies except when the excess pressure is caused by exposure to fire or another unexpected source of heat, which 46 CFR 54.15-5 treats as a separate case with its own supplemental-device requirement. See 46 CFR 54.15-5(c)."
@@ -483,7 +483,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-005",
-     "latency_s": 9.5367431640625e-07,
+     "latency_s": 1.1920928955078125e-06,
      "metadata": {},
      "provenance": "oracle_ceiling",
      "text": "Supplemental pressure-relieving devices must be installed, capable of preventing the pressure from rising more than 20 percent above the maximum allowable working pressure of the vessel. A single relieving device may satisfy both the fire case and the general 10 percent case if it meets both requirements. See 46 CFR 54.15-5(d)."
@@ -495,7 +495,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-006",
-     "latency_s": 1.1920928955078125e-06,
+     "latency_s": 9.5367431640625e-07,
      "metadata": {},
      "provenance": "oracle_ceiling",
      "text": "46 CFR 54.15-13, 'Rupture disks', modifies UG-127. 46 CFR 54.15-10, 'Safety and relief valves', modifies UG-126. 46 CFR 54.15-5, 'Protective devices', modifies UG-125. See 46 CFR 54.15-13 and 46 CFR 54.15-10 (section headings)."
@@ -507,7 +507,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-007",
-     "latency_s": 0.0,
+     "latency_s": 9.5367431640625e-07,
      "metadata": {},
      "provenance": "oracle_ceiling",
      "text": "All disks must be oriented so that if rupture occurs, the disk fragments and pressure vessel discharge will be directed away from operating personnel and vital machinery. The hazard is fragmentation and directed discharge at the moment of burst. See 46 CFR 54.15-13(c)."
@@ -519,7 +519,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-008",
-     "latency_s": 0.0,
+     "latency_s": 1.1920928955078125e-06,
      "metadata": {},
      "provenance": "oracle_ceiling",
      "text": "Steam or air service. The lifting device must allow the disk to be lifted from its seat when the pressure in the vessel is 75 percent of that at which the valve is set to blow. For services other than steam and air a lifting device is not required, although it is described as desirable where releasing the vapors would not create a hazard. See 46 CFR 54.15-10(c) and (d)."
@@ -567,7 +567,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-012",
-     "latency_s": 0.0,
+     "latency_s": 9.5367431640625e-07,
      "metadata": {},
      "provenance": "oracle_ceiling",
      "text": "Yes. 46 CFR 54.15-13(a) states that UG-127 of ASME Section VIII provides for the use of rupture disks in series with spring loaded safety or relief valves. Separately, 54.15-13(b) allows the Commandant to authorize or require a rupture disk in parallel with or in lieu of a spring-loaded valve for certain vessels containing substances that may render a valve inoperative, or where installing a valve is impractical. See 46 CFR 54.15-13(a) and (b)."
@@ -579,7 +579,7 @@
      "confidence": null,
      "error": null,
      "item_id": "psm-001",
-     "latency_s": 9.5367431640625e-07,
+     "latency_s": 1.1920928955078125e-06,
      "metadata": {},
      "provenance": "oracle_ceiling",
      "text": "At least every five years after completion of the initial process hazard analysis, the PHA must be updated and revalidated by a team meeting the requirements of 1910.119(e)(4), to assure that it is consistent with the current process. See 29 CFR 1910.119(e)(6)."
@@ -591,7 +591,7 @@
      "confidence": null,
      "error": null,
      "item_id": "psm-002",
-     "latency_s": 1.1920928955078125e-06,
+     "latency_s": 9.5367431640625e-07,
      "metadata": {},
      "provenance": "oracle_ceiling",
      "text": "At least every three years. The audit must be conducted by at least one person knowledgeable in the process, a report of findings must be developed, the employer must promptly determine and document a response to each finding and document that deficiencies have been corrected, and the two most recent compliance audit reports must be retained. See 29 CFR 1910.119(o)(1) and (o)(5)."
@@ -603,7 +603,7 @@
      "confidence": null,
      "error": null,
      "item_id": "psm-003",
-     "latency_s": 0.0,
+     "latency_s": 9.5367431640625e-07,
      "metadata": {},
      "provenance": "oracle_ceiling",
      "text": "At least every three years, and more often if necessary. The employer, in consultation with the employees involved in operating the process, determines the appropriate frequency of refresher training. See 29 CFR 1910.119(g)(2)."
@@ -615,7 +615,7 @@
      "confidence": null,
      "error": null,
      "item_id": "psm-004",
-     "latency_s": 0.0,
+     "latency_s": 2.1457672119140625e-06,
      "metadata": {},
      "provenance": "oracle_ceiling",
      "text": "The investigation must be initiated as promptly as possible, but not later than 48 hours following the incident. The obligation is triggered by each incident which resulted in, or could reasonably have resulted in, a catastrophic release of a highly hazardous chemical in the workplace. Near misses of that severity are therefore in scope. See 29 CFR 1910.119(m)(1) and (m)(2)."
@@ -627,7 +627,7 @@
      "confidence": null,
      "error": null,
      "item_id": "psm-005",
-     "latency_s": 9.5367431640625e-07,
+     "latency_s": 7.152557373046875e-07,
      "metadata": {},
      "provenance": "oracle_ceiling",
      "text": "Incident investigation reports must be retained for five years. Compliance audit reports follow a different rule: the employer must retain the two most recent audit reports, which is a count-based rather than a time-based obligation. See 29 CFR 1910.119(m)(7) and (o)(5)."
@@ -651,7 +651,7 @@
      "confidence": null,
      "error": null,
      "item_id": "psm-007",
-     "latency_s": 1.1920928955078125e-06,
+     "latency_s": 2.1457672119140625e-06,
      "metadata": {},
      "provenance": "oracle_ceiling",
      "text": "The five-year accident history is an EPA Risk Management Program requirement at 40 CFR 68.42. It must include all accidental releases from covered processes that resulted in deaths, injuries, or significant property damage on site, or known offsite deaths, injuries, evacuations, sheltering in place, property damage, or environmental damage, with specified data for each release. It is not the same as the five-year retention of incident investigation reports under 29 CFR 1910.119(m)(7) or 40 CFR 68.81(g); the accident history is a reporting obligation with defined content, and the retention rule is a records-keeping obligation. See 40 CFR 68.42(a)."
@@ -663,7 +663,7 @@
      "confidence": null,
      "error": null,
      "item_id": "psm-008",
-     "latency_s": 0.0,
+     "latency_s": 9.5367431640625e-07,
      "metadata": {},
      "provenance": "oracle_ceiling",
      "text": "OSHA: 29 CFR 1910.119(o)(1). EPA: 40 CFR 68.79(a). A substantive difference is that the EPA rule provides for a third-party audit when required under 40 CFR 68.79(f); the OSHA rule has no third-party audit trigger and requires only that the audit be conducted by at least one person knowledgeable in the process. See 40 CFR 68.79(a)."
@@ -675,7 +675,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-001",
-     "latency_s": 9.5367431640625e-07,
+     "latency_s": 1.1920928955078125e-06,
      "metadata": {},
      "provenance": "oracle_ceiling",
      "text": "Within eight hours after the death of any employee as a result of a work-related incident. Reporting is by telephone or in person to the nearest OSHA Area Office, by telephone to the OSHA toll-free central number, or by electronic submission using the reporting application on OSHA's public website. See 29 CFR 1904.39(a)(1)."
@@ -711,7 +711,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-004",
-     "latency_s": 0.0,
+     "latency_s": 9.5367431640625e-07,
      "metadata": {},
      "provenance": "oracle_ceiling",
      "text": "No. Counting begins on the day after the injury occurred or the illness began. See 29 CFR 1904.7(b)(3)(i)."
@@ -735,7 +735,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-006",
-     "latency_s": 9.5367431640625e-07,
+     "latency_s": 7.152557373046875e-07,
      "metadata": {},
      "provenance": "oracle_ceiling",
      "text": "It is exhaustive. The standard states that this is a complete list of all treatments considered first aid for part 1904 purposes. Any treatment not on the list is medical treatment. See 29 CFR 1904.7(b)(5)(iii)."
@@ -759,7 +759,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-008",
-     "latency_s": 0.0,
+     "latency_s": 9.5367431640625e-07,
      "metadata": {},
      "provenance": "oracle_ceiling",
      "text": "It does not have to be reported to OSHA, because the motor vehicle accident occurred on a public street or highway and not in a construction work zone. It must still be recorded on the employer's injury and illness records if the employer is required to keep such records. Reporting and recording are separate obligations and this case separates them. See 29 CFR 1904.39(b)(3)."
@@ -783,7 +783,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-010",
-     "latency_s": 7.152557373046875e-07,
+     "latency_s": 9.5367431640625e-07,
      "metadata": {},
      "provenance": "oracle_ceiling",
      "text": "The premise is false. 29 CFR part 1904 sets no maximum allowable recordable rate, and no rate threshold automatically places an establishment in an enforcement program. Recordkeeping rules govern what must be recorded and reported; they do not set performance limits. The correct response identifies the false premise rather than supplying a number. See 29 CFR 1904.7(a)."
@@ -807,7 +807,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rp-002",
-     "latency_s": 0.0,
+     "latency_s": 1.1920928955078125e-06,
      "metadata": {},
      "provenance": "oracle_ceiling",
      "text": "A full facepiece air-purifying respirator has an APF of 50, and a half mask powered air-purifying respirator also has an APF of 50. A loose-fitting facepiece powered air-purifying respirator has an APF of 25. See 29 CFR 1910.134(d)(3)(i)(A), Table 1."
@@ -831,7 +831,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rp-004",
-     "latency_s": 1.1920928955078125e-06,
+     "latency_s": 9.5367431640625e-07,
      "metadata": {},
      "provenance": "oracle_ceiling",
      "text": "All oxygen-deficient atmospheres are considered IDLH. There is one exception: if the employer demonstrates that under all foreseeable conditions the oxygen concentration can be maintained within the ranges specified in Table II of the section, for the altitudes set out in that table, then any atmosphere-supplying respirator may be used. See 29 CFR 1910.134(d)(2)(iii)."
@@ -2160,7 +2160,7 @@
     }
    },
    "seed": null,
-   "started_utc": "2026-09-07T21:34:56Z"
+   "started_utc": "2026-09-11T02:07:37Z"
   }
  ],
  "schema": "grounding_eval.baselines/1"

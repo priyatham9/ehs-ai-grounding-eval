@@ -11,7 +11,7 @@
     "seed": 20260907
    },
    "corpus_digest": "a9fd4f4c2222dfb9f6135ee39a94ca9b92168867b14a56a5a319d16cb3980528",
-   "duration_s": 0.04560112953186035,
+   "duration_s": 0.08432793617248535,
    "environment": {
     "implementation": "CPython",
     "platform": "macOS-26.6.2-arm64-arm-64bit",
@@ -30,7 +30,7 @@
      "confidence": null,
      "error": null,
      "item_id": "cs-001",
-     "latency_s": 3.62396240234375e-05,
+     "latency_s": 4.506111145019531e-05,
      "metadata": {
       "option": "correct"
      },
@@ -44,7 +44,7 @@
      "confidence": null,
      "error": null,
      "item_id": "cs-002",
-     "latency_s": 2.193450927734375e-05,
+     "latency_s": 3.695487976074219e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -58,7 +58,7 @@
      "confidence": null,
      "error": null,
      "item_id": "cs-003",
-     "latency_s": 1.1682510375976562e-05,
+     "latency_s": 2.4080276489257812e-05,
      "metadata": {
       "option": "correct"
      },
@@ -72,7 +72,7 @@
      "confidence": null,
      "error": null,
      "item_id": "cs-004",
-     "latency_s": 1.4066696166992188e-05,
+     "latency_s": 2.5987625122070312e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -86,7 +86,7 @@
      "confidence": null,
      "error": null,
      "item_id": "cs-005",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.5987625122070312e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -100,7 +100,7 @@
      "confidence": null,
      "error": null,
      "item_id": "cs-006",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.288818359375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -114,7 +114,7 @@
      "confidence": null,
      "error": null,
      "item_id": "cs-007",
-     "latency_s": 1.3589859008789062e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -128,7 +128,7 @@
      "confidence": null,
      "error": null,
      "item_id": "cs-008",
-     "latency_s": 1.621246337890625e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -142,7 +142,7 @@
      "confidence": null,
      "error": null,
      "item_id": "el-001",
-     "latency_s": 1.3828277587890625e-05,
+     "latency_s": 2.288818359375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -156,7 +156,7 @@
      "confidence": null,
      "error": null,
      "item_id": "el-002",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.288818359375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -170,7 +170,7 @@
      "confidence": null,
      "error": null,
      "item_id": "fe-001",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -184,7 +184,7 @@
      "confidence": null,
      "error": null,
      "item_id": "fe-002",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.4080276489257812e-05,
      "metadata": {
       "option": "correct"
      },
@@ -198,7 +198,7 @@
      "confidence": null,
      "error": null,
      "item_id": "fl-001",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -212,7 +212,7 @@
      "confidence": null,
      "error": null,
      "item_id": "fl-002",
-     "latency_s": 1.2874603271484375e-05,
+     "latency_s": 2.5987625122070312e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -226,7 +226,7 @@
      "confidence": null,
      "error": null,
      "item_id": "hc-001",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -240,7 +240,7 @@
      "confidence": null,
      "error": null,
      "item_id": "hc-002",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.288818359375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -254,7 +254,7 @@
      "confidence": null,
      "error": null,
      "item_id": "hc-003",
-     "latency_s": 1.4066696166992188e-05,
+     "latency_s": 2.47955322265625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -268,7 +268,7 @@
      "confidence": null,
      "error": null,
      "item_id": "hc-004",
-     "latency_s": 1.4781951904296875e-05,
+     "latency_s": 2.193450927734375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -282,7 +282,7 @@
      "confidence": null,
      "error": null,
      "item_id": "hc-005",
-     "latency_s": 1.5020370483398438e-05,
+     "latency_s": 2.2172927856445312e-05,
      "metadata": {
       "option": "correct"
      },
@@ -296,7 +296,7 @@
      "confidence": null,
      "error": null,
      "item_id": "hn-001",
-     "latency_s": 1.430511474609375e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -310,7 +310,7 @@
      "confidence": null,
      "error": null,
      "item_id": "hn-002",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.288818359375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -324,7 +324,7 @@
      "confidence": null,
      "error": null,
      "item_id": "hn-003",
-     "latency_s": 1.2874603271484375e-05,
+     "latency_s": 2.4080276489257812e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -338,7 +338,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-001",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -352,7 +352,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-002",
-     "latency_s": 1.1205673217773438e-05,
+     "latency_s": 2.288818359375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -366,7 +366,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-003",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -380,7 +380,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-004",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.288818359375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -394,7 +394,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-005",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.384185791015625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -408,7 +408,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-006",
-     "latency_s": 1.2636184692382812e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -422,7 +422,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-007",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.47955322265625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -436,7 +436,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-008",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -450,7 +450,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-009",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -464,7 +464,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-010",
-     "latency_s": 1.2636184692382812e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -478,7 +478,7 @@
      "confidence": null,
      "error": null,
      "item_id": "mg-001",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.193450927734375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -492,7 +492,7 @@
      "confidence": null,
      "error": null,
      "item_id": "mg-002",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.193450927734375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -506,7 +506,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-001",
-     "latency_s": 1.4066696166992188e-05,
+     "latency_s": 2.7179718017578125e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -520,7 +520,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-002",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.193450927734375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -534,7 +534,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-003",
-     "latency_s": 1.2874603271484375e-05,
+     "latency_s": 2.3603439331054688e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -548,7 +548,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-004",
-     "latency_s": 1.2874603271484375e-05,
+     "latency_s": 2.5272369384765625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -562,7 +562,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-005",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.288818359375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -576,7 +576,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-006",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.2172927856445312e-05,
      "metadata": {
       "option": "correct"
      },
@@ -590,7 +590,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-007",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.47955322265625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -604,7 +604,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-008",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.193450927734375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -618,7 +618,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-009",
-     "latency_s": 1.5735626220703125e-05,
+     "latency_s": 2.6226043701171875e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -632,7 +632,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-010",
-     "latency_s": 1.52587890625e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -646,7 +646,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-011",
-     "latency_s": 1.2874603271484375e-05,
+     "latency_s": 2.288818359375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -660,7 +660,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-012",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.193450927734375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -674,7 +674,7 @@
      "confidence": null,
      "error": null,
      "item_id": "psm-001",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.193450927734375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -688,7 +688,7 @@
      "confidence": null,
      "error": null,
      "item_id": "psm-002",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -702,7 +702,7 @@
      "confidence": null,
      "error": null,
      "item_id": "psm-003",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -716,7 +716,7 @@
      "confidence": null,
      "error": null,
      "item_id": "psm-004",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -730,7 +730,7 @@
      "confidence": null,
      "error": null,
      "item_id": "psm-005",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.288818359375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -744,7 +744,7 @@
      "confidence": null,
      "error": null,
      "item_id": "psm-006",
-     "latency_s": 1.1682510375976562e-05,
+     "latency_s": 2.193450927734375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -758,7 +758,7 @@
      "confidence": null,
      "error": null,
      "item_id": "psm-007",
-     "latency_s": 2.0265579223632812e-05,
+     "latency_s": 2.4080276489257812e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -772,7 +772,7 @@
      "confidence": null,
      "error": null,
      "item_id": "psm-008",
-     "latency_s": 1.2874603271484375e-05,
+     "latency_s": 2.4080276489257812e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -786,7 +786,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-001",
-     "latency_s": 1.2874603271484375e-05,
+     "latency_s": 2.3603439331054688e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -800,7 +800,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-002",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.5272369384765625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -814,7 +814,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-003",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.4080276489257812e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -828,7 +828,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-004",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.193450927734375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -842,7 +842,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-005",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.288818359375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -856,7 +856,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-006",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.193450927734375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -870,7 +870,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-007",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -884,7 +884,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-008",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -898,7 +898,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-009",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -912,7 +912,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-010",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.47955322265625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -926,7 +926,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rp-001",
-     "latency_s": 1.4066696166992188e-05,
+     "latency_s": 2.5272369384765625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -940,7 +940,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rp-002",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.4080276489257812e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -954,7 +954,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rp-003",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.1696090698242188e-05,
      "metadata": {
       "option": "correct"
      },
@@ -968,7 +968,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rp-004",
-     "latency_s": 1.3828277587890625e-05,
+     "latency_s": 2.7179718017578125e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -2439,7 +2439,7 @@
     }
    },
    "seed": 20260907,
-   "started_utc": "2026-09-07T21:34:56Z"
+   "started_utc": "2026-09-11T02:07:36Z"
   },
   {
    "adapter": {
@@ -2451,7 +2451,7 @@
     "seed": 20260908
    },
    "corpus_digest": "a9fd4f4c2222dfb9f6135ee39a94ca9b92168867b14a56a5a319d16cb3980528",
-   "duration_s": 0.04520297050476074,
+   "duration_s": 0.0828857421875,
    "environment": {
     "implementation": "CPython",
     "platform": "macOS-26.6.2-arm64-arm-64bit",
@@ -2470,7 +2470,7 @@
      "confidence": null,
      "error": null,
      "item_id": "cs-001",
-     "latency_s": 4.76837158203125e-05,
+     "latency_s": 7.867813110351562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -2484,7 +2484,7 @@
      "confidence": null,
      "error": null,
      "item_id": "cs-002",
-     "latency_s": 9.799003601074219e-05,
+     "latency_s": 4.00543212890625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -2498,7 +2498,7 @@
      "confidence": null,
      "error": null,
      "item_id": "cs-003",
-     "latency_s": 1.9073486328125e-05,
+     "latency_s": 2.8133392333984375e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -2512,7 +2512,7 @@
      "confidence": null,
      "error": null,
      "item_id": "cs-004",
-     "latency_s": 1.4781951904296875e-05,
+     "latency_s": 2.574920654296875e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -2526,7 +2526,7 @@
      "confidence": null,
      "error": null,
      "item_id": "cs-005",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.5272369384765625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -2540,7 +2540,7 @@
      "confidence": null,
      "error": null,
      "item_id": "cs-006",
-     "latency_s": 1.2874603271484375e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -2554,7 +2554,7 @@
      "confidence": null,
      "error": null,
      "item_id": "cs-007",
-     "latency_s": 1.4066696166992188e-05,
+     "latency_s": 2.288818359375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -2568,7 +2568,7 @@
      "confidence": null,
      "error": null,
      "item_id": "cs-008",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.7179718017578125e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -2582,7 +2582,7 @@
      "confidence": null,
      "error": null,
      "item_id": "el-001",
-     "latency_s": 1.2874603271484375e-05,
+     "latency_s": 2.574920654296875e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -2596,7 +2596,7 @@
      "confidence": null,
      "error": null,
      "item_id": "el-002",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -2610,7 +2610,7 @@
      "confidence": null,
      "error": null,
      "item_id": "fe-001",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.5987625122070312e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -2624,7 +2624,7 @@
      "confidence": null,
      "error": null,
      "item_id": "fe-002",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -2638,7 +2638,7 @@
      "confidence": null,
      "error": null,
      "item_id": "fl-001",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.384185791015625e-05,
      "metadata": {
       "option": "correct"
      },
@@ -2652,7 +2652,7 @@
      "confidence": null,
      "error": null,
      "item_id": "fl-002",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "correct"
      },
@@ -2666,7 +2666,7 @@
      "confidence": null,
      "error": null,
      "item_id": "hc-001",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -2680,7 +2680,7 @@
      "confidence": null,
      "error": null,
      "item_id": "hc-002",
-     "latency_s": 1.0967254638671875e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -2694,7 +2694,7 @@
      "confidence": null,
      "error": null,
      "item_id": "hc-003",
-     "latency_s": 1.2874603271484375e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -2708,7 +2708,7 @@
      "confidence": null,
      "error": null,
      "item_id": "hc-004",
-     "latency_s": 1.6927719116210938e-05,
+     "latency_s": 2.6226043701171875e-05,
      "metadata": {
       "option": "correct"
      },
@@ -2722,7 +2722,7 @@
      "confidence": null,
      "error": null,
      "item_id": "hc-005",
-     "latency_s": 1.71661376953125e-05,
+     "latency_s": 2.574920654296875e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -2736,7 +2736,7 @@
      "confidence": null,
      "error": null,
      "item_id": "hn-001",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -2750,7 +2750,7 @@
      "confidence": null,
      "error": null,
      "item_id": "hn-002",
-     "latency_s": 4.100799560546875e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -2764,7 +2764,7 @@
      "confidence": null,
      "error": null,
      "item_id": "hn-003",
-     "latency_s": 1.5735626220703125e-05,
+     "latency_s": 2.47955322265625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -2778,7 +2778,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-001",
-     "latency_s": 1.5020370483398438e-05,
+     "latency_s": 2.5987625122070312e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -2792,7 +2792,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-002",
-     "latency_s": 6.103515625e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -2806,7 +2806,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-003",
-     "latency_s": 4.6253204345703125e-05,
+     "latency_s": 2.5987625122070312e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -2820,7 +2820,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-004",
-     "latency_s": 4.9114227294921875e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -2834,7 +2834,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-005",
-     "latency_s": 2.288818359375e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -2848,7 +2848,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-006",
-     "latency_s": 3.790855407714844e-05,
+     "latency_s": 2.4080276489257812e-05,
      "metadata": {
       "option": "correct"
      },
@@ -2862,7 +2862,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-007",
-     "latency_s": 1.4066696166992188e-05,
+     "latency_s": 2.288818359375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -2876,7 +2876,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-008",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -2890,7 +2890,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-009",
-     "latency_s": 1.5974044799804688e-05,
+     "latency_s": 2.5987625122070312e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -2904,7 +2904,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-010",
-     "latency_s": 1.4066696166992188e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -2918,7 +2918,7 @@
      "confidence": null,
      "error": null,
      "item_id": "mg-001",
-     "latency_s": 1.2874603271484375e-05,
+     "latency_s": 2.288818359375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -2932,7 +2932,7 @@
      "confidence": null,
      "error": null,
      "item_id": "mg-002",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -2946,7 +2946,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-001",
-     "latency_s": 2.193450927734375e-05,
+     "latency_s": 2.6941299438476562e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -2960,7 +2960,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-002",
-     "latency_s": 1.4066696166992188e-05,
+     "latency_s": 2.288818359375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -2974,7 +2974,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-003",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -2988,7 +2988,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-004",
-     "latency_s": 1.3828277587890625e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -3002,7 +3002,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-005",
-     "latency_s": 1.4066696166992188e-05,
+     "latency_s": 2.384185791015625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -3016,7 +3016,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-006",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -3030,7 +3030,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-007",
-     "latency_s": 1.3828277587890625e-05,
+     "latency_s": 2.6941299438476562e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -3044,7 +3044,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-008",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -3058,7 +3058,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-009",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.6226043701171875e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -3072,7 +3072,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-010",
-     "latency_s": 1.4066696166992188e-05,
+     "latency_s": 2.47955322265625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -3086,7 +3086,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-011",
-     "latency_s": 1.2636184692382812e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -3100,7 +3100,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-012",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.4080276489257812e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -3114,7 +3114,7 @@
      "confidence": null,
      "error": null,
      "item_id": "psm-001",
-     "latency_s": 2.09808349609375e-05,
+     "latency_s": 2.4080276489257812e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -3128,7 +3128,7 @@
      "confidence": null,
      "error": null,
      "item_id": "psm-002",
-     "latency_s": 1.71661376953125e-05,
+     "latency_s": 2.47955322265625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -3142,7 +3142,7 @@
      "confidence": null,
      "error": null,
      "item_id": "psm-003",
-     "latency_s": 1.3828277587890625e-05,
+     "latency_s": 2.7179718017578125e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -3156,7 +3156,7 @@
      "confidence": null,
      "error": null,
      "item_id": "psm-004",
-     "latency_s": 1.5020370483398438e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -3170,7 +3170,7 @@
      "confidence": null,
      "error": null,
      "item_id": "psm-005",
-     "latency_s": 1.4066696166992188e-05,
+     "latency_s": 2.2649765014648438e-05,
      "metadata": {
       "option": "correct"
      },
@@ -3184,7 +3184,7 @@
      "confidence": null,
      "error": null,
      "item_id": "psm-006",
-     "latency_s": 1.2874603271484375e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -3198,7 +3198,7 @@
      "confidence": null,
      "error": null,
      "item_id": "psm-007",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.288818359375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -3212,7 +3212,7 @@
      "confidence": null,
      "error": null,
      "item_id": "psm-008",
-     "latency_s": 1.4066696166992188e-05,
+     "latency_s": 3.361701965332031e-05,
      "metadata": {
       "option": "correct"
      },
@@ -3226,7 +3226,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-001",
-     "latency_s": 1.4066696166992188e-05,
+     "latency_s": 2.4080276489257812e-05,
      "metadata": {
       "option": "correct"
      },
@@ -3240,7 +3240,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-002",
-     "latency_s": 1.8835067749023438e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -3254,7 +3254,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-003",
-     "latency_s": 1.6927719116210938e-05,
+     "latency_s": 2.6226043701171875e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -3268,7 +3268,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-004",
-     "latency_s": 1.71661376953125e-05,
+     "latency_s": 2.47955322265625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -3282,7 +3282,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-005",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -3296,7 +3296,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-006",
-     "latency_s": 1.3828277587890625e-05,
+     "latency_s": 4.506111145019531e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -3310,7 +3310,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-007",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.574920654296875e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -3324,7 +3324,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-008",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -3338,7 +3338,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-009",
-     "latency_s": 1.2874603271484375e-05,
+     "latency_s": 2.4080276489257812e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -3352,7 +3352,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-010",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.288818359375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -3366,7 +3366,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rp-001",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.1696090698242188e-05,
      "metadata": {
       "option": "correct"
      },
@@ -3380,7 +3380,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rp-002",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -3394,7 +3394,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rp-003",
-     "latency_s": 1.0967254638671875e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "correct"
      },
@@ -3408,7 +3408,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rp-004",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.47955322265625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -4898,7 +4898,7 @@
     }
    },
    "seed": 20260908,
-   "started_utc": "2026-09-07T21:34:56Z"
+   "started_utc": "2026-09-11T02:07:36Z"
   },
   {
    "adapter": {
@@ -4910,7 +4910,7 @@
     "seed": 20260909
    },
    "corpus_digest": "a9fd4f4c2222dfb9f6135ee39a94ca9b92168867b14a56a5a319d16cb3980528",
-   "duration_s": 0.04506111145019531,
+   "duration_s": 0.08171701431274414,
    "environment": {
     "implementation": "CPython",
     "platform": "macOS-26.6.2-arm64-arm-64bit",
@@ -4929,7 +4929,7 @@
      "confidence": null,
      "error": null,
      "item_id": "cs-001",
-     "latency_s": 3.1948089599609375e-05,
+     "latency_s": 4.482269287109375e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -4943,7 +4943,7 @@
      "confidence": null,
      "error": null,
      "item_id": "cs-002",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "correct"
      },
@@ -4957,7 +4957,7 @@
      "confidence": null,
      "error": null,
      "item_id": "cs-003",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -4971,7 +4971,7 @@
      "confidence": null,
      "error": null,
      "item_id": "cs-004",
-     "latency_s": 1.2874603271484375e-05,
+     "latency_s": 2.6941299438476562e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -4985,7 +4985,7 @@
      "confidence": null,
      "error": null,
      "item_id": "cs-005",
-     "latency_s": 1.0967254638671875e-05,
+     "latency_s": 2.288818359375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -4999,7 +4999,7 @@
      "confidence": null,
      "error": null,
      "item_id": "cs-006",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.5272369384765625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -5013,7 +5013,7 @@
      "confidence": null,
      "error": null,
      "item_id": "cs-007",
-     "latency_s": 1.2874603271484375e-05,
+     "latency_s": 2.384185791015625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -5027,7 +5027,7 @@
      "confidence": null,
      "error": null,
      "item_id": "cs-008",
-     "latency_s": 2.193450927734375e-05,
+     "latency_s": 2.4080276489257812e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -5041,7 +5041,7 @@
      "confidence": null,
      "error": null,
      "item_id": "el-001",
-     "latency_s": 1.2874603271484375e-05,
+     "latency_s": 2.5272369384765625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -5055,7 +5055,7 @@
      "confidence": null,
      "error": null,
      "item_id": "el-002",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.2649765014648438e-05,
      "metadata": {
       "option": "correct"
      },
@@ -5069,7 +5069,7 @@
      "confidence": null,
      "error": null,
      "item_id": "fe-001",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -5083,7 +5083,7 @@
      "confidence": null,
      "error": null,
      "item_id": "fe-002",
-     "latency_s": 1.4066696166992188e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -5097,7 +5097,7 @@
      "confidence": null,
      "error": null,
      "item_id": "fl-001",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.193450927734375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -5111,7 +5111,7 @@
      "confidence": null,
      "error": null,
      "item_id": "fl-002",
-     "latency_s": 1.1682510375976562e-05,
+     "latency_s": 2.2172927856445312e-05,
      "metadata": {
       "option": "correct"
      },
@@ -5125,7 +5125,7 @@
      "confidence": null,
      "error": null,
      "item_id": "hc-001",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.288818359375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -5139,7 +5139,7 @@
      "confidence": null,
      "error": null,
      "item_id": "hc-002",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.2172927856445312e-05,
      "metadata": {
       "option": "correct"
      },
@@ -5153,7 +5153,7 @@
      "confidence": null,
      "error": null,
      "item_id": "hc-003",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.193450927734375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -5167,7 +5167,7 @@
      "confidence": null,
      "error": null,
      "item_id": "hc-004",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.4080276489257812e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -5181,7 +5181,7 @@
      "confidence": null,
      "error": null,
      "item_id": "hc-005",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.384185791015625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -5195,7 +5195,7 @@
      "confidence": null,
      "error": null,
      "item_id": "hn-001",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.4080276489257812e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -5209,7 +5209,7 @@
      "confidence": null,
      "error": null,
      "item_id": "hn-002",
-     "latency_s": 1.0967254638671875e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -5223,7 +5223,7 @@
      "confidence": null,
      "error": null,
      "item_id": "hn-003",
-     "latency_s": 1.1205673217773438e-05,
+     "latency_s": 2.288818359375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -5237,7 +5237,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-001",
-     "latency_s": 1.2874603271484375e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -5251,7 +5251,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-002",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.193450927734375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -5265,7 +5265,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-003",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.4080276489257812e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -5279,7 +5279,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-004",
-     "latency_s": 1.2636184692382812e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -5293,7 +5293,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-005",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.2172927856445312e-05,
      "metadata": {
       "option": "correct"
      },
@@ -5307,7 +5307,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-006",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.193450927734375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -5321,7 +5321,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-007",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.5272369384765625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -5335,7 +5335,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-008",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.288818359375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -5349,7 +5349,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-009",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.3603439331054688e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -5363,7 +5363,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-010",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.4080276489257812e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -5377,7 +5377,7 @@
      "confidence": null,
      "error": null,
      "item_id": "mg-001",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -5391,7 +5391,7 @@
      "confidence": null,
      "error": null,
      "item_id": "mg-002",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.288818359375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -5405,7 +5405,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-001",
-     "latency_s": 1.4066696166992188e-05,
+     "latency_s": 2.6941299438476562e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -5419,7 +5419,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-002",
-     "latency_s": 1.3828277587890625e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -5433,7 +5433,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-003",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -5447,7 +5447,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-004",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.4080276489257812e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -5461,7 +5461,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-005",
-     "latency_s": 1.4066696166992188e-05,
+     "latency_s": 2.4080276489257812e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -5475,7 +5475,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-006",
-     "latency_s": 1.0967254638671875e-05,
+     "latency_s": 2.288818359375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -5489,7 +5489,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-007",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.288818359375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -5503,7 +5503,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-008",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -5517,7 +5517,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-009",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -5531,7 +5531,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-010",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.193450927734375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -5545,7 +5545,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-011",
-     "latency_s": 1.2874603271484375e-05,
+     "latency_s": 2.4080276489257812e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -5559,7 +5559,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-012",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.6941299438476562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -5573,7 +5573,7 @@
      "confidence": null,
      "error": null,
      "item_id": "psm-001",
-     "latency_s": 1.0967254638671875e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -5587,7 +5587,7 @@
      "confidence": null,
      "error": null,
      "item_id": "psm-002",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -5601,7 +5601,7 @@
      "confidence": null,
      "error": null,
      "item_id": "psm-003",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.2649765014648438e-05,
      "metadata": {
       "option": "correct"
      },
@@ -5615,7 +5615,7 @@
      "confidence": null,
      "error": null,
      "item_id": "psm-004",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -5629,7 +5629,7 @@
      "confidence": null,
      "error": null,
      "item_id": "psm-005",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -5643,7 +5643,7 @@
      "confidence": null,
      "error": null,
      "item_id": "psm-006",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -5657,7 +5657,7 @@
      "confidence": null,
      "error": null,
      "item_id": "psm-007",
-     "latency_s": 1.2636184692382812e-05,
+     "latency_s": 2.384185791015625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -5671,7 +5671,7 @@
      "confidence": null,
      "error": null,
      "item_id": "psm-008",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -5685,7 +5685,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-001",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.288818359375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -5699,7 +5699,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-002",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.6941299438476562e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -5713,7 +5713,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-003",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.384185791015625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -5727,7 +5727,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-004",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.193450927734375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -5741,7 +5741,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-005",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -5755,7 +5755,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-006",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.47955322265625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -5769,7 +5769,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-007",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -5783,7 +5783,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-008",
-     "latency_s": 1.4066696166992188e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -5797,7 +5797,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-009",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -5811,7 +5811,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-010",
-     "latency_s": 1.2636184692382812e-05,
+     "latency_s": 2.384185791015625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -5825,7 +5825,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rp-001",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.4080276489257812e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -5839,7 +5839,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rp-002",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -5853,7 +5853,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rp-003",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -5867,7 +5867,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rp-004",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.47955322265625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -7346,7 +7346,7 @@
     }
    },
    "seed": 20260909,
-   "started_utc": "2026-09-07T21:34:56Z"
+   "started_utc": "2026-09-11T02:07:36Z"
   },
   {
    "adapter": {
@@ -7358,7 +7358,7 @@
     "seed": 20260910
    },
    "corpus_digest": "a9fd4f4c2222dfb9f6135ee39a94ca9b92168867b14a56a5a319d16cb3980528",
-   "duration_s": 0.04519796371459961,
+   "duration_s": 0.08274364471435547,
    "environment": {
     "implementation": "CPython",
     "platform": "macOS-26.6.2-arm64-arm-64bit",
@@ -7377,7 +7377,7 @@
      "confidence": null,
      "error": null,
      "item_id": "cs-001",
-     "latency_s": 3.1948089599609375e-05,
+     "latency_s": 4.38690185546875e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -7391,7 +7391,7 @@
      "confidence": null,
      "error": null,
      "item_id": "cs-002",
-     "latency_s": 1.52587890625e-05,
+     "latency_s": 2.9087066650390625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -7405,7 +7405,7 @@
      "confidence": null,
      "error": null,
      "item_id": "cs-003",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.288818359375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -7419,7 +7419,7 @@
      "confidence": null,
      "error": null,
      "item_id": "cs-004",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 3.0279159545898438e-05,
      "metadata": {
       "option": "correct"
      },
@@ -7433,7 +7433,7 @@
      "confidence": null,
      "error": null,
      "item_id": "cs-005",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.2649765014648438e-05,
      "metadata": {
       "option": "correct"
      },
@@ -7447,7 +7447,7 @@
      "confidence": null,
      "error": null,
      "item_id": "cs-006",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -7461,7 +7461,7 @@
      "confidence": null,
      "error": null,
      "item_id": "cs-007",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.2172927856445312e-05,
      "metadata": {
       "option": "correct"
      },
@@ -7475,7 +7475,7 @@
      "confidence": null,
      "error": null,
      "item_id": "cs-008",
-     "latency_s": 1.4066696166992188e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -7489,7 +7489,7 @@
      "confidence": null,
      "error": null,
      "item_id": "el-001",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.288818359375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -7503,7 +7503,7 @@
      "confidence": null,
      "error": null,
      "item_id": "el-002",
-     "latency_s": 1.3828277587890625e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -7517,7 +7517,7 @@
      "confidence": null,
      "error": null,
      "item_id": "fe-001",
-     "latency_s": 1.2874603271484375e-05,
+     "latency_s": 2.5272369384765625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -7531,7 +7531,7 @@
      "confidence": null,
      "error": null,
      "item_id": "fe-002",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.193450927734375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -7545,7 +7545,7 @@
      "confidence": null,
      "error": null,
      "item_id": "fl-001",
-     "latency_s": 1.7881393432617188e-05,
+     "latency_s": 2.5272369384765625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -7559,7 +7559,7 @@
      "confidence": null,
      "error": null,
      "item_id": "fl-002",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.193450927734375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -7573,7 +7573,7 @@
      "confidence": null,
      "error": null,
      "item_id": "hc-001",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.4080276489257812e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -7587,7 +7587,7 @@
      "confidence": null,
      "error": null,
      "item_id": "hc-002",
-     "latency_s": 1.2874603271484375e-05,
+     "latency_s": 2.3603439331054688e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -7601,7 +7601,7 @@
      "confidence": null,
      "error": null,
      "item_id": "hc-003",
-     "latency_s": 1.2874603271484375e-05,
+     "latency_s": 2.4080276489257812e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -7615,7 +7615,7 @@
      "confidence": null,
      "error": null,
      "item_id": "hc-004",
-     "latency_s": 1.1205673217773438e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -7629,7 +7629,7 @@
      "confidence": null,
      "error": null,
      "item_id": "hc-005",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.193450927734375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -7643,7 +7643,7 @@
      "confidence": null,
      "error": null,
      "item_id": "hn-001",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.2172927856445312e-05,
      "metadata": {
       "option": "correct"
      },
@@ -7657,7 +7657,7 @@
      "confidence": null,
      "error": null,
      "item_id": "hn-002",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.193450927734375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -7671,7 +7671,7 @@
      "confidence": null,
      "error": null,
      "item_id": "hn-003",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.2172927856445312e-05,
      "metadata": {
       "option": "correct"
      },
@@ -7685,7 +7685,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-001",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.288818359375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -7699,7 +7699,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-002",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.288818359375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -7713,7 +7713,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-003",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -7727,7 +7727,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-004",
-     "latency_s": 1.0967254638671875e-05,
+     "latency_s": 2.288818359375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -7741,7 +7741,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-005",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -7755,7 +7755,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-006",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.288818359375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -7769,7 +7769,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-007",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.5272369384765625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -7783,7 +7783,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-008",
-     "latency_s": 1.1682510375976562e-05,
+     "latency_s": 2.288818359375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -7797,7 +7797,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-009",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.2172927856445312e-05,
      "metadata": {
       "option": "correct"
      },
@@ -7811,7 +7811,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-010",
-     "latency_s": 1.2874603271484375e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -7825,7 +7825,7 @@
      "confidence": null,
      "error": null,
      "item_id": "mg-001",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -7839,7 +7839,7 @@
      "confidence": null,
      "error": null,
      "item_id": "mg-002",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.47955322265625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -7853,7 +7853,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-001",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.288818359375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -7867,7 +7867,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-002",
-     "latency_s": 1.2874603271484375e-05,
+     "latency_s": 2.6226043701171875e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -7881,7 +7881,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-003",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -7895,7 +7895,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-004",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.384185791015625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -7909,7 +7909,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-005",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -7923,7 +7923,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-006",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -7937,7 +7937,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-007",
-     "latency_s": 1.2636184692382812e-05,
+     "latency_s": 2.47955322265625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -7951,7 +7951,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-008",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.2172927856445312e-05,
      "metadata": {
       "option": "correct"
      },
@@ -7965,7 +7965,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-009",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -7979,7 +7979,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-010",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.2172927856445312e-05,
      "metadata": {
       "option": "correct"
      },
@@ -7993,7 +7993,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-011",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.288818359375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -8007,7 +8007,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-012",
-     "latency_s": 1.2636184692382812e-05,
+     "latency_s": 2.47955322265625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -8021,7 +8021,7 @@
      "confidence": null,
      "error": null,
      "item_id": "psm-001",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.5272369384765625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -8035,7 +8035,7 @@
      "confidence": null,
      "error": null,
      "item_id": "psm-002",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.288818359375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -8049,7 +8049,7 @@
      "confidence": null,
      "error": null,
      "item_id": "psm-003",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.47955322265625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -8063,7 +8063,7 @@
      "confidence": null,
      "error": null,
      "item_id": "psm-004",
-     "latency_s": 1.0967254638671875e-05,
+     "latency_s": 2.2172927856445312e-05,
      "metadata": {
       "option": "correct"
      },
@@ -8077,7 +8077,7 @@
      "confidence": null,
      "error": null,
      "item_id": "psm-005",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.4080276489257812e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -8091,7 +8091,7 @@
      "confidence": null,
      "error": null,
      "item_id": "psm-006",
-     "latency_s": 1.1682510375976562e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -8105,7 +8105,7 @@
      "confidence": null,
      "error": null,
      "item_id": "psm-007",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.4080276489257812e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -8119,7 +8119,7 @@
      "confidence": null,
      "error": null,
      "item_id": "psm-008",
-     "latency_s": 2.193450927734375e-05,
+     "latency_s": 2.3603439331054688e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -8133,7 +8133,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-001",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.193450927734375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -8147,7 +8147,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-002",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.2172927856445312e-05,
      "metadata": {
       "option": "correct"
      },
@@ -8161,7 +8161,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-003",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.288818359375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -8175,7 +8175,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-004",
-     "latency_s": 1.2636184692382812e-05,
+     "latency_s": 2.6941299438476562e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -8189,7 +8189,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-005",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -8203,7 +8203,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-006",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -8217,7 +8217,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-007",
-     "latency_s": 1.4066696166992188e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -8231,7 +8231,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-008",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.47955322265625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -8245,7 +8245,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-009",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -8259,7 +8259,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-010",
-     "latency_s": 1.2636184692382812e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -8273,7 +8273,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rp-001",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.288818359375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -8287,7 +8287,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rp-002",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.384185791015625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -8301,7 +8301,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rp-003",
-     "latency_s": 1.4066696166992188e-05,
+     "latency_s": 2.4080276489257812e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -8315,7 +8315,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rp-004",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.288818359375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -9768,7 +9768,7 @@
     }
    },
    "seed": 20260910,
-   "started_utc": "2026-09-07T21:34:56Z"
+   "started_utc": "2026-09-11T02:07:36Z"
   },
   {
    "adapter": {
@@ -9780,7 +9780,7 @@
     "seed": 20260911
    },
    "corpus_digest": "a9fd4f4c2222dfb9f6135ee39a94ca9b92168867b14a56a5a319d16cb3980528",
-   "duration_s": 0.04488706588745117,
+   "duration_s": 0.08229517936706543,
    "environment": {
     "implementation": "CPython",
     "platform": "macOS-26.6.2-arm64-arm-64bit",
@@ -9799,7 +9799,7 @@
      "confidence": null,
      "error": null,
      "item_id": "cs-001",
-     "latency_s": 3.0994415283203125e-05,
+     "latency_s": 4.696846008300781e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -9813,7 +9813,7 @@
      "confidence": null,
      "error": null,
      "item_id": "cs-002",
-     "latency_s": 1.3828277587890625e-05,
+     "latency_s": 2.8848648071289062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -9827,7 +9827,7 @@
      "confidence": null,
      "error": null,
      "item_id": "cs-003",
-     "latency_s": 1.4066696166992188e-05,
+     "latency_s": 2.7179718017578125e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -9841,7 +9841,7 @@
      "confidence": null,
      "error": null,
      "item_id": "cs-004",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.4080276489257812e-05,
      "metadata": {
       "option": "correct"
      },
@@ -9855,7 +9855,7 @@
      "confidence": null,
      "error": null,
      "item_id": "cs-005",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.1696090698242188e-05,
      "metadata": {
       "option": "correct"
      },
@@ -9869,7 +9869,7 @@
      "confidence": null,
      "error": null,
      "item_id": "cs-006",
-     "latency_s": 1.2874603271484375e-05,
+     "latency_s": 2.5987625122070312e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -9883,7 +9883,7 @@
      "confidence": null,
      "error": null,
      "item_id": "cs-007",
-     "latency_s": 1.4066696166992188e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -9897,7 +9897,7 @@
      "confidence": null,
      "error": null,
      "item_id": "cs-008",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.47955322265625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -9911,7 +9911,7 @@
      "confidence": null,
      "error": null,
      "item_id": "el-001",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -9925,7 +9925,7 @@
      "confidence": null,
      "error": null,
      "item_id": "el-002",
-     "latency_s": 1.3828277587890625e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -9939,7 +9939,7 @@
      "confidence": null,
      "error": null,
      "item_id": "fe-001",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.1696090698242188e-05,
      "metadata": {
       "option": "correct"
      },
@@ -9953,7 +9953,7 @@
      "confidence": null,
      "error": null,
      "item_id": "fe-002",
-     "latency_s": 1.2874603271484375e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -9967,7 +9967,7 @@
      "confidence": null,
      "error": null,
      "item_id": "fl-001",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -9981,7 +9981,7 @@
      "confidence": null,
      "error": null,
      "item_id": "fl-002",
-     "latency_s": 1.4066696166992188e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -9995,7 +9995,7 @@
      "confidence": null,
      "error": null,
      "item_id": "hc-001",
-     "latency_s": 1.4781951904296875e-05,
+     "latency_s": 2.47955322265625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -10009,7 +10009,7 @@
      "confidence": null,
      "error": null,
      "item_id": "hc-002",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -10023,7 +10023,7 @@
      "confidence": null,
      "error": null,
      "item_id": "hc-003",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.193450927734375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -10037,7 +10037,7 @@
      "confidence": null,
      "error": null,
      "item_id": "hc-004",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.47955322265625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -10051,7 +10051,7 @@
      "confidence": null,
      "error": null,
      "item_id": "hc-005",
-     "latency_s": 1.2874603271484375e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -10065,7 +10065,7 @@
      "confidence": null,
      "error": null,
      "item_id": "hn-001",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -10079,7 +10079,7 @@
      "confidence": null,
      "error": null,
      "item_id": "hn-002",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.288818359375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -10093,7 +10093,7 @@
      "confidence": null,
      "error": null,
      "item_id": "hn-003",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -10107,7 +10107,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-001",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.9087066650390625e-05,
      "metadata": {
       "option": "correct"
      },
@@ -10121,7 +10121,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-002",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.384185791015625e-05,
      "metadata": {
       "option": "correct"
      },
@@ -10135,7 +10135,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-003",
-     "latency_s": 1.2874603271484375e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -10149,7 +10149,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-004",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -10163,7 +10163,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-005",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -10177,7 +10177,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-006",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.2649765014648438e-05,
      "metadata": {
       "option": "correct"
      },
@@ -10191,7 +10191,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-007",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.5272369384765625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -10205,7 +10205,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-008",
-     "latency_s": 1.2874603271484375e-05,
+     "latency_s": 2.4080276489257812e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -10219,7 +10219,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-009",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.193450927734375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -10233,7 +10233,7 @@
      "confidence": null,
      "error": null,
      "item_id": "loto-010",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.3603439331054688e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -10247,7 +10247,7 @@
      "confidence": null,
      "error": null,
      "item_id": "mg-001",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.288818359375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -10261,7 +10261,7 @@
      "confidence": null,
      "error": null,
      "item_id": "mg-002",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -10275,7 +10275,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-001",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.193450927734375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -10289,7 +10289,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-002",
-     "latency_s": 1.2636184692382812e-05,
+     "latency_s": 2.47955322265625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -10303,7 +10303,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-003",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.193450927734375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -10317,7 +10317,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-004",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.5272369384765625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -10331,7 +10331,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-005",
-     "latency_s": 1.2874603271484375e-05,
+     "latency_s": 2.4080276489257812e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -10345,7 +10345,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-006",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.2649765014648438e-05,
      "metadata": {
       "option": "correct"
      },
@@ -10359,7 +10359,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-007",
-     "latency_s": 1.2874603271484375e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -10373,7 +10373,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-008",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.2172927856445312e-05,
      "metadata": {
       "option": "correct"
      },
@@ -10387,7 +10387,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-009",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.193450927734375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -10401,7 +10401,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-010",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.7894973754882812e-05,
      "metadata": {
       "option": "correct"
      },
@@ -10415,7 +10415,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-011",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -10429,7 +10429,7 @@
      "confidence": null,
      "error": null,
      "item_id": "prd-012",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -10443,7 +10443,7 @@
      "confidence": null,
      "error": null,
      "item_id": "psm-001",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.2172927856445312e-05,
      "metadata": {
       "option": "correct"
      },
@@ -10457,7 +10457,7 @@
      "confidence": null,
      "error": null,
      "item_id": "psm-002",
-     "latency_s": 1.2636184692382812e-05,
+     "latency_s": 2.384185791015625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -10471,7 +10471,7 @@
      "confidence": null,
      "error": null,
      "item_id": "psm-003",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -10485,7 +10485,7 @@
      "confidence": null,
      "error": null,
      "item_id": "psm-004",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -10499,7 +10499,7 @@
      "confidence": null,
      "error": null,
      "item_id": "psm-005",
-     "latency_s": 1.2874603271484375e-05,
+     "latency_s": 2.47955322265625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -10513,7 +10513,7 @@
      "confidence": null,
      "error": null,
      "item_id": "psm-006",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -10527,7 +10527,7 @@
      "confidence": null,
      "error": null,
      "item_id": "psm-007",
-     "latency_s": 1.3828277587890625e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -10541,7 +10541,7 @@
      "confidence": null,
      "error": null,
      "item_id": "psm-008",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -10555,7 +10555,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-001",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.384185791015625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -10569,7 +10569,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-002",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.288818359375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -10583,7 +10583,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-003",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -10597,7 +10597,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-004",
-     "latency_s": 1.2636184692382812e-05,
+     "latency_s": 2.4080276489257812e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -10611,7 +10611,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-005",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.2172927856445312e-05,
      "metadata": {
       "option": "correct"
      },
@@ -10625,7 +10625,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-006",
-     "latency_s": 1.3113021850585938e-05,
+     "latency_s": 2.47955322265625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -10639,7 +10639,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-007",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.5033950805664062e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -10653,7 +10653,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-008",
-     "latency_s": 1.0967254638671875e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -10667,7 +10667,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-009",
-     "latency_s": 1.0967254638671875e-05,
+     "latency_s": 2.288818359375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -10681,7 +10681,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rk-010",
-     "latency_s": 1.2874603271484375e-05,
+     "latency_s": 2.47955322265625e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -10695,7 +10695,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rp-001",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.4080276489257812e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -10709,7 +10709,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rp-002",
-     "latency_s": 1.2159347534179688e-05,
+     "latency_s": 2.4080276489257812e-05,
      "metadata": {
       "option": "adjacent"
      },
@@ -10723,7 +10723,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rp-003",
-     "latency_s": 1.1920928955078125e-05,
+     "latency_s": 2.288818359375e-05,
      "metadata": {
       "option": "correct"
      },
@@ -10737,7 +10737,7 @@
      "confidence": null,
      "error": null,
      "item_id": "rp-004",
-     "latency_s": 1.1205673217773438e-05,
+     "latency_s": 2.3126602172851562e-05,
      "metadata": {
       "option": "correct"
      },
@@ -12210,7 +12210,7 @@
     }
    },
    "seed": 20260911,
-   "started_utc": "2026-09-07T21:34:56Z"
+   "started_utc": "2026-09-11T02:07:36Z"
   }
  ],
  "schema": "grounding_eval.baselines/1"
