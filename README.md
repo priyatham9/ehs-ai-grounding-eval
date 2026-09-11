@@ -87,6 +87,21 @@ Domains: pressure relief devices, lockout/tagout, confined space, process safety
 management, injury recordkeeping, hazard communication, respiratory protection
 and noise, machine guarding / electrical / flammable liquids.
 
+### Corpus by domain
+
+<!-- corpus-stats:start -->
+| domain | items | minimal pairs | mean question length | distinct CFR titles |
+|---|---|---|---|---|
+| confined_space | 8 | 3 | 23.5 | 1 |
+| hazard_communication | 5 | 1 | 21.0 | 1 |
+| injury_recordkeeping | 10 | 3 | 23.7 | 1 |
+| lockout_tagout | 10 | 4 | 19.8 | 1 |
+| machine_electrical_fire | 8 | 3 | 22.2 | 1 |
+| pressure_relief_devices | 12 | 3 | 32.9 | 1 |
+| process_safety_management | 8 | 3 | 24.6 | 2 |
+| respiratory_protection_and_noise | 7 | 3 | 22.6 | 1 |
+<!-- corpus-stats:end -->
+
 ### Anatomy of an item
 
 Every item carries the question, a reference answer, the specific adjacent wrong
