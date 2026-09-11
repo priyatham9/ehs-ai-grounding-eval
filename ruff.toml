@@ -1,3 +1,5 @@
-select = ["E9", "F"]
 line-length = 100
 exclude = ["docs", "synthetic", "results", "corpus"]
+
+[lint]
+select = ["E9", "F"]
