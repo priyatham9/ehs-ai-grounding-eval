@@ -2,9 +2,7 @@
 
 [![tests](https://github.com/priyatham9/ehs-ai-grounding-eval/actions/workflows/tests.yml/badge.svg)](https://github.com/priyatham9/ehs-ai-grounding-eval/actions/workflows/tests.yml)
 
-A benchmark for measuring whether an AI system's answers to safety-critical
-technical questions are grounded in authoritative sources, or generated from
-parametric memory and merely sound authoritative.
+A benchmark for measuring whether an AI system's answers to safety-critical technical questions are grounded in authoritative sources. It contains 68 items built so that co-hyponym substitution, a semantically adjacent wrong answer, is plausible and dangerous; three non-LLM baselines show 27.0% accuracy for TF-IDF retrieval. No experimental results for any language model have been evaluated; the mock adapter's demonstration outcome probabilities were fixed in advance.
 
 **This repository contains no experimental results for any language model.** It
 contains a question corpus, a scoring harness, an adapter interface, a mock
