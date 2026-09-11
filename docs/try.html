@@ -170,6 +170,15 @@ main{padding:32px 0 60px}
 .baselines th{font-family:var(--font-mono);font-size:.625rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .baselines td.n{font-family:var(--font-mono);text-align:right}
 .baselines tr.you td{font-weight:700;color:var(--accent)}
+.baselines-chart{margin:20px 0 0;padding:0}
+.baselines-chart img{display:block;width:100%;height:auto;border:2px solid var(--rule-soft)}
+.baselines-chart figcaption{font-size:.75rem;color:var(--muted);margin-top:8px}
+.baselines-chart details{margin-top:10px}
+.baselines-chart summary{font-family:var(--font-mono);font-size:.75rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);cursor:pointer}
+.baselines-chart details table{width:100%;border-collapse:collapse;font-size:.8125rem;margin-top:10px}
+.baselines-chart details th,.baselines-chart details td{padding:8px 10px;border-bottom:1px solid var(--rule-soft);text-align:left}
+.baselines-chart details th{font-family:var(--font-mono);font-size:.625rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.baselines-chart details td.n{font-family:var(--font-mono);text-align:right}
 
 .explainer{margin-top:40px;border:2px solid var(--rule-soft);background:var(--surface);padding:24px 26px}
 .explainer h2{font-size:1.05rem;margin-bottom:12px}
@@ -1176,6 +1185,24 @@ main{padding:32px 0 60px}
     <thead><tr><th>Arm</th><th class="n">Accuracy</th></tr></thead>
     <tbody id="baselineRows"></tbody>
   </table>
+
+  <figure class="baselines-chart">
+    <img src="baselines.svg" alt="" role="img"
+      aria-label="Scatter of accuracy versus adjacent substitution rate for the random floor, TF-IDF, BM25 and oracle baselines, each with a 95% interval. No language model has been scored yet, so the high-accuracy, high-error upper-right region is empty." />
+    <figcaption>Accuracy vs. adjacent substitution rate, with 95% intervals. Numbers are read from <span class="mono">results/baselines_summary.csv</span>.</figcaption>
+    <details>
+      <summary>Data table</summary>
+      <table>
+        <thead><tr><th>Arm</th><th class="n">Accuracy</th><th class="n">Accuracy 95% CI</th><th class="n">Adjacent substitution rate</th><th class="n">Adjacent 95% CI</th></tr></thead>
+        <tbody>
+          <tr><td>Random floor</td><td class="n">52.1%</td><td class="n">45.9%&ndash;58.9%</td><td class="n">47.3%</td><td class="n">40.4%&ndash;53.5%</td></tr>
+          <tr><td>TF-IDF retrieval</td><td class="n">27.0%</td><td class="n">15.4%&ndash;40.0%</td><td class="n">0.0%</td><td class="n">0.0%&ndash;0.0%</td></tr>
+          <tr><td>BM25 retrieval</td><td class="n">28.6%</td><td class="n">17.2%&ndash;40.9%</td><td class="n">0.0%</td><td class="n">0.0%&ndash;0.0%</td></tr>
+          <tr><td>Oracle ceiling</td><td class="n">100.0%</td><td class="n">94.3%&ndash;100.0%</td><td class="n">0.0%</td><td class="n">0.0%&ndash;0.0%</td></tr>
+        </tbody>
+      </table>
+    </details>
+  </figure>
 </div>
 
 <div class="explainer">
