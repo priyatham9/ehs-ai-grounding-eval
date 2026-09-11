@@ -103,7 +103,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,s
 .gbar-panel a:hover{background:var(--accent-wash)}
 .gbar-panel a[aria-current="page"]{color:var(--accent);font-weight:700}
 .gbar-panel a small{font-family:var(--font-mono);font-size:.625rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);align-self:center}
-.gbar-toggle{display:inline-flex;align-items:center;justify-content:center;width:36px;flex:none;margin:8px 0 8px 12px;background:var(--paper);border:2px solid var(--rule);border-radius:0;color:var(--ink);cursor:pointer}
+.gbar-toggle{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;flex:none;margin:4px 0 4px 12px;background:var(--paper);border:2px solid var(--rule);border-radius:0;color:var(--ink);cursor:pointer}
 .gbar-toggle svg{width:15px;height:15px}
 .gbar-toggle:hover{background:var(--surface-2)}
 @media (max-width:760px){.gbar-row{padding:0 12px;flex-wrap:wrap}.gbar-personal{display:none}.gbar-primary>a,.gbar-menu>summary{padding:0 9px;font-size:.625rem}.gbar-panel{position:fixed;left:0;right:0;top:auto;min-width:0;border-left:0;border-right:0}}
@@ -190,7 +190,7 @@ main{padding:32px 0 60px}
 
 .footer{padding:54px 0 66px;border-top:2px solid var(--rule)}
 .footer-links{display:flex;flex-wrap:wrap;gap:18px;margin-top:14px}
-.footer-links a{font-family:var(--font-mono);font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;color:var(--muted)}
+.footer-links a{font-family:var(--font-mono);font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;color:var(--muted);display:flex;align-items:center;min-height:24px}
 .footer-links a:hover{color:var(--accent)}
 .footer-note{margin-top:16px;font-size:.8125rem;line-height:1.6;color:var(--muted);max-width:64ch}
 @media print{.gbar,.toggle,.skip,.filters,.answers,footer.footer{display:none!important}body{background:#fff!important;color:#000!important}}
