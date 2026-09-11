@@ -11,7 +11,7 @@ from __future__ import annotations
 import unittest
 
 from grounding_eval.corpus import load_corpus
-from grounding_eval.schema import AdapterResponse, CitationGrade, ItemType, Outcome
+from grounding_eval.schema import AdapterResponse, ItemType, Outcome
 from grounding_eval.scoring import (
     ScoringConfig,
     assess_adjacency,

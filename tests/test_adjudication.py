@@ -8,7 +8,6 @@ whose only validation is the scorer checking itself has no validation at all.
 from __future__ import annotations
 
 import json
-import os
 import tempfile
 import unittest
 

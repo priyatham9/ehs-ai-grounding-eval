@@ -21,12 +21,12 @@ import os
 import sys
 from typing import List, Optional, Sequence
 
-from . import MOCK_PROVENANCE, __version__
+from . import __version__
 from .adapters.mock import MockAdapter, available_profiles
 from .corpus import REPO_ROOT, load_corpus, load_quarantine, summarize
 from .harness import RunResult, corpus_digest, load_run, run_repeats, write_run
 from .report import compare_arms, format_summary, runs_frame
-from .schema import AdapterResponse, ItemScore, ItemType, Outcome
+from .schema import AdapterResponse, ItemScore
 from .scoring import ScoringConfig
 
 DEFAULT_RESULTS_DIR = os.path.join(REPO_ROOT, "results", "demo")

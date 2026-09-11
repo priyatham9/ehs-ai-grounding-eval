@@ -12,7 +12,7 @@ and every reported number should name the configuration that produced it.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Dict, Iterable, List, Mapping, Optional, Sequence
+from typing import Dict, Iterable, List, Mapping, Optional
 
 from ..corpus import Corpus
 from ..schema import (
@@ -20,7 +20,6 @@ from ..schema import (
     CitationGrade,
     Item,
     ItemScore,
-    ItemType,
     Outcome,
     RiskTier,
 )

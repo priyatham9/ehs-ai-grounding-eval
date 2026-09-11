@@ -93,7 +93,7 @@ class RunnerTests(unittest.TestCase):
         self.assertEqual(len(runs["random_floor"]), 2)
         self.assertEqual(len(runs["oracle"]), 1)
         summary = summarize(runs, corpus)
-        self.assertEqual(set(summary["adapter"]), {"random_floor", "retrieval_tfidf", "oracle"})
+        self.assertEqual(set(summary["adapter"]), {"random_floor", "retrieval_tfidf", "retrieval_bm25", "oracle"})
         for col in ("accuracy_ci_low", "adjacent_ci_high", "citation_ci_low", "safety_utility"):
             self.assertIn(col, summary.columns)
         oracle = summary[summary["adapter"] == "oracle"].iloc[0]

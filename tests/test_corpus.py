@@ -14,14 +14,13 @@ import os
 import unittest
 
 from grounding_eval.corpus import (
-    DEFAULT_ITEMS_DIR,
     QUARANTINE_PATH,
     REPO_ROOT,
     load_corpus,
     load_quarantine,
     summarize,
 )
-from grounding_eval.schema import ItemType, VerificationStatus, parse_citations
+from grounding_eval.schema import VerificationStatus, parse_citations
 
 VERIFICATION_PATH = os.path.join(REPO_ROOT, "corpus", "verification", "source_verification.json")
 

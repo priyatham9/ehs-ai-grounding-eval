@@ -59,7 +59,7 @@ import time
 import urllib.error
 import urllib.request
 from dataclasses import dataclass
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Optional
 
 from ..corpus import Corpus
 from ..schema import AdapterResponse, Item

@@ -26,10 +26,10 @@ from __future__ import annotations
 
 import random
 from dataclasses import dataclass
-from typing import Dict, List, Mapping, Optional, Tuple
+from typing import Dict, List, Mapping, Tuple
 
 from .. import MOCK_PROVENANCE
-from ..schema import AdapterResponse, Item, ItemType
+from ..schema import AdapterResponse, Item
 from .base import Adapter
 
 

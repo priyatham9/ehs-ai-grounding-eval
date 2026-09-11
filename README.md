@@ -518,6 +518,10 @@ and `abstainer`. The last is a floor case that declines everything: it scores ze
 accuracy and declines every false-premise item, which is the behaviour the
 `safety` utility policy is designed to rank above confabulation.
 
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for development instructions, dependency policy, and testing. Reports of errors in corpus items or security issues can be filed as [issues](https://github.com/priyatham9/ehs-ai-grounding-eval/issues). See [SECURITY.md](SECURITY.md) for reporting details.
+
 ## References
 
 [1] V. Magesh, F. Surani, M. Dahl, M. Suzgun, C. D. Manning, D. E. Ho.

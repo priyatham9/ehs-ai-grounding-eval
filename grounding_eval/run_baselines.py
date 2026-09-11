@@ -34,7 +34,7 @@ from .adapters.retrieval import RetrievalAdapter
 from .corpus import Corpus, load_corpus
 from .harness import RunResult, run_once
 from .report import arm_summary, runs_frame
-from .schema import ItemType, Outcome
+from .schema import ItemType
 from .scoring import ScoringConfig
 from .scoring.score import utility_of
 from .stats import cluster_bootstrap_ci

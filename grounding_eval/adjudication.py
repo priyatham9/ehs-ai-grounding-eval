@@ -29,7 +29,7 @@ import json
 import os
 import random
 from dataclasses import dataclass
-from typing import Dict, Iterable, List, Optional, Sequence, Tuple
+from typing import Dict, List, Optional, Sequence, Tuple
 
 from .corpus import Corpus
 from .harness import RunResult

@@ -17,7 +17,7 @@ more expensive error to catch and therefore worth counting on its own.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Iterable, List, Sequence, Tuple
+from typing import List, Sequence, Tuple
 
 from ..schema import CitationGrade, CitationRef, Item, is_paywalled_family, parse_citations
 

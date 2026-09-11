@@ -1,22 +1,30 @@
 ---
 name: Bug report
-about: Something produces the wrong result or does not run
-labels: bug
+about: Report a bug in the code or test harness
 ---
 
-## What happened
+## Description
 
-Describe the unexpected behaviour or error.
+A clear description of what the bug is.
 
-## What you expected
+## Steps to reproduce
 
-Describe what should have happened instead.
+1. ...
+2. ...
 
-## How to reproduce
+## Expected behavior
 
-Give the exact command and steps to trigger the issue.
+What should happen.
+
+## Actual behavior
+
+What actually happens.
 
 ## Environment
 
 - Python version:
 - Operating system:
+
+## Additional context
+
+Any additional information that might help diagnose the issue.

@@ -29,12 +29,12 @@ import re
 import sys
 import time
 from dataclasses import dataclass, field
-from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
+from typing import Any, Dict, List, Optional
 
 from . import MOCK_PROVENANCE, __version__
 from .adapters.base import Adapter
 from .corpus import Corpus, load_corpus
-from .schema import AdapterResponse, Item, ItemScore
+from .schema import AdapterResponse, ItemScore
 from .scoring import ScoringConfig, score_item
 
 __all__ = ["RunResult", "corpus_digest", "run_once", "run_repeats", "write_run", "load_run"]

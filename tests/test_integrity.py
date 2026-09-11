@@ -28,7 +28,7 @@ RUN_ARTIFACT_DIRS = (
 
 #: Provenance labels a non-LLM baseline run may carry. Anything else stored
 #: under a run directory must be a labelled mock demonstration.
-BASELINE_PROVENANCES = {"random_floor_baseline", "retrieval_tfidf_baseline", "oracle_ceiling"}
+BASELINE_PROVENANCES = {"random_floor_baseline", "retrieval_tfidf_baseline", "retrieval_bm25_baseline", "oracle_ceiling"}
 
 #: Standards bodies whose text may not be redistributed. Naming a clause is
 #: fine and necessary; reproducing its text is not.
@@ -180,11 +180,11 @@ class TestPackagingHygiene(unittest.TestCase):
         allowed = {"pandas", "numpy"}
         pattern = re.compile(r"^\s*(?:import|from)\s+([a-zA-Z_][\w]*)", re.MULTILINE)
         stdlib_ok = {
-            "abc", "argparse", "collections", "dataclasses", "datetime", "enum",
+            "abc", "argparse", "ast", "collections", "dataclasses", "datetime", "enum",
             "functools", "gzip", "hashlib", "io", "itertools", "json", "math",
-            "os", "platform", "random", "re", "string", "sys", "tempfile",
+            "os", "pathlib", "platform", "random", "re", "string", "sys", "tempfile",
             "textwrap", "time", "typing", "unicodedata", "unittest", "urllib",
-            "warnings", "grounding_eval", "verify_sources", "__future__",
+            "warnings", "corpus_stats", "grounding_eval", "verify_sources", "__future__",
         }
         offenders = []
         for root, dirs, files in os.walk(REPO_ROOT):
