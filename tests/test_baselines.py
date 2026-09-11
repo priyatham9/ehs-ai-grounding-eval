@@ -6,6 +6,7 @@ import os
 import tempfile
 import unittest
 
+from grounding_eval.adapters.bm25 import BM25Adapter, BM25Index
 from grounding_eval.adapters.oracle import OracleAdapter
 from grounding_eval.adapters.random_floor import RandomFloorAdapter
 from grounding_eval.adapters.retrieval import RetrievalAdapter, TfidfIndex
@@ -46,8 +47,36 @@ class BaselineAdapterTests(unittest.TestCase):
         idx = TfidfIndex([("a", "permit space forced air ventilation"), ("b", "rupture disk burst pressure"), ("c", "noise dosimeter exposure")])
         self.assertEqual(idx.query("what burst pressure applies to a rupture disk")[0][0], "b")
 
+    def test_bm25_index_ranks_exact_match_first(self):
+        idx = BM25Index([("a", "permit space forced air ventilation"), ("b", "rupture disk burst pressure"), ("c", "noise dosimeter exposure")])
+        self.assertEqual(idx.query("what burst pressure applies to a rupture disk")[0][0], "b")
+
+    def test_bm25_index_is_deterministic(self):
+        docs = [("a", "permit space forced air ventilation"), ("b", "rupture disk burst pressure"), ("c", "noise dosimeter exposure")]
+        idx1 = BM25Index(docs)
+        idx2 = BM25Index(docs)
+        result1 = idx1.query("what burst pressure applies to a rupture disk")
+        result2 = idx2.query("what burst pressure applies to a rupture disk")
+        self.assertEqual(result1, result2)
+
+    def test_bm25_ranks_by_relevance(self):
+        idx = BM25Index([("a", "rupture disk burst pressure safety"), ("b", "permit space ventilation"), ("c", "noise dosimeter")])
+        ranked = idx.query("rupture disk burst pressure")
+        self.assertEqual(ranked[0][0], "a")
+        self.assertGreater(ranked[0][1], ranked[1][1])
+
     def test_retrieval_cites_matched_clause_and_never_reads_key(self):
         adapter = RetrievalAdapter(self.corpus)
+        by_id = {i.id: i for i in self.corpus}
+        for item in self.corpus:
+            resp = adapter.answer(item)
+            matched = by_id[resp.metadata["matched_item"]]
+            self.assertEqual(resp.citations, [matched.source.clause])
+            self.assertIn(matched.source.anchor_text, resp.text)
+            self.assertNotIn(item.adjacent_wrong.label, resp.text)
+
+    def test_bm25_adapter_cites_matched_clause_and_never_reads_key(self):
+        adapter = BM25Adapter(self.corpus)
         by_id = {i.id: i for i in self.corpus}
         for item in self.corpus:
             resp = adapter.answer(item)

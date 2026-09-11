@@ -27,6 +27,7 @@ from typing import Dict, List, Sequence
 
 import pandas as pd
 
+from .adapters.bm25 import BM25Adapter
 from .adapters.oracle import OracleAdapter
 from .adapters.random_floor import RandomFloorAdapter
 from .adapters.retrieval import RetrievalAdapter
@@ -50,6 +51,7 @@ def run_all(corpus: Corpus, n_seeds: int = 5) -> Dict[str, List[RunResult]]:
         for k in range(n_seeds)
     ]
     out["retrieval_tfidf"] = [run_once(RetrievalAdapter(corpus), corpus)]
+    out["retrieval_bm25"] = [run_once(BM25Adapter(corpus), corpus)]
     out["oracle"] = [run_once(OracleAdapter(), corpus)]
     return out
 
@@ -106,7 +108,7 @@ def render_table(summary: pd.DataFrame) -> str:
         % int(summary["n_factual_obs"].iloc[0] / summary["n_repeats"].iloc[0]),
         "|---|---|---|---|---|---|---|---|",
     ]
-    order = ["random_floor", "retrieval_tfidf", "oracle"]
+    order = ["random_floor", "retrieval_tfidf", "retrieval_bm25", "oracle"]
     for name in order:
         r = summary[summary["adapter"] == name].iloc[0]
         lines.append(
@@ -143,9 +145,11 @@ def main(argv: Sequence[str] = None) -> int:
         fh.write(table)
     print(table)
     # Retrieval diagnostics: how often the top document was the item's own source.
-    ret = runs_by_adapter["retrieval_tfidf"][0]
-    self_match = sum(1 for r in ret.responses if r.metadata.get("self_match"))
-    print("retrieval self-match: %d/%d items retrieved their own source document" % (self_match, len(ret.responses)))
+    for adapter_name in ["retrieval_tfidf", "retrieval_bm25"]:
+        if adapter_name in runs_by_adapter:
+            ret = runs_by_adapter[adapter_name][0]
+            self_match = sum(1 for r in ret.responses if r.metadata.get("self_match"))
+            print("%s self-match: %d/%d items retrieved their own source document" % (adapter_name, self_match, len(ret.responses)))
     return 0
 
 
