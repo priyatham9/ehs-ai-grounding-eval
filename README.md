@@ -1,8 +1,12 @@
 # ehs-ai-grounding-eval
 
-[![tests](https://github.com/priyatham9/ehs-ai-grounding-eval/actions/workflows/tests.yml/badge.svg)](https://github.com/priyatham9/ehs-ai-grounding-eval/actions/workflows/tests.yml)
+[![tests](https://github.com/priyatham9/ehs-ai-grounding-eval/actions/workflows/tests.yml/badge.svg)](https://github.com/priyatham9/ehs-ai-grounding-eval/actions/workflows/tests.yml) [![site](https://img.shields.io/badge/site-priyatham9.github.io-blue)](https://priyatham9.github.io/ehs-ai-grounding-eval/)
 
-A benchmark for measuring whether an AI system's answers to safety-critical technical questions are grounded in authoritative sources. It contains 68 items built so that co-hyponym substitution, a semantically adjacent wrong answer, is plausible and dangerous; three non-LLM baselines show 27.0% accuracy for TF-IDF retrieval. No experimental results for any language model have been evaluated; the mock adapter's demonstration outcome probabilities were fixed in advance.
+Part of the Grounded research programme: https://priyatham9.github.io/grounded/
+
+A benchmark for measuring whether an AI system's answers to safety-critical technical questions are grounded in authoritative sources. It contains 68 items built so that co-hyponym substitution, a semantically adjacent wrong answer, is plausible and dangerous; three non-LLM baselines show 27.0% accuracy for TF-IDF retrieval.
+
+No experimental results for any language model have been evaluated; the mock adapter's demonstration outcome probabilities were fixed in advance.
 
 **This repository contains no experimental results for any language model.** It
 contains a question corpus, a scoring harness, an adapter interface, a mock
@@ -11,6 +15,16 @@ adapter that produces a labelled demonstration run, and three non-LLM baselines
 model or vendor product has been evaluated here. The mock adapter's numbers come
 from a simulation whose outcome probabilities were fixed in advance, and every
 artifact it writes carries the string `MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS`.
+
+**At a glance**
+
+| | |
+|---|---|
+| Status | no language model has been evaluated; mock demonstration fixture only |
+| Data | simulated (mock adapter's outcome probabilities fixed in advance) |
+| Tests | 158 (`python3 -m unittest discover -s tests -v`) |
+| Quickstart | `python3 -m grounding_eval.cli demo` |
+| Licence | MIT |
 
 ---
 
