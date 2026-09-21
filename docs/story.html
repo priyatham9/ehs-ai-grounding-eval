@@ -695,7 +695,8 @@ body{overflow-x:clip}
 /* ---------- charts ---------- */
 .st-chart{display:block;width:100%;overflow:visible;font-family:var(--font-sans)}
 .st-chart.st-in-stage{height:min(66vh,720px);max-height:66vh}
-.st-chart text{font-family:var(--font-mono);fill:var(--muted);font-variant-numeric:tabular-nums}
+.st-chart text{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
+.st-chart text:not([fill]){fill:var(--muted)}
 .st-chart text:not([font-size]){font-size:14px}
 .st-chart .st-axis-line{stroke:var(--rule-soft);stroke-width:1.5}
 .st-chart .st-grid{stroke:var(--rule-soft);stroke-width:1;stroke-dasharray:2 4}
@@ -889,6 +890,20 @@ html{scroll-padding-top:16px}
 }
 .st-presenting .rs-header,.st-presenting .footer,.st-presenting .st-chapter,.st-presenting .st-findings{display:none!important}
 .st-presenting nav.pgm,.st-presenting .story-nav,.st-presenting .story-hero{display:none!important}
+
+/* forced reduced motion (testing hook ?reduced=1) mirrors the media query */
+.st-reduced *,.st-reduced *::before,.st-reduced *::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+/* v1.2.5 phone: cap any stage figure, however deeply nested, so it fits the pinned half-screen stage; presenter on phones falls back to normal reading */
+@media(max-width:800px){
+  .st-stage-inner svg,.st-stage-inner canvas:not(.st-orb){max-height:40vh;max-height:40svh}
+  .st-presenting .st-step{min-height:80vh}
+}
+/* forced reduced motion gets the same end states as the media query */
+.st-reduced .st-reveal{opacity:1!important;transform:none!important;transition:none!important}
+.st-reduced .st-step{opacity:1!important;transition:none!important}
+.st-reduced .st-scene.st-flow .st-step > *{opacity:1!important;transform:none!important;transition:none!important}
+.st-reduced .st-stage-inner.st-layers > [data-show]{transition:none!important}
+.st-reduced .st-companion .st-companion-cap{transition:none!important}
 /*STORY_CSS_END*/</style>
 <script id="rs-theme-init">try{var t=localStorage.getItem("pc-theme")||localStorage.getItem("ehs-ai-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);}catch(e){}</script><style id="rs-header-css">
 .rs-header{
@@ -1035,10 +1050,9 @@ html.rs-lock,html.rs-lock body{overflow:hidden}
 
 /* chapter cards */
 .sy-chapter{border-bottom:2px solid var(--rule)}
-.sy-chapter .st-chapter-num{color:var(--rule-soft)}
 
-/* the two stacked site bars are sticky, so the scene stage starts below them */
-.st-scene .st-stage,.st-scene[data-side="left"] .st-stage{padding:92px 0 28px}
+/* the site header is static on story pages, so the stage needs only breathing room */
+.st-scene .st-stage,.st-scene[data-side="left"] .st-stage{padding:36px 0 28px}
 
 /* stage furniture */
 .sy-stagenum{display:flex;align-items:flex-end;gap:26px;flex-wrap:wrap;margin:0 0 14px;min-height:104px}
@@ -1093,10 +1107,8 @@ html.rs-lock,html.rs-lock body{overflow:hidden}
 
 /* the big next card */
 .sy-nextsec{border-bottom:none;position:relative;overflow:hidden;padding:clamp(40px,7vw,90px) 0}
-.sy-nextgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.62fr);gap:clamp(24px,4vw,56px);align-items:center;position:relative;z-index:1}
-.sy-nextgrid h2{font-size:clamp(2rem,4.6vw,3.4rem);margin:10px 0 16px}
-.sy-nextorb{width:clamp(200px,22vw,320px);aspect-ratio:1/1;justify-self:center;line-height:0}
-.sy-nextorb canvas{display:block;width:100%;height:100%}
+.sy-nextgrid h2{font-size:clamp(2rem,4.6vw,3.4rem);margin:10px 0 16px;max-width:22ch}
+.sy-nextgrid .sy-lede-2{max-width:60ch}
 
 /* chart styling local to this page */
 .st-chart .sy-ent{fill:var(--surface);stroke:var(--rule);stroke-width:2.5}
@@ -1113,23 +1125,45 @@ html.rs-lock,html.rs-lock body{overflow:hidden}
 .st-chart .sy-pt-lab{fill:var(--ink);font-weight:700;font-size:15px;font-family:var(--font-mono)}
 .st-chart .sy-axis-t{fill:var(--muted);font-size:14px}
 
+/* phone rendering of the figures: a narrower viewBox is drawn by the page JS and
+   these sizes are tuned so the key number and its one label stay readable */
+.st-chart.is-phone .sy-ent-t{font-size:30px}
+.st-chart.is-phone .sy-ent-q{font-size:27px}
+.st-chart.is-phone .sy-ent-s{font-size:20px}
+.st-chart.is-phone .sy-ent-tag{font-size:20px}
+.st-chart.is-phone .sy-shared{font-size:23px}
+.st-chart.is-phone .sy-shared-l{font-size:19px}
+.st-chart.is-phone .sy-row-lab{font-size:23px}
+.st-chart.is-phone .sy-pt-lab{font-size:24px}
+.st-chart.is-phone .sy-axis-t{font-size:22px}
+.st-chart.is-phone .st-caption{font-size:20px}
+.st-chart.is-phone .st-ref-text{font-size:20px}
+.st-chart.is-phone .st-anno-text{font-size:22px}
+.st-chart.is-phone .st-label-direct:not([font-size]){font-size:24px}
+
 @media (max-width:1100px){
   .sy-stagenum .st-bignum{font-size:clamp(2.2rem,5vw,3.4rem)}
   .sy-stagenum{min-height:88px}
 }
 @media (max-width:900px){
-  .sy-monday-grid,.sy-nextgrid{grid-template-columns:1fr}
-  .sy-nextorb{justify-self:start;width:min(56vw,240px)}
+  .sy-monday-grid{grid-template-columns:1fr}
 }
 @media (max-width:800px){
   .sy-wide{max-width:none}
-  .sy-stagenum{min-height:0;margin-bottom:8px;gap:14px}
+  .sy-stagenum{min-height:54px;margin-bottom:6px;gap:14px}
   .sy-stagenum .st-bignum{font-size:clamp(1.8rem,9vw,2.6rem)}
   .sy-stagenum .st-bignum small{font-size:.5625rem;margin-top:.35em}
   .sy-fig figcaption{display:none}
-  .sy-fig > svg,.sy-figwrap > svg{max-height:36vh}
-  .sy-model{width:24%}
-  .sy-model-cap{font-size:.5rem;letter-spacing:.1em}
+  /* engine caps .st-stage-inner > .st-figure > svg at 66vh and its phone rule misses
+     that nesting, so the cap is restated here at equal specificity */
+  .st-stage-inner > .st-figure > svg,
+  .st-stage-inner > .st-figure > .sy-figwrap > svg{max-height:30vh;max-height:30svh}
+  .st-scene .st-stage,.st-scene[data-side="left"] .st-stage{padding:10px 0 16px}
+  .sy-model{top:24%}
+  /* the engine companion sits top-right of the stage; its caption would sit on the figure */
+  .st-companion .st-companion-cap{display:none}
+  .sy-model{width:22%}
+  .sy-model-cap{font-size:.5625rem;letter-spacing:.1em}
 }
 @media (max-width:480px){
   .sy-card-head{flex-direction:column;gap:4px}
@@ -1167,9 +1201,9 @@ html.rs-lock,html.rs-lock body{overflow:hidden}
 </section>
 
 <!-- ============ CHAPTER 1 ============ -->
-<section class="sy-chapter st-chapter" id="ch1" data-num="01" data-orb="wrong" data-orb-label="Chapter orb fracturing as the answer lands on the wrong entity">
-  <h2 class="display">The substitution</h2>
-  <p>One question. Two devices the law treats separately. The answer that comes back is about the other one, and nothing in it looks wrong.</p>
+<section class="sy-chapter st-chapter" id="ch1" data-num="01">
+  <h2 class="display">The answer comes back about the wrong device</h2>
+  <p>It is fluent, it cites a real clause, and every quantity in it belongs to a different piece of equipment.</p>
 </section>
 
 <!-- ============ SCENE 1: the substitution ============ -->
@@ -1197,24 +1231,24 @@ html.rs-lock,html.rs-lock body{overflow:hidden}
       <div class="st-steps">
         <span class="st-scene-rail" aria-hidden="true"></span>
         <div class="st-step" data-orb="breathing" data-step="0" data-orb-label="reading the question">
-          <span class="label">Act one</span>
-          <h3>A question with one right answer</h3>
-          <p>A rupture disk protects an unfired pressure vessel. Someone asks what relationship must hold between the operating pressure and the burst pressure. There is a clause that answers it.</p>
+          <span class="label">The question</span>
+          <h3>1 clause governs the rupture disk question</h3>
+          <p>A rupture disk protects an unfired pressure vessel. The question asks what margin must hold between operating pressure and burst pressure. One clause in 46 CFR subpart 54.15 answers it.</p>
         </div>
         <div class="st-step" data-orb="searching" data-step="1" data-orb-label="searching the neighbourhood">
-          <span class="label">Act two</span>
-          <h3>The neighbour shares the vocabulary</h3>
-          <p>A spring-loaded relief valve sits one step away in the same regulatory neighbourhood. Same vessel, same overpressure language, same handbooks. The words overlap almost completely.</p>
+          <span class="label">The neighbour</span>
+          <h3>A relief valve sits 1 step away and shares the vocabulary</h3>
+          <p>Spring-loaded relief valves cover the same vessel under the same overpressure language. Retrieval on the words in the question returns both devices.</p>
         </div>
         <div class="st-step" data-orb="wrong" data-step="2" data-orb-label="wrong entity">
-          <span class="label">Act three</span>
-          <h3>The answer drifts one entity over</h3>
-          <p>What comes back describes set pressure, blowdown and reseating. Those quantities do not exist for a rupture disk, which is a one-shot non-reclosing device. Nothing in the sentence looks wrong.</p>
+          <span class="label">The substitution</span>
+          <h3>0 of the quantities in the answer exist for a rupture disk</h3>
+          <p>The answer gives set pressure, blowdown and reseating. A rupture disk is a one-shot non-reclosing device and has none of them. The sentence still reads as correct.</p>
         </div>
         <div class="st-step" data-orb="grounded" data-step="3" data-orb-label="grounded in the clause">
-          <span class="label">Act four</span>
-          <h3>Grounding is the check that catches it</h3>
-          <p>Read the clause and the substitution collapses: 46 CFR 54.15-13(b)(3) sets operating pressure times 1.3 against the nominal burst pressure. Plausibility does not catch this. A cited source does.</p>
+          <span class="label">The check</span>
+          <h3>The clause sets 1.3 times operating pressure and ends it</h3>
+          <p>46 CFR 54.15-13(b)(3) requires operating pressure times 1.3 to stay under the nominal burst pressure. Opening the clause catches the swap in seconds. Reading the answer for plausibility never will.</p>
         </div>
       </div>
     </div>
@@ -1222,9 +1256,9 @@ html.rs-lock,html.rs-lock body{overflow:hidden}
 </section>
 
 <!-- ============ CHAPTER 2 ============ -->
-<section class="sy-chapter st-chapter" id="ch2" data-num="02" data-orb="connecting" data-orb-label="Chapter orb drawing the corpus into a lattice of pairs">
-  <h2 class="display">The corpus</h2>
-  <p>68 items across eight regulated domains, built so that guessing well is not the same as reading the clause.</p>
+<section class="sy-chapter st-chapter" id="ch2" data-num="02">
+  <h2 class="display">23 minimal pairs cover 46 of the 68 items</h2>
+  <p>The corpus is built so that guessing well is not the same as reading the clause. A system has to get both members of a pair right.</p>
 </section>
 
 <!-- ============ SCENE 2: the corpus ============ -->
@@ -1247,23 +1281,23 @@ html.rs-lock,html.rs-lock body{overflow:hidden}
         <span class="st-scene-rail" aria-hidden="true"></span>
         <div class="st-step" data-orb="shaping" data-step="0" data-orb-label="shaping the corpus">
           <span class="label">The corpus</span>
-          <h3>68 items across eight domains</h3>
+          <h3>68 items cover eight regulated domains</h3>
           <p>Confined space, hazard communication, lockout/tagout, machine guarding and electrical, overpressure protection, process safety, recordkeeping, respiratory protection and noise. Every item names a clause and a source URL.</p>
         </div>
         <div class="st-step" data-orb="connecting" data-step="1" data-orb-label="connecting the pairs">
           <span class="label">The construction</span>
-          <h3>23 pairs cover 46 of the items</h3>
-          <p>A minimal pair is two entities the law treats separately that share vocabulary. Asking about both members is the stricter test: a system can pass one member by luck and cannot pass both without reading the right clause.</p>
+          <h3>23 minimal pairs cover 46 of the items</h3>
+          <p>A minimal pair is two entities the law treats separately that share vocabulary. Both members get asked. A system can pass one by luck and cannot pass both without reading the right clause.</p>
         </div>
         <div class="st-step" data-orb="listening" data-step="2" data-orb-label="listening for a decline">
-          <span class="label">The trap for confident answers</span>
-          <h3>Five items have no correct answer</h3>
-          <p>The category-error items ask something that does not apply to the entity. The right response is to decline. A system that answers them anyway is telling you how it behaves when the question itself is malformed.</p>
+          <span class="label">The trap</span>
+          <h3>5 items have no correct answer</h3>
+          <p>These ask something that does not apply to the entity, so the right response is to decline. Answering anyway shows how a system behaves when the question itself is malformed.</p>
         </div>
         <div class="st-step" data-orb="grounded" data-step="3" data-orb-label="verified against source">
           <span class="label">The provenance</span>
-          <h3>68 of 68 verified, six thrown out</h3>
-          <p>Each item was checked back to its published source. Six drafted items whose provenance could not be confirmed were moved to quarantine rather than kept. Verification checks provenance, not editorial quality.</p>
+          <h3>68 of 68 items trace back to a published source</h3>
+          <p>Six drafted items whose provenance could not be confirmed went to quarantine rather than into the corpus. Verification checks provenance, not editorial quality. A benchmark nobody can trace is not evidence.</p>
         </div>
       </div>
     </div>
@@ -1300,7 +1334,6 @@ html.rs-lock,html.rs-lock body{overflow:hidden}
       <div class="sy-actions">
         <button type="button" class="sy-btn sy-btn-p" id="try-commit">I have an answer</button>
         <button type="button" class="sy-btn" id="try-next">Another item</button>
-        <span class="st-orb-inline" id="try-orb" data-orb="working" aria-hidden="true"></span>
       </div>
       <div class="sy-reveal" id="try-reveal" hidden>
         <div class="sy-rev sy-rev-wrong">
@@ -1324,9 +1357,9 @@ html.rs-lock,html.rs-lock body{overflow:hidden}
 </section>
 
 <!-- ============ CHAPTER 3 ============ -->
-<section class="sy-chapter st-chapter" id="ch3" data-num="03" data-orb="solving" data-orb-label="Chapter orb working through the scoreboard">
-  <h2 class="display">The scoreboard</h2>
-  <p>Three baselines, none of them a language model. What they measure is the trade between being right and being checkable.</p>
+<section class="sy-chapter st-chapter" id="ch3" data-num="03">
+  <h2 class="display">Retrieval substitutes 0.0 percent of the time, guessing 47.3 percent</h2>
+  <p>Accuracy is the number people quote. The substitution rate decides whether a wrong answer reaches the plant floor.</p>
 </section>
 
 <!-- ============ SCENE 3: baselines ============ -->
@@ -1349,23 +1382,23 @@ html.rs-lock,html.rs-lock body{overflow:hidden}
         <span class="st-scene-rail" aria-hidden="true"></span>
         <div class="st-step" data-orb="working" data-step="0" data-orb-label="scoring the floor">
           <span class="label">The floor</span>
-          <h3>Guessing scores 52.1 percent</h3>
-          <p>The random arm picks between the two answers an item carries. It lands at 52.1 percent accuracy, and it takes the adjacent wrong answer 47.3 percent of the time. That second number is what the whole corpus is built to measure.</p>
+          <h3>Guessing scores 52.1 percent and substitutes 47.3 percent</h3>
+          <p>The random arm picks between the two answers an item carries. It lands at 52.1 percent accuracy and takes the adjacent wrong answer 47.3 percent of the time. That second number is what the corpus was built to measure.</p>
         </div>
         <div class="st-step" data-orb="searching" data-step="1" data-orb-label="retrieving clauses">
           <span class="label">The retrievers</span>
-          <h3>Retrieval scores 27.0 percent and never substitutes</h3>
-          <p>TF-IDF over the authoritative text gets 27.0 percent of the factual items right, below the guessing floor, and substitutes the adjacent entity zero times. It quotes a clause or it says nothing. BM25 behaves the same way at 28.6 percent.</p>
+          <h3>TF-IDF scores 27.0 percent and substitutes 0.0 percent</h3>
+          <p>TF-IDF over the authoritative text gets 27.0 percent of the factual items right, below the guessing floor, and never substitutes the adjacent entity. It quotes a clause or it says nothing. BM25 behaves the same way at 28.6 percent.</p>
         </div>
         <div class="st-step" data-orb="solving" data-step="2" data-orb-label="solving for the trade">
           <span class="label">The trade</span>
-          <h3>Low accuracy, high citation</h3>
-          <p>Switch the vertical axis to citation correctness. The retrievers name the correct clause 73.5 and 75.0 percent of the time, against 5.0 percent for guessing. They are wrong often and misleading rarely. A generator that reverses that trade is the risk this benchmark exists to catch.</p>
+          <h3>The retrievers cite the right clause 73.5 percent of the time</h3>
+          <p>On the vertical axis, citation correctness: 73.5 percent for TF-IDF and 75.0 for BM25, against 5.0 percent for guessing. They are wrong often and misleading rarely. A system that reverses that trade is the risk this benchmark was built to catch.</p>
         </div>
         <div class="st-step" data-orb="listening" data-step="3" data-orb-label="nothing scored yet">
           <span class="label">The empty region</span>
-          <h3>Nothing is plotted where a model would go</h3>
-          <p>No language model has been run on this corpus. The point at 100 percent is a fixture that replays the answer key, not a system. The region between the retrievers and that ceiling stays empty until an LLM arm is actually scored.</p>
+          <h3>0 language models have been scored on this corpus</h3>
+          <p>The point at 100 percent is a fixture that replays the answer key, not a system. The region between the retrievers and that ceiling stays empty until an LLM arm is actually run. Until then this page reports no model number at all.</p>
         </div>
       </div>
     </div>
@@ -1456,9 +1489,6 @@ html.rs-lock,html.rs-lock body{overflow:hidden}
         <button type="button" class="sy-btn" id="sy-map">or open the map</button>
       </div>
     </div>
-    <div class="sy-nextorb">
-      <canvas id="next-orb" role="img" aria-label="Dot sphere settling into a stable lattice at the end of the story."></canvas>
-    </div>
   </div>
 </section>
 
@@ -1500,7 +1530,10 @@ html.rs-lock,html.rs-lock body{overflow:hidden}
      0. small utilities
      --------------------------------------------------------- */
   var mqReduce = global.matchMedia ? matchMedia("(prefers-reduced-motion: reduce)") : null;
-  function reduced() { return !!(mqReduce && mqReduce.matches); }
+  // ?reduced=1 forces the reduced-motion path so it can be tested without changing OS settings
+  var forceReduced = /[?&]reduced=1/.test(location.search);
+  if (forceReduced) document.documentElement.classList.add("st-reduced");
+  function reduced() { return forceReduced || !!(mqReduce && mqReduce.matches); }
   function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
   function lerp(a, b, t) { return a + (b - a) * t; }
   function isEl(x) { return x && x.nodeType === 1; }
@@ -3787,28 +3820,39 @@ html.rs-lock,html.rs-lock body{overflow:hidden}
 (function(){
 "use strict";
 var S = window.Story;
-var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(!S) return;                 /* engine missing: the page stays static, which is fine */
+var reduce = S.reduced ? S.reduced()
+  : (matchMedia('(prefers-reduced-motion: reduce)').matches
+     || document.documentElement.classList.contains('st-reduced')
+     || /[?&]reduced=1/.test(location.search));
 var NS = 'http://www.w3.org/2000/svg';
+var PHONE = matchMedia('(max-width:800px)');
 function el(n,a){var e=document.createElementNS(NS,n);for(var k in a){if(a[k]!==null&&a[k]!==undefined)e.setAttribute(k,a[k]);}return e;}
 function txt(x,y,s,cls,anchor){var t=el('text',{x:x,y:y,'text-anchor':anchor||'middle'});if(cls)t.setAttribute('class',cls);t.textContent=s;return t;}
-function clamp(v,a,b){return v<a?a:v>b?b:v;}
 function tokv(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim();}
+function clear(node){while(node.firstChild)node.removeChild(node.firstChild);}
 
-/* minimal shim so the page still renders its final state if the engine is absent */
-if(!S){
-  S = window.Story = {
-    isShim:true,
-    orb:function(){return {setState:function(){},destroy:function(){}};},
-    orbInline:function(){return null;},
-    scenes:function(root,o){
-      var steps=[].slice.call(root.querySelectorAll('.st-step'));
-      steps.forEach(function(s){s.classList.add('is-entered','is-active');});
-      if(o&&o.onStep)o.onStep(steps.length-1,steps[steps.length-1],1);
-      return {companion:null,destroy:function(){}};
-    },
-    reveal:function(){},progressBar:function(){},present:function(){},
-    tween:function(a,b,cb){cb(b,1);},
-    wayfinder:function(){return null;}
+/* a scene figure is rebuilt when the viewport crosses the phone breakpoint, so
+   the phone variant is a real drawing and not a shrunken desktop one */
+function figure(id,box,phoneBox,make){
+  var svg=document.getElementById(id); if(!svg)return null;
+  var cur=null,last=reduce?3:0,extra=null;
+  function build(){
+    var p=PHONE.matches;
+    clear(svg);
+    svg.classList.toggle('is-phone',p);
+    svg.setAttribute('viewBox',p?phoneBox:box);
+    cur=make(svg,p);
+    cur.show(last);
+    if(extra)extra(last,p);
+  }
+  build();
+  if(PHONE.addEventListener)PHONE.addEventListener('change',build);
+  else if(PHONE.addListener)PHONE.addListener(build);
+  if(S.theme&&S.theme.onChange)S.theme.onChange(function(){cur.show(last);});
+  return {
+    show:function(i){last=i;cur.show(i);if(extra)extra(i,PHONE.matches);},
+    after:function(fn){extra=fn;}
   };
 }
 
@@ -3825,45 +3869,95 @@ if(S.field){ try{ S.field(document.getElementById('hero'),{density:1.1}); }catch
 
 /* ============ scene 1: the substitution ============ */
 var pairScene=(function(){
-  var svg=document.getElementById('pair-svg'); if(!svg)return null;
-  var g=el('g',{});svg.appendChild(g);
+  var fig=figure('pair-svg','0 0 1000 620','0 0 560 400',function(svg,p){
+    var g=el('g',{});svg.appendChild(g);
+    var L=p
+      ? {qx:10,qw:540,qh:68,cx:280,qt:32,qs:62,
+         cw:258,ch:110,cy:162,ax:10,bx:292,ct:200,cs:230,cg:258,
+         beamY0:76,beamY1:158,
+         shL:330,shT:368,
+         chx:10,chy:288,chw:540,chh:108,cht:326,chs:360}
+      : {qx:250,qw:500,qh:80,cx:500,qt:42,qs:70,
+         cw:340,ch:150,cy:306,ax:20,bx:640,ct:364,cs:396,cg:426,
+         beamY0:86,beamY1:302,
+         shL:512,shT:546,
+         chx:110,chy:496,chw:780,chh:104,cht:542,chs:576};
 
-  /* question */
-  var q=el('g',{});
-  q.appendChild(el('rect',{x:250,y:6,width:500,height:80,'class':'sy-ent'}));
-  q.appendChild(txt(500,42,'Question about an unfired pressure vessel','sy-ent-q'));
-  q.appendChild(txt(500,70,'What margin must hold before the device opens?','sy-ent-s'));
-  g.appendChild(q);
+    var q=el('g',{});
+    q.appendChild(el('rect',{x:L.qx,y:6,width:L.qw,height:L.qh,'class':'sy-ent'}));
+    q.appendChild(txt(L.cx,L.qt,p?'Unfired pressure vessel':'Question about an unfired pressure vessel','sy-ent-q'));
+    q.appendChild(txt(L.cx,L.qs,p?'What margin before the device opens?':'What margin must hold before the device opens?','sy-ent-s'));
+    g.appendChild(q);
 
-  /* shared vocabulary band */
-  var shared=el('g',{opacity:0});
-  shared.appendChild(txt(500,512,'Shared vocabulary','sy-shared-l'));
-  shared.appendChild(txt(500,546,'overpressure  ·  set  ·  vessel  ·  MAWP  ·  relief','sy-shared'));
-  g.appendChild(shared);
+    var shared=el('g',{opacity:0});
+    shared.appendChild(txt(L.cx,L.shL,'Shared vocabulary','sy-shared-l'));
+    shared.appendChild(txt(L.cx,L.shT,p?'overpressure · set · vessel · MAWP':'overpressure  ·  set  ·  vessel  ·  MAWP  ·  relief','sy-shared'));
+    g.appendChild(shared);
 
-  /* beam sits behind the cards */
-  var beam=el('path',{'class':'sy-beam',opacity:0,d:''});g.appendChild(beam);
+    var beam=el('path',{'class':'sy-beam',opacity:0,d:''});g.appendChild(beam);
 
-  function card(x,title,sub,tag){
-    var gg=el('g',{opacity:0});
-    var r=el('rect',{x:x,y:306,width:340,height:150,'class':'sy-ent'});
-    gg.appendChild(r);
-    gg.appendChild(txt(x+170,364,title,'sy-ent-t'));
-    gg.appendChild(txt(x+170,396,sub,'sy-ent-s'));
-    gg.appendChild(txt(x+170,426,tag,'sy-ent-tag'));
-    g.appendChild(gg);return {g:gg,r:r};
-  }
-  var right=card(20,'Rupture disk','one-shot, non-reclosing','the entity in the question');
-  var wrongN=card(640,'Relief valve','spring-loaded, reseats','one step away in the same code');
+    function card(x,title,sub,tag){
+      var gg=el('g',{opacity:0});
+      var r=el('rect',{x:x,y:L.cy,width:L.cw,height:L.ch,'class':'sy-ent'});
+      gg.appendChild(r);
+      gg.appendChild(txt(x+L.cw/2,L.ct,title,'sy-ent-t'));
+      gg.appendChild(txt(x+L.cw/2,L.cs,sub,'sy-ent-s'));
+      gg.appendChild(txt(x+L.cw/2,L.cg,tag,'sy-ent-tag'));
+      g.appendChild(gg);return {g:gg,r:r,mid:x+L.cw/2};
+    }
+    var right=card(L.ax,'Rupture disk',p?'one-shot':'one-shot, non-reclosing',p?'asked about':'the entity in the question');
+    var wrongN=card(L.bx,'Relief valve',p?'spring-loaded':'spring-loaded, reseats',p?'one step away':'one step away in the same code');
 
-  /* the answer chip */
-  var chip=el('g',{opacity:0});
-  var chipR=el('rect',{x:110,y:496,width:780,height:104,'class':'sy-ent'});
-  chip.appendChild(chipR);
-  var chipT=txt(500,542,'','sy-ent-q'), chipS=txt(500,576,'','sy-ent-s');
-  chip.appendChild(chipT);chip.appendChild(chipS);g.appendChild(chip);
+    var chip=el('g',{opacity:0});
+    var chipR=el('rect',{x:L.chx,y:L.chy,width:L.chw,height:L.chh,'class':'sy-ent'});
+    chip.appendChild(chipR);
+    var chipT=txt(L.cx,L.cht,'','sy-ent-q');
+    var chipS=el('text',{x:L.cx,y:L.chs,'text-anchor':'middle','class':'sy-ent-s'});
+    chip.appendChild(chipT);chip.appendChild(chipS);g.appendChild(chip);
+    function setChip(title,lines){
+      chipT.textContent=title;clear(chipS);
+      lines.forEach(function(s,i){
+        var ts=el('tspan',{x:L.cx,dy:i?26:0});ts.textContent=s;chipS.appendChild(ts);
+      });
+    }
 
-  /* the model orb drifts across the stage */
+    function beamTo(x,colour){
+      beam.setAttribute('d','M'+L.cx+' '+L.beamY0+' C'+L.cx+' '+(L.beamY0+104)+', '+x+' '+(L.beamY1-78)+', '+x+' '+L.beamY1);
+      beam.style.stroke=colour;
+      beam.setAttribute('opacity',1);
+    }
+    function show(step){
+      var warn=tokv('--warn'), acc=tokv('--accent'), rule=tokv('--rule');
+      right.g.setAttribute('opacity',1);
+      right.r.style.stroke=rule;
+      wrongN.g.setAttribute('opacity',step>=1?1:0);
+      wrongN.r.style.stroke=rule;
+      shared.setAttribute('opacity',step===1?1:0);
+      if(step>=2){
+        var toWrong=(step===2);
+        beamTo(toWrong?wrongN.mid:right.mid, toWrong?warn:acc);
+        wrongN.r.style.stroke=toWrong?warn:rule;
+        right.r.style.stroke=toWrong?rule:acc;
+        chip.setAttribute('opacity',1);
+        if(toWrong){
+          setChip('set pressure · blowdown · reseat',
+            p?['none of these exist','for a rupture disk']:['none of these quantities exist for a rupture disk']);
+          chipR.style.stroke=warn;
+        }else{
+          setChip('46 CFR 54.15-13(b)(3)',
+            p?['operating pressure × 1.3 must','not exceed nominal burst']
+             :['operating pressure × 1.3 must not exceed nominal burst pressure']);
+          chipR.style.stroke=acc;
+        }
+      }else{
+        beam.setAttribute('opacity',0);chip.setAttribute('opacity',0);
+      }
+    }
+    return {show:show};
+  });
+  if(!fig)return null;
+
+  /* the model orb drifts across the stage, outside the svg so it keeps its canvas */
   var model=document.getElementById('pair-model');
   var cap=document.getElementById('orbcap-pair');
   var orb=S.orb(document.getElementById('orb-pair'),{density:1500,state:'breathing',parallax:false,
@@ -3874,183 +3968,153 @@ var pairScene=(function(){
     orb.setState(state);
     model.style.left=leftPct+'%';
     var text=String(label).toUpperCase();
-    if(reduce){cap.textContent=text;return;}
+    if(reduce){cap.classList.remove('is-fading');cap.textContent=text;return;}
     cap.classList.add('is-fading');
     clearTimeout(capTimer);
     capTimer=setTimeout(function(){cap.textContent=text;cap.classList.remove('is-fading');},200);
   }
-
   var num=document.getElementById('pair-num');
   var NUM=[['1','question, two entities'],
-           ['2','entities that share the vocabulary'],
+           ['2','entities share the vocabulary'],
            ['0','of those quantities exist for a rupture disk'],
            ['1.3×','operating pressure against nominal burst']];
-  function setNum(i){
-    var d=NUM[i]||NUM[0];
+  fig.after(function(step,p){
+    var d=NUM[step]||NUM[0];
     num.childNodes[0].nodeValue=d[0];
     num.querySelector('small').textContent=d[1];
-  }
-
-  function beamTo(x,colour){
-    beam.setAttribute('d','M500 86 C500 190, '+x+' 224, '+x+' 302');
-    beam.style.stroke=colour;
-    beam.setAttribute('opacity',1);
-  }
-  function show(step){
-    var warn=tokv('--warn'), acc=tokv('--accent'), rule=tokv('--rule');
-    right.g.setAttribute('opacity',1);
-    right.r.style.stroke=rule;
-    wrongN.g.setAttribute('opacity',step>=1?1:0);
-    wrongN.r.style.stroke=rule;
-    shared.setAttribute('opacity',step===1?1:0);
-    if(step>=2){
-      var toWrong=(step===2);
-      beamTo(toWrong?810:190, toWrong?warn:acc);
-      wrongN.r.style.stroke=toWrong?warn:rule;
-      right.r.style.stroke=toWrong?rule:acc;
-      chip.setAttribute('opacity',1);
-      if(toWrong){
-        chipT.textContent='set pressure  ·  blowdown  ·  reseat';
-        chipS.textContent='none of these quantities exist for a rupture disk';
-        chipR.style.stroke=warn;
-      }else{
-        chipT.textContent='46 CFR 54.15-13(b)(3)';
-        chipS.textContent='operating pressure × 1.3 must not exceed nominal burst pressure';
-        chipR.style.stroke=acc;
-      }
-    }else{
-      beam.setAttribute('opacity',0);chip.setAttribute('opacity',0);
-    }
-    setNum(step);
-    var pos=[50,50,81,19][step]||50;
+    var pos=(p?[50,50,75,25]:[50,50,81,19])[step]||50;
     var st=['breathing','searching','wrong','grounded'][step]||'breathing';
     var lab=['reading the question','searching the neighbourhood','wrong entity','grounded in the clause'][step]||'idle';
     setModel(st,lab,pos);
-  }
-  show(reduce?3:0);
-  if(S.theme&&S.theme.onChange)S.theme.onChange(function(){show(lastStep);});
-  var lastStep=reduce?3:0;
-  return {show:function(i){lastStep=i;show(i);}};
+  });
+  fig.show(reduce?3:0);
+  return fig;
 })();
 
 /* ============ scene 2: the corpus ============ */
+var SHORT={'confined space':'confined space','hazard communication':'hazard comm.','lockout/tagout':'lockout/tagout',
+  'machine, electrical, fire':'machine guard','overpressure protection':'overpressure','process safety':'process safety',
+  'recordkeeping':'recordkeeping','respiratory, noise':'respiratory','category error':'category error'};
 var corpusScene=(function(){
-  var svg=document.getElementById('corpus-svg'); if(!svg)return null;
-  var rows=window.__CORPUS_ROWS||[];
-  var g=el('g',{});svg.appendChild(g);
-  var y0=46,rowH=60,x0=290,gap=44,R=11;
-  var dots=[],links=[];
-  rows.forEach(function(r,ri){
-    var y=y0+ri*rowH;
-    g.appendChild(txt(250,y+6,r.label,'sy-row-lab','end'));
-    r.items.forEach(function(it,ii){
-      var x=x0+ii*gap;
-      it.x=x;it.y=y;
-      var c=el('circle',{cx:x,cy:y,r:R,'class':'sy-dot',fill:'currentColor'});
-      g.appendChild(c);dots.push({c:c,kind:it.kind});
-      var hit=el('circle',{cx:x,cy:y,r:R+8,fill:'transparent'});
-      hit.setAttribute('tabindex','0');hit.setAttribute('role','img');
-      var what=it.kind==='cat'?'category-error item, no correct answer':it.kind==='paired'?'member of a minimal pair':'single item';
-      hit.setAttribute('aria-label',r.label+': '+what);
-      hit.appendChild((function(){var t=el('title',{});t.textContent=r.label+' — '+what;return t;})());
-      g.appendChild(hit);
+  var fig=figure('corpus-svg','0 0 1000 620','0 0 560 400',function(svg,p){
+    var rows=window.__CORPUS_ROWS||[];
+    var g=el('g',{});svg.appendChild(g);
+    var y0=p?28:46, rowH=p?41:60, x0=p?216:290, gap=p?34:44, R=p?10:11, labX=p?196:250;
+    var dots=[],links=[],key=null;
+    rows.forEach(function(r,ri){
+      var y=y0+ri*rowH;
+      g.appendChild(txt(labX,y+(p?8:6),p?(SHORT[r.label]||r.label):r.label,'sy-row-lab','end'));
+      r.items.forEach(function(it,ii){
+        var x=x0+ii*gap;
+        it.x=x;it.y=y;
+        var c=el('circle',{cx:x,cy:y,r:R,'class':'sy-dot',fill:'currentColor'});
+        g.appendChild(c);dots.push({c:c,kind:it.kind});
+        var hit=el('circle',{cx:x,cy:y,r:R+8,fill:'transparent'});
+        hit.setAttribute('tabindex','0');hit.setAttribute('role','img');
+        var what=it.kind==='cat'?'category-error item, no correct answer':it.kind==='paired'?'member of a minimal pair':'single item';
+        hit.setAttribute('aria-label',r.label+': '+what);
+        hit.appendChild((function(){var t=el('title',{});t.textContent=r.label+': '+what;return t;})());
+        g.appendChild(hit);
+      });
+      r.items.forEach(function(it,ii){
+        if(it.pair!==undefined && it.pair>ii){
+          var b=r.items[it.pair];
+          var pa=el('path',{'class':'st-link',opacity:0,'stroke-width':2.4,
+            d:'M'+it.x+' '+(it.y-R-2)+' Q'+((it.x+b.x)/2)+' '+(it.y-R-30)+' '+b.x+' '+(b.y-R-2)});
+          g.appendChild(pa);links.push(pa);
+        }
+      });
     });
-    r.items.forEach(function(it,ii){
-      if(it.pair!==undefined && it.pair>ii){
-        var b=r.items[it.pair];
-        var p=el('path',{'class':'st-link',opacity:0,'stroke-width':2.4,
-          d:'M'+it.x+' '+(it.y-R-2)+' Q'+((it.x+b.x)/2)+' '+(it.y-R-30)+' '+b.x+' '+(b.y-R-2)});
-        g.appendChild(p);links.push(p);
+    /* legend: desktop only, the phone figure carries the count in the big number */
+    if(!p){
+      key=el('g',{});
+      [['paired','one of 23 minimal pairs'],['single','single item'],['cat','no correct answer']]
+        .forEach(function(k,i){
+          var y=150+i*52;
+          var c=el('circle',{cx:772,cy:y-5,r:R,'class':'sy-dot sy-key-dot','data-kind':k[0],fill:'currentColor'});
+          key.appendChild(c);key.appendChild(txt(796,y,k[1],'sy-key','start'));
+        });
+      g.appendChild(key);
+    }
+    function show(step){
+      var ink=tokv('--ink'), acc=tokv('--accent'), warn=tokv('--warn'), soft=tokv('--rule-soft');
+      function colour(kind){
+        if(step===0)return ink;
+        if(step===1)return kind==='paired'?acc:soft;
+        if(step===2)return kind==='cat'?warn:soft;
+        return acc;
       }
-    });
+      dots.forEach(function(d){d.c.style.fill=colour(d.kind);});
+      if(key)[].slice.call(key.querySelectorAll('.sy-key-dot')).forEach(function(c){c.style.fill=colour(c.getAttribute('data-kind'));});
+      links.forEach(function(pa){pa.setAttribute('opacity',step===1?1:step>=2?.22:0);pa.style.stroke=(step===1?acc:soft);});
+    }
+    return {show:show};
   });
-  /* legend */
-  var key=el('g',{});
-  [['paired','one of 23 minimal pairs'],['single','single item'],['cat','no correct answer']]
-    .forEach(function(k,i){
-      var y=150+i*52;
-      var c=el('circle',{cx:772,cy:y-5,r:R,'class':'sy-dot sy-key-dot','data-kind':k[0],fill:'currentColor'});
-      key.appendChild(c);key.appendChild(txt(796,y,k[1],'sy-key','start'));
-    });
-  g.appendChild(key);
-
+  if(!fig)return null;
   var num=document.getElementById('corpus-num');
   var NUM=[['68','items, eight domains'],['23','pairs cover 46 items'],['5','items have no correct answer'],['68','of 68 verified against source']];
-  function setNum(i){var d=NUM[i]||NUM[0];num.childNodes[0].nodeValue=d[0];num.querySelector('small').textContent=d[1];}
-
-  function show(step){
-    var ink=tokv('--ink'), acc=tokv('--accent'), warn=tokv('--warn'), soft=tokv('--rule-soft');
-    function colour(kind){
-      if(step===0)return ink;
-      if(step===1)return kind==='paired'?acc:soft;
-      if(step===2)return kind==='cat'?warn:soft;
-      return acc;
-    }
-    dots.forEach(function(d){d.c.style.fill=colour(d.kind);});
-    [].slice.call(key.querySelectorAll('.sy-key-dot')).forEach(function(c){c.style.fill=colour(c.getAttribute('data-kind'));});
-    links.forEach(function(p){p.setAttribute('opacity',step===1?1:step>=2?.22:0);p.style.stroke=(step===1?acc:soft);});
-    setNum(step);
-  }
-  var last=reduce?3:0;
-  show(last);
-  if(S.theme&&S.theme.onChange)S.theme.onChange(function(){show(last);});
-  return {show:function(i){last=i;show(i);}};
+  fig.after(function(step){
+    var d=NUM[step]||NUM[0];
+    num.childNodes[0].nodeValue=d[0];num.querySelector('small').textContent=d[1];
+  });
+  fig.show(reduce?3:0);
+  return fig;
 })();
 
 /* ============ scene 3: baselines ============ */
 var baseScene=(function(){
-  var svg=document.getElementById('base-svg'); if(!svg)return null;
-  var P={l:112,r:232,t:46,b:94},W=1000,H=620,pw=W-P.l-P.r,ph=H-P.t-P.b;
-  var pts=[
-    {k:'random_floor',x:52.1,sub:47.3,cite:5.0},
-    {k:'retrieval_tfidf',x:27.0,sub:0.0,cite:73.5},
-    {k:'retrieval_bm25',x:28.6,sub:0.0,cite:75.0},
-    {k:'oracle',x:100.0,sub:0.0,cite:100.0}
-  ];
-  var g=el('g',{});svg.appendChild(g);
-  var sx=function(v){return P.l+(v/100)*pw;}, sy=function(v){return P.t+ph-(v/100)*ph;};
-  var i;
-  for(i=0;i<=100;i+=25){
-    g.appendChild(el('line',{'class':'st-grid',x1:P.l,x2:P.l+pw,y1:sy(i),y2:sy(i)}));
-    g.appendChild(txt(P.l-14,sy(i)+5,i+'%','sy-axis-t','end'));
-    g.appendChild(txt(sx(i),P.t+ph+28,i+'%','sy-axis-t'));
-  }
-  /* empty region, drawn under the marks */
-  var region=el('rect',{'class':'st-region',x:sx(30),y:P.t,width:sx(99)-sx(30),height:ph});region.style.opacity='0';
-  var regionE=el('rect',{'class':'st-region-edge',x:sx(30),y:P.t,width:sx(99)-sx(30),height:ph});regionE.style.opacity='0';
-  g.appendChild(region);g.appendChild(regionE);
-  var regionT=txt((sx(30)+sx(99))/2,P.t+ph/2,'No language model scored','st-label-direct');
-  regionT.style.opacity='0';g.appendChild(regionT);
-
-  /* reference lines */
-  var refFloor=el('line',{'class':'st-ref-line',x1:sx(52.1),x2:sx(52.1),y1:P.t,y2:P.t+ph});
-  g.appendChild(refFloor);
-  var refFloorT=txt(sx(52.1)+8,P.t+14,'Guessing floor 52.1%','st-ref-text','start');
-  g.appendChild(refFloorT);
-  var refZero=el('line',{'class':'st-ref-line',x1:P.l,x2:P.l+pw,y1:sy(0),y2:sy(0),opacity:0});
-  g.appendChild(refZero);
-  var refZeroT=txt(P.l+6,sy(0)-12,'Never substitutes','st-ref-text','start');
-  refZeroT.setAttribute('opacity',0);g.appendChild(refZeroT);
-
-  g.appendChild(el('line',{'class':'st-axis-line',x1:P.l,x2:P.l+pw,y1:P.t+ph,y2:P.t+ph,'stroke-width':2}));
-  g.appendChild(el('line',{'class':'st-axis-line',x1:P.l,x2:P.l,y1:P.t,y2:P.t+ph,'stroke-width':2}));
-  var xlab=txt(P.l+pw/2,H-26,'Accuracy on the 63 factual items','st-caption');
-  var ylabG=el('g',{transform:'translate(26,'+(P.t+ph/2)+') rotate(-90)'});
-  var ylab=txt(0,0,'Adjacent substitution rate','st-caption');ylabG.appendChild(ylab);
-  g.appendChild(xlab);g.appendChild(ylabG);
-
-  /* annotations with leader lines, for the two marks that sit on top of each other */
-  function anno(dx,dy,lines){
-    var gg=el('g',{opacity:0});
-    var lead=el('line',{'class':'st-anno-line'});
-    var dot=el('circle',{'class':'st-anno-dot',r:6});
-    var t=el('text',{'class':'st-anno-text','text-anchor':dx>=0?'start':'end'});
-    lines.forEach(function(s,i){
-      var ts=el('tspan',{dy:i?20:0});if(i)ts.setAttribute('class','st-anno-sub');ts.textContent=s;t.appendChild(ts);
+  var fig=figure('base-svg','0 0 1000 620','0 0 560 400',function(svg,p){
+    var P=p?{l:92,r:28,t:26,b:86}:{l:112,r:232,t:46,b:94};
+    var W=p?560:1000,H=p?400:620,pw=W-P.l-P.r,ph=H-P.t-P.b;
+    var pts=[
+      {k:'random_floor',x:52.1,sub:47.3,cite:5.0},
+      {k:'retrieval_tfidf',x:27.0,sub:0.0,cite:73.5},
+      {k:'retrieval_bm25',x:28.6,sub:0.0,cite:75.0},
+      {k:'oracle',x:100.0,sub:0.0,cite:100.0}
+    ];
+    var g=el('g',{});svg.appendChild(g);
+    var sx=function(v){return P.l+(v/100)*pw;}, sy=function(v){return P.t+ph-(v/100)*ph;};
+    var stepTick=p?50:25,i;
+    for(i=0;i<=100;i+=stepTick){
+      g.appendChild(el('line',{'class':'st-grid',x1:P.l,x2:P.l+pw,y1:sy(i),y2:sy(i)}));
+      g.appendChild(txt(P.l-(p?10:14),sy(i)+(p?8:5),i+'%','sy-axis-t','end'));
+      g.appendChild(txt(sx(i),P.t+ph+(p?34:28),i+'%','sy-axis-t'));
+    }
+    var region=el('rect',{'class':'st-region',x:sx(30),y:P.t,width:sx(99)-sx(30),height:ph});region.style.opacity='0';
+    var regionE=el('rect',{'class':'st-region-edge',x:sx(30),y:P.t,width:sx(99)-sx(30),height:ph});regionE.style.opacity='0';
+    g.appendChild(region);g.appendChild(regionE);
+    var regionT=el('text',{x:(sx(30)+sx(99))/2,y:P.t+ph*0.26,'text-anchor':'middle','class':'st-label-direct'});
+    (p?['No language model','scored']:['No language model scored']).forEach(function(s,ix){
+      var ts=el('tspan',{x:(sx(30)+sx(99))/2,dy:ix?26:0});ts.textContent=s;regionT.appendChild(ts);
     });
-    gg.appendChild(lead);gg.appendChild(dot);gg.appendChild(t);g.appendChild(gg);
-    return {g:gg,lead:lead,dot:dot,t:t,dx:dx,dy:dy,
-      place:function(px,py){
+    regionT.style.opacity='0';g.appendChild(regionT);
+
+    var refFloor=el('line',{'class':'st-ref-line',x1:sx(52.1),x2:sx(52.1),y1:P.t,y2:P.t+ph});
+    g.appendChild(refFloor);
+    var refFloorT=txt(sx(52.1)+(p?-10:8),P.t+(p?16:14),p?'Floor 52.1%':'Guessing floor 52.1%','st-ref-text',p?'end':'start');
+    g.appendChild(refFloorT);
+    var refZero=el('line',{'class':'st-ref-line',x1:P.l,x2:P.l+pw,y1:sy(0),y2:sy(0),opacity:0});
+    g.appendChild(refZero);
+    var refZeroT=txt(P.l+6,sy(0)-(p?14:12),'Never substitutes','st-ref-text','start');
+    refZeroT.setAttribute('opacity',0);g.appendChild(refZeroT);
+
+    g.appendChild(el('line',{'class':'st-axis-line',x1:P.l,x2:P.l+pw,y1:P.t+ph,y2:P.t+ph,'stroke-width':2}));
+    g.appendChild(el('line',{'class':'st-axis-line',x1:P.l,x2:P.l,y1:P.t,y2:P.t+ph,'stroke-width':2}));
+    g.appendChild(txt(P.l+pw/2,H-(p?28:26),p?'Accuracy, 63 items':'Accuracy on the 63 factual items','st-caption'));
+    var ylabG=el('g',{transform:'translate('+(p?22:26)+','+(P.t+ph/2)+') rotate(-90)'});
+    var ylab=txt(0,0,'Adjacent substitution rate','st-caption');ylabG.appendChild(ylab);
+    g.appendChild(ylabG);
+
+    function anno(dx,dy,lines){
+      var gg=el('g',{opacity:0});
+      var lead=el('line',{'class':'st-anno-line'});
+      var dot=el('circle',{'class':'st-anno-dot',r:p?7:6});
+      var t=el('text',{'class':'st-anno-text','text-anchor':dx>=0?'start':'end'});
+      lines.forEach(function(s,ix){
+        var ts=el('tspan',{dy:ix?(p?26:20):0});if(ix)ts.setAttribute('class','st-anno-sub');ts.textContent=s;t.appendChild(ts);
+      });
+      gg.appendChild(lead);gg.appendChild(dot);gg.appendChild(t);g.appendChild(gg);
+      return {g:gg,place:function(px,py){
         var tx=px+dx, ty=py+dy, elbow=dx>=0?14:-14;
         lead.setAttribute('x1',px);lead.setAttribute('y1',py);
         lead.setAttribute('x2',tx);lead.setAttribute('y2',ty);
@@ -4059,64 +4123,66 @@ var baseScene=(function(){
         t.setAttribute('x',ax);t.setAttribute('y',ty+5);
         [].slice.call(t.childNodes).forEach(function(ts){ts.setAttribute('x',ax);});
       }};
-  }
-  var annoT=anno(-70,-96,['TF-IDF 27.0%','quotes a clause or says nothing']);
-  var annoB=anno(96,-52,['BM25 28.6%','same behaviour, same zero']);
+    }
+    /* on the phone the two retrievers share one callout: they sit on the same point */
+    var annoT=p?anno(54,-104,['TF-IDF 27.0%','BM25 28.6%, both 0%'])
+               :anno(-46,-96,['TF-IDF 27.0%','quotes a clause or nothing']);
+    var annoB=p?null:anno(96,-52,['BM25 28.6%','same behaviour, same zero']);
 
-  var marks=pts.map(function(p){
-    var c=el('circle',{cx:sx(p.x),cy:sy(p.sub),r:13,fill:'currentColor','class':'st-node',opacity:0});
-    var t=txt(sx(p.x)+20,sy(p.sub)+6,p.k,'sy-pt-lab','start');
-    t.setAttribute('opacity',0);
-    var hit=el('circle',{cx:sx(p.x),cy:sy(p.sub),r:26,fill:'transparent'});
-    hit.setAttribute('tabindex','0');hit.setAttribute('role','img');
-    var ttl=el('title',{});hit.appendChild(ttl);
-    g.appendChild(c);g.appendChild(t);g.appendChild(hit);
-    return {c:c,t:t,hit:hit,ttl:ttl,p:p,cur:p.sub};
+    var marks=pts.map(function(pt){
+      var endLab=p&&pt.k==='oracle';
+      var c=el('circle',{cx:sx(pt.x),cy:sy(pt.sub),r:p?12:13,fill:'currentColor','class':'st-node',opacity:0});
+      var t=txt(sx(pt.x)+(endLab?-18:(p?16:20)),sy(pt.sub)+6,pt.k,'sy-pt-lab',endLab?'end':'start');
+      t.setAttribute('opacity',0);
+      var hit=el('circle',{cx:sx(pt.x),cy:sy(pt.sub),r:26,fill:'transparent'});
+      hit.setAttribute('tabindex','0');hit.setAttribute('role','img');
+      var ttl=el('title',{});hit.appendChild(ttl);
+      g.appendChild(c);g.appendChild(t);g.appendChild(hit);
+      return {c:c,t:t,hit:hit,ttl:ttl,p:pt,cur:pt.sub};
+    });
+    function place(m,v){
+      m.c.setAttribute('cy',sy(v));m.t.setAttribute('y',sy(v)+6);
+      m.hit.setAttribute('cy',sy(v));
+      if(m.p.k==='retrieval_tfidf')annoT.place(sx(m.p.x),sy(v));
+      if(m.p.k==='retrieval_bm25'&&annoB)annoB.place(sx(m.p.x),sy(v));
+    }
+    function show(step){
+      var acc=tokv('--accent'), warn=tokv('--warn'), soft=tokv('--rule-soft');
+      var want=(step===2)?'cite':'sub';
+      ylab.textContent=want==='cite'?(p?'Citation correct rate':'Citation correct-clause rate'):(p?'Adjacent substitution':'Adjacent substitution rate');
+      marks.forEach(function(m,ix){
+        var on=(step===0)?(ix===0):(step===1)?(ix<3):true;
+        m.c.setAttribute('opacity',on?1:.14);
+        var direct=(ix===0||ix===3);
+        m.t.setAttribute('opacity',(on&&direct)?1:0);
+        m.c.style.fill=(ix===0?(want==='sub'?warn:soft):ix===3?soft:acc);
+        var target=m.p[want];
+        m.ttl.textContent=m.p.k+'\naccuracy '+m.p.x.toFixed(1)+'%\nadjacent substitution '+m.p.sub.toFixed(1)+'%\ncitation correct clause '+m.p.cite.toFixed(1)+'%';
+        m.hit.setAttribute('aria-label',m.p.k+', accuracy '+m.p.x.toFixed(1)+' percent, adjacent substitution '+m.p.sub.toFixed(1)+' percent, citation correct clause '+m.p.cite.toFixed(1)+' percent');
+        var from=m.cur; m.cur=target; place(m,target);
+        if(!reduce&&from!==target&&S.tween)S.tween(from,target,function(v){place(m,v);},{duration:700});
+      });
+      var showAnno=(step>=1)?1:0;
+      annoT.g.setAttribute('opacity',showAnno);if(annoB)annoB.g.setAttribute('opacity',showAnno);
+      var showZero=(step===1)?1:0;
+      refZero.setAttribute('opacity',showZero);refZeroT.setAttribute('opacity',showZero);
+      var showR=(step>=3)?1:0;
+      region.style.opacity=showR?'.14':'0';regionE.style.opacity=showR?'1':'0';regionT.style.opacity=showR?'1':'0';
+    }
+    return {show:show};
   });
-  var metric='sub';
-  function place(m,v){
-    m.c.setAttribute('cy',sy(v));m.t.setAttribute('y',sy(v)+6);
-    m.hit.setAttribute('cy',sy(v));
-    if(m.p.k==='retrieval_tfidf')annoT.place(sx(m.p.x),sy(v));
-    if(m.p.k==='retrieval_bm25')annoB.place(sx(m.p.x),sy(v));
-  }
+  if(!fig)return null;
   var num=document.getElementById('base-num');
   var NUM=[['47.3%','of guesses take the adjacent answer'],
            ['0.0%','substitution by either retriever'],
            ['73.5%','of TF-IDF answers name the correct clause'],
            ['0','language models scored on this corpus']];
-  function setNum(i){var d=NUM[i]||NUM[0];num.childNodes[0].nodeValue=d[0];num.querySelector('small').textContent=d[1];}
-
-  function show(step){
-    var acc=tokv('--accent'), warn=tokv('--warn'), soft=tokv('--rule-soft');
-    var want=(step===2)?'cite':'sub';
-    ylab.textContent=want==='cite'?'Citation correct-clause rate':'Adjacent substitution rate';
-    marks.forEach(function(m,i){
-      var on=(step===0)?(i===0):(step===1)?(i<3):true;
-      m.c.setAttribute('opacity',on?1:.14);
-      /* the two retrievers are labelled by callout, not by a label on the mark */
-      var direct=(i===0||i===3);
-      m.t.setAttribute('opacity',(on&&direct)?1:0);
-      m.c.style.fill=(i===0?(want==='sub'?warn:soft):i===3?soft:acc);
-      var target=m.p[want];
-      m.ttl.textContent=m.p.k+'\naccuracy '+m.p.x.toFixed(1)+'%\nadjacent substitution '+m.p.sub.toFixed(1)+'%\ncitation correct clause '+m.p.cite.toFixed(1)+'%';
-      m.hit.setAttribute('aria-label',m.p.k+', accuracy '+m.p.x.toFixed(1)+' percent, adjacent substitution '+m.p.sub.toFixed(1)+' percent, citation correct clause '+m.p.cite.toFixed(1)+' percent');
-      var from=m.cur; m.cur=target; place(m,target);
-      if(!reduce&&from!==target&&S.tween)S.tween(from,target,function(v){place(m,v);},{duration:700});
-    });
-    metric=want;
-    var showAnno=(step>=1)?1:0;
-    annoT.g.setAttribute('opacity',showAnno);annoB.g.setAttribute('opacity',showAnno);
-    var showZero=(step===1)?1:0;
-    refZero.setAttribute('opacity',showZero);refZeroT.setAttribute('opacity',showZero);
-    var showR=(step>=3)?1:0;
-    region.style.opacity=showR?'.14':'0';regionE.style.opacity=showR?'1':'0';regionT.style.opacity=showR?'1':'0';
-    setNum(step);
-  }
-  var last=reduce?3:0;
-  show(last);
-  if(S.theme&&S.theme.onChange)S.theme.onChange(function(){show(last);});
-  return {show:function(i){last=i;show(i);}};
+  fig.after(function(step){
+    var d=NUM[step]||NUM[0];
+    num.childNodes[0].nodeValue=d[0];num.querySelector('small').textContent=d[1];
+  });
+  fig.show(reduce?3:0);
+  return fig;
 })();
 
 /* ============ wire the scenes ============ */
@@ -4139,7 +4205,6 @@ var baseScene=(function(){
   var i=Math.floor(Math.random()*items.length);
   var q=document.getElementById('try-q'),dom=document.getElementById('try-domain'),id=document.getElementById('try-id'),
       rev=document.getElementById('try-reveal'),commit=document.getElementById('try-commit'),next=document.getElementById('try-next');
-  var tryOrb=S.orbInline?S.orbInline(document.getElementById('try-orb'),{state:'listening'}):null;
   function render(){
     var it=items[i];
     dom.textContent=it.domain_title;id.textContent=it.id;q.textContent=it.question;
@@ -4150,21 +4215,17 @@ var baseScene=(function(){
     var a=document.getElementById('try-url');a.href=it.url;a.target='_blank';a.rel='noopener';
     document.getElementById('try-why').textContent=it.why_it_matters;
     rev.hidden=true;commit.textContent='I have an answer';commit.disabled=false;
-    if(tryOrb)tryOrb.setState('listening');
   }
   commit.addEventListener('click',function(){
     rev.hidden=false;commit.disabled=true;commit.textContent='Answer shown';
-    if(tryOrb){tryOrb.setState('wrong');setTimeout(function(){tryOrb.setState('grounded');},1500);}
     rev.scrollIntoView({block:'nearest',behavior:reduce?'auto':'smooth'});
   });
-  next.addEventListener('click',function(){ i=(i+1)%items.length; render(); if(tryOrb)tryOrb.setState('searching'); });
+  next.addEventListener('click',function(){ i=(i+1)%items.length; render(); });
   render();
 })();
 
 /* ============ the closing card ============ */
 (function(){
-  var cv=document.getElementById('next-orb');
-  if(cv)S.orb(cv,{density:1500,state:'grounded',parallax:false,label:'Dot sphere settled into a stable lattice.'});
   var b=document.getElementById('sy-map');
   if(b)b.addEventListener('click',function(){
     var w=S.wayfinder&&S.wayfinder();
