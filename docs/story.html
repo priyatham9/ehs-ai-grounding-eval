@@ -610,7 +610,7 @@ body{overflow-x:clip}
 </style>
 <style id="story-css">/*STORY_CSS_START*/
 /* ============================================================
-   story.css  -  shared storytelling engine styles
+   story.css  -  shared storytelling engine styles  (v1.1)
    Depends on tokens defined in tools/shared.css:
    --paper --surface --surface-2 --ink --ink-2 --muted --rule
    --rule-soft --accent --accent-2 --accent-ink --accent-wash
@@ -620,52 +620,117 @@ body{overflow-x:clip}
 /* ---------- orb ---------- */
 .st-orb{display:block;width:100%;height:100%;touch-action:manipulation}
 .st-orb-wrap{position:relative;display:block;line-height:0}
+.st-orb-inline{display:inline-block;width:20px;height:20px;vertical-align:-3px;line-height:0;margin:0 .35em 0 .1em}
+.st-orb-inline canvas{display:block;width:100%;height:100%}
 
 /* ---------- scenes ---------- */
-.st-scene{position:relative;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:0 46px;align-items:start}
-.st-scene[data-side="left"]{grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr)}
+.st-scene{position:relative;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,4fr);gap:0 56px;align-items:start}
+.st-scene[data-side="left"]{grid-template-columns:minmax(0,4fr) minmax(0,7fr)}
 .st-scene[data-side="left"] .st-stage{order:2}
 .st-scene[data-side="left"] .st-steps{order:1}
 .st-stage{position:sticky;top:0;height:100vh;height:100svh;display:flex;flex-direction:column;justify-content:center;min-width:0;padding:24px 0}
-.st-stage-inner{position:relative;width:100%;min-width:0;max-height:100%}
+.st-stage-inner{position:relative;width:100%;min-width:0;min-height:60vh;min-height:60svh;display:flex;flex-direction:column;justify-content:center}
+.st-stage-inner > svg,.st-stage-inner > canvas,.st-stage-inner > .st-chart{display:block;width:100%;height:auto;max-height:74vh;max-height:74svh}
+.st-stage-inner > .st-figure{margin:0;width:100%}
+.st-stage-inner > .st-figure > svg,.st-stage-inner > .st-figure > canvas{display:block;width:100%;height:auto;max-height:66vh;max-height:66svh}
 .st-steps{min-width:0}
 .st-step{min-height:86vh;display:flex;flex-direction:column;justify-content:center;padding:34px 0;opacity:.34;transition:opacity .45s ease}
 .st-step.is-active{opacity:1}
 .st-step:last-child{min-height:64vh}
-.st-step h3{font-size:clamp(1.18rem,2.4vw,1.6rem);margin-bottom:12px;letter-spacing:-.01em}
-.st-step p{font-size:1rem;color:var(--ink-2);max-width:46ch}
+.st-step h3{font-size:clamp(1.6rem,2.6vw,2.4rem);margin-bottom:14px;letter-spacing:-.015em;line-height:1.08}
+.st-step p{font-size:clamp(1.125rem,.55vw + 1rem,1.25rem);line-height:1.5;color:var(--ink-2);max-width:42ch}
+.st-step p + p{margin-top:.7em}
 .st-step .label{display:block;margin-bottom:10px}
+
+/* big number beside or inside a visual */
+.st-bignum{display:block;font-family:var(--font-mono);font-variant-numeric:tabular-nums;font-size:clamp(3rem,7.5vw,6rem);line-height:.92;letter-spacing:-.04em;color:var(--accent);font-weight:700}
+.st-bignum small{display:block;margin-top:.5em;font-size:.625rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:400;line-height:1.4}
+.st-bignum-row{display:flex;align-items:baseline;gap:22px;flex-wrap:wrap}
+
+/* staggered step entrance (only once .st-flow is set by the engine) */
+.st-scene.st-flow .st-step > *{opacity:0;transform:translateY(20px);transition:opacity .55s cubic-bezier(.22,.7,.2,1),transform .55s cubic-bezier(.22,.7,.2,1)}
+.st-scene.st-flow .st-step.is-entered > *{opacity:1;transform:none}
+.st-scene.st-flow .st-step.is-entered > :nth-child(2){transition-delay:.08s}
+.st-scene.st-flow .st-step.is-entered > :nth-child(3){transition-delay:.16s}
+.st-scene.st-flow .st-step.is-entered > :nth-child(4){transition-delay:.24s}
+.st-scene.st-flow .st-step.is-entered > :nth-child(n+5){transition-delay:.3s}
+
+/* layered stage children: [data-show="0 1"] crossfade by active step */
+.st-stage-inner.st-layers{display:grid;align-items:center}
+.st-stage-inner.st-layers > *{grid-area:1/1;width:100%}
+.st-stage-inner.st-layers > [data-show]{opacity:0;transform:scale(.975);transition:opacity .5s cubic-bezier(.22,.7,.2,1),transform .5s cubic-bezier(.22,.7,.2,1);pointer-events:none}
+.st-stage-inner.st-layers > [data-show].is-shown{opacity:1;transform:none;pointer-events:auto}
+
 /* scroll progress rail drawn from the scene's --p (0..1) */
 .st-scene-rail{position:absolute;left:-18px;top:0;bottom:0;width:2px;background:var(--rule-soft)}
 .st-scene-rail::after{content:"";position:absolute;left:0;top:0;width:2px;height:calc(var(--p,0) * 100%);background:var(--accent)}
-@media(max-width:800px){
-  .st-scene,.st-scene[data-side="left"]{grid-template-columns:1fr;gap:0}
-  .st-scene .st-stage,.st-scene[data-side="left"] .st-stage{order:0;position:sticky;top:var(--st-top,58px);height:50vh;height:50svh;background:var(--paper);z-index:2;padding:12px 0;border-bottom:2px solid var(--rule-soft)}
-  .st-scene .st-steps,.st-scene[data-side="left"] .st-steps{order:1}
-  .st-step{min-height:80vh;padding:26px 0}
-  .st-scene-rail{display:none}
-}
+
+/* ---------- companion orb docked on the stage ---------- */
+.st-companion{position:absolute;left:0;top:0;z-index:3;display:flex;flex-direction:column;align-items:flex-start;gap:6px;pointer-events:none}
+.st-companion .st-companion-orb{width:var(--st-comp,108px);height:var(--st-comp,108px);line-height:0}
+.st-companion .st-companion-cap{font-family:var(--font-mono);font-size:.625rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);transition:opacity .28s ease;padding-left:2px}
+.st-companion .st-companion-cap.is-fading{opacity:0}
+.st-companion[data-state="wrong"] .st-companion-cap{color:var(--warn)}
+.st-companion[data-state="grounded"] .st-companion-cap,.st-companion[data-state="resolved"] .st-companion-cap{color:var(--accent)}
+
+/* ---------- ambient dot field ---------- */
+.st-field{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:0;pointer-events:none}
+
+/* ---------- hero ---------- */
+.st-hero{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,.78fr);gap:40px;align-items:center;min-height:82vh;min-height:82svh}
+.st-hero > *{position:relative;z-index:1}
+.st-hero > .st-field{position:absolute;inset:0;z-index:0}
+.st-hero .st-hero-orb{width:clamp(380px,32vw,480px);max-width:100%;aspect-ratio:1/1;justify-self:center;line-height:0}
+
+/* ---------- chapter card ---------- */
+.st-chapter{position:relative;min-height:100vh;min-height:100svh;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.8fr);gap:40px;align-items:center;overflow:hidden;padding:0 clamp(20px,5vw,60px)}
+.st-chapter > *{position:relative;z-index:1}
+.st-chapter > .st-field{position:absolute;inset:0;z-index:0}
+.st-chapter .st-chapter-body{min-width:0}
+.st-chapter .st-chapter-num{font-family:var(--font-mono);font-size:clamp(4rem,12vw,9rem);line-height:.85;letter-spacing:-.05em;color:var(--rule);font-variant-numeric:tabular-nums;margin-bottom:.12em}
+.st-chapter h2,.st-chapter .st-chapter-title{font-size:clamp(2rem,5vw,3.6rem);line-height:1.02;letter-spacing:-.02em;margin:0 0 .4em}
+.st-chapter p{font-size:clamp(1.05rem,1.4vw,1.3rem);color:var(--ink-2);max-width:40ch;margin:0}
+.st-chapter .st-chapter-orb{width:clamp(220px,26vw,320px);aspect-ratio:1/1;justify-self:center;line-height:0}
 
 /* ---------- charts ---------- */
 .st-chart{display:block;width:100%;overflow:visible;font-family:var(--font-sans)}
-.st-chart text{font-family:var(--font-mono);font-size:12px;fill:var(--muted);font-variant-numeric:tabular-nums}
-.st-chart .st-axis-line{stroke:var(--rule-soft);stroke-width:1}
+.st-chart.st-in-stage{height:min(66vh,720px);max-height:66vh}
+.st-chart text{font-family:var(--font-mono);font-size:14px;fill:var(--muted);font-variant-numeric:tabular-nums}
+.st-chart .st-axis-line{stroke:var(--rule-soft);stroke-width:1.5}
 .st-chart .st-grid{stroke:var(--rule-soft);stroke-width:1;stroke-dasharray:2 4}
-.st-chart .st-label-direct{fill:var(--ink);font-weight:700;font-size:12px}
-.st-chart .st-caption{fill:var(--muted);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.st-chart .st-label-direct{fill:var(--ink);font-weight:700;font-size:14px}
+.st-chart .st-caption{fill:var(--muted);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
 .st-chart .st-series-line{fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
 .st-chart .st-gap{fill:var(--accent);opacity:.14}
 .st-chart .st-bar{transition:none}
 .st-chart .st-region{fill:var(--warn);opacity:.12}
-.st-chart .st-region-edge{stroke:var(--warn);stroke-width:1;stroke-dasharray:4 4;fill:none}
-.st-chart .st-marker{stroke:var(--warn);stroke-width:2}
+.st-chart .st-region-edge{stroke:var(--warn);stroke-width:1.5;stroke-dasharray:4 4;fill:none}
+.st-chart .st-marker{stroke:var(--warn);stroke-width:2.5}
 .st-chart .st-node{stroke:var(--paper);stroke-width:1.5}
-.st-chart .st-link{stroke:var(--rule-soft);stroke-width:1.2;fill:none}
-.st-chart .st-link.is-hot{stroke:var(--accent);stroke-width:2.6}
+.st-chart .st-link{stroke:var(--rule-soft);stroke-width:1.4;fill:none}
+.st-chart .st-chart .st-link.is-hot,.st-chart .st-link.is-hot{stroke:var(--accent);stroke-width:2.8}
 .st-chart .st-path-edge{stroke:var(--ink-2);fill:none;marker-end:url(#st-arrow)}
+/* soft glow on accent marks (SVG only; never applied to canvas) */
+.st-chart .st-glow{filter:drop-shadow(0 0 5px color-mix(in srgb, var(--accent) 60%, transparent))}
+@supports not (color: color-mix(in srgb, red, blue)){.st-chart .st-glow{filter:drop-shadow(0 0 4px var(--accent))}}
+/* annotations */
+.st-chart .st-anno-line{stroke:var(--ink-2);stroke-width:1.5;fill:none}
+.st-chart .st-anno-dot{fill:var(--accent);stroke:var(--paper);stroke-width:2}
+.st-chart .st-anno-text{fill:var(--ink);font-family:var(--font-mono);font-size:13px;font-weight:700}
+.st-chart .st-anno-text tspan.st-anno-sub{fill:var(--muted);font-weight:400}
+.st-chart .st-ref-line{stroke:var(--ink-2);stroke-width:1.5;stroke-dasharray:6 5;fill:none}
+.st-chart .st-ref-text{fill:var(--ink-2);font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+/* hover / focus hit targets */
+.st-chart .st-hit{fill:transparent;stroke:transparent;pointer-events:all;cursor:crosshair}
+.st-chart .st-hit:focus{outline:none;stroke:var(--accent);stroke-width:2}
+.st-chart .st-hit:focus-visible{outline:none;stroke:var(--accent);stroke-width:2}
 .st-canvas{display:block;width:100%}
 .st-figure{margin:0}
 .st-figure figcaption{margin-top:10px;font-family:var(--font-mono);font-size:.625rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+/* tooltip */
+.st-tiphost{position:relative}
+.st-tip{position:absolute;left:0;top:0;z-index:12;transform:translate(-50%,-128%);padding:7px 10px;background:var(--surface);border:2px solid var(--rule);color:var(--ink);font-family:var(--font-mono);font-size:.75rem;line-height:1.35;white-space:pre;pointer-events:none;opacity:0;transition:opacity .16s ease;max-width:280px}
+.st-tip.is-on{opacity:1}
 
 /* ---------- reveal ---------- */
 .st-reveal{opacity:0;transform:translateY(14px);transition:opacity .6s cubic-bezier(.22,.7,.2,1),transform .6s cubic-bezier(.22,.7,.2,1)}
@@ -679,15 +744,97 @@ body{overflow-x:clip}
 .st-presenting .st-hide-on-present,.st-presenting header.banner,.st-presenting .footer,.st-presenting .skip{display:none!important}
 .st-presenting body,body.st-presenting{font-size:19px}
 .st-presenting .st-step{opacity:1;min-height:0}
+.st-presenting .st-scene.st-flow .st-step > *{opacity:1;transform:none}
 .st-present-dots{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);display:flex;gap:8px;z-index:70;padding:9px 13px;border:2px solid var(--rule);background:var(--surface)}
 .st-present-dots b{display:block;width:8px;height:8px;background:var(--rule-soft);border-radius:50%}
 .st-present-dots b.is-on{background:var(--accent)}
 .st-present-hint{position:fixed;right:18px;bottom:24px;z-index:70;font-family:var(--font-mono);font-size:.625rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 
+/* ---------- wayfinder ---------- */
+body.st-has-way{padding-bottom:calc(var(--st-way-h,60px) + 10px)}
+body.st-has-way .presbtn{bottom:calc(var(--st-way-h,60px) + 16px)}
+.st-way{position:fixed;left:0;right:0;bottom:0;z-index:75;background:var(--surface);border-top:2px solid var(--rule);font-family:var(--font-mono)}
+.st-presenting .st-way,.st-presenting .st-way-map{display:none!important}
+.st-way-seg{display:flex;gap:3px;padding:0}
+.st-way-seg i{display:block;height:3px;flex:1 1 0;background:var(--rule-soft)}
+.st-way-seg i.is-done{background:var(--accent);opacity:.45}
+.st-way-seg i.is-now{background:var(--accent);opacity:1}
+.st-way-row{display:flex;align-items:center;gap:14px;padding:9px 16px;min-height:44px}
+.st-way-crumb{flex:1 1 auto;min-width:0;font-size:.6875rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.st-way-crumb b{color:var(--ink);font-weight:700}
+.st-way-btns{display:flex;gap:8px;flex:0 0 auto}
+.st-way a.st-way-btn,.st-way button.st-way-btn{display:inline-block;font-family:var(--font-mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;padding:7px 12px;border:2px solid var(--rule);background:var(--paper);color:var(--ink);text-decoration:none;cursor:pointer;line-height:1.1}
+.st-way a.st-way-btn:hover,.st-way button.st-way-btn:hover{border-color:var(--accent);color:var(--accent)}
+.st-way .st-way-btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.st-way .st-way-btn[aria-disabled="true"]{opacity:.35;pointer-events:none}
+@media(max-width:820px){.st-way-crumb{font-size:.625rem;letter-spacing:.08em}.st-way a.st-way-btn,.st-way button.st-way-btn{padding:7px 9px}}
+@media(max-width:620px){.st-way-site{display:none}}
+@media(max-width:460px){.st-way-title{display:none}.st-way-row{gap:8px;padding:8px 12px}.st-way a.st-way-btn,.st-way button.st-way-btn{padding:7px 7px;letter-spacing:.06em}}
+
+/* map overlay */
+.st-way-map{position:fixed;inset:0;z-index:90;background:var(--paper);display:none;overflow:auto;font-family:var(--font-sans)}
+.st-way-map.is-open{display:block}
+.st-way-map .st-map-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:20px 24px 8px;flex-wrap:wrap}
+.st-way-map .st-map-head h2{font-size:clamp(1.3rem,3vw,2rem);margin:0;letter-spacing:-.02em}
+.st-way-map .st-map-hint{font-family:var(--font-mono);font-size:.625rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.st-map-wrap{position:relative;padding:0 24px 28px}
+.st-map-svg{display:block;width:100%;height:auto;max-height:64vh;overflow:visible}
+.st-map-svg text{font-family:var(--font-mono);font-size:13px;fill:var(--muted)}
+.st-map-svg .st-map-spoke{stroke:var(--rule-soft);stroke-width:1.5}
+.st-map-svg .st-map-spoke.is-now{stroke:var(--accent);stroke-width:2.5}
+.st-map-svg .st-map-node{fill:var(--surface);stroke:var(--rule);stroke-width:2}
+.st-map-svg .st-map-node.is-now{stroke:var(--accent);fill:var(--accent-wash)}
+.st-map-svg .st-map-name{fill:var(--ink);font-weight:700;font-size:13px}
+.st-map-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;padding:0 24px 40px}
+.st-map-card{border:2px solid var(--rule);background:var(--surface);padding:14px 15px}
+.st-map-card.is-now{border-color:var(--accent)}
+.st-map-card h3{font-size:.95rem;margin:0 0 3px;letter-spacing:-.01em}
+.st-map-card .st-map-sub{font-family:var(--font-mono);font-size:.625rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+.st-map-card ul{list-style:none;margin:0;padding:0;display:grid;gap:7px}
+.st-map-card a{display:block;text-decoration:none;color:var(--ink);border-left:3px solid var(--rule-soft);padding-left:9px;font-size:.85rem}
+.st-map-card a:hover,.st-map-card a:focus-visible{border-left-color:var(--accent);color:var(--accent);outline:none}
+.st-map-card a span{display:block;font-family:var(--font-mono);font-size:.625rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.st-map-card a:hover span{color:var(--ink-2)}
+.st-map-extra{display:flex;flex-wrap:wrap;gap:8px;padding:0 24px 40px}
+@media(max-width:800px){.st-map-wrap{display:none}}
+
+/* ---------- responsive ---------- */
+@media(max-width:1100px){
+  .st-scene{grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:0 34px}
+  .st-scene[data-side="left"]{grid-template-columns:minmax(0,5fr) minmax(0,6fr)}
+}
+@media(max-width:900px){
+  .st-hero{grid-template-columns:1fr;gap:26px;min-height:0;padding:28px 0}
+  .st-hero .st-hero-orb{width:min(72vw,360px);order:-1}
+  .st-chapter{grid-template-columns:1fr;gap:24px;text-align:left}
+  .st-chapter .st-chapter-orb{width:min(60vw,240px);justify-self:start}
+}
+@media(max-width:800px){
+  .st-scene,.st-scene[data-side="left"]{grid-template-columns:1fr;gap:0}
+  .st-scene .st-stage,.st-scene[data-side="left"] .st-stage{order:0;position:sticky;top:var(--st-top,58px);height:50vh;height:50svh;background:var(--paper);z-index:2;padding:12px 0;border-bottom:2px solid var(--rule-soft)}
+  .st-stage-inner{min-height:0}
+  .st-stage-inner > svg,.st-stage-inner > canvas,.st-stage-inner > .st-chart{max-height:44vh}
+  .st-chart.st-in-stage{height:min(40vh,300px);max-height:40vh}
+  .st-scene .st-steps,.st-scene[data-side="left"] .st-steps{order:1}
+  .st-step{min-height:80vh;padding:26px 0}
+  .st-step h3{font-size:clamp(1.3rem,5.5vw,1.8rem)}
+  .st-step p{font-size:1.0625rem}
+  .st-scene-rail{display:none}
+  .st-companion{--st-comp:64px}
+  .st-companion .st-companion-cap{font-size:.5625rem;letter-spacing:.12em}
+}
+@media(max-width:420px){
+  .st-companion{--st-comp:52px}
+  .st-bignum{font-size:clamp(2.4rem,15vw,3.4rem)}
+}
+
 /* ---------- reduced motion ---------- */
 @media (prefers-reduced-motion: reduce){
   .st-reveal{opacity:1;transform:none;transition:none}
   .st-step{opacity:1;transition:none}
+  .st-scene.st-flow .st-step > *{opacity:1;transform:none;transition:none}
+  .st-stage-inner.st-layers > [data-show]{transition:none}
+  .st-companion .st-companion-cap{transition:none}
 }
 /*STORY_CSS_END*/</style>
 <script id="rs-theme-init">try{var t=localStorage.getItem("pc-theme")||localStorage.getItem("ehs-ai-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);}catch(e){}</script><style id="rs-header-css">
@@ -800,97 +947,143 @@ html.rs-lock,html.rs-lock body{overflow:hidden}
 
 <style id="story-page-css">
 /* ---------- story page (ehs-ai-grounding-eval) ---------- */
-.sy-hero{border-bottom:2px solid var(--rule);padding:clamp(34px,6vw,74px) 0 clamp(30px,5vw,58px)}
-.sy-hero-grid{display:grid;grid-template-columns:minmax(0,360px) minmax(0,1fr);gap:clamp(24px,4vw,54px);align-items:center}
-.sy-hero-orb{text-align:center}
-.st-orb-wrap{width:100%;max-width:360px;margin:0 auto;aspect-ratio:1/1}
-.st-orb{width:100%;height:100%}
-.sy-orbcap{margin-top:10px;display:block}
+
+/* you are here */
+.sy-crumb{font-family:var(--font-mono);font-size:.6875rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 20px}
+.sy-crumb a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--rule-soft)}
+.sy-crumb a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+.sy-crumb b{color:var(--ink);font-weight:700}
+.sy-crumb i{font-style:normal;padding:0 8px;color:var(--rule-soft)}
+
+/* hero */
+.sy-hero{position:relative;border-bottom:2px solid var(--rule);overflow:hidden;padding:clamp(20px,3vw,40px) 0}
+.sy-hero .st-hero{min-height:82vh}
+.sy-hero-text h1{font-size:clamp(2.6rem,7.2vw,5.4rem);margin-bottom:20px}
 .sy-eyebrow{display:block;margin-bottom:14px}
-.sy-hero-text h1{font-size:clamp(2.4rem,7vw,4.6rem);margin-bottom:18px}
-.sy-lede{font-size:clamp(1.05rem,1.9vw,1.3rem);color:var(--ink);max-width:56ch}
-.sy-lede-2{font-size:clamp(1rem,1.7vw,1.15rem);color:var(--ink);max-width:60ch}
-.sy-sub{color:var(--ink-2);max-width:58ch}
-.sy-cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:20px}
-.sy-btn{display:inline-block;border:2px solid var(--rule);background:var(--surface);color:var(--ink);text-decoration:none;font-family:var(--font-mono);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;padding:11px 17px;cursor:pointer;line-height:1.2}
-.sy-btn:hover{background:var(--surface-2)}
+.sy-lede{font-size:clamp(1.1rem,1.5vw,1.4rem);color:var(--ink);max-width:48ch;line-height:1.45}
+.sy-lede-2{font-size:clamp(1.05rem,1.4vw,1.25rem);color:var(--ink);max-width:56ch}
+.sy-sub{color:var(--ink-2);max-width:52ch}
+.sy-orbcap{display:block;margin-top:16px;text-align:center}
+.sy-cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:24px}
+.sy-btn{display:inline-block;border:2px solid var(--rule);background:var(--surface);color:var(--ink);text-decoration:none;font-family:var(--font-mono);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;padding:12px 18px;cursor:pointer;line-height:1.2}
+.sy-btn:hover{background:var(--surface-2);border-color:var(--accent);color:var(--accent)}
 .sy-btn-p{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
-.sy-btn-p:hover{background:var(--accent-2);border-color:var(--accent-2)}
+.sy-btn-p:hover{background:var(--accent-2);border-color:var(--accent-2);color:var(--accent-ink)}
 .sy-hint{font-size:.625rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 
-.sy-sec{border-bottom:2px solid var(--rule);padding:clamp(30px,5vw,60px) 0}
-.sy-h2{font-size:clamp(1.8rem,4.4vw,3rem);margin:8px 0 16px}
-.sy-intro{color:var(--ink-2);max-width:62ch}
+/* sections */
+.sy-sec{border-bottom:2px solid var(--rule);padding:clamp(30px,5vw,62px) 0}
+.sy-scene-sec{padding:0 0 clamp(24px,4vw,54px)}
+.sy-h2{font-size:clamp(1.9rem,4.4vw,3.2rem);margin:8px 0 18px}
+.sy-intro{color:var(--ink-2);max-width:62ch;font-size:1.0625rem}
 .sy-src{display:block;margin-top:18px;font-size:.625rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+/* scenes get a wider gutter than the reading column so the stage is big */
+.sy-wide{max-width:min(1560px,95vw)}
 
-.sy-table{margin-top:16px;border-top:1px solid var(--rule-soft)}
-.sy-table summary{cursor:pointer;font-family:var(--font-mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:9px 0}
-.sy-tbl{border-collapse:collapse;width:100%;font-size:.8125rem}
-.sy-tbl th,.sy-tbl td{border-bottom:1px solid var(--rule-soft);padding:6px 9px 6px 0;text-align:left;vertical-align:top}
+/* chapter cards */
+.sy-chapter{border-bottom:2px solid var(--rule)}
+.sy-chapter .st-chapter-num{color:var(--rule-soft)}
+
+/* the two stacked site bars are sticky, so the scene stage starts below them */
+.st-scene .st-stage,.st-scene[data-side="left"] .st-stage{padding:92px 0 28px}
+
+/* stage furniture */
+.sy-stagenum{display:flex;align-items:flex-end;gap:26px;flex-wrap:wrap;margin:0 0 14px;min-height:104px}
+.sy-stagenum .st-bignum{font-size:clamp(2.8rem,5.6vw,4.8rem)}
+.sy-stagenum .st-bignum small{margin-top:.55em}
+.sy-fig{margin:0;width:100%}
+.sy-figwrap{position:relative;line-height:0;width:100%}
+.sy-fig > svg,.sy-figwrap > svg{display:block;width:100%;height:auto}
+.sy-fig figcaption{margin-top:12px;font-family:var(--font-mono);font-size:.625rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);line-height:1.5}
+
+/* the model orb: it drifts across the stage between the two entities */
+.sy-model{position:absolute;left:50%;top:33%;width:18%;transform:translate(-50%,-50%);z-index:3;pointer-events:none;display:flex;flex-direction:column-reverse;align-items:center;gap:6px;transition:left .9s cubic-bezier(.22,.7,.2,1),top .9s cubic-bezier(.22,.7,.2,1)}
+.sy-model-orb{width:100%;aspect-ratio:1/1;line-height:0}
+.sy-model-orb canvas{display:block;width:100%;height:100%}
+.sy-model-cap{font-family:var(--font-mono);font-size:.6875rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);line-height:1.2;white-space:nowrap;transition:opacity .28s ease}
+.sy-model-cap.is-fading{opacity:0}
+.sy-model[data-state="wrong"] .sy-model-cap{color:var(--warn)}
+.sy-model[data-state="grounded"] .sy-model-cap,.sy-model[data-state="resolved"] .sy-model-cap{color:var(--accent)}
+
+/* tables */
+.sy-table{margin-top:18px;border-top:1px solid var(--rule-soft)}
+.sy-table summary{cursor:pointer;font-family:var(--font-mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:10px 0}
+.sy-tbl{border-collapse:collapse;width:100%;font-size:.875rem}
+.sy-tbl th,.sy-tbl td{border-bottom:1px solid var(--rule-soft);padding:7px 10px 7px 0;text-align:left;vertical-align:top}
 .sy-tbl th{font-weight:600;color:var(--ink-2)}
 
 /* interactive item */
-.sy-card{border:2px solid var(--rule);background:var(--surface);padding:clamp(18px,3vw,30px);margin-top:20px}
-.sy-card-head{display:flex;justify-content:space-between;gap:14px;align-items:baseline;border-bottom:1px solid var(--rule-soft);padding-bottom:10px;margin-bottom:16px}
+.sy-card{border:2px solid var(--rule);background:var(--surface);padding:clamp(18px,3vw,32px);margin-top:22px}
+.sy-card-head{display:flex;justify-content:space-between;gap:14px;align-items:baseline;border-bottom:1px solid var(--rule-soft);padding-bottom:10px;margin-bottom:18px}
 .sy-id{font-size:.6875rem;color:var(--muted)}
-.sy-q{font-size:clamp(1.05rem,2.1vw,1.35rem);color:var(--ink);max-width:70ch;margin-bottom:18px}
-.sy-actions{display:flex;flex-wrap:wrap;gap:10px}
-.sy-reveal{margin-top:22px;display:grid;gap:16px}
+.sy-q{font-size:clamp(1.1rem,2vw,1.4rem);color:var(--ink);max-width:70ch;margin-bottom:20px;line-height:1.45}
+.sy-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.sy-reveal{margin-top:24px;display:grid;gap:16px}
 .sy-rev{border-left:4px solid var(--rule-soft);padding:2px 0 2px 16px}
 .sy-rev p{margin:6px 0 0;color:var(--ink-2);max-width:72ch}
-.sy-rev-wrong{border-left-color:var(--warn);background:var(--warn-wash);padding:12px 12px 12px 16px}
+.sy-rev-wrong{border-left-color:var(--warn);background:var(--warn-wash);padding:13px 13px 13px 16px}
 .sy-rev-wrong .sy-rev-lab{color:var(--ink);font-weight:700}
-.sy-rev-right{border-left-color:var(--accent);background:var(--accent-wash);padding:12px 12px 12px 16px}
+.sy-rev-right{border-left-color:var(--accent);background:var(--accent-wash);padding:13px 13px 13px 16px}
 .sy-clause{font-size:.8125rem}
 .sy-clause .mono{color:var(--ink)}
 
 /* honesty grid */
-.sy-grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2px;background:var(--surface);border:2px solid var(--rule);margin-top:20px}
-.sy-note{box-shadow:0 0 0 2px var(--rule-soft)}
-.sy-note{background:var(--surface);padding:18px}
+.sy-grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2px;background:var(--surface);border:2px solid var(--rule);margin-top:22px}
+.sy-note{background:var(--surface);padding:20px;box-shadow:0 0 0 2px var(--rule-soft)}
 .sy-note p{margin:8px 0 0;color:var(--ink-2);font-size:.9375rem}
 
 /* monday */
-.sy-monday{border-bottom:none}
-.sy-monday-grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,.9fr);gap:clamp(22px,4vw,48px);align-items:start}
-.sy-next{border:2px solid var(--rule);background:var(--surface-2);padding:18px}
-.sy-nextlink{display:block;text-decoration:none;border-top:1px solid var(--rule-soft);padding:13px 0 11px}
-.sy-nextlink:hover .sy-next-t{color:var(--accent)}
-.sy-next-t{display:block;font-weight:700;color:var(--ink);font-size:1.0625rem;line-height:1.25}
-.sy-next-n{display:block;font-family:var(--font-mono);font-size:.6875rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.sy-monday-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(22px,4vw,54px);align-items:start}
+.sy-do{border:2px solid var(--rule);background:var(--surface-2);padding:20px}
+.sy-do ol{margin:10px 0 0;padding-left:20px;color:var(--ink-2);font-size:.9375rem}
+.sy-do li{margin-bottom:8px}
 
-/* scene-local chart styling */
-#pair-svg .sy-ent{fill:var(--surface);stroke:var(--rule);stroke-width:2}
-#pair-svg .sy-ent-t{fill:var(--ink);font-family:var(--font-sans);font-weight:700;font-size:13px}
-#pair-svg .sy-ent-s{fill:var(--muted);font-size:10.5px}
-#pair-svg .sy-shared{fill:var(--muted);font-size:11px}
-#pair-svg .sy-beam{stroke:var(--accent);stroke-width:2.5;fill:none;stroke-linecap:round}
-#corpus-svg .sy-dot{stroke:var(--paper);stroke-width:1}
-#base-svg .sy-pt-lab{fill:var(--ink);font-weight:700;font-size:11.5px;font-family:var(--font-mono)}
+/* the big next card */
+.sy-nextsec{border-bottom:none;position:relative;overflow:hidden;padding:clamp(40px,7vw,90px) 0}
+.sy-nextgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.62fr);gap:clamp(24px,4vw,56px);align-items:center;position:relative;z-index:1}
+.sy-nextgrid h2{font-size:clamp(2rem,4.6vw,3.4rem);margin:10px 0 16px}
+.sy-nextorb{width:clamp(200px,22vw,320px);aspect-ratio:1/1;justify-self:center;line-height:0}
+.sy-nextorb canvas{display:block;width:100%;height:100%}
 
+/* chart styling local to this page */
+.st-chart .sy-ent{fill:var(--surface);stroke:var(--rule);stroke-width:2.5}
+.st-chart .sy-ent-t{fill:var(--ink);font-family:var(--font-sans);font-weight:700;font-size:24px;letter-spacing:-.01em}
+.st-chart .sy-ent-q{fill:var(--ink);font-family:var(--font-sans);font-weight:700;font-size:21px}
+.st-chart .sy-ent-s{fill:var(--ink-2);font-size:15px}
+.st-chart .sy-ent-tag{fill:var(--muted);font-size:13px;letter-spacing:.06em;text-transform:uppercase}
+.st-chart .sy-shared{fill:var(--muted);font-size:15px}
+.st-chart .sy-shared-l{fill:var(--muted);font-size:12px;letter-spacing:.18em;text-transform:uppercase}
+.st-chart .sy-beam{stroke:var(--accent);stroke-width:3.5;fill:none;stroke-linecap:round}
+.st-chart .sy-dot{stroke:var(--paper);stroke-width:1.5}
+.st-chart .sy-row-lab{fill:var(--ink-2);font-size:15px}
+.st-chart .sy-key{fill:var(--muted);font-size:14px}
+.st-chart .sy-pt-lab{fill:var(--ink);font-weight:700;font-size:15px;font-family:var(--font-mono)}
+.st-chart .sy-axis-t{fill:var(--muted);font-size:14px}
+
+@media (max-width:1100px){
+  .sy-stagenum .st-bignum{font-size:clamp(2.2rem,5vw,3.4rem)}
+  .sy-stagenum{min-height:88px}
+}
 @media (max-width:900px){
-  .sy-hero-grid{grid-template-columns:1fr}
-  .st-orb-wrap{max-width:240px}
-  .sy-monday-grid{grid-template-columns:1fr}
+  .sy-monday-grid,.sy-nextgrid{grid-template-columns:1fr}
+  .sy-nextorb{justify-self:start;width:min(56vw,240px)}
+}
+@media (max-width:800px){
+  .sy-wide{max-width:none}
+  .sy-stagenum{min-height:0;margin-bottom:8px;gap:14px}
+  .sy-stagenum .st-bignum{font-size:clamp(1.8rem,9vw,2.6rem)}
+  .sy-stagenum .st-bignum small{font-size:.5625rem;margin-top:.35em}
+  .sy-fig figcaption{display:none}
+  .sy-fig > svg,.sy-figwrap > svg{max-height:36vh}
+  .sy-model{width:24%}
+  .sy-model-cap{font-size:.5rem;letter-spacing:.1em}
 }
 @media (max-width:480px){
   .sy-card-head{flex-direction:column;gap:4px}
 }
-
-.sy-stage-orb{display:flex;align-items:center;gap:14px;margin-bottom:14px}
-.sy-stage-orb .st-orb-wrap{width:78px;height:78px;max-width:78px;margin:0;flex:0 0 auto}
-.sy-stage-orb .label{color:var(--muted)}
-@media(max-width:800px){.sy-stage-orb{margin-bottom:8px}.sy-stage-orb .st-orb-wrap{width:54px;height:54px;max-width:54px}}
-
-/* mobile: the site header is sticky too, so drop the scene stage below it */
-@media (max-width:800px){
-  .st-scene .st-stage,.st-scene[data-side="left"] .st-stage{top:100px;height:calc(60vh - 40px);padding-top:6px}
-  .sy-stage-orb{display:none}
-  .st-stage-inner .st-figure figcaption{font-size:.5625rem}
+@media (prefers-reduced-motion: reduce){
+  .sy-model{transition:none}
 }
-
-.st-scene + .sy-table{margin-top:18px}
-
 </style>
 </head>
 <body>
@@ -898,63 +1091,74 @@ html.rs-lock,html.rs-lock body{overflow:hidden}
 <main id="main">
 
 <section class="sy-hero" id="thesis">
-  <div class="wrap sy-hero-grid">
-    <div class="sy-hero-orb">
-      <div class="st-orb-wrap" id="hero-orb-wrap" data-state="idle">
-        <canvas class="st-orb" id="hero-orb" width="380" height="380"
-          role="img" aria-label="Animated dot sphere standing for the system under review. It searches, drifts to the wrong clause, then settles when it is bound to a source."></canvas>
+  <div class="wrap">
+    <div class="st-hero" id="hero">
+      <div class="sy-hero-text">
+        <p class="sy-crumb"><a href="https://priyatham9.github.io/grounded/">Grounded</a><i>&rsaquo;</i><a href="index.html">ehs-ai-grounding-eval</a><i>&rsaquo;</i><b>Story</b></p>
+        <p class="label sy-eyebrow">Story 3 of 7 &middot; the adjacent clause</p>
+        <h1 class="display">The adjacent clause</h1>
+        <p class="sy-lede">A wrong answer about the next regulated entity over reads exactly like a right one. It is fluent, internally consistent, and it carries a citation. This benchmark was built to catch that one failure.</p>
+        <p class="sy-sub">68 questions. 23 minimal pairs. Three non-LLM baselines. No language model has been scored yet, and the page says so wherever that number would go.</p>
+        <div class="sy-cta">
+          <a class="sy-btn sy-btn-p" href="#ch1">Start the story</a>
+          <a class="sy-btn" href="index.html">Project page</a>
+          <span class="sy-hint mono">P for presenter mode &middot; M for the map</span>
+        </div>
       </div>
-      <p class="sy-orbcap label">The system under review</p>
-    </div>
-    <div class="sy-hero-text">
-      <p class="label sy-eyebrow">Story &middot; ehs-ai-grounding-eval</p>
-      <h1 class="display">The adjacent clause</h1>
-      <p class="sy-lede">A wrong answer about the next regulated entity over reads exactly like a right one. It is fluent, internally consistent, and it carries a citation. This benchmark was built to catch that one failure.</p>
-      <p class="sy-sub">68 questions. 23 minimal pairs. Three non-LLM baselines. No language model has been scored yet, and the page says so wherever that number would go.</p>
-      <div class="sy-cta">
-        <a class="sy-btn sy-btn-p" href="#substitution">Start the story</a>
-        <a class="sy-btn" href="index.html">Project page</a>
-        <span class="sy-hint mono">Press P for presenter mode</span>
+      <div class="st-hero-orb">
+        <canvas id="hero-orb" role="img" aria-label="Animated dot sphere standing for the system under review. It searches, drifts to the wrong clause, then settles when it is bound to a source."></canvas>
+        <span class="label sy-orbcap">The system under review</span>
       </div>
     </div>
   </div>
 </section>
 
+<!-- ============ CHAPTER 1 ============ -->
+<section class="sy-chapter st-chapter" id="ch1" data-num="01" data-orb="wrong" data-orb-label="Chapter orb fracturing as the answer lands on the wrong entity">
+  <h2 class="display">The substitution</h2>
+  <p>One question. Two devices the law treats separately. The answer that comes back is about the other one, and nothing in it looks wrong.</p>
+</section>
+
 <!-- ============ SCENE 1: the substitution ============ -->
-<section class="sy-sec" id="substitution">
-  <div class="wrap">
+<section class="sy-sec sy-scene-sec" id="substitution">
+  <div class="wrap sy-wide">
     <div class="st-scene" data-scene="pair" data-side="right">
       <div class="st-stage">
         <div class="st-stage-inner">
-          <div class="sy-stage-orb">
-            <div class="st-orb-wrap" data-state="idle"><canvas class="st-orb" id="orb-pair" width="200" height="200" role="img" aria-label="The system under review, shown as a dot sphere whose state matches the sentence on screen."></canvas></div>
-            <span class="label" id="orbcap-pair">idle</span>
+          <div class="sy-stagenum">
+            <span class="st-bignum" id="pair-num">1<small>question, two entities</small></span>
           </div>
-          <figure class="st-figure">
-            <svg class="st-chart" id="pair-svg" viewBox="0 0 560 420" role="img"
-              aria-label="Two regulated entities that share vocabulary. A retrieval beam leaves the question, lands on the neighbouring entity, and the answer that comes back is about the wrong device."></svg>
+          <figure class="st-figure sy-fig">
+            <div class="sy-figwrap">
+              <svg class="st-chart" id="pair-svg" viewBox="0 0 1000 620" role="img"
+                aria-label="Two regulated entities that share vocabulary. A retrieval beam leaves the question, lands on the neighbouring relief valve, and the answer that comes back is about the wrong device. Reading the clause moves it back to the rupture disk."></svg>
+              <div class="sy-model" id="pair-model" data-state="breathing">
+                <div class="sy-model-orb"><canvas id="orb-pair" role="img" aria-label="The system under review, drawn as a dot sphere that drifts between the two entities."></canvas></div>
+                <span class="sy-model-cap" id="orbcap-pair">BREATHING</span>
+              </div>
+            </div>
             <figcaption>Item prd-001. Source artifact: docs/try-data.json, clause 46 CFR 54.15-13(b)(3)</figcaption>
           </figure>
         </div>
       </div>
       <div class="st-steps">
         <span class="st-scene-rail" aria-hidden="true"></span>
-        <div class="st-step" data-orb="idle" data-step="0">
+        <div class="st-step" data-orb="breathing" data-step="0" data-orb-label="reading the question">
           <span class="label">Act one</span>
           <h3>A question with one right answer</h3>
           <p>A rupture disk protects an unfired pressure vessel. Someone asks what relationship must hold between the operating pressure and the burst pressure. There is a clause that answers it.</p>
         </div>
-        <div class="st-step" data-orb="searching" data-step="1">
+        <div class="st-step" data-orb="searching" data-step="1" data-orb-label="searching the neighbourhood">
           <span class="label">Act two</span>
           <h3>The neighbour shares the vocabulary</h3>
           <p>A spring-loaded relief valve sits one step away in the same regulatory neighbourhood. Same vessel, same overpressure language, same handbooks. The words overlap almost completely.</p>
         </div>
-        <div class="st-step" data-orb="wrong" data-step="2">
+        <div class="st-step" data-orb="wrong" data-step="2" data-orb-label="wrong entity">
           <span class="label">Act three</span>
           <h3>The answer drifts one entity over</h3>
           <p>What comes back describes set pressure, blowdown and reseating. Those quantities do not exist for a rupture disk, which is a one-shot non-reclosing device. Nothing in the sentence looks wrong.</p>
         </div>
-        <div class="st-step" data-orb="grounded" data-step="3">
+        <div class="st-step" data-orb="grounded" data-step="3" data-orb-label="grounded in the clause">
           <span class="label">Act four</span>
           <h3>Grounding is the check that catches it</h3>
           <p>Read the clause and the substitution collapses: 46 CFR 54.15-13(b)(3) sets operating pressure times 1.3 against the nominal burst pressure. Plausibility does not catch this. A cited source does.</p>
@@ -964,41 +1168,46 @@ html.rs-lock,html.rs-lock body{overflow:hidden}
   </div>
 </section>
 
+<!-- ============ CHAPTER 2 ============ -->
+<section class="sy-chapter st-chapter" id="ch2" data-num="02" data-orb="connecting" data-orb-label="Chapter orb drawing the corpus into a lattice of pairs">
+  <h2 class="display">The corpus</h2>
+  <p>68 items across eight regulated domains, built so that guessing well is not the same as reading the clause.</p>
+</section>
+
 <!-- ============ SCENE 2: the corpus ============ -->
-<section class="sy-sec" id="corpus">
-  <div class="wrap">
+<section class="sy-sec sy-scene-sec" id="corpus">
+  <div class="wrap sy-wide">
     <div class="st-scene" data-scene="corpus" data-side="left">
       <div class="st-stage">
         <div class="st-stage-inner">
-          <div class="sy-stage-orb">
-            <div class="st-orb-wrap" data-state="idle"><canvas class="st-orb" id="orb-corpus" width="200" height="200" role="img" aria-label="The corpus under construction, shown as a dot sphere whose state matches the sentence on screen."></canvas></div>
-            <span class="label" id="orbcap-corpus">idle</span>
+          <div class="sy-stagenum">
+            <span class="st-bignum" id="corpus-num">68<small id="corpus-num-lab">items, eight domains</small></span>
           </div>
-          <figure class="st-figure">
-            <svg class="st-chart" id="corpus-svg" viewBox="0 0 560 420" role="img"
-              aria-label="68 items drawn as rows of dots, one row per regulatory domain, with minimal pairs joined by an arc and five category-error items on their own row."></svg>
+          <figure class="st-figure sy-fig">
+            <svg class="st-chart" id="corpus-svg" viewBox="0 0 1000 620" role="img"
+              aria-label="68 items drawn as rows of dots, one row per regulatory domain, with the 23 minimal pairs joined by an arc and the five category-error items on their own row."></svg>
             <figcaption>68 items, 8 domains. Source artifacts: docs/CORPUS_CARD.md, docs/try-data.json</figcaption>
           </figure>
         </div>
       </div>
       <div class="st-steps">
         <span class="st-scene-rail" aria-hidden="true"></span>
-        <div class="st-step" data-orb="shaping" data-step="0">
+        <div class="st-step" data-orb="shaping" data-step="0" data-orb-label="shaping the corpus">
           <span class="label">The corpus</span>
           <h3>68 items across eight domains</h3>
           <p>Confined space, hazard communication, lockout/tagout, machine guarding and electrical, overpressure protection, process safety, recordkeeping, respiratory protection and noise. Every item names a clause and a source URL.</p>
         </div>
-        <div class="st-step" data-orb="connecting" data-step="1">
+        <div class="st-step" data-orb="connecting" data-step="1" data-orb-label="connecting the pairs">
           <span class="label">The construction</span>
           <h3>23 pairs cover 46 of the items</h3>
           <p>A minimal pair is two entities the law treats separately that share vocabulary. Asking about both members is the stricter test: a system can pass one member by luck and cannot pass both without reading the right clause.</p>
         </div>
-        <div class="st-step" data-orb="listening" data-step="2">
+        <div class="st-step" data-orb="listening" data-step="2" data-orb-label="listening for a decline">
           <span class="label">The trap for confident answers</span>
           <h3>Five items have no correct answer</h3>
           <p>The category-error items ask something that does not apply to the entity. The right response is to decline. A system that answers them anyway is telling you how it behaves when the question itself is malformed.</p>
         </div>
-        <div class="st-step" data-orb="grounded" data-step="3">
+        <div class="st-step" data-orb="grounded" data-step="3" data-orb-label="verified against source">
           <span class="label">The provenance</span>
           <h3>68 of 68 verified, six thrown out</h3>
           <p>Each item was checked back to its published source. Six drafted items whose provenance could not be confirmed were moved to quarantine rather than kept. Verification checks provenance, not editorial quality.</p>
@@ -1038,6 +1247,7 @@ html.rs-lock,html.rs-lock body{overflow:hidden}
       <div class="sy-actions">
         <button type="button" class="sy-btn sy-btn-p" id="try-commit">I have an answer</button>
         <button type="button" class="sy-btn" id="try-next">Another item</button>
+        <span class="st-orb-inline" id="try-orb" data-orb="working" aria-hidden="true"></span>
       </div>
       <div class="sy-reveal" id="try-reveal" hidden>
         <div class="sy-rev sy-rev-wrong">
@@ -1060,41 +1270,46 @@ html.rs-lock,html.rs-lock body{overflow:hidden}
   </div>
 </section>
 
+<!-- ============ CHAPTER 3 ============ -->
+<section class="sy-chapter st-chapter" id="ch3" data-num="03" data-orb="solving" data-orb-label="Chapter orb working through the scoreboard">
+  <h2 class="display">The scoreboard</h2>
+  <p>Three baselines, none of them a language model. What they measure is the trade between being right and being checkable.</p>
+</section>
+
 <!-- ============ SCENE 3: baselines ============ -->
-<section class="sy-sec" id="baselines">
-  <div class="wrap">
+<section class="sy-sec sy-scene-sec" id="baselines">
+  <div class="wrap sy-wide">
     <div class="st-scene" data-scene="base" data-side="right">
       <div class="st-stage">
         <div class="st-stage-inner">
-          <div class="sy-stage-orb">
-            <div class="st-orb-wrap" data-state="idle"><canvas class="st-orb" id="orb-base" width="200" height="200" role="img" aria-label="The scoreboard, shown as a dot sphere whose state matches the sentence on screen."></canvas></div>
-            <span class="label" id="orbcap-base">idle</span>
+          <div class="sy-stagenum">
+            <span class="st-bignum" id="base-num">47.3%<small id="base-num-lab">of guesses take the adjacent answer</small></span>
           </div>
-          <figure class="st-figure">
-            <svg class="st-chart" id="base-svg" viewBox="0 0 560 440" role="img"
+          <figure class="st-figure sy-fig">
+            <svg class="st-chart" id="base-svg" viewBox="0 0 1000 620" role="img"
               aria-label="Accuracy against adjacent-substitution rate for three non-LLM baselines and the oracle ceiling. Random guessing sits at 52.1 percent accuracy and 47.3 percent substitution. TF-IDF retrieval sits at 27.0 percent accuracy and zero substitution. BM25 sits at 28.6 percent and zero. The oracle fixture sits at 100 percent and zero. The region where a language model would be plotted is empty."></svg>
-            <figcaption>Source artifact: results/baselines_summary.csv (rendered in results/baselines_table.md)</figcaption>
+            <figcaption>n = 63 factual items. Source artifact: results/baselines_summary.csv (rendered in results/baselines_table.md)</figcaption>
           </figure>
         </div>
       </div>
       <div class="st-steps">
         <span class="st-scene-rail" aria-hidden="true"></span>
-        <div class="st-step" data-orb="working" data-step="0">
+        <div class="st-step" data-orb="working" data-step="0" data-orb-label="scoring the floor">
           <span class="label">The floor</span>
           <h3>Guessing scores 52.1 percent</h3>
           <p>The random arm picks between the two answers an item carries. It lands at 52.1 percent accuracy, and it takes the adjacent wrong answer 47.3 percent of the time. That second number is what the whole corpus is built to measure.</p>
         </div>
-        <div class="st-step" data-orb="searching" data-step="1">
+        <div class="st-step" data-orb="searching" data-step="1" data-orb-label="retrieving clauses">
           <span class="label">The retrievers</span>
           <h3>Retrieval scores 27.0 percent and never substitutes</h3>
           <p>TF-IDF over the authoritative text gets 27.0 percent of the factual items right, below the guessing floor, and substitutes the adjacent entity zero times. It quotes a clause or it says nothing. BM25 behaves the same way at 28.6 percent.</p>
         </div>
-        <div class="st-step" data-orb="solving" data-step="2">
+        <div class="st-step" data-orb="solving" data-step="2" data-orb-label="solving for the trade">
           <span class="label">The trade</span>
           <h3>Low accuracy, high citation</h3>
           <p>Switch the vertical axis to citation correctness. The retrievers name the correct clause 73.5 and 75.0 percent of the time, against 5.0 percent for guessing. They are wrong often and misleading rarely. A generator that reverses that trade is the risk this benchmark exists to catch.</p>
         </div>
-        <div class="st-step" data-orb="idle" data-step="3">
+        <div class="st-step" data-orb="listening" data-step="3" data-orb-label="nothing scored yet">
           <span class="label">The empty region</span>
           <h3>Nothing is plotted where a model would go</h3>
           <p>No language model has been run on this corpus. The point at 100 percent is a fixture that replays the answer key, not a system. The region between the retrievers and that ceiling stays empty until an LLM arm is actually scored.</p>
@@ -1164,16 +1379,32 @@ html.rs-lock,html.rs-lock body{overflow:hidden}
         <a class="sy-btn" href="index.html">Methods and preregistration</a>
       </div>
     </div>
-    <div class="sy-next">
-      <span class="label">Next in the series</span>
-      <a class="sy-nextlink" href="https://priyatham9.github.io/ehs-human-factors-ontology/story.html">
-        <span class="sy-next-t">Why people err, as a graph</span>
-        <span class="sy-next-n">Human factors ontology &#8599;</span>
-      </a>
-      <a class="sy-nextlink" href="https://priyatham9.github.io/grounded/">
-        <span class="sy-next-t">All six instruments</span>
-        <span class="sy-next-n">Research hub &#8599;</span>
-      </a>
+    <div class="sy-do">
+      <span class="label">The one-hour check</span>
+      <ol>
+        <li>Pull five AI-assisted answers your team acted on.</li>
+        <li>Open each cited clause and read it.</li>
+        <li>Confirm the clause governs the entity in the question.</li>
+        <li>Count how many carried no clause at all.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NEXT ============ -->
+<section class="sy-nextsec" id="next">
+  <div class="wrap sy-nextgrid">
+    <div>
+      <p class="label">Story 4 of 7 &middot; next in the path</p>
+      <h2 class="display">Why people err, as a graph</h2>
+      <p class="sy-lede-2">The performance influencing factors behind the error, as a network, with one rule derivation traced edge by edge.</p>
+      <div class="sy-cta">
+        <a class="sy-btn sy-btn-p" href="https://priyatham9.github.io/ehs-human-factors-ontology/story.html">Read the next story</a>
+        <button type="button" class="sy-btn" id="sy-map">or open the map</button>
+      </div>
+    </div>
+    <div class="sy-nextorb">
+      <canvas id="next-orb" role="img" aria-label="Dot sphere settling into a stable lattice at the end of the story."></canvas>
     </div>
   </div>
 </section>
@@ -1967,6 +2198,203 @@ html.rs-lock,html.rs-lock body{overflow:hidden}
   }
 
   /* ---------------------------------------------------------
+     4b. companion orb, inline orb, chapter card, ambient field
+     --------------------------------------------------------- */
+  var ORB_VERB = {
+    breathing: "IDLE", working: "THINKING", searching: "SEARCHING", solving: "SOLVING",
+    connecting: "CONNECTING", listening: "LISTENING", wrong: "WRONG",
+    grounded: "GROUNDED", resolved: "RESOLVED"
+  };
+
+  /* Story.companion(hostEl, {state, caption, size, label})
+     A docked orb with a live mono verb caption. Used by Story.scenes. */
+  function companion(host, opts) {
+    opts = opts || {};
+    host = isEl(host) ? host : el(host);
+    if (!host) return null;
+    var box = html("div", "st-companion");
+    var orbHost = html("div", "st-companion-orb", box);
+    var cap = html("span", "st-companion-cap", box);
+    var cv = document.createElement("canvas");
+    orbHost.appendChild(cv);
+    if (opts.size) box.style.setProperty("--st-comp", typeof opts.size === "number" ? opts.size + "px" : opts.size);
+    host.insertBefore(box, host.firstChild);
+    var state = ORB_ALIAS[opts.state] || "breathing";
+    var o = orb(cv, {
+      state: state, parallax: false, density: opts.density,
+      label: opts.label || "Orb showing the state of the system under review"
+    });
+    cap.textContent = (opts.caption || ORB_VERB[state] || state).toUpperCase();
+    box.setAttribute("data-state", state);
+    var timer = null, api;
+    function setState(name, label) {
+      var canon = ORB_ALIAS[name] || "breathing";
+      var text = String(label || ORB_VERB[canon] || canon).toUpperCase();
+      if (canon === state && text === cap.textContent) return api;
+      state = canon;
+      o.setState(canon);
+      box.setAttribute("data-state", canon);
+      if (reduced()) { cap.textContent = text; return api; }
+      cap.classList.add("is-fading");
+      clearTimeout(timer);
+      timer = setTimeout(function () { cap.textContent = text; cap.classList.remove("is-fading"); }, 180);
+      return api;
+    }
+    api = {
+      orb: o, el: box, setState: setState,
+      get state() { return state; },
+      destroy: function () { clearTimeout(timer); o.destroy(); box.remove(); }
+    };
+    return api;
+  }
+
+  /* Story.orbInline(el, {state}) - a 20px orb that sits in running text */
+  function orbInline(node, opts) {
+    opts = opts || {};
+    node = isEl(node) ? node : el(node);
+    if (!node) return null;
+    node.classList.add("st-orb-inline");
+    var cv = node.querySelector("canvas");
+    if (!cv) { cv = document.createElement("canvas"); node.appendChild(cv); }
+    return orb(cv, {
+      state: opts.state || node.getAttribute("data-orb") || "working",
+      density: opts.density || 72, parallax: false,
+      label: opts.label || node.getAttribute("aria-label") || "Inline orb"
+    });
+  }
+
+  /* Story.field(canvasOrHost, {density}) - ambient monochrome dot field */
+  function field(node, opts) {
+    opts = opts || {};
+    var host = isEl(node) ? node : el(node);
+    if (!host) return null;
+    var canvas = host.tagName.toLowerCase() === "canvas" ? host : html("canvas", "st-field");
+    canvas.classList.add("st-field");
+    canvas.setAttribute("aria-hidden", "true");
+    if (host !== canvas) {
+      if (getComputedStyle(host).position === "static") host.style.position = "relative";
+      host.insertBefore(canvas, host.firstChild);
+    }
+    var ctx = canvas.getContext("2d");
+    var W = 0, H = 0, DPR = 1, pts = [], visible = false, un = null, ro = null, io = null, destroyed = false;
+    var par = 0, lastY = global.scrollY || 0, pxT = 0, pyT = 0, px = 0, py = 0;
+
+    function build() {
+      var n = clamp(Math.round((W * H) / 10000 * (opts.density == null ? 1.1 : opts.density)), 20, 420);
+      pts = [];
+      for (var i = 0; i < n; i++) {
+        var z = 0.25 + hashD(i, 4.21) * 0.75;
+        pts.push({
+          x: hashD(i, 1.13) * W, y: hashD(i, 2.27) * H, z: z,
+          vx: (hashD(i, 3.31) - 0.5) * 8, vy: (hashD(i, 5.57) - 0.5) * 5,
+          r: 0.6 + z * 1.6
+        });
+      }
+    }
+    function paintField() {
+      ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+      ctx.clearRect(0, 0, W, H);
+      var c = Theme.rgb("ink");
+      for (var i = 0; i < pts.length; i++) {
+        var p = pts[i];
+        var x = p.x + px * p.z, y = p.y + (py + par) * p.z;
+        if (y < -8) y += H + 16; else if (y > H + 8) y -= H + 16;
+        ctx.fillStyle = rgba(c, (0.05 + 0.2 * p.z).toFixed(3));
+        ctx.beginPath(); ctx.arc(x, y, p.r, 0, 6.2832); ctx.fill();
+      }
+    }
+    function step(dt) {
+      if (destroyed) return false;
+      if (!visible) return;
+      for (var i = 0; i < pts.length; i++) {
+        var p = pts[i];
+        p.x += p.vx * p.z * dt; p.y += p.vy * p.z * dt;
+        if (p.x < -6) p.x = W + 6; else if (p.x > W + 6) p.x = -6;
+        if (p.y < -6) p.y = H + 6; else if (p.y > H + 6) p.y = -6;
+      }
+      var k = 1 - Math.pow(0.02, dt);
+      par = lerp(par, 0, k);
+      px = lerp(px, pxT, k); py = lerp(py, pyT, k);
+      paintField();
+    }
+    function resize() {
+      var r = canvas.getBoundingClientRect();
+      var w = Math.max(1, Math.round(r.width || 600)), h = Math.max(1, Math.round(r.height || 400));
+      DPR = Math.min(global.devicePixelRatio || 1, 2);
+      if (w === W && h === H) return;
+      W = w; H = h;
+      canvas.width = Math.round(W * DPR); canvas.height = Math.round(H * DPR);
+      build(); paintField();
+    }
+    function onScroll() {
+      var y = global.scrollY || 0, dv = y - lastY; lastY = y;
+      if (!reduced()) par = clamp(par - dv * 0.28, -70, 70);
+    }
+    function onPointer(e) {
+      var r = canvas.getBoundingClientRect();
+      if (!r.width) return;
+      pxT = clamp((e.clientX - (r.left + r.width / 2)) / r.width, -1, 1) * 16;
+      pyT = clamp((e.clientY - (r.top + r.height / 2)) / Math.max(1, r.height), -1, 1) * 10;
+    }
+    function start() { if (!un && !destroyed && !reduced()) un = tick(step); }
+    function stop() { if (un) { un(); un = null; } }
+    if (global.ResizeObserver) { ro = new ResizeObserver(resize); ro.observe(canvas); } else addEventListener("resize", resize);
+    if (global.IntersectionObserver) {
+      io = new IntersectionObserver(function (es) { visible = es[0].isIntersecting; if (visible) start(); else stop(); }, { rootMargin: "80px" });
+      io.observe(canvas);
+    } else { visible = true; start(); }
+    addEventListener("scroll", onScroll, { passive: true });
+    if (opts.pointer !== false) addEventListener("pointermove", onPointer, { passive: true });
+    var unTheme = Theme.onChange(paintField);
+    resize();
+    return {
+      el: canvas,
+      destroy: function () {
+        destroyed = true; stop();
+        if (ro) ro.disconnect(); else removeEventListener("resize", resize);
+        if (io) io.disconnect();
+        removeEventListener("scroll", onScroll); removeEventListener("pointermove", onPointer);
+        unTheme(); canvas.remove();
+      }
+    };
+  }
+
+  /* Story.chapter(el) - full-viewport chapter card.
+     Markup: <section class="st-chapter" data-num="02" data-orb="searching">
+               <h2>Title</h2><p>One line.</p></section>                     */
+  function chapter(node, opts) {
+    opts = opts || {};
+    node = isEl(node) ? node : el(node);
+    if (!node) return null;
+    if (node.__stChapter) return node.__stChapter;
+    var body = html("div", "st-chapter-body");
+    while (node.firstChild) body.appendChild(node.firstChild);
+    var num = node.getAttribute("data-num");
+    if (num) { var nEl = html("div", "st-chapter-num"); nEl.textContent = num; body.insertBefore(nEl, body.firstChild); }
+    var orbHost = html("div", "st-chapter-orb");
+    var cv = document.createElement("canvas");
+    orbHost.appendChild(cv);
+    node.appendChild(body);
+    node.appendChild(orbHost);
+    var f = field(node, { density: opts.density == null ? 0.9 : opts.density });
+    var target = node.getAttribute("data-orb") || "grounded";
+    var o = orb(cv, {
+      state: opts.from || "breathing", parallax: false,
+      label: node.getAttribute("data-orb-label") || ("Chapter orb, state " + target)
+    });
+    inView(node, function () {
+      if (reduced()) { o.setState(target); return; }
+      setTimeout(function () { o.setState(target); }, 420);
+    }, { once: true, margin: "0px 0px -30% 0px" });
+    var api = {
+      el: node, orb: o, field: f,
+      destroy: function () { o.destroy(); if (f) f.destroy(); node.__stChapter = null; }
+    };
+    node.__stChapter = api;
+    return api;
+  }
+
+  /* ---------------------------------------------------------
      5. scenes  (sticky stage + scroll steps)
      --------------------------------------------------------- */
   function scenes(root, opts) {
@@ -1975,18 +2403,53 @@ html.rs-lock,html.rs-lock body{overflow:hidden}
     if (!scene) return { destroy: function () { } };
     var steps = els(".st-step", scene);
     var stage = el(".st-stage", scene);
+    var inner = el(".st-stage-inner", scene) || stage;
     var active = -1, ioStep = null, unScroll = null;
+
+    // staggered step-text entrance is opt-in via this class, so pages that
+    // never run scenes() still render their step text normally
+    scene.classList.add("st-flow");
+    // text enters when the step reaches the viewport, not when it goes active,
+    // so the column ahead of the reader is never blank
+    steps.forEach(function (s) {
+      inView(s, function () { s.classList.add("is-entered"); }, { once: true, margin: "0px 0px -6% 0px" });
+    });
+
+    // docked companion orb, unless the stage already has one
+    var comp = null;
+    if (opts.companion !== false && stage && !el(".st-orb-wrap", stage) && !el("canvas.st-orb", stage) && !el(".st-companion", stage)) {
+      comp = companion(stage, {
+        size: opts.companionSize,
+        state: (steps[0] && steps[0].getAttribute("data-orb")) || "breathing",
+        caption: steps[0] && steps[0].getAttribute("data-orb-label")
+      });
+    }
+
+    // layered stage children driven by [data-show="0 1 2"]
+    var layers = inner ? els("[data-show]", inner).filter(function (n) { return n.parentNode === inner; }) : [];
+    if (layers.length && inner) inner.classList.add("st-layers");
+    function showLayers(i) {
+      layers.forEach(function (n) {
+        var list = (n.getAttribute("data-show") || "").split(/[\s,]+/).filter(Boolean);
+        n.classList.toggle("is-shown", list.indexOf(String(i)) >= 0);
+      });
+    }
 
     function setActive(i, dir) {
       if (i === active) return;
       var prev = active; active = i;
-      steps.forEach(function (s, j) { s.classList.toggle("is-active", j === i); });
+      steps.forEach(function (s, j) {
+        s.classList.toggle("is-active", j === i);
+        if (j === i) s.classList.add("is-entered");
+      });
       var node = steps[i];
       if (node) {
         var orbState = node.getAttribute("data-orb");
         if (orbState && opts.orb && opts.orb.setState) opts.orb.setState(orbState);
+        if (comp) comp.setState(orbState || "breathing", node.getAttribute("data-orb-label"));
         scene.setAttribute("data-step", node.getAttribute("data-step") || String(i));
       }
+      showLayers(i);
       if (opts.onStep) opts.onStep(i, node, i > prev ? 1 : -1);
     }
 
@@ -2000,7 +2463,7 @@ html.rs-lock,html.rs-lock body{overflow:hidden}
         if (best) setActive(steps.indexOf(best.target));
       }, { rootMargin: narrow ? "-68% 0px -12% 0px" : "-45% 0px -45% 0px", threshold: 0 });
       steps.forEach(function (s) { ioStep.observe(s); });
-    } else { setActive(0); }
+    } else { steps.forEach(function (s) { s.classList.add("is-entered"); }); setActive(0); }
 
     function onScroll() {
       var r = scene.getBoundingClientRect();
@@ -2024,11 +2487,12 @@ html.rs-lock,html.rs-lock body{overflow:hidden}
     else if (active < 0) setActive(0);
 
     return {
-      steps: steps, stage: stage, scene: scene,
+      steps: steps, stage: stage, scene: scene, companion: comp,
       get index() { return active; },
       go: function (i) { if (steps[i]) steps[i].scrollIntoView({ behavior: reduced() ? "auto" : "smooth", block: "center" }); },
       destroy: function () {
         if (ioStep) ioStep.disconnect();
+        if (comp) comp.destroy();
         removeEventListener("scroll", onScroll); removeEventListener("resize", onScroll);
       }
     };
@@ -2051,19 +2515,37 @@ html.rs-lock,html.rs-lock body{overflow:hidden}
     var W = opts.width || 700, H = opts.height || Math.round(W * (opts.aspect || defAspect || 0.58));
     var api = {
       svg: svg, host: host, m: m,
+      tipHost: (host === svg ? (host.parentNode || host) : host),
       get w() { return W - m.left - m.right; },
       get h() { return H - m.top - m.bottom; },
       W: W, H: H,
       clear: function () { while (svg.firstChild) svg.removeChild(svg.firstChild); },
+      fit: function () {
+        // a stage chart is sized by CSS; match the viewBox to the real box so
+        // the drawing fills it instead of being letterboxed
+        if (!svg.classList.contains("st-in-stage")) return false;
+        var r = svg.getBoundingClientRect();
+        if (!r.width || !r.height) return false;
+        var want = clamp(Math.round(W * (r.height / r.width)), 180, 1400);
+        if (Math.abs(want - H) < 3) return false;
+        H = want; return true;
+      },
       frame: function () {
+        api.fit();
         svg.setAttribute("viewBox", "0 0 " + W + " " + H);
         svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
         if (opts.height && host !== svg) svg.setAttribute("height", opts.height);
+        // a chart that lives on a scene stage fills the stage by default
+        if (opts.fill !== false && host.closest && host.closest(".st-stage-inner")) svg.classList.add("st-in-stage");
         var g = mk("g", { transform: "translate(" + m.left + "," + m.top + ")" }, svg);
         return g;
       },
       setLabel: function (s) { svg.setAttribute("aria-label", s); }
     };
+    if (global.ResizeObserver) {
+      api._ro = new ResizeObserver(function () { if (api.fit() && api._redraw) api._redraw(); });
+      api._ro.observe(svg);
+    }
     return api;
   }
   // x/y axes with 12px mono type (styled by story.css)
@@ -2106,6 +2588,85 @@ html.rs-lock,html.rs-lock body{overflow:hidden}
     if (reduced()) { cb(1, true); return { stop: function () { } }; }
     var s = spring(0, 1, function (v, done) { cb(clamp(v, 0, 1.0001), done); }, { stiffness: opts.stiffness || 120, damping: opts.damping });
     return s;
+  }
+
+  /* ---- tooltips, callouts, reference lines (shared by all charts) ---- */
+  function tipFor(b) {
+    var host = b.tipHost;
+    if (!host || !host.appendChild) return null;
+    if (!host.__stTip) {
+      if (host.classList) host.classList.add("st-tiphost");
+      var t = html("div", "st-tip", host);
+      t.setAttribute("aria-hidden", "true");
+      host.__stTip = t;
+    }
+    return host.__stTip;
+  }
+  function hideTip(b) { var t = b.tipHost && b.tipHost.__stTip; if (t) t.classList.remove("is-on"); }
+  function showTipAt(b, text, clientX, clientY) {
+    var t = tipFor(b); if (!t) return;
+    var hr = b.tipHost.getBoundingClientRect();
+    t.textContent = text;
+    t.style.left = clamp(clientX - hr.left, 10, Math.max(10, hr.width - 10)).toFixed(1) + "px";
+    t.style.top = (clientY - hr.top).toFixed(1) + "px";
+    t.classList.add("is-on");
+  }
+  // invisible, keyboard-focusable hit target that reveals the exact value
+  function addHit(b, g, shape, attrs, text) {
+    if (text == null || text === "") return null;
+    var a = {}; for (var k in attrs) a[k] = attrs[k];
+    a["class"] = "st-hit";
+    var n = mk(shape, a, g);
+    n.setAttribute("tabindex", "0");
+    n.setAttribute("role", "img");
+    n.setAttribute("aria-label", String(text).replace(/\n/g, ", "));
+    function show() { var r = n.getBoundingClientRect(); showTipAt(b, text, r.left + r.width / 2, r.top); }
+    function hide() { hideTip(b); }
+    n.addEventListener("pointerenter", show);
+    n.addEventListener("pointerleave", hide);
+    n.addEventListener("focus", show);
+    n.addEventListener("blur", hide);
+    return n;
+  }
+  /* opts.annotations: [{x, y, text, dx, dy}] in data units, dx/dy in px */
+  function drawAnnotations(b, g, xs, ys, anns, t) {
+    if (!anns || !anns.length) return;
+    var a = clamp((t - 0.5) / 0.5, 0, 1);
+    if (a <= 0.01) return;
+    anns.forEach(function (an) {
+      if (an.x == null || an.y == null) return;
+      var px = xs(an.x), py = ys(an.y);
+      var dx = an.dx == null ? 54 : an.dx, dy = an.dy == null ? -48 : an.dy;
+      var tx = px + dx * a, ty = py + dy * a;
+      var elbow = dx >= 0 ? 10 : -10;
+      var col = an.color ? (tok(an.color) || an.color) : tok("accent");
+      mk("line", { class: "st-anno-line", x1: px, y1: py, x2: tx, y2: ty, opacity: a.toFixed(2) }, g);
+      mk("line", { class: "st-anno-line", x1: tx, y1: ty, x2: tx + elbow, y2: ty, opacity: a.toFixed(2) }, g);
+      mk("circle", { class: "st-anno-dot st-glow", cx: px, cy: py, r: (5 * a).toFixed(2), fill: col }, g);
+      var ax = tx + elbow + (dx >= 0 ? 6 : -6), anchor = dx >= 0 ? "start" : "end";
+      var txt = mk("text", { class: "st-anno-text", x: ax, y: ty + 5, "text-anchor": anchor, opacity: a.toFixed(2) }, g);
+      String(an.text).split("\n").forEach(function (ln, i) {
+        var ts = mk("tspan", { x: ax, dy: i ? 17 : 0 }, txt);
+        if (i) ts.setAttribute("class", "st-anno-sub");
+        ts.textContent = ln;
+      });
+    });
+  }
+  /* opts.refLines: [{y|x, label?, color?}] */
+  function drawRefLines(b, g, xs, ys, refs, t) {
+    if (!refs || !refs.length) return;
+    refs.forEach(function (r) {
+      var col = r.color ? (tok(r.color) || r.color) : tok("ink-2");
+      if (r.y != null && ys) {
+        var y = ys(r.y);
+        mk("line", { class: "st-ref-line", x1: 0, x2: (b.w * t).toFixed(1), y1: y, y2: y, stroke: col }, g);
+        if (r.label && t > .6) { var n1 = mk("text", { class: "st-ref-text", x: 2, y: y - 8, fill: col }, g); n1.textContent = r.label; }
+      } else if (r.x != null && xs) {
+        var x = xs(r.x);
+        mk("line", { class: "st-ref-line", x1: x, x2: x, y1: (b.h * (1 - t)).toFixed(1), y2: b.h, stroke: col }, g);
+        if (r.label && t > .6) { var n2 = mk("text", { class: "st-ref-text", x: x + 6, y: 12, fill: col }, g); n2.textContent = r.label; }
+      }
+    });
   }
 
   /* ---------------------------------------------------------
@@ -2155,9 +2716,21 @@ html.rs-lock,html.rs-lock body{overflow:hidden}
           lab.setAttribute("opacity", ((t - .6) / .4).toFixed(2));
         }
       });
+      drawRefLines(b, g, xs, ys, opts.refLines, t);
+      drawAnnotations(b, g, xs, ys, opts.annotations, t);
+      if (t > .95 && opts.tips !== false) {
+        cur.series.forEach(function (s) {
+          s.points.forEach(function (p) {
+            var txt = opts.tipFmt ? opts.tipFmt(p, s) :
+              (s.name ? s.name + "\n" : "") + (opts.xlabel || "x") + " " + fmt(p[0], 0) + "\n" + (opts.ylabel || "y") + " " + fmt(p[1]);
+            addHit(b, g, "circle", { cx: xs(p[0]).toFixed(2), cy: ys(p[1]).toFixed(2), r: 10 }, txt);
+          });
+        });
+      }
     }
     function run() { if (anim) anim.stop(); anim = transition(function (t) { render(clamp(t, 0, 1)); }); }
     un = Theme.onChange(function () { render(1); });
+    b._redraw = function () { render(1); };
     if (first) { first = false; inView(b.svg, run, { once: true }); render(0.0001); }
     return {
       update: function (d, o) { if (d) cur = d; if (o) Object.assign(opts, o); run(); },
@@ -2181,10 +2754,17 @@ html.rs-lock,html.rs-lock body{overflow:hidden}
         var v = lerp(from[i] == null ? 0 : from[i], d.value, t);
         var x = i * (w / cur.length) + (w / cur.length - bw) / 2;
         var y = ys(v), hh = Math.max(0, h - y);
-        mk("rect", { class: "st-bar", x: x, y: y, width: bw, height: hh, fill: d.color ? (tok(d.color) || d.color) : tok("accent") }, g);
+        var rect = mk("rect", { class: "st-bar", x: x, y: y, width: bw, height: hh, fill: d.color ? (tok(d.color) || d.color) : tok("accent") }, g);
+        if (d.glow) rect.setAttribute("class", "st-bar st-glow");
         var lab = mk("text", { class: "st-label-direct", x: x + bw / 2, y: y - 7, "text-anchor": "middle" }, g);
         lab.textContent = (opts.valueFmt || fmt)(v);
+        if (t > .95 && opts.tips !== false) {
+          addHit(b, g, "rect", { x: i * (w / cur.length), y: 0, width: w / cur.length, height: h },
+            opts.tipFmt ? opts.tipFmt(d) : d.label + "\n" + (opts.valueFmt || fmt)(d.value) + (opts.unit ? " " + opts.unit : ""));
+        }
       });
+      drawRefLines(b, g, null, ys, opts.refLines, t);
+      if (opts.annotations) drawAnnotations(b, g, function (i) { return (i + .5) * (w / cur.length); }, ys, opts.annotations, t);
     }
     function run() {
       var from = prev.slice();
@@ -2193,6 +2773,7 @@ html.rs-lock,html.rs-lock body{overflow:hidden}
       prev = cur.map(function (d) { return d.value; });
     }
     un = Theme.onChange(function () { render(1, prev); });
+    b._redraw = function () { render(1, prev); };
     render(0, prev);
     inView(b.svg, run, { once: true });
     return {
@@ -2249,6 +2830,7 @@ html.rs-lock,html.rs-lock body{overflow:hidden}
     }
     function run() { if (anim) anim.stop(); anim = transition(function (t) { render(clamp(t, 0, 1)); }, { stiffness: 70 }); }
     un = Theme.onChange(function () { render(1); });
+    b._redraw = function () { render(1); };
     render(0.001); inView(b.svg, run, { once: true });
     return { update: function (d, o) { if (d) cur = d; if (o) Object.assign(opts, o); run(); }, el: b.svg, destroy: function () { if (anim) anim.stop(); un(); b.clear(); } };
   };
@@ -2279,14 +2861,22 @@ html.rs-lock,html.rs-lock body{overflow:hidden}
         var e = clamp((t - (i / Math.max(1, pts.length)) * 0.4) / 0.6, 0, 1);
         var c = mk("circle", { cx: xs(p.x), cy: ys(p.y), r: (p.r || 5) * e, fill: p.color ? (tok(p.color) || p.color) : tok("accent") }, g);
         c.setAttribute("opacity", (0.85 * e).toFixed(2));
+        if (p.glow) c.setAttribute("class", "st-glow");
         if (p.label && e > .9) {
           var tx = mk("text", { class: "st-label-direct", x: xs(p.x) + 9, y: ys(p.y) + 4 }, g);
           tx.textContent = p.label;
         }
+        if (t > .95 && opts.tips !== false) {
+          addHit(b, g, "circle", { cx: xs(p.x), cy: ys(p.y), r: Math.max(11, (p.r || 5) + 6) },
+            opts.tipFmt ? opts.tipFmt(p) : (p.label ? p.label + "\n" : "") + (opts.xlabel || "x") + " " + fmt(p.x) + "\n" + (opts.ylabel || "y") + " " + fmt(p.y));
+        }
       });
+      drawRefLines(b, g, xs, ys, opts.refLines, t);
+      drawAnnotations(b, g, xs, ys, opts.annotations, t);
     }
     function run() { if (anim) anim.stop(); anim = transition(function (t) { render(clamp(t, 0, 1)); }, { stiffness: 90 }); }
     un = Theme.onChange(function () { render(1); });
+    b._redraw = function () { render(1); };
     render(0.001); inView(b.svg, run, { once: true });
     return { update: function (d, o) { if (d) cur = d; if (o) Object.assign(opts, o); run(); }, el: b.svg, destroy: function () { if (anim) anim.stop(); un(); b.clear(); } };
   };
@@ -2332,9 +2922,20 @@ html.rs-lock,html.rs-lock body{overflow:hidden}
         var ct = mk("text", { class: "st-caption", x: w, y: -4, "text-anchor": "end" }, g);
         ct.textContent = take + " / " + B.order.length + " draws";
       }
+      drawRefLines(b, g, xs, ys, opts.refLines, t);
+      drawAnnotations(b, g, xs, ys, opts.annotations, t);
+      if (t > .95 && opts.tips !== false) {
+        var step = (B.d[1] - B.d[0]) / B.n;
+        full.forEach(function (c, i) {
+          if (!c) return;
+          addHit(b, g, "rect", { x: i * bw, y: 0, width: bw, height: h },
+            fmt(B.d[0] + i * step) + " to " + fmt(B.d[0] + (i + 1) * step) + "\n" + c + " of " + B.order.length + " draws");
+        });
+      }
     }
     function run() { if (anim) anim.stop(); anim = transition(function (t) { render(clamp(t, 0, 1)); }, { stiffness: 26 }); }
     un = Theme.onChange(function () { render(1); });
+    b._redraw = function () { render(1); };
     render(0); inView(b.svg, run, { once: true });
     return { update: function (d, o) { if (d) cur = d; if (o) Object.assign(opts, o); run(); }, el: b.svg, destroy: function () { if (anim) anim.stop(); un(); b.clear(); } };
   };
@@ -2375,7 +2976,13 @@ html.rs-lock,html.rs-lock body{overflow:hidden}
         lt.textContent = d.label;
         var vt = mk("text", { x: x1 + 6, y: y + bh / 2 + 4 }, g);
         vt.textContent = (opts.xfmt ? opts.xfmt(d.high) : fmt(d.high));
+        if (t > .95 && opts.tips !== false) {
+          var f = opts.xfmt || fmt;
+          addHit(b, g, "rect", { x: 0, y: row * rowH, width: w, height: rowH },
+            opts.tipFmt ? opts.tipFmt(d) : d.label + "\nlow " + f(d.low) + "\nhigh " + f(d.high) + "\nswing " + f(Math.abs(d.high - d.low)));
+        }
       });
+      drawRefLines(b, g, xs, null, opts.refLines, t);
     }
     function run(toSorted) {
       order = toSorted === false ? cur.map(function (d, i) { return i; }) : sorted();
@@ -2383,6 +2990,7 @@ html.rs-lock,html.rs-lock body{overflow:hidden}
       anim = transition(function (t) { render(clamp(t, 0, 1)); }, { stiffness: 55 });
     }
     un = Theme.onChange(function () { render(1); });
+    b._redraw = function () { render(1); };
     render(0); inView(b.svg, function () { run(true); }, { once: true });
     return {
       update: function (d, o) { if (d) cur = d; if (o) Object.assign(opts, o); run(o && o.sorted === false ? false : true); },
@@ -2455,6 +3063,7 @@ html.rs-lock,html.rs-lock body{overflow:hidden}
     }
     init(data);
     un = Theme.onChange(render);
+    b._redraw = function () { init(cur); sim(120); render(); };
     sim(60); render();
     inView(b.svg, settle, { once: true });
     return {
@@ -2528,6 +3137,7 @@ html.rs-lock,html.rs-lock body{overflow:hidden}
       prev = {}; cur.edges.forEach(function (e) { prev[e.from + ">" + e.to] = e.coef; });
     }
     un = Theme.onChange(function () { render(1, prev); });
+    b._redraw = function () { render(1, prev); };
     render(0, {}); inView(b.svg, run, { once: true });
     return { update: function (d, o) { if (d) cur = d; if (o) Object.assign(opts, o); run(); }, el: b.svg, destroy: function () { if (anim) anim.stop(); un(); b.clear(); } };
   };
@@ -2587,7 +3197,7 @@ html.rs-lock,html.rs-lock body{overflow:hidden}
       ctx.strokeStyle = tok("rule-soft"); ctx.lineWidth = 1;
       ctx.beginPath(); ctx.moveTo(m.left, H - m.bottom); ctx.lineTo(W - m.right, H - m.bottom); ctx.stroke();
       ctx.fillStyle = tok("muted");
-      ctx.font = "12px " + (getComputedStyle(document.documentElement).getPropertyValue("--font-mono") || "monospace");
+      ctx.font = "14px " + (getComputedStyle(document.documentElement).getPropertyValue("--font-mono") || "monospace");
       ctx.textAlign = "center";
       ticks(laid.xd[0], laid.xd[1], 5).forEach(function (v) {
         var x = m.left + (v - laid.xd[0]) / (laid.xd[1] - laid.xd[0]) * pw;
@@ -2608,6 +3218,61 @@ html.rs-lock,html.rs-lock body{overflow:hidden}
         ctx.beginPath(); ctx.arc(d.x, d.y, d.r, 0, 6.2832); ctx.fill();
       }
       ctx.globalAlpha = 1;
+      // reference lines
+      var sx = function (v) { return m.left + (v - laid.xd[0]) / (laid.xd[1] - laid.xd[0]) * pw; };
+      (opts.refLines || []).forEach(function (r) {
+        if (r.x == null) return;
+        ctx.save();
+        ctx.strokeStyle = r.color ? (tok(r.color) || r.color) : tok("ink-2");
+        ctx.lineWidth = 1.5; ctx.setLineDash([6, 5]);
+        ctx.beginPath(); ctx.moveTo(sx(r.x), m.top); ctx.lineTo(sx(r.x), H - m.bottom); ctx.stroke();
+        ctx.restore();
+        if (r.label) {
+          ctx.fillStyle = r.color ? (tok(r.color) || r.color) : tok("ink-2");
+          ctx.textAlign = "left"; ctx.fillText(r.label, sx(r.x) + 6, m.top + 12);
+        }
+      });
+      // callouts with leader lines
+      (opts.annotations || []).forEach(function (an) {
+        if (an.x == null) return;
+        var gi = an.group == null ? 0 : Math.max(0, laid.groups.indexOf(an.group));
+        var px = sx(an.x);
+        var py = an.y != null ? (m.top + an.y * ph) : (m.top + gi * laid.bandH + laid.bandH / 2);
+        var tx = px + (an.dx == null ? 54 : an.dx), ty = py + (an.dy == null ? -48 : an.dy);
+        ctx.save();
+        ctx.strokeStyle = tok("ink-2"); ctx.lineWidth = 1.5;
+        ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(tx, ty); ctx.lineTo(tx + (an.dx >= 0 || an.dx == null ? 10 : -10), ty); ctx.stroke();
+        ctx.fillStyle = an.color ? (tok(an.color) || an.color) : tok("accent");
+        ctx.beginPath(); ctx.arc(px, py, 5, 0, 6.2832); ctx.fill();
+        ctx.restore();
+        var right = (an.dx == null || an.dx >= 0);
+        ctx.textAlign = right ? "left" : "right";
+        var lx = tx + (right ? 16 : -16);
+        String(an.text).split("\n").forEach(function (ln, i) {
+          ctx.fillStyle = i ? tok("muted") : tok("ink");
+          ctx.fillText(ln, lx, ty + 5 + i * 17);
+        });
+        ctx.textAlign = "center";
+      });
+    }
+    // hover / focus: nearest dot inside 8px
+    var tipBox = { tipHost: (host === canvas ? (canvas.parentNode || canvas) : host) };
+    function nearest(cx, cy) {
+      var best = null, bd = 81;
+      for (var i = 0; i < laid.length; i++) {
+        var dx = laid[i].x - cx, dy = laid[i].y - cy, d2 = dx * dx + dy * dy;
+        if (d2 < bd) { bd = d2; best = laid[i]; }
+      }
+      return best;
+    }
+    function onHover(e) {
+      var r = canvas.getBoundingClientRect();
+      var d = nearest((e.clientX - r.left) * (W / Math.max(1, r.width)), (e.clientY - r.top) * (H / Math.max(1, r.height)));
+      if (!d) { hideTip(tipBox); return; }
+      var txt = opts.tipFmt ? opts.tipFmt(d.p) :
+        (d.p.label ? d.p.label + "\n" : "") + (d.p.group != null && d.p.group !== "" ? d.p.group + "\n" : "") +
+        (opts.xlabel || "value") + " " + fmt(d.p.x) + (d.p.flag ? "\nflagged" : "");
+      showTipAt(tipBox, txt, r.left + d.x * (r.width / Math.max(1, W)), r.top + d.y * (r.height / Math.max(1, H)));
     }
     function resize() {
       var r = canvas.getBoundingClientRect();
@@ -2626,12 +3291,17 @@ html.rs-lock,html.rs-lock body{overflow:hidden}
     }
     un = Theme.onChange(function () { render(1); });
     if (global.ResizeObserver) { ro = new ResizeObserver(resize); ro.observe(canvas); } else addEventListener("resize", resize);
+    function offHover() { hideTip(tipBox); }
+    if (opts.tips !== false) {
+      canvas.addEventListener("pointermove", onHover);
+      canvas.addEventListener("pointerleave", offHover);
+    }
     resize(); render(0);
     inView(canvas, run, { once: true });
     return {
       update: function (d, o) { if (d) cur = d; if (o) Object.assign(opts, o); run(); },
       el: canvas,
-      destroy: function () { if (anim) anim.stop(); un(); if (ro) ro.disconnect(); else removeEventListener("resize", resize); ctx.clearRect(0, 0, canvas.width, canvas.height); }
+      destroy: function () { if (anim) anim.stop(); un(); if (ro) ro.disconnect(); else removeEventListener("resize", resize); canvas.removeEventListener("pointermove", onHover); canvas.removeEventListener("pointerleave", offHover); ctx.clearRect(0, 0, canvas.width, canvas.height); }
     };
   };
 
@@ -2695,11 +3365,327 @@ html.rs-lock,html.rs-lock body{overflow:hidden}
   }
 
   /* ---------------------------------------------------------
+     8b. wayfinder  -  one navigation model, site map lives here
+     --------------------------------------------------------- */
+  var BASE = "https://priyatham9.github.io/";
+  function U(p) { return /^https?:/.test(p) ? p : BASE + p; }
+
+  var WAY = {
+    site: "GROUNDED",
+    // one linear path through the whole research site
+    path: [
+      { key: "hub", title: "The argument", url: "grounded/" },
+      { key: "osha", title: "The denominator", url: "ehs-osha-analysis/story.html" },
+      { key: "grounding", title: "The adjacent clause", url: "ehs-ai-grounding-eval/story.html" },
+      { key: "ontology", title: "Why people err", url: "ehs-human-factors-ontology/story.html" },
+      { key: "sem", title: "Where the method breaks", url: "ehs-risk-sem/story.html" },
+      { key: "capitals", title: "The capital case", url: "ehs-capitals-calculator/story.html" },
+      { key: "benchmarks", title: "Compared with whom", url: "ehs-benchmarks/story.html" }
+    ],
+    end: { title: "What is missing", url: "grounded/#open" },
+    hub: {
+      key: "hub", repo: "grounded", name: "Grounded", sub: "The hub",
+      doors: [
+        { kind: "story", label: "The argument", url: "grounded/", note: "Hub story, 10 min" },
+        { kind: "project", label: "Start here", url: "grounded/start.html", note: "Guided 5 minute path" },
+        { kind: "tool", label: "Observatory", url: "grounded/observatory.html", note: "Status of every repo" }
+      ]
+    },
+    projects: [
+      {
+        key: "osha", repo: "ehs-osha-analysis", name: "OSHA 300A screen", sub: "The denominator",
+        doors: [
+          { kind: "story", label: "Story", url: "ehs-osha-analysis/story.html", note: "5 min, for leaders" },
+          { kind: "project", label: "Project page", url: "ehs-osha-analysis/", note: "Methods and tables, for analysts" },
+          { kind: "tool", label: "Explore", url: "ehs-osha-analysis/explore.html", note: "Filings, hours, flags" }
+        ]
+      },
+      {
+        key: "grounding", repo: "ehs-ai-grounding-eval", name: "Grounding eval", sub: "The adjacent clause",
+        doors: [
+          { kind: "story", label: "Story", url: "ehs-ai-grounding-eval/story.html", note: "5 min, for leaders" },
+          { kind: "project", label: "Project page", url: "ehs-ai-grounding-eval/", note: "Corpus card, preregistration" },
+          { kind: "tool", label: "Try an item", url: "ehs-ai-grounding-eval/try.html", note: "Answer before the model does" }
+        ]
+      },
+      {
+        key: "ontology", repo: "ehs-human-factors-ontology", name: "Human factors ontology", sub: "Why people err",
+        doors: [
+          { kind: "story", label: "Story", url: "ehs-human-factors-ontology/story.html", note: "5 min, for leaders" },
+          { kind: "project", label: "Project page", url: "ehs-human-factors-ontology/", note: "Provenance and compatibility" },
+          {
+            kind: "tool", label: "Walkthrough", url: "ehs-human-factors-ontology/walkthrough.html", note: "Rule derivation, edge by edge",
+            alt: { label: "Crosswalk", url: "ehs-human-factors-ontology/crosswalk.html" }
+          }
+        ]
+      },
+      {
+        key: "sem", repo: "ehs-risk-sem", name: "Risk SEM", sub: "Where the method breaks",
+        doors: [
+          { kind: "story", label: "Story", url: "ehs-risk-sem/story.html", note: "5 min, for leaders" },
+          { kind: "project", label: "Project page", url: "ehs-risk-sem/", note: "Simulation studies, synthetic data" },
+          { kind: "tool", label: "API reference", url: "ehs-risk-sem/api/", note: "Estimator and diagnostics" }
+        ]
+      },
+      {
+        key: "capitals", repo: "ehs-capitals-calculator", name: "Capitals calculator", sub: "The capital case",
+        doors: [
+          { kind: "story", label: "Story", url: "ehs-capitals-calculator/story.html", note: "5 min, for leaders" },
+          { kind: "project", label: "Project page", url: "ehs-capitals-calculator/", note: "Model and assumptions" },
+          { kind: "tool", label: "Calculator", url: "ehs-capitals-calculator/#calculator", note: "Run one investment" }
+        ]
+      },
+      {
+        key: "benchmarks", repo: "ehs-benchmarks", name: "Peer benchmarks", sub: "Compared with whom",
+        doors: [
+          { kind: "story", label: "Story", url: "ehs-benchmarks/story.html", note: "5 min, for leaders" },
+          { kind: "project", label: "Method", url: "ehs-benchmarks/#view-method", note: "Peer groups and sources" },
+          { kind: "tool", label: "Benchmark app", url: "ehs-benchmarks/#view-benchmark", note: "Pick a NAICS and size band" }
+        ]
+      }
+    ],
+    extras: [
+      { label: "Paper: grounding", url: "grounded/paper.html" },
+      { label: "Paper: OSHA", url: "grounded/paper-osha.html" },
+      { label: "Observatory", url: "grounded/observatory.html" },
+      { label: "Start here", url: "grounded/start.html" },
+      { label: "Changelog", url: "grounded/changelog.html" },
+      { label: "Benchmark API", url: "ehs-osha-benchmark-api/" },
+      { label: "GitHub", url: "https://github.com/priyatham9" }
+    ]
+  };
+  var REPO_KEY = {
+    "grounded": "hub", "ehs-osha-analysis": "osha", "ehs-ai-grounding-eval": "grounding",
+    "ehs-human-factors-ontology": "ontology", "ehs-risk-sem": "sem",
+    "ehs-capitals-calculator": "capitals", "ehs-benchmarks": "benchmarks",
+    "ehs-osha-benchmark-api": "benchmarks"
+  };
+  var DOOR_LABEL = { story: "Story", project: "Project page", tool: "Tool" };
+
+  function detectCurrent() {
+    var parts = location.pathname.split("/").filter(Boolean);
+    var key = null, file = parts.length ? parts[parts.length - 1] : "";
+    for (var i = 0; i < parts.length; i++) if (REPO_KEY[parts[i]]) key = REPO_KEY[parts[i]];
+    if (!key) return null;
+    if (!/\.html?$/.test(file)) file = "";
+    var door = "project";
+    if (file === "story.html" || (key === "hub" && (file === "" || file === "index.html"))) door = "story";
+    else if (/^(explore|try|walkthrough|crosswalk|observatory|start|changelog)\.html$/.test(file) || /api/.test(location.pathname)) door = "tool";
+    return { key: key, door: door };
+  }
+
+  var wayState = null;
+  function wayfinder(opts) {
+    opts = opts || {};
+    if (wayState) return wayState;
+    var cur = opts.current || detectCurrent() || { key: "hub", door: "story" };
+    if (typeof cur === "string") cur = { key: cur, door: opts.door || "story" };
+    var key = cur.key || "hub", door = cur.door || opts.door || "story";
+    var idx = 0;
+    WAY.path.forEach(function (p, i) { if (p.key === key) idx = i; });
+    var here = WAY.path[idx];
+
+    /* ---- fixed bottom bar ---- */
+    var bar = html("nav", "st-way");
+    bar.setAttribute("aria-label", "Site path");
+    var seg = html("div", "st-way-seg", bar);
+    WAY.path.forEach(function (p, i) {
+      var s = html("i", null, seg);
+      if (i < idx) s.className = "is-done";
+      else if (i === idx) s.className = "is-now";
+    });
+    var row = html("div", "st-way-row", bar);
+    var crumb = html("div", "st-way-crumb", row);
+    var site = html("span", "st-way-site", crumb);
+    site.textContent = WAY.site + " · ";
+    var b = document.createElement("b");
+    b.textContent = (idx + 1) + " of " + WAY.path.length;
+    crumb.appendChild(b);
+    var ttl = html("span", "st-way-title", crumb);
+    ttl.textContent = " · " + here.title + (door !== "story" ? " · " + DOOR_LABEL[door] : "");
+
+    var btns = html("div", "st-way-btns", row);
+    function link(text, target, rel) {
+      var a = document.createElement("a");
+      a.className = "st-way-btn";
+      a.textContent = text;
+      if (target) { a.href = U(target.url); a.title = target.title; if (rel) a.rel = rel; }
+      else a.setAttribute("aria-disabled", "true");
+      btns.appendChild(a);
+      return a;
+    }
+    link("← Prev", idx > 0 ? WAY.path[idx - 1] : null, "prev");
+    var mapBtn = document.createElement("button");
+    mapBtn.type = "button"; mapBtn.className = "st-way-btn";
+    mapBtn.textContent = "Map (M)";
+    mapBtn.setAttribute("aria-expanded", "false");
+    btns.appendChild(mapBtn);
+    link("Next →", idx < WAY.path.length - 1 ? WAY.path[idx + 1] : WAY.end, "next");
+    document.body.appendChild(bar);
+    document.body.classList.add("st-has-way");
+
+    function measure() {
+      document.documentElement.style.setProperty("--st-way-h", Math.round(bar.getBoundingClientRect().height || 60) + "px");
+    }
+    measure();
+    addEventListener("resize", measure);
+
+    /* ---- map overlay ---- */
+    var map = html("div", "st-way-map");
+    map.setAttribute("role", "dialog");
+    map.setAttribute("aria-modal", "true");
+    map.setAttribute("aria-label", "Site map");
+    var head = html("div", "st-map-head", map);
+    var h2 = document.createElement("h2");
+    h2.textContent = "Where everything is";
+    head.appendChild(h2);
+    var closeBtn = document.createElement("button");
+    closeBtn.type = "button"; closeBtn.className = "st-way-btn";
+    closeBtn.textContent = "Close (Esc)";
+    head.appendChild(closeBtn);
+    var hint = html("div", "st-map-hint", head);
+    hint.textContent = "Every project has three doors: story, project page, tool";
+
+    // constellation (hidden under 800px by CSS; the card list below is the
+    // plain-list fallback and is always present)
+    var wrap = html("div", "st-map-wrap", map);
+    var svg = mk("svg", { class: "st-map-svg", viewBox: "0 0 820 430", role: "img", "aria-label": "Site map as a constellation: the hub at the centre, six projects around it" }, wrap);
+    var cx = 410, cy = 215, rx = 310, ry = 150;
+    var placed = WAY.projects.map(function (p, i) {
+      var a = -Math.PI / 2 + (i / WAY.projects.length) * 6.2832;
+      return { p: p, x: cx + Math.cos(a) * rx, y: cy + Math.sin(a) * ry };
+    });
+    placed.forEach(function (n) {
+      mk("line", { class: "st-map-spoke" + (n.p.key === key ? " is-now" : ""), x1: cx, y1: cy, x2: n.x, y2: n.y }, svg);
+    });
+    var hubG = mk("g", null, svg);
+    mk("circle", { class: "st-map-node" + (key === "hub" ? " is-now" : ""), cx: cx, cy: cy, r: 44 }, hubG);
+    var hubT = mk("text", { class: "st-map-name", x: cx, y: cy + 5, "text-anchor": "middle" }, hubG);
+    hubT.textContent = "HUB";
+    placed.forEach(function (n) {
+      var a = mk("a", { href: U(n.p.doors[0].url) }, svg);
+      mk("circle", { class: "st-map-node" + (n.p.key === key ? " is-now" : ""), cx: n.x, cy: n.y, r: 30 }, a);
+      var t = mk("text", { class: "st-map-name", x: n.x, y: n.y + (n.y < cy ? -56 : 50), "text-anchor": "middle" }, a);
+      t.textContent = n.p.name;
+      var s = mk("text", { x: n.x, y: n.y + (n.y < cy ? -39 : 67), "text-anchor": "middle" }, a);
+      s.textContent = n.p.sub;
+      var num = mk("text", { class: "st-map-name", x: n.x, y: n.y + 5, "text-anchor": "middle" }, a);
+      num.textContent = String(WAY.path.map(function (q) { return q.key; }).indexOf(n.p.key) + 1);
+    });
+
+    var list = html("div", "st-map-list", map);
+    function card(node) {
+      var c = html("div", "st-map-card" + (node.key === key ? " is-now" : ""), list);
+      var t = document.createElement("h3"); t.textContent = node.name; c.appendChild(t);
+      var s = html("p", "st-map-sub", c); s.textContent = node.sub;
+      var ul = document.createElement("ul"); c.appendChild(ul);
+      node.doors.forEach(function (d) {
+        var li = document.createElement("li");
+        var a = document.createElement("a");
+        a.href = U(d.url);
+        a.appendChild(document.createTextNode(d.label));
+        var sp = document.createElement("span"); sp.textContent = d.note; a.appendChild(sp);
+        if (node.key === key && d.kind === door) a.setAttribute("aria-current", "page");
+        li.appendChild(a);
+        if (d.alt) {
+          var a2 = document.createElement("a");
+          a2.href = U(d.alt.url); a2.textContent = d.alt.label;
+          a2.style.marginTop = "6px";
+          li.appendChild(a2);
+        }
+        ul.appendChild(li);
+      });
+    }
+    card(WAY.hub);
+    WAY.projects.forEach(card);
+    var extra = html("div", "st-map-extra", map);
+    WAY.extras.forEach(function (e) {
+      var a = document.createElement("a");
+      a.className = "st-way-btn"; a.href = U(e.url); a.textContent = e.label;
+      extra.appendChild(a);
+    });
+    document.body.appendChild(map);
+
+    /* ---- open / close with a focus trap ---- */
+    var lastFocus = null, isOpen = false;
+    function focusables() {
+      return els("a[href],button:not([disabled])", map).filter(function (n) { return n.offsetParent !== null || n.getClientRects().length; });
+    }
+    function open() {
+      if (isOpen) return;
+      isOpen = true;
+      lastFocus = document.activeElement;
+      map.classList.add("is-open");
+      mapBtn.setAttribute("aria-expanded", "true");
+      document.documentElement.style.overflow = "hidden";
+      closeBtn.focus();
+      addEventListener("keydown", trap, true);
+    }
+    function close() {
+      if (!isOpen) return;
+      isOpen = false;
+      map.classList.remove("is-open");
+      mapBtn.setAttribute("aria-expanded", "false");
+      document.documentElement.style.overflow = "";
+      removeEventListener("keydown", trap, true);
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+    function trap(e) {
+      if (e.key === "Escape") { e.preventDefault(); close(); return; }
+      if (e.key !== "Tab") return;
+      var f = focusables();
+      if (!f.length) return;
+      var first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+    mapBtn.addEventListener("click", function () { isOpen ? close() : open(); });
+    closeBtn.addEventListener("click", close);
+    function key2(e) {
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      var t = e.target;
+      if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.isContentEditable)) return;
+      if ((e.key === "m" || e.key === "M") && !isOpen) { e.preventDefault(); open(); }
+    }
+    addEventListener("keydown", key2);
+
+    wayState = {
+      el: bar, map: map, open: open, close: close,
+      get index() { return idx; },
+      data: WAY,
+      destroy: function () {
+        close(); removeEventListener("keydown", key2); removeEventListener("resize", measure);
+        bar.remove(); map.remove();
+        document.body.classList.remove("st-has-way");
+        wayState = null;
+      }
+    };
+    return wayState;
+  }
+  function autoWayfinder() {
+    if (global.STORY_NO_WAYFINDER) return;
+    if (document.querySelector(".st-way")) return;
+    try { wayfinder(); } catch (e) { if (global.console) console.error(e); }
+  }
+  function autoChapters() {
+    els(".st-chapter").forEach(function (n) { try { chapter(n); } catch (e) { if (global.console) console.error(e); } });
+  }
+  function boot() { autoChapters(); autoWayfinder(); }
+  if (document.readyState === "loading") addEventListener("DOMContentLoaded", boot);
+  else boot();
+
+  /* ---------------------------------------------------------
      9. export
      --------------------------------------------------------- */
   var Story = {
-    version: "1.0.0",
+    version: "1.1.0",
     orb: orb,
+    orbInline: orbInline,
+    companion: companion,
+    chapter: chapter,
+    field: field,
+    wayfinder: wayfinder,
+    sitemap: WAY,
     scenes: scenes,
     chart: chart,
     spring: spring,
@@ -2732,249 +3718,215 @@ var NS = 'http://www.w3.org/2000/svg';
 function el(n,a){var e=document.createElementNS(NS,n);for(var k in a){if(a[k]!==null&&a[k]!==undefined)e.setAttribute(k,a[k]);}return e;}
 function txt(x,y,s,cls,anchor){var t=el('text',{x:x,y:y,'text-anchor':anchor||'middle'});if(cls)t.setAttribute('class',cls);t.textContent=s;return t;}
 function clamp(v,a,b){return v<a?a:v>b?b:v;}
-function ease(t){return t<0?0:t>1?1:1-Math.pow(1-t,3);}
+function tokv(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim();}
 
-/* ============ minimal fallback engine (used only if tools/story.js is absent) ============ */
+/* minimal shim so the page still renders its final state if the engine is absent */
 if(!S){
-  S = window.Story = (function(){
-    var STATES={
-      idle:{spin:.10,jit:.03,r:1.00,tone:'ink'},
-      breathing:{spin:.10,jit:.03,r:1.00,tone:'ink'},
-      working:{spin:.45,jit:.16,r:1.02,tone:'ink'},
-      thinking:{spin:.45,jit:.16,r:1.02,tone:'ink'},
-      searching:{spin:.62,jit:.10,r:1.06,tone:'ink'},
-      retrieving:{spin:.62,jit:.10,r:1.06,tone:'ink'},
-      solving:{spin:.30,jit:.20,r:.96,tone:'ink'},
-      connecting:{spin:.22,jit:.07,r:1.03,tone:'ink'},
-      listening:{spin:.08,jit:.02,r:.94,tone:'ink'},
-      shaping:{spin:.34,jit:.12,r:1.00,tone:'ink'},
-      wrong:{spin:.85,jit:.42,r:1.10,tone:'warn'},
-      grounded:{spin:.14,jit:.0,r:.92,tone:'accent',lattice:1},
-      resolved:{spin:.10,jit:.0,r:.92,tone:'accent',lattice:1}
-    };
-    function tone(name){
-      var cs=getComputedStyle(document.documentElement);
-      return (cs.getPropertyValue(name==='warn'?'--warn':name==='accent'?'--accent':'--ink')||'#101311').trim();
-    }
-    function orb(canvas,opts){
-      opts=opts||{};
-      var n=opts.density||900, pts=[], i, raf=null, t=0, cur=STATES.idle, mix=1, target=STATES.idle, prev=STATES.idle, vis=true;
-      for(i=0;i<n;i++){
-        var k=(i+.5)/n, phi=Math.acos(1-2*k), th=Math.PI*(1+Math.sqrt(5))*i;
-        pts.push({x:Math.cos(th)*Math.sin(phi),y:Math.sin(th)*Math.sin(phi),z:Math.cos(phi),s:Math.random()});
-      }
-      var dpr=Math.min(2,devicePixelRatio||1);
-      function size(){
-        var r=canvas.getBoundingClientRect(), w=Math.max(120,r.width||300);
-        canvas.width=w*dpr;canvas.height=w*dpr;canvas._w=w;
-      }
-      size();addEventListener('resize',size);
-      function lerp(a,b,m){return a+(b-a)*m;}
-      function draw(){
-        var w=canvas._w,c=canvas.getContext('2d'),cx=w/2,cy=w/2,R=w*.40;
-        c.setTransform(dpr,0,0,dpr,0,0);c.clearRect(0,0,w,w);
-        var spin=lerp(prev.spin,target.spin,mix), jit=lerp(prev.jit,target.jit,mix), rr=lerp(prev.r,target.r,mix);
-        var lat=lerp(prev.lattice||0,target.lattice||0,mix);
-        var col=tone(mix>.5?target.tone:prev.tone);
-        var breathe=1+Math.sin(t*.9)*.022;
-        var cosA=Math.cos(t*spin),sinA=Math.sin(t*spin);
-        for(var i=0;i<pts.length;i++){
-          var p=pts[i];
-          var x=p.x*cosA-p.z*sinA, z=p.x*sinA+p.z*cosA, y=p.y;
-          var j=jit*Math.sin(t*1.7+p.s*11+i*.03);
-          var ring=lat?(Math.round(y*6)/6):y;
-          y=lerp(y,ring,lat);
-          var rad=R*rr*breathe*(1+j*.35);
-          var sx=cx+x*rad, sy=cy+y*rad;
-          var depth=(z+1)/2;
-          c.globalAlpha=.10+depth*.72;
-          c.fillStyle=col;
-          c.beginPath();c.arc(sx,sy,(w/300)*(.7+depth*1.15),0,6.283);c.fill();
-        }
-        c.globalAlpha=1;
-      }
-      function frame(){ if(mix<1) mix=Math.min(1,mix+.045); t+=.016; draw(); raf=requestAnimationFrame(frame); }
-      function start(){ if(raf||reduce)return; raf=requestAnimationFrame(frame); }
-      function stop(){ if(raf){cancelAnimationFrame(raf);raf=null;} }
-      var io=new IntersectionObserver(function(es){ vis=es[0].isIntersecting; if(vis&&!document.hidden)start(); else stop(); },{threshold:.01});
-      io.observe(canvas);
-      document.addEventListener('visibilitychange',function(){ if(document.hidden)stop(); else if(vis)start(); });
-      if(reduce){ size(); draw(); } else start();
-      return {
-        setState:function(name){
-          var s=STATES[name]||STATES.idle; if(s===target)return;
-          prev=target;target=s;mix=0;
-          var wrap=canvas.closest('.st-orb-wrap'); if(wrap)wrap.setAttribute('data-state',name);
-          if(reduce){mix=1;size();draw();}
-        },
-        pointAt:function(){},
-        destroy:function(){stop();io.disconnect();}
-      };
-    }
-    function scenes(root,o){
-      o=o||{};var steps=[].slice.call(root.querySelectorAll('.st-step')),last=-1,tick=false;
-      function frame(){
-        tick=false;
-        var mid=innerHeight*0.5, pick=0;
-        for(var i=0;i<steps.length;i++){ if(steps[i].getBoundingClientRect().top<=mid) pick=i; }
-        var r=root.getBoundingClientRect(), span=r.height-innerHeight;
-        var p=span>0?clamp((-r.top)/span,0,1):(r.top<0?1:0);
-        root.style.setProperty('--p',p.toFixed(3));
-        if(o.onProgress)o.onProgress(pick,p);
-        if(pick!==last){
-          var dir=pick>last?1:-1;last=pick;
-          steps.forEach(function(s,i){s.classList.toggle('is-active',i===pick);});
-          if(o.onStep)o.onStep(pick,steps[pick],dir);
-        }
-      }
-      function onScroll(){ if(!tick){tick=true;requestAnimationFrame(frame);} }
-      addEventListener('scroll',onScroll,{passive:true});addEventListener('resize',onScroll);
-      frame();
-      return {steps:steps,destroy:function(){removeEventListener('scroll',onScroll);}};
-    }
-    function reveal(root,o){
-      var sel=(o&&o.selector)||'[data-st-reveal]';
-      var els=[].slice.call((root||document).querySelectorAll(sel));
-      els.forEach(function(e){e.classList.add('st-reveal');});
-      if(reduce||!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('is-in');});return;}
-      var io=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('is-in'); io.unobserve(e.target);} });},{rootMargin:'0px 0px -12% 0px'});
-      els.forEach(function(e){io.observe(e);});
-    }
-    function progressBar(){
-      var b=document.createElement('div');b.className='st-progress';b.innerHTML='<i></i>';
-      document.body.appendChild(b);var i=b.firstChild,tick=false;
-      function f(){tick=false;var m=document.documentElement.scrollHeight-innerHeight;i.style.width=(m>0?clamp(scrollY/m,0,1)*100:0)+'%';}
-      addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(f);}},{passive:true});f();return b;
-    }
-    function present(){
-      var on=document.documentElement.classList.toggle('st-presenting');
-      document.body.classList.toggle('st-presenting',on);
-      return on;
-    }
-    function tween(from,to,cb,o){
-      var ms=(typeof o==='number')?o:((o&&o.duration)||600);
-      if(reduce){cb(to,1);return {stop:function(){}};}
-      var t0=performance.now();
-      (function f(now){var p=clamp((now-t0)/ms,0,1);cb(from+(to-from)*ease(p),p);if(p<1)requestAnimationFrame(f);})(t0);
-    }
-    return {orb:orb,scenes:scenes,reveal:reveal,progressBar:progressBar,present:present,tween:tween,spring:tween,isFallback:true};
-  })();
+  S = window.Story = {
+    isShim:true,
+    orb:function(){return {setState:function(){},destroy:function(){}};},
+    orbInline:function(){return null;},
+    scenes:function(root,o){
+      var steps=[].slice.call(root.querySelectorAll('.st-step'));
+      steps.forEach(function(s){s.classList.add('is-entered','is-active');});
+      if(o&&o.onStep)o.onStep(steps.length-1,steps[steps.length-1],1);
+      return {companion:null,destroy:function(){}};
+    },
+    reveal:function(){},progressBar:function(){},present:function(){},
+    tween:function(a,b,cb){cb(b,1);},
+    wayfinder:function(){return null;}
+  };
 }
 
-/* ============ hero orb ============ */
-var heroOrb = S.orb(document.getElementById('hero-orb'),{density:1100});
+/* ============ hero ============ */
+var heroOrb = S.orb(document.getElementById('hero-orb'),{density:2200,state:'breathing',
+  label:'The system under review, drawn as a dot sphere.'});
+if(S.field){ try{ S.field(document.getElementById('hero'),{density:1.1}); }catch(e){} }
 (function(){
   if(reduce)return;
-  var seq=['idle','searching','wrong','grounded'],i=0;
-  var id=setInterval(function(){ i=(i+1)%seq.length; heroOrb.setState(seq[i]); },2600);
+  var seq=['breathing','searching','wrong','grounded'],i=0;
+  var id=setInterval(function(){ i=(i+1)%seq.length; heroOrb.setState(seq[i]); },3000);
   addEventListener('pagehide',function(){clearInterval(id);});
 })();
 
 /* ============ scene 1: the substitution ============ */
-(function(){
-  var svg=document.getElementById('pair-svg'); if(!svg)return;
+var pairScene=(function(){
+  var svg=document.getElementById('pair-svg'); if(!svg)return null;
   var g=el('g',{});svg.appendChild(g);
-  function node(x,y,title,sub,id){
-    var gg=el('g',{id:id,opacity:0});
-    gg.appendChild(el('rect',{x:x-110,y:y-42,width:220,height:84,'class':'sy-ent'}));
-    gg.appendChild(txt(x,y-8,title,'sy-ent-t'));
-    gg.appendChild(txt(x,y+14,sub,'sy-ent-s'));
-    g.appendChild(gg);return gg;
-  }
-  var q=el('g',{opacity:0});
-  q.appendChild(el('rect',{x:110,y:24,width:340,height:62,'class':'sy-ent'}));
-  q.appendChild(txt(280,48,'Question about an unfired vessel','sy-ent-t'));
-  q.appendChild(txt(280,70,'What margin must hold before the device opens?','sy-ent-s'));
+
+  /* question */
+  var q=el('g',{});
+  q.appendChild(el('rect',{x:250,y:6,width:500,height:80,'class':'sy-ent'}));
+  q.appendChild(txt(500,42,'Question about an unfired pressure vessel','sy-ent-q'));
+  q.appendChild(txt(500,70,'What margin must hold before the device opens?','sy-ent-s'));
   g.appendChild(q);
+
+  /* shared vocabulary band */
   var shared=el('g',{opacity:0});
-  shared.appendChild(txt(280,150,'shared vocabulary','sy-shared'));
-  shared.appendChild(txt(280,170,'overpressure  ·  set  ·  vessel  ·  MAWP  ·  relief','sy-shared'));
+  shared.appendChild(txt(500,512,'Shared vocabulary','sy-shared-l'));
+  shared.appendChild(txt(500,546,'overpressure  ·  set  ·  vessel  ·  MAWP  ·  relief','sy-shared'));
   g.appendChild(shared);
-  var right=node(140,260,'Rupture disk','one-shot, non-reclosing','sy-n-right');
-  var wrongN=node(420,260,'Relief valve','spring-loaded, reseats','sy-n-wrong');
+
+  /* beam sits behind the cards */
   var beam=el('path',{'class':'sy-beam',opacity:0,d:''});g.appendChild(beam);
+
+  function card(x,title,sub,tag){
+    var gg=el('g',{opacity:0});
+    var r=el('rect',{x:x,y:306,width:340,height:150,'class':'sy-ent'});
+    gg.appendChild(r);
+    gg.appendChild(txt(x+170,364,title,'sy-ent-t'));
+    gg.appendChild(txt(x+170,396,sub,'sy-ent-s'));
+    gg.appendChild(txt(x+170,426,tag,'sy-ent-tag'));
+    g.appendChild(gg);return {g:gg,r:r};
+  }
+  var right=card(20,'Rupture disk','one-shot, non-reclosing','the entity in the question');
+  var wrongN=card(640,'Relief valve','spring-loaded, reseats','one step away in the same code');
+
+  /* the answer chip */
   var chip=el('g',{opacity:0});
-  chip.appendChild(el('rect',{x:80,y:334,width:400,height:56,'class':'sy-ent'}));
-  var chipT=txt(280,358,'','sy-ent-t'), chipS=txt(280,378,'','sy-ent-s');
+  var chipR=el('rect',{x:110,y:496,width:780,height:104,'class':'sy-ent'});
+  chip.appendChild(chipR);
+  var chipT=txt(500,542,'','sy-ent-q'), chipS=txt(500,576,'','sy-ent-s');
   chip.appendChild(chipT);chip.appendChild(chipS);g.appendChild(chip);
 
-  function path(tx){return 'M280 92 C280 160, '+tx+' 170, '+tx+' 214';}
-  function set(node,o,stroke){node.setAttribute('opacity',o);if(stroke)node.querySelector('rect').style.stroke=stroke;}
+  /* the model orb drifts across the stage */
+  var model=document.getElementById('pair-model');
+  var cap=document.getElementById('orbcap-pair');
+  var orb=S.orb(document.getElementById('orb-pair'),{density:1500,state:'breathing',parallax:false,
+    label:'The system under review. It searches, drifts to the neighbouring entity, then settles on the clause.'});
+  var capTimer=null;
+  function setModel(state,label,leftPct){
+    model.setAttribute('data-state',state);
+    orb.setState(state);
+    model.style.left=leftPct+'%';
+    var text=String(label).toUpperCase();
+    if(reduce){cap.textContent=text;return;}
+    cap.classList.add('is-fading');
+    clearTimeout(capTimer);
+    capTimer=setTimeout(function(){cap.textContent=text;cap.classList.remove('is-fading');},200);
+  }
+
+  var num=document.getElementById('pair-num');
+  var NUM=[['1','question, two entities'],
+           ['2','entities that share the vocabulary'],
+           ['0','of those quantities exist for a rupture disk'],
+           ['1.3×','operating pressure against nominal burst']];
+  function setNum(i){
+    var d=NUM[i]||NUM[0];
+    num.childNodes[0].nodeValue=d[0];
+    num.querySelector('small').textContent=d[1];
+  }
+
+  function beamTo(x,colour){
+    beam.setAttribute('d','M500 86 C500 190, '+x+' 224, '+x+' 302');
+    beam.style.stroke=colour;
+    beam.setAttribute('opacity',1);
+  }
   function show(step){
-    var warn=getComputedStyle(document.documentElement).getPropertyValue('--warn').trim();
-    var acc=getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
-    var rule=getComputedStyle(document.documentElement).getPropertyValue('--rule').trim();
-    q.setAttribute('opacity',1);
-    set(right,step>=0?1:0,rule);
-    set(wrongN,step>=1?1:0,rule);
-    shared.setAttribute('opacity',step>=1?1:0);
+    var warn=tokv('--warn'), acc=tokv('--accent'), rule=tokv('--rule');
+    right.g.setAttribute('opacity',1);
+    right.r.style.stroke=rule;
+    wrongN.g.setAttribute('opacity',step>=1?1:0);
+    wrongN.r.style.stroke=rule;
+    shared.setAttribute('opacity',step===1?1:0);
     if(step>=2){
-      beam.setAttribute('opacity',1);beam.setAttribute('d',path(step>=3?140:420));
-      beam.style.stroke=(step>=3?acc:warn);
-      set(wrongN,1,step>=3?rule:warn);
-      set(right,1,step>=3?acc:rule);
+      var toWrong=(step===2);
+      beamTo(toWrong?810:190, toWrong?warn:acc);
+      wrongN.r.style.stroke=toWrong?warn:rule;
+      right.r.style.stroke=toWrong?rule:acc;
       chip.setAttribute('opacity',1);
-      if(step>=3){
+      if(toWrong){
+        chipT.textContent='set pressure  ·  blowdown  ·  reseat';
+        chipS.textContent='none of these quantities exist for a rupture disk';
+        chipR.style.stroke=warn;
+      }else{
         chipT.textContent='46 CFR 54.15-13(b)(3)';
         chipS.textContent='operating pressure × 1.3 must not exceed nominal burst pressure';
-        chip.querySelector('rect').style.stroke=acc;
-      }else{
-        chipT.textContent='set pressure · blowdown · reseat';
-        chipS.textContent='none of these quantities exist for a rupture disk';
-        chip.querySelector('rect').style.stroke=warn;
+        chipR.style.stroke=acc;
       }
     }else{
       beam.setAttribute('opacity',0);chip.setAttribute('opacity',0);
     }
+    setNum(step);
+    var pos=[50,50,81,19][step]||50;
+    var st=['breathing','searching','wrong','grounded'][step]||'breathing';
+    var lab=['reading the question','searching the neighbourhood','wrong entity','grounded in the clause'][step]||'idle';
+    setModel(st,lab,pos);
   }
-  svg.__show=show; show(reduce?3:0);
+  show(reduce?3:0);
+  if(S.theme&&S.theme.onChange)S.theme.onChange(function(){show(lastStep);});
+  var lastStep=reduce?3:0;
+  return {show:function(i){lastStep=i;show(i);}};
 })();
 
 /* ============ scene 2: the corpus ============ */
-(function(){
-  var svg=document.getElementById('corpus-svg'); if(!svg)return;
+var corpusScene=(function(){
+  var svg=document.getElementById('corpus-svg'); if(!svg)return null;
   var rows=window.__CORPUS_ROWS||[];
   var g=el('g',{});svg.appendChild(g);
-  var y0=26,rowH=40,x0=190,gap=17;
+  var y0=46,rowH=60,x0=290,gap=44,R=11;
   var dots=[],links=[];
   rows.forEach(function(r,ri){
     var y=y0+ri*rowH;
-    g.appendChild(txt(180,y+4,r.label,'sy-ent-s','end'));
+    g.appendChild(txt(250,y+6,r.label,'sy-row-lab','end'));
     r.items.forEach(function(it,ii){
       var x=x0+ii*gap;
-      var c=el('circle',{cx:x,cy:y,r:5.6,'class':'sy-dot',fill:'currentColor',opacity:0});
-      g.appendChild(c);dots.push({c:c,kind:it.kind,i:dots.length});
       it.x=x;it.y=y;
+      var c=el('circle',{cx:x,cy:y,r:R,'class':'sy-dot',fill:'currentColor'});
+      g.appendChild(c);dots.push({c:c,kind:it.kind});
+      var hit=el('circle',{cx:x,cy:y,r:R+8,fill:'transparent'});
+      hit.setAttribute('tabindex','0');hit.setAttribute('role','img');
+      var what=it.kind==='cat'?'category-error item, no correct answer':it.kind==='paired'?'member of a minimal pair':'single item';
+      hit.setAttribute('aria-label',r.label+': '+what);
+      hit.appendChild((function(){var t=el('title',{});t.textContent=r.label+' — '+what;return t;})());
+      g.appendChild(hit);
     });
     r.items.forEach(function(it,ii){
       if(it.pair!==undefined && it.pair>ii){
         var b=r.items[it.pair];
-        var p=el('path',{'class':'st-link',opacity:0,d:'M'+it.x+' '+(it.y-6)+' Q'+((it.x+b.x)/2)+' '+(it.y-22)+' '+b.x+' '+(b.y-6)});
+        var p=el('path',{'class':'st-link',opacity:0,'stroke-width':2.4,
+          d:'M'+it.x+' '+(it.y-R-2)+' Q'+((it.x+b.x)/2)+' '+(it.y-R-30)+' '+b.x+' '+(b.y-R-2)});
         g.appendChild(p);links.push(p);
       }
     });
   });
-  function show(step){
-    var cs=getComputedStyle(document.documentElement);
-    var ink=cs.getPropertyValue('--ink').trim(), acc=cs.getPropertyValue('--accent').trim(), warn=cs.getPropertyValue('--warn').trim(), soft=cs.getPropertyValue('--rule-soft').trim();
-    dots.forEach(function(d){
-      d.c.setAttribute('opacity',1);
-      var f=ink;
-      if(step>=1&&d.kind==='paired')f=acc;
-      if(step>=2&&d.kind==='cat')f=warn;
-      if(step>=3)f=acc;
-      if(step>=2&&d.kind!=='cat'&&step<3)f=soft;
-      d.c.style.fill=f;
+  /* legend */
+  var key=el('g',{});
+  [['paired','one of 23 minimal pairs'],['single','single item'],['cat','no correct answer']]
+    .forEach(function(k,i){
+      var y=150+i*52;
+      var c=el('circle',{cx:772,cy:y-5,r:R,'class':'sy-dot sy-key-dot','data-kind':k[0],fill:'currentColor'});
+      key.appendChild(c);key.appendChild(txt(796,y,k[1],'sy-key','start'));
     });
-    links.forEach(function(p){p.setAttribute('opacity',step===1?1:step>=2?.25:0);p.style.stroke=(step===1?acc:soft);});
+  g.appendChild(key);
+
+  var num=document.getElementById('corpus-num');
+  var NUM=[['68','items, eight domains'],['23','pairs cover 46 items'],['5','items have no correct answer'],['68','of 68 verified against source']];
+  function setNum(i){var d=NUM[i]||NUM[0];num.childNodes[0].nodeValue=d[0];num.querySelector('small').textContent=d[1];}
+
+  function show(step){
+    var ink=tokv('--ink'), acc=tokv('--accent'), warn=tokv('--warn'), soft=tokv('--rule-soft');
+    function colour(kind){
+      if(step===0)return ink;
+      if(step===1)return kind==='paired'?acc:soft;
+      if(step===2)return kind==='cat'?warn:soft;
+      return acc;
+    }
+    dots.forEach(function(d){d.c.style.fill=colour(d.kind);});
+    [].slice.call(key.querySelectorAll('.sy-key-dot')).forEach(function(c){c.style.fill=colour(c.getAttribute('data-kind'));});
+    links.forEach(function(p){p.setAttribute('opacity',step===1?1:step>=2?.22:0);p.style.stroke=(step===1?acc:soft);});
+    setNum(step);
   }
-  svg.__show=show; show(reduce?3:0);
+  var last=reduce?3:0;
+  show(last);
+  if(S.theme&&S.theme.onChange)S.theme.onChange(function(){show(last);});
+  return {show:function(i){last=i;show(i);}};
 })();
 
 /* ============ scene 3: baselines ============ */
-(function(){
-  var svg=document.getElementById('base-svg'); if(!svg)return;
-  var P={l:66,r:24,t:34,b:60},W=560,H=440,pw=W-P.l-P.r,ph=H-P.t-P.b;
+var baseScene=(function(){
+  var svg=document.getElementById('base-svg'); if(!svg)return null;
+  var P={l:112,r:232,t:46,b:94},W=1000,H=620,pw=W-P.l-P.r,ph=H-P.t-P.b;
   var pts=[
     {k:'random_floor',x:52.1,sub:47.3,cite:5.0},
     {k:'retrieval_tfidf',x:27.0,sub:0.0,cite:73.5},
@@ -2986,61 +3938,123 @@ var heroOrb = S.orb(document.getElementById('hero-orb'),{density:1100});
   var i;
   for(i=0;i<=100;i+=25){
     g.appendChild(el('line',{'class':'st-grid',x1:P.l,x2:P.l+pw,y1:sy(i),y2:sy(i)}));
-    g.appendChild(txt(P.l-10,sy(i)+4,i+'%','','end'));
-    g.appendChild(txt(sx(i),P.t+ph+20,i+'%'));
+    g.appendChild(txt(P.l-14,sy(i)+5,i+'%','sy-axis-t','end'));
+    g.appendChild(txt(sx(i),P.t+ph+28,i+'%','sy-axis-t'));
   }
-  g.appendChild(el('line',{'class':'st-axis-line',x1:P.l,x2:P.l+pw,y1:P.t+ph,y2:P.t+ph}));
-  g.appendChild(el('line',{'class':'st-axis-line',x1:P.l,x2:P.l,y1:P.t,y2:P.t+ph}));
-  var xlab=txt(P.l+pw/2,H-14,'Accuracy on the 63 factual items','st-caption');
-  var ylabG=el('g',{transform:'translate(16,'+(P.t+ph/2)+') rotate(-90)'});
+  /* empty region, drawn under the marks */
+  var region=el('rect',{'class':'st-region',x:sx(30),y:P.t,width:sx(99)-sx(30),height:ph});region.style.opacity='0';
+  var regionE=el('rect',{'class':'st-region-edge',x:sx(30),y:P.t,width:sx(99)-sx(30),height:ph});regionE.style.opacity='0';
+  g.appendChild(region);g.appendChild(regionE);
+  var regionT=txt((sx(30)+sx(99))/2,P.t+ph/2,'No language model scored','st-label-direct');
+  regionT.style.opacity='0';g.appendChild(regionT);
+
+  /* reference lines */
+  var refFloor=el('line',{'class':'st-ref-line',x1:sx(52.1),x2:sx(52.1),y1:P.t,y2:P.t+ph});
+  g.appendChild(refFloor);
+  var refFloorT=txt(sx(52.1)+8,P.t+14,'Guessing floor 52.1%','st-ref-text','start');
+  g.appendChild(refFloorT);
+  var refZero=el('line',{'class':'st-ref-line',x1:P.l,x2:P.l+pw,y1:sy(0),y2:sy(0),opacity:0});
+  g.appendChild(refZero);
+  var refZeroT=txt(P.l+6,sy(0)-12,'Never substitutes','st-ref-text','start');
+  refZeroT.setAttribute('opacity',0);g.appendChild(refZeroT);
+
+  g.appendChild(el('line',{'class':'st-axis-line',x1:P.l,x2:P.l+pw,y1:P.t+ph,y2:P.t+ph,'stroke-width':2}));
+  g.appendChild(el('line',{'class':'st-axis-line',x1:P.l,x2:P.l,y1:P.t,y2:P.t+ph,'stroke-width':2}));
+  var xlab=txt(P.l+pw/2,H-26,'Accuracy on the 63 factual items','st-caption');
+  var ylabG=el('g',{transform:'translate(26,'+(P.t+ph/2)+') rotate(-90)'});
   var ylab=txt(0,0,'Adjacent substitution rate','st-caption');ylabG.appendChild(ylab);
   g.appendChild(xlab);g.appendChild(ylabG);
-  var region=el('rect',{'class':'st-region',x:sx(30),y:P.t,width:sx(99)-sx(30),height:ph,opacity:0});
-  var regionE=el('rect',{'class':'st-region-edge',x:sx(30),y:P.t,width:sx(99)-sx(30),height:ph,opacity:0});
-  g.appendChild(region);g.appendChild(regionE);
-  var regionT=txt((sx(30)+sx(99))/2,P.t+ph/2,'No language model scored','st-label-direct');regionT.setAttribute('opacity',0);g.appendChild(regionT);
+
+  /* annotations with leader lines, for the two marks that sit on top of each other */
+  function anno(dx,dy,lines){
+    var gg=el('g',{opacity:0});
+    var lead=el('line',{'class':'st-anno-line'});
+    var dot=el('circle',{'class':'st-anno-dot',r:6});
+    var t=el('text',{'class':'st-anno-text','text-anchor':dx>=0?'start':'end'});
+    lines.forEach(function(s,i){
+      var ts=el('tspan',{dy:i?20:0});if(i)ts.setAttribute('class','st-anno-sub');ts.textContent=s;t.appendChild(ts);
+    });
+    gg.appendChild(lead);gg.appendChild(dot);gg.appendChild(t);g.appendChild(gg);
+    return {g:gg,lead:lead,dot:dot,t:t,dx:dx,dy:dy,
+      place:function(px,py){
+        var tx=px+dx, ty=py+dy, elbow=dx>=0?14:-14;
+        lead.setAttribute('x1',px);lead.setAttribute('y1',py);
+        lead.setAttribute('x2',tx);lead.setAttribute('y2',ty);
+        dot.setAttribute('cx',px);dot.setAttribute('cy',py);
+        var ax=tx+elbow;
+        t.setAttribute('x',ax);t.setAttribute('y',ty+5);
+        [].slice.call(t.childNodes).forEach(function(ts){ts.setAttribute('x',ax);});
+      }};
+  }
+  var annoT=anno(-70,-96,['TF-IDF 27.0%','quotes a clause or says nothing']);
+  var annoB=anno(96,-52,['BM25 28.6%','same behaviour, same zero']);
+
   var marks=pts.map(function(p){
-    var c=el('circle',{cx:sx(p.x),cy:sy(p.sub),r:8,fill:'currentColor','class':'st-node',opacity:0});
-    var t=txt(sx(p.x),sy(p.sub)-15,p.k,'sy-pt-lab');t.setAttribute('opacity',0);
-    g.appendChild(c);g.appendChild(t);return {c:c,t:t,p:p,cur:p.sub};
+    var c=el('circle',{cx:sx(p.x),cy:sy(p.sub),r:13,fill:'currentColor','class':'st-node',opacity:0});
+    var t=txt(sx(p.x)+20,sy(p.sub)+6,p.k,'sy-pt-lab','start');
+    t.setAttribute('opacity',0);
+    var hit=el('circle',{cx:sx(p.x),cy:sy(p.sub),r:26,fill:'transparent'});
+    hit.setAttribute('tabindex','0');hit.setAttribute('role','img');
+    var ttl=el('title',{});hit.appendChild(ttl);
+    g.appendChild(c);g.appendChild(t);g.appendChild(hit);
+    return {c:c,t:t,hit:hit,ttl:ttl,p:p,cur:p.sub};
   });
   var metric='sub';
-  function place(m,v){m.c.setAttribute('cy',sy(v));m.t.setAttribute('y',sy(v)-15);}
+  function place(m,v){
+    m.c.setAttribute('cy',sy(v));m.t.setAttribute('y',sy(v)+6);
+    m.hit.setAttribute('cy',sy(v));
+    if(m.p.k==='retrieval_tfidf')annoT.place(sx(m.p.x),sy(v));
+    if(m.p.k==='retrieval_bm25')annoB.place(sx(m.p.x),sy(v));
+  }
+  var num=document.getElementById('base-num');
+  var NUM=[['47.3%','of guesses take the adjacent answer'],
+           ['0.0%','substitution by either retriever'],
+           ['73.5%','of TF-IDF answers name the correct clause'],
+           ['0','language models scored on this corpus']];
+  function setNum(i){var d=NUM[i]||NUM[0];num.childNodes[0].nodeValue=d[0];num.querySelector('small').textContent=d[1];}
+
   function show(step){
-    var cs=getComputedStyle(document.documentElement);
-    var ink=cs.getPropertyValue('--ink').trim(), acc=cs.getPropertyValue('--accent').trim(), warn=cs.getPropertyValue('--warn').trim(), soft=cs.getPropertyValue('--rule-soft').trim();
+    var acc=tokv('--accent'), warn=tokv('--warn'), soft=tokv('--rule-soft');
     var want=(step===2)?'cite':'sub';
     ylab.textContent=want==='cite'?'Citation correct-clause rate':'Adjacent substitution rate';
     marks.forEach(function(m,i){
       var on=(step===0)?(i===0):(step===1)?(i<3):true;
-      m.c.setAttribute('opacity',on?1:.16);m.t.setAttribute('opacity',on?1:0);
+      m.c.setAttribute('opacity',on?1:.14);
+      /* the two retrievers are labelled by callout, not by a label on the mark */
+      var direct=(i===0||i===3);
+      m.t.setAttribute('opacity',(on&&direct)?1:0);
       m.c.style.fill=(i===0?(want==='sub'?warn:soft):i===3?soft:acc);
       var target=m.p[want];
-      if(reduce||metric===want){m.cur=target;place(m,target);}
-      else { var from=m.cur; m.cur=target; S.tween(from,target,function(v){place(m,v);},{duration:560}); }
+      m.ttl.textContent=m.p.k+'\naccuracy '+m.p.x.toFixed(1)+'%\nadjacent substitution '+m.p.sub.toFixed(1)+'%\ncitation correct clause '+m.p.cite.toFixed(1)+'%';
+      m.hit.setAttribute('aria-label',m.p.k+', accuracy '+m.p.x.toFixed(1)+' percent, adjacent substitution '+m.p.sub.toFixed(1)+' percent, citation correct clause '+m.p.cite.toFixed(1)+' percent');
+      var from=m.cur; m.cur=target; place(m,target);
+      if(!reduce&&from!==target&&S.tween)S.tween(from,target,function(v){place(m,v);},{duration:700});
     });
     metric=want;
+    var showAnno=(step>=1)?1:0;
+    annoT.g.setAttribute('opacity',showAnno);annoB.g.setAttribute('opacity',showAnno);
+    var showZero=(step===1)?1:0;
+    refZero.setAttribute('opacity',showZero);refZeroT.setAttribute('opacity',showZero);
     var showR=(step>=3)?1:0;
-    region.setAttribute('opacity',showR?1:0);regionE.setAttribute('opacity',showR?1:0);regionT.setAttribute('opacity',showR?1:0);
+    region.style.opacity=showR?'.14':'0';regionE.style.opacity=showR?'1':'0';regionT.style.opacity=showR?'1':'0';
+    setNum(step);
   }
-  svg.__show=show; show(reduce?3:0);
+  var last=reduce?3:0;
+  show(last);
+  if(S.theme&&S.theme.onChange)S.theme.onChange(function(){show(last);});
+  return {show:function(i){last=i;show(i);}};
 })();
 
-/* ============ wire scenes to orb + charts ============ */
+/* ============ wire the scenes ============ */
 (function(){
-  var VERB={idle:'idle',searching:'searching',wrong:'wrong entity',grounded:'grounded',shaping:'shaping',connecting:'connecting',listening:'listening',working:'working',solving:'solving'};
+  var SHOW={pair:pairScene,corpus:corpusScene,base:baseScene};
   [].slice.call(document.querySelectorAll('.st-scene')).forEach(function(scene){
     var name=scene.getAttribute('data-scene');
-    var svg=document.getElementById(name+'-svg');
-    var cv=document.getElementById('orb-'+name);
-    var cap=document.getElementById('orbcap-'+name);
-    var orb=cv?S.orb(cv,{density:620}):null;
+    var target=SHOW[name];
     S.scenes(scene,{
-      onStep:function(i,step){
-        if(svg&&svg.__show)svg.__show(i);
-        var st=step&&step.getAttribute('data-orb');
-        if(st){ if(orb)orb.setState(st); if(cap)cap.textContent=VERB[st]||st; }
-      }
+      companion:(name!=='pair'),
+      companionSize:134,
+      onStep:function(i){ if(target)target.show(i); }
     });
   });
 })();
@@ -3051,6 +4065,7 @@ var heroOrb = S.orb(document.getElementById('hero-orb'),{density:1100});
   var i=Math.floor(Math.random()*items.length);
   var q=document.getElementById('try-q'),dom=document.getElementById('try-domain'),id=document.getElementById('try-id'),
       rev=document.getElementById('try-reveal'),commit=document.getElementById('try-commit'),next=document.getElementById('try-next');
+  var tryOrb=S.orbInline?S.orbInline(document.getElementById('try-orb'),{state:'listening'}):null;
   function render(){
     var it=items[i];
     dom.textContent=it.domain_title;id.textContent=it.id;q.textContent=it.question;
@@ -3061,53 +4076,32 @@ var heroOrb = S.orb(document.getElementById('hero-orb'),{density:1100});
     var a=document.getElementById('try-url');a.href=it.url;a.target='_blank';a.rel='noopener';
     document.getElementById('try-why').textContent=it.why_it_matters;
     rev.hidden=true;commit.textContent='I have an answer';commit.disabled=false;
+    if(tryOrb)tryOrb.setState('listening');
   }
   commit.addEventListener('click',function(){
     rev.hidden=false;commit.disabled=true;commit.textContent='Answer shown';
-    heroOrb.setState('wrong');setTimeout(function(){heroOrb.setState('grounded');},1400);
+    if(tryOrb){tryOrb.setState('wrong');setTimeout(function(){tryOrb.setState('grounded');},1500);}
     rev.scrollIntoView({block:'nearest',behavior:reduce?'auto':'smooth'});
   });
-  next.addEventListener('click',function(){ i=(i+1)%items.length; render(); heroOrb.setState('searching'); });
+  next.addEventListener('click',function(){ i=(i+1)%items.length; render(); if(tryOrb)tryOrb.setState('searching'); });
   render();
 })();
 
-/* ============ page chrome ============ */
-S.reveal(document,{selector:'.sy-note,.sy-nextlink,.sy-card,.sy-hero-text p,.sy-grid3'});
-S.progressBar();
+/* ============ the closing card ============ */
 (function(){
-  if(!S.isFallback)return;   /* the real engine binds P and the arrow keys itself */
-  var secs=[].slice.call(document.querySelectorAll('main > section')),cur=0,dots=null;
-  function makeDots(){
-    if(dots)return;
-    dots=document.createElement('div');dots.className='st-present-dots';
-    secs.forEach(function(){dots.appendChild(document.createElement('b'));});
-    document.body.appendChild(dots);
-    var hint=document.createElement('div');hint.className='st-present-hint';hint.id='st-hint';
-    hint.textContent='Arrow keys · P to exit';document.body.appendChild(hint);
-  }
-  function mark(){ if(!dots)return; [].slice.call(dots.children).forEach(function(b,i){b.classList.toggle('is-on',i===cur);}); }
-  function presenting(){return document.documentElement.classList.contains('st-presenting');}
-  function go(d){ cur=clamp(cur+d,0,secs.length-1); secs[cur].scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'}); mark(); }
-  addEventListener('keydown',function(e){
-    var t=e.target;
-    if(t&&(t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.isContentEditable))return;
-    if(e.key==='p'||e.key==='P'){
-      var on=S.present();
-      if(on){makeDots();mark();}
-      if(dots){dots.style.display=on?'':'none';var h=document.getElementById('st-hint');if(h)h.style.display=on?'':'none';}
-      e.preventDefault();return;
-    }
-    if(!presenting())return;
-    if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' '){go(1);e.preventDefault();}
-    if(e.key==='ArrowLeft'||e.key==='ArrowUp'){go(-1);e.preventDefault();}
-    if(e.key==='Escape'){S.present();if(dots){dots.style.display='none';var h2=document.getElementById('st-hint');if(h2)h2.style.display='none';}}
+  var cv=document.getElementById('next-orb');
+  if(cv)S.orb(cv,{density:1500,state:'grounded',parallax:false,label:'Dot sphere settled into a stable lattice.'});
+  var b=document.getElementById('sy-map');
+  if(b)b.addEventListener('click',function(){
+    var w=S.wayfinder&&S.wayfinder();
+    if(w&&w.open)w.open();
   });
-  try{
-    if(new URLSearchParams(location.search).get('present')==='1'){ S.present(); makeDots(); mark(); }
-  }catch(e){}
-})();
 })();
 
+/* ============ page chrome ============ */
+S.reveal(document,{selector:'.sy-note,.sy-card,.sy-hero-text p,.sy-grid3,.sy-do,.sy-nextgrid h2,.sy-intro'});
+S.progressBar();
+})();
 </script>
 <script id="rs-header-js">
 (function(){
