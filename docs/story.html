@@ -1540,6 +1540,203 @@ html.st-printing .st-chart .sy-beam,html.st-printing .st-chart .st-link{stroke:#
 html.st-printing .st-chart text,html.st-printing .st-chart .sy-ent-t,html.st-printing .st-chart .sy-ent-q,html.st-printing .st-chart .sy-ent-s{fill:#000!important}
 @media print{.st-chart text{fill:#000!important}}
 </style>
+<style id="story-leader-css">
+/* ---------- leader briefing layer: 60-second strip, findings, asks, Monday ---------- */
+.ld-sixty{background-image:radial-gradient(var(--grid-dot) 1px,transparent 1px);background-size:22px 22px}
+.ld-strip{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:8px}
+@media (max-width:1100px){.ld-strip{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:700px){.ld-strip{grid-template-columns:1fr 1fr}}
+@media (max-width:420px){.ld-strip{grid-template-columns:1fr}}
+.ld-tile{display:flex;flex-direction:column;gap:8px;border:2px solid var(--rule);background:var(--surface);padding:16px 16px 14px;text-decoration:none;color:var(--ink);transition:transform .18s ease,box-shadow .18s ease,border-color .18s}
+.ld-tile:hover{transform:translateY(-2px);box-shadow:0 8px 22px var(--shadow);border-color:var(--accent)}
+.ld-n{font-stretch:125%;font-weight:900;font-size:clamp(2rem,3.6vw,2.9rem);line-height:1;font-variant-numeric:tabular-nums;color:var(--accent)}
+.ld-warn .ld-n{color:var(--ld-bad)}
+.ld-good .ld-n{color:var(--ld-good)}
+.ld-muted .ld-n{color:var(--muted)}
+.ld-t{font-size:.875rem;line-height:1.45;color:var(--ink-2);flex:1}
+.ld-go{font-family:var(--font-mono);font-size:.625rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:700}
+:root{--ld-bad:#A3271F;--ld-bad-wash:#FBE6E4;--ld-good:#1F6B3A;--ld-good-wash:#E1F0E5}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--ld-bad:#E37B72;--ld-bad-wash:#2B1613;--ld-good:#5FC98A;--ld-good-wash:#122A1C}}
+:root[data-theme="dark"]{--ld-bad:#E37B72;--ld-bad-wash:#2B1613;--ld-good:#5FC98A;--ld-good-wash:#122A1C}
+
+.ld-find-tight{padding-top:clamp(18px,3vw,30px)}
+.ld-head{display:grid;grid-template-columns:minmax(0,auto) minmax(0,1fr);gap:clamp(16px,4vw,48px);align-items:end;margin-bottom:22px}
+@media (max-width:760px){.ld-head{grid-template-columns:1fr}}
+.ld-big{margin:0;font-stretch:125%;font-weight:900;font-size:clamp(3rem,8vw,5.6rem);line-height:.9;color:var(--accent);font-variant-numeric:tabular-nums}
+.ld-big small{display:block;font-family:var(--font-mono);font-stretch:100%;font-weight:600;font-size:.6875rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:10px;max-width:30ch;line-height:1.5}
+.ld-big-warn{color:var(--ld-bad)}
+.ld-head .sy-intro{margin:0}
+
+/* segmented switch */
+.ld-switch{display:inline-flex;flex-wrap:wrap;border:2px solid var(--rule);background:var(--surface);max-width:100%}
+.ld-sw{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;padding:10px 14px;border:0;background:transparent;color:var(--ink-2);cursor:pointer;min-height:44px}
+.ld-sw+.ld-sw{border-left:2px solid var(--rule-soft)}
+.ld-sw[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+@media (max-width:600px){.ld-switch{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;width:100%}.ld-sw{padding:8px 6px;font-size:.62rem;letter-spacing:.04em}}
+.ld-sw:hover:not([aria-pressed="true"]){background:var(--accent-wash);color:var(--accent)}
+
+/* flip */
+.ld-flip{border:2px solid var(--rule);background:var(--surface)}
+.ld-tabs{display:flex;overflow-x:auto;border-bottom:2px solid var(--rule);scrollbar-width:thin}
+.ld-tab{flex:1 0 auto;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;padding:12px 16px;border:0;background:transparent;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;min-height:44px}
+.ld-tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.ld-tab:hover{color:var(--accent)}
+.ld-flipcard{padding:clamp(16px,3vw,28px)}
+.ld-q{font-size:clamp(1.02rem,1.6vw,1.2rem);font-weight:700;line-height:1.4;max-width:72ch;margin-bottom:16px}
+.ld-qid{font-size:.72rem;font-weight:500;color:var(--muted);margin-right:6px}
+.ld-face{margin-top:16px;border:2px solid var(--ld-bad);background:var(--ld-bad-wash);padding:clamp(14px,2.4vw,22px);transform-origin:50% 50%}
+.ld-face[data-side="right"]{border-color:var(--ld-good);background:var(--ld-good-wash)}
+.ld-face.is-flipping{animation:ldflip .42s cubic-bezier(.3,.7,.2,1)}
+@keyframes ldflip{0%{transform:perspective(900px) rotateX(0)}45%{transform:perspective(900px) rotateX(78deg);opacity:.35}100%{transform:perspective(900px) rotateX(0);opacity:1}}
+.ld-key{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px;margin-bottom:10px}
+.ld-keyv{font-stretch:125%;font-weight:900;font-size:clamp(1.7rem,4.4vw,2.8rem);line-height:1;color:var(--ld-bad)}
+.ld-face[data-side="right"] .ld-keyv{color:var(--ld-good)}
+.ld-keyl{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);font-weight:600}
+.ld-body{color:var(--ink);max-width:76ch;margin:0 0 10px}
+.ld-body mark{background:transparent;color:inherit;font-weight:700;border-bottom:3px solid var(--ld-bad);padding:0 1px}
+.ld-face[data-side="right"] .ld-body mark{border-bottom-color:var(--ld-good)}
+.ld-cite{font-size:.72rem;color:var(--ink-2);margin:0}
+.ld-cite a{color:var(--accent)}
+.ld-why{margin-top:16px;border-left:3px solid var(--warn);padding:4px 0 4px 14px}
+.ld-why p{margin:6px 0 0;color:var(--ink-2);max-width:76ch;font-size:.95rem}
+
+/* take-away pair */
+.ld-take{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:12px;margin-top:24px}
+@media (max-width:800px){.ld-take{grid-template-columns:1fr}}
+.ld-mean,.ld-ask{border:2px solid var(--rule);padding:18px 20px;background:var(--surface)}
+.ld-mean{border-left:8px solid var(--accent)}
+.ld-ask{background:var(--accent-wash);border-color:var(--accent)}
+.ld-ask .label{color:var(--accent)}
+.ld-mean p,.ld-ask p{margin:8px 0 0;color:var(--ink);font-size:.98rem;line-height:1.55}
+.ld-ask p{font-weight:600}
+
+/* ranking bars */
+.ld-rank{border:2px solid var(--rule);background:var(--surface);padding:clamp(14px,2.6vw,26px)}
+.ld-rank-note{margin:12px 0 14px;font-family:var(--font-mono);font-size:.75rem;letter-spacing:.04em;color:var(--ink-2)}
+.ld-bars{list-style:none;margin:0;padding:0;position:relative}
+.ld-bars li{display:grid;grid-template-columns:minmax(120px,30%) 1fr 64px;gap:12px;align-items:center;padding:9px 0;border-top:1px solid var(--rule-soft);transition:transform .55s cubic-bezier(.3,.7,.2,1)}
+.ld-bn{font-weight:700;font-size:.95rem;line-height:1.25}
+.ld-bn small{display:block;font-weight:400;font-size:.75rem;color:var(--muted);margin-top:2px}
+.ld-bt{height:22px;background:var(--surface-2);position:relative;overflow:hidden}
+.ld-bf{position:absolute;inset:0;transform-origin:left;transform:scaleX(0);background:var(--accent);transition:transform .6s cubic-bezier(.3,.7,.2,1),background .3s}
+.ld-bv{text-align:right;font-weight:700;font-size:.95rem}
+.ld-bars li[data-k="oracle"] .ld-bf{opacity:.35}
+.ld-bars li[data-k="oracle"] .ld-bn{color:var(--muted)}
+.ld-rank[data-m="adj"] .ld-bf{background:var(--ld-bad)}
+.ld-rank[data-m="acc"] li[data-k="random"] .ld-bf,.ld-rank[data-m="cite"] li[data-k="bm25"] .ld-bf,.ld-rank[data-m="cite"] li[data-k="tfidf"] .ld-bf{background:var(--accent)}
+.ld-bars li.ld-empty .ld-bt{background:repeating-linear-gradient(135deg,var(--surface-2) 0 6px,transparent 6px 12px);border:1px dashed var(--rule-soft)}
+.ld-bars li.ld-empty .ld-bv{color:var(--muted);font-size:.72rem;font-weight:500}
+.ld-bars .ld-rankno{display:inline-block;min-width:1.6em;font-family:var(--font-mono);font-size:.72rem;color:var(--muted)}
+@media (max-width:560px){.ld-bars li{grid-template-columns:1fr 58px;grid-template-areas:"n v" "t t";gap:6px 10px}.ld-bn{grid-area:n}.ld-bv{grid-area:v}.ld-bt{grid-area:t;height:16px}}
+
+/* asks + monday */
+.ld-qs{list-style:none;margin:10px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;counter-reset:q}
+.ld-qs li{counter-increment:q;border:2px solid var(--rule);background:var(--surface);padding:16px 18px;color:var(--ink-2);font-size:.92rem;line-height:1.5}
+.ld-qs li::before{content:"Q" counter(q);display:block;font-family:var(--font-mono);font-weight:700;font-size:.72rem;letter-spacing:.1em;color:var(--accent);margin-bottom:6px}
+.ld-qs b{display:block;color:var(--ink);font-size:1rem;margin-bottom:4px}
+.ld-monday{margin-top:clamp(24px,4vw,40px)}
+.ld-acts{list-style:none;margin:10px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:860px){.ld-acts{grid-template-columns:1fr}}
+.ld-acts li{border:2px solid var(--rule);border-top:8px solid var(--accent);background:var(--surface);padding:16px 18px;color:var(--ink-2);font-size:.92rem;line-height:1.5}
+.ld-an{display:block;font-size:1.4rem;font-weight:700;color:var(--accent);margin-bottom:4px}
+.ld-acts b{display:block;color:var(--ink);font-size:1rem;margin-bottom:4px}
+
+@media (prefers-reduced-motion: reduce){.ld-face.is-flipping{animation:none}.ld-bars li,.ld-bf,.ld-tile{transition:none}}
+@media print{.ld-switch,.ld-tabs,.ld-go{display:none!important}.ld-tile,.ld-flip,.ld-rank,.ld-mean,.ld-ask,.ld-qs li,.ld-acts li{border:.5pt solid #999!important;box-shadow:none!important;background:none!important}.ld-bf{transform:scaleX(var(--v,0))!important}}
+html.st-printing .ld-switch,html.st-printing .ld-tabs{display:none!important}
+</style>
+<style id="story-opening-css">
+/* ---------- opening: kinetic clause ---------- */
+.kc{position:relative;overflow:clip;padding-bottom:clamp(30px,5vw,60px)}
+.kc::before{content:"";position:absolute;inset:-10% -10% auto auto;width:70vw;height:70vw;max-width:900px;max-height:900px;background:radial-gradient(closest-side,color-mix(in srgb,var(--accent) 16%,transparent),transparent 70%);pointer-events:none;z-index:0}
+.kc>.wrap{position:relative;z-index:1}
+.kc-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:clamp(20px,4vw,56px);align-items:start}
+.kc-stage-col{position:sticky;top:12px;align-self:start}
+.kc-stage{border:2px solid var(--rule);background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(2px);padding:clamp(14px,2.4vw,26px);background-image:radial-gradient(var(--grid-dot) 1px,transparent 1px);background-size:22px 22px}
+.kc-q{margin:0 0 6px;font-size:clamp(1rem,1.7vw,1.25rem);font-weight:700;line-height:1.35}
+.kc-q .label{display:block;margin-bottom:6px}
+.kc-words .w{display:inline-block;transition:opacity .45s ease,transform .45s ease}
+.kc-stage[data-step="0"].kc-armed .kc-words .w.pre{opacity:0;transform:translateY(.35em)}
+.kc-clauses{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:12px;padding-top:62px}
+.kc-cl{position:relative;border:2px solid var(--rule-soft);background:var(--surface);padding:12px 14px;font-size:.92rem;line-height:1.5;color:var(--ink-2);transition:border-color .5s ease,box-shadow .6s ease,opacity .5s ease,background .5s ease}
+.kc-cl p{margin:6px 0 0}
+.kc-cite{font-size:.72rem;color:var(--muted);display:block}
+.kc-tag{position:absolute;left:12px;top:-12px;font-family:var(--font-mono);font-size:.625rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;padding:2px 7px;background:var(--surface);border:2px solid currentColor;opacity:0;transform:translateY(4px);transition:opacity .4s ease,transform .4s ease}
+.kc-tag-r{color:var(--ld-good)}
+.kc-tag-w{color:var(--ld-bad)}
+.kc-span{background-image:linear-gradient(currentColor,currentColor);background-repeat:no-repeat;background-size:0 3px;background-position:0 100%;transition:background-size .7s ease-in-out,color .4s ease;font-weight:600}
+.kc-chip{position:absolute;left:0;top:0;display:inline-flex;flex-direction:column;align-items:flex-start;padding:6px 12px;border:2px solid var(--rule);background:var(--surface);box-shadow:0 8px 20px var(--shadow);transition:transform .75s cubic-bezier(.65,0,.35,1),border-color .4s ease,background .4s ease,opacity .4s ease;will-change:transform;z-index:2}
+.kc-chip b{font-stretch:125%;font-weight:900;font-size:1.25rem;line-height:1}
+.kc-chip i{font-style:normal;font-family:var(--font-mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+/* step states */
+.kc-stage[data-step="0"] .kc-chip{opacity:0}
+.kc-stage[data-step="1"] .kc-wrong{border-color:var(--ld-bad);box-shadow:0 0 0 4px color-mix(in srgb,var(--ld-bad) 18%,transparent),0 0 28px color-mix(in srgb,var(--ld-bad) 25%,transparent)}
+.kc-stage[data-step="1"] .kc-wrong .kc-tag{opacity:1;transform:none}
+.kc-stage[data-step="1"] .kc-wrong .kc-span{background-size:100% 3px;color:var(--ld-bad)}
+.kc-stage[data-step="1"] .kc-chip{border-color:var(--ld-bad);background:var(--ld-bad-wash)}
+.kc-stage[data-step="1"] .kc-chip b{color:var(--ld-bad)}
+.kc-stage:is([data-step="2"],[data-step="3"],[data-step="4"]) .kc-right{border-color:var(--ld-good);box-shadow:0 0 0 4px color-mix(in srgb,var(--ld-good) 16%,transparent),0 0 28px color-mix(in srgb,var(--ld-good) 22%,transparent)}
+.kc-stage:is([data-step="2"],[data-step="3"],[data-step="4"]) .kc-right .kc-tag,.kc-stage:is([data-step="2"],[data-step="3"],[data-step="4"]) .kc-wrong .kc-tag{opacity:1;transform:none}
+.kc-stage:is([data-step="2"],[data-step="3"],[data-step="4"]) .kc-right .kc-span{background-size:100% 3px;color:var(--ld-good)}
+.kc-stage:is([data-step="2"],[data-step="3"],[data-step="4"]) .kc-wrong{opacity:.62}
+.kc-stage:is([data-step="2"],[data-step="3"],[data-step="4"]) .kc-chip{border-color:var(--ld-good);background:var(--ld-good-wash)}
+.kc-stage:is([data-step="2"],[data-step="3"],[data-step="4"]) .kc-chip b{color:var(--ld-good)}
+/* no-JS / before layout: the chip sits in flow above the governing clause */
+.kc-chip{transform:translate(0,8px)}
+
+.kc-waffle-wrap{margin-top:18px;border-top:2px solid var(--rule-soft);padding-top:12px}
+.kc-waffle-head{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:baseline;justify-content:space-between;margin-bottom:8px}
+.kc-legend{display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center;font-size:.78rem;color:var(--ink-2)}
+.kc-legend b{margin-right:8px;color:var(--ink)}
+.kc-lg{display:inline-block;width:11px;height:11px}
+.kc-lg-r,.kc-c.r{background:var(--ld-good)}
+.kc-lg-w,.kc-c.w{background:var(--ld-bad)}
+.kc-lg-o,.kc-c.o{background:var(--rule-soft)}
+.kc-waffle{display:grid;grid-template-columns:repeat(25,minmax(0,1fr));gap:3px}
+.kc-c{aspect-ratio:1/1;transition:background-color .5s ease-in-out,transform .55s cubic-bezier(.3,.7,.2,1),opacity .45s ease}
+.kc-c.w{box-shadow:inset 0 0 0 1px color-mix(in srgb,#000 12%,transparent)}
+.kc-stage.kc-armed:is([data-step="0"],[data-step="1"],[data-step="2"]) .kc-c{opacity:.18;transform:scale(.5)}
+.kc-src{margin:12px 0 0;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+.kc-steps{padding:6vh 0 30vh}
+.kc-step{min-height:62vh;display:flex;flex-direction:column;justify-content:center;opacity:.35;transition:opacity .5s ease}
+.kc-step.is-on{opacity:1}
+.kc-step p{font-size:clamp(1.02rem,1.5vw,1.2rem);color:var(--ink);max-width:40ch;margin:8px 0 0;line-height:1.5}
+.kc-step b{font-variant-numeric:tabular-nums}
+.kc-step .label{color:var(--accent)}
+
+/* keyword emphasis in finding headlines */
+.ld-kw{font-style:normal;background-image:linear-gradient(var(--accent),var(--accent));background-repeat:no-repeat;background-size:100% .12em;background-position:0 92%;transition:background-size .9s cubic-bezier(.65,0,.35,1) .2s}
+.js .ld-kw.kw-pre{background-size:0 .12em}
+
+@media (max-width:860px){
+  .kc-grid{grid-template-columns:1fr}
+  .kc-stage-col{top:0;z-index:2;margin:0 -16px;padding:0 16px 0;background:linear-gradient(var(--paper) 85%,transparent)}
+  .kc-stage{padding:10px 12px}
+  .kc-q{font-size:.92rem}
+  .kc-q .label{display:none}
+  .kc-clauses{grid-template-columns:1fr 1fr;gap:8px;padding-top:60px}
+  .kc-cl{font-size:.74rem;line-height:1.35;padding:16px 9px 8px}
+  .kc-cite{font-size:.6rem}
+  .kc-tag{font-size:.5rem;padding:1px 4px;top:-10px;left:6px}
+  .kc-chip{padding:4px 8px}
+  .kc-chip b{font-size:1rem}
+  .kc-waffle-wrap{margin-top:10px;padding-top:8px}
+  .kc-legend{font-size:.66rem}
+  .kc-waffle{gap:2px}
+  .kc-src{display:none}
+  .kc-steps{padding:2vh 0 20vh}
+  .kc-step{min-height:48vh;justify-content:flex-end;padding-bottom:4vh}
+  .kc-step p{background:var(--surface);border:2px solid var(--rule);padding:12px 14px;max-width:none}
+}
+@media (max-width:860px) and (max-height:760px){.kc-waffle-head .label{display:none}}
+@media (prefers-reduced-motion: reduce){
+  .kc-c,.kc-chip,.kc-cl,.kc-tag,.kc-span,.kc-step,.kc-words .w,.ld-kw{transition:none!important}
+}
+@media print{.kc-stage-col{position:static}.kc-steps{padding:0}.kc-step{min-height:0;opacity:1}.kc::before{display:none}}
+html.st-printing .kc-stage-col{position:static}
+html.st-printing .kc-step{min-height:0;opacity:1}
+</style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a><header class="rs-header" id="rs-header"><div class="rs-bar"><div class="rs-row"><a class="rs-brand" href="https://priyatham9.github.io/grounded/" aria-label="Grounded research hub"><span class="rs-mark" aria-hidden="true"></span>Grounded</a><a class="rs-author" href="https://priyatham9.github.io/">Priyatham Chimmani&nbsp;&#8599;</a><nav class="rs-nav" aria-label="Research site"><a class="rs-item" href="https://priyatham9.github.io/grounded/">Overview</a><a class="rs-item" href="https://priyatham9.github.io/grounded/start.html">Start here</a><a class="rs-item" href="https://priyatham9.github.io/grounded/observatory.html">Observatory</a><details class="rs-menu" data-current="true"><summary class="rs-item" aria-haspopup="true">Projects<span class="rs-caret" aria-hidden="true"></span></summary><div class="rs-panel"><a class="rs-opt" href="https://priyatham9.github.io/ehs-osha-analysis/"><span class="rs-t">OSHA data quality</span><span class="rs-n">2.8M real filings</span></a><a class="rs-opt" href="https://priyatham9.github.io/ehs-ai-grounding-eval/" aria-current="page"><span class="rs-t">Grounding benchmark</span><span class="rs-n">first baselines</span></a><a class="rs-opt" href="https://priyatham9.github.io/ehs-human-factors-ontology/"><span class="rs-t">Human factors ontology</span><span class="rs-n">derivation traces</span></a><a class="rs-opt" href="https://priyatham9.github.io/ehs-risk-sem/"><span class="rs-t">SEM for safety risk</span><span class="rs-n">simulation studies</span></a><a class="rs-opt" href="https://priyatham9.github.io/ehs-capitals-calculator/"><span class="rs-t">Cost-benefit calculator</span><span class="rs-n">interactive tool</span></a><a class="rs-opt" href="https://priyatham9.github.io/ehs-benchmarks/"><span class="rs-t">OSHA benchmarks</span><span class="rs-n">TRIR/DART library</span></a></div></details><details class="rs-menu"><summary class="rs-item" aria-haspopup="true">Papers<span class="rs-caret" aria-hidden="true"></span></summary><div class="rs-panel"><a class="rs-opt" href="https://priyatham9.github.io/grounded/paper.html"><span class="rs-t">Grounded reasoning for safety-critical AI</span><span class="rs-n">bundled draft</span></a><a class="rs-opt" href="https://priyatham9.github.io/grounded/paper-osha.html"><span class="rs-t">The hours denominator</span><span class="rs-n">standalone OSHA paper</span></a></div></details><a class="rs-item rs-story" href="story.html">Read the story</a></nav><span class="rs-sep" aria-hidden="true"></span><button class="rs-btn" id="rs-theme" type="button" aria-label="Toggle colour theme"><svg class="rs-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg><svg class="rs-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg></button><button class="rs-btn rs-burger" id="rs-menu-btn" type="button" aria-expanded="false" aria-controls="rs-sheet" aria-label="Open menu"><i></i></button></div></div><div class="rs-sub"><div class="rs-row rs-subrow"><span class="rs-sublabel">On this page</span><nav class="rs-sections" id="rs-sections" aria-label="On this page"><a class="rs-sec" href="#substitution">The substitution</a><a class="rs-sec" href="#corpus">The corpus</a><a class="rs-sec" href="#try">You go first</a><a class="rs-sec" href="#baselines">Baselines</a><a class="rs-sec" href="#honesty">What it does not show</a><a class="rs-sec" href="#monday">Monday</a></nav><button class="rs-subbtn" id="rs-subbtn" type="button" aria-expanded="false" aria-controls="rs-sublist">On this page:<b id="rs-now">The substitution</b><span class="rs-caret" aria-hidden="true"></span></button></div><nav class="rs-sublist" id="rs-sublist" aria-label="On this page (list)" hidden><a class="rs-sec" href="#substitution">The substitution</a><a class="rs-sec" href="#corpus">The corpus</a><a class="rs-sec" href="#try">You go first</a><a class="rs-sec" href="#baselines">Baselines</a><a class="rs-sec" href="#honesty">What it does not show</a><a class="rs-sec" href="#monday">Monday</a></nav></div><div class="rs-sheet" id="rs-sheet" hidden><a class="rs-item" href="https://priyatham9.github.io/grounded/">Overview</a><a class="rs-item" href="https://priyatham9.github.io/grounded/start.html">Start here</a><a class="rs-item" href="https://priyatham9.github.io/grounded/observatory.html">Observatory</a><a class="rs-item rs-story" href="story.html">Read the story</a><span class="rs-group">Projects</span><a class="rs-opt" href="https://priyatham9.github.io/ehs-osha-analysis/"><span class="rs-t">OSHA data quality</span><span class="rs-n">2.8M real filings</span></a><a class="rs-opt" href="https://priyatham9.github.io/ehs-ai-grounding-eval/" aria-current="page"><span class="rs-t">Grounding benchmark</span><span class="rs-n">first baselines</span></a><a class="rs-opt" href="https://priyatham9.github.io/ehs-human-factors-ontology/"><span class="rs-t">Human factors ontology</span><span class="rs-n">derivation traces</span></a><a class="rs-opt" href="https://priyatham9.github.io/ehs-risk-sem/"><span class="rs-t">SEM for safety risk</span><span class="rs-n">simulation studies</span></a><a class="rs-opt" href="https://priyatham9.github.io/ehs-capitals-calculator/"><span class="rs-t">Cost-benefit calculator</span><span class="rs-n">interactive tool</span></a><a class="rs-opt" href="https://priyatham9.github.io/ehs-benchmarks/"><span class="rs-t">OSHA benchmarks</span><span class="rs-n">TRIR/DART library</span></a><span class="rs-group">Papers</span><a class="rs-opt" href="https://priyatham9.github.io/grounded/paper.html"><span class="rs-t">Grounded reasoning for safety-critical AI</span><span class="rs-n">bundled draft</span></a><a class="rs-opt" href="https://priyatham9.github.io/grounded/paper-osha.html"><span class="rs-t">The hours denominator</span><span class="rs-n">standalone OSHA paper</span></a><a class="rs-sheet-author" href="https://priyatham9.github.io/">Priyatham Chimmani&nbsp;&#8599;</a></div><span class="rs-progress" aria-hidden="true"></span></header>
@@ -1556,6 +1753,7 @@ html.st-printing .st-chart text,html.st-printing .st-chart .sy-ent-t,html.st-pri
         <p class="sy-sub">68 questions. 23 minimal pairs. Three non-LLM baselines. No language model has been scored yet, and the page says so wherever that number would go.</p>
         <div class="sy-cta">
           <a class="sy-btn sy-btn-p" href="#ch1">Start the story</a>
+          <a class="sy-btn" href="#sixty">The 60-second version</a>
           <a class="sy-btn" href="index.html">Project page</a>
           <span class="sy-hint mono">P for presenter mode &middot; M for the map</span>
         </div>
@@ -1565,6 +1763,82 @@ html.st-printing .st-chart text,html.st-printing .st-chart .sy-ent-t,html.st-pri
         <span class="label sy-orbcap">The system under review</span>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ============ OPENING: kinetic clause (leader layer) ============ -->
+<section class="sy-sec kc" id="opening" aria-labelledby="kc-h">
+  <div class="wrap">
+    <p class="label">Watch it happen &middot; item rk-001, 29 CFR 1904.39</p>
+    <h2 class="display sy-h2" id="kc-h">The answer lands one paragraph <em class="ld-kw">too far</em></h2>
+  </div>
+  <div class="wrap kc-grid">
+    <div class="kc-stage-col">
+      <div class="kc-stage" id="kc-stage" data-step="2">
+        <p class="kc-q"><span class="label">The question</span><span class="kc-words" id="kc-q">Within what time must an employer report a work-related employee fatality to OSHA?</span></p>
+        <div class="kc-clauses" id="kc-clauses">
+          <span class="kc-chip" id="kc-chip" aria-hidden="true"><b id="kc-chip-v">8 hours</b><i id="kc-chip-t">the answer</i></span>
+          <div class="kc-cl kc-right" id="kc-a1">
+            <span class="kc-tag kc-tag-r">&#10003; the clause that governs</span>
+            <span class="mono kc-cite">1904.39(a)(1)</span>
+            <p>Fatality: report <span class="kc-span">within eight hours</span> after the death of any employee as a result of a work-related incident.</p>
+          </div>
+          <div class="kc-cl kc-wrong" id="kc-a2">
+            <span class="kc-tag kc-tag-w">&#10005; the adjacent clause</span>
+            <span class="mono kc-cite">1904.39(a)(2), the very next paragraph</span>
+            <p>In-patient hospitalization, amputation, or loss of an eye: report <span class="kc-span">within 24 hours</span>.</p>
+          </div>
+        </div>
+        <div class="kc-waffle-wrap">
+          <div class="kc-waffle-head"><span class="label" id="kc-wlab">Guessing, 63 factual items</span><span class="kc-legend"><i class="kc-lg kc-lg-r"></i>right clause <b class="mono" id="kc-wr">52.1%</b><i class="kc-lg kc-lg-w"></i>neighbour's answer <b class="mono" id="kc-ww">47.3%</b><i class="kc-lg kc-lg-o"></i>other <b class="mono" id="kc-wo">0.6%</b></span></div>
+          <div class="kc-waffle" id="kc-waffle" role="img" aria-label="100 squares, one per percent of answers. Guessing: 52 right, 47 the neighbour's answer, 1 other."></div>
+        </div>
+        <p class="kc-src mono">Clause wording paraphrased from item rk-001 (docs/try-data.json). Rates: results/baselines_summary.csv. One square = 1% of answers, rounded.</p>
+      </div>
+    </div>
+    <div class="kc-steps" id="kc-steps">
+      <div class="kc-step" data-s="0"><span class="label">01 &middot; the question</span><p>A supervisor asks a plain question: how long do we have to report a fatality? One paragraph of the rule answers it.</p></div>
+      <div class="kc-step" data-s="1"><span class="label">02 &middot; the latch</span><p>The answer comes back <b>24 hours</b>. It is a real deadline, from the very next paragraph, for hospitalizations, amputations and eye loss. It reads as correct.</p></div>
+      <div class="kc-step" data-s="2"><span class="label">03 &middot; the check</span><p>Open the clause and the governing span lights up: <b>within eight hours</b>. A report filed at hour 20 is late, and a separate citable violation.</p></div>
+      <div class="kc-step" data-s="3"><span class="label">04 &middot; how often</span><p>Guessing between the two answers on all 63 factual items: <b>52.1%</b> right, and <b>47.3%</b> the neighbour's answer. Accuracy looks respectable. Half the misses are the dangerous kind.</p></div>
+      <div class="kc-step" data-s="4"><span class="label">05 &middot; the other trade</span><p>Plain BM25 retrieval: only <b>28.6%</b> right, but <b>0.0%</b> the neighbour's answer. Wrong often, misleading never. No language model has been scored here yet.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 60-SECOND VERSION ============ -->
+<section class="sy-sec ld-sixty" id="sixty" aria-labelledby="sixty-h">
+  <div class="wrap">
+    <p class="label">The 60-second version</p>
+    <h2 class="display sy-h2" id="sixty-h">Accuracy picks the coin flip. The clause picks retrieval.</h2>
+    <div class="ld-strip">
+      <a class="ld-tile ld-warn" href="#ranking">
+        <span class="ld-n"><span data-count="47.3" data-dec="1">47.3</span>%</span>
+        <span class="ld-t">of coin-flip answers are the neighbouring rule's answer, while the same coin flip scores 52.1% accuracy</span>
+        <span class="ld-go">Finding 3 &rarr;</span>
+      </a>
+      <a class="ld-tile ld-good" href="#ranking">
+        <span class="ld-n"><span data-count="0" data-dec="1">0.0</span>%</span>
+        <span class="ld-t">of plain retrieval answers do that, at only 27.0 to 28.6% accuracy: often unhelpful, never misleading</span>
+        <span class="ld-go">Finding 3 &rarr;</span>
+      </a>
+      <a class="ld-tile" href="#flip">
+        <span class="ld-n"><span data-count="63" data-dec="0">63</span></span>
+        <span class="ld-t">factual items, each built around a real neighbouring rule whose answer reads as correct</span>
+        <span class="ld-go">Finding 1 &rarr;</span>
+      </a>
+      <a class="ld-tile" href="#corpus">
+        <span class="ld-n"><span data-count="23" data-dec="0">23</span></span>
+        <span class="ld-t">minimal pairs cover 46 of the 68 items, so a lucky guess cannot pass both halves</span>
+        <span class="ld-go">Finding 2 &rarr;</span>
+      </a>
+      <a class="ld-tile ld-muted" href="#honesty">
+        <span class="ld-n"><span data-count="0" data-dec="0">0</span></span>
+        <span class="ld-t">language models scored so far. No model number appears anywhere on this page</span>
+        <span class="ld-go">What this does not establish &rarr;</span>
+      </a>
+    </div>
+    <p class="sy-src mono">Source artifacts: results/baselines_summary.csv, docs/try-data.json, docs/CORPUS_CARD.md</p>
   </div>
 </section>
 
@@ -1618,6 +1892,58 @@ html.st-printing .st-chart text,html.st-printing .st-chart .sy-ent-t,html.st-pri
           <h3>The clause sets 1.3 times operating pressure and ends it</h3>
           <p>46 CFR 54.15-13(b)(3) requires operating pressure times 1.3 to stay under the nominal burst pressure. Opening the clause catches the swap in seconds. Reading the answer for plausibility never will.</p>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINDING 1 (leader): flip the answer ============ -->
+<section class="sy-sec ld-find" id="flip" aria-labelledby="flip-h">
+  <div class="wrap">
+    <p class="label">Finding 1 &middot; what the failure looks like</p>
+    <h2 class="display sy-h2" id="flip-h">The wrong answer quotes a real rule. It is <em class="ld-kw">the neighbour's</em>.</h2>
+    <div class="ld-head">
+      <p class="ld-big"><span data-count="63" data-dec="0">63</span><small>of 63 factual items carry a documented neighbour answer</small></p>
+      <p class="sy-intro">Nothing about a grounding failure looks broken. The number is real, the paragraph exists, the sentence is confident. It simply answers a question about the next device, deadline or table row over. Pick an item and flip between the two answers.</p>
+    </div>
+
+    <div class="ld-flip" id="ld-flip">
+      <div class="ld-tabs" role="tablist" aria-label="Example items">
+        <button type="button" role="tab" class="ld-tab" data-ex="0" aria-selected="true">Fatality report</button>
+        <button type="button" role="tab" class="ld-tab" data-ex="1" aria-selected="false">Respirator APF</button>
+        <button type="button" role="tab" class="ld-tab" data-ex="2" aria-selected="false">PHA revalidation</button>
+        <button type="button" role="tab" class="ld-tab" data-ex="3" aria-selected="false">Rupture disk</button>
+      </div>
+      <div class="ld-flipcard" role="tabpanel" aria-live="polite">
+        <p class="ld-q"><span class="mono ld-qid" id="fl-id">rk-001</span> <span id="fl-q">Within what time must an employer report a work-related employee fatality to OSHA under 29 CFR 1904.39?</span></p>
+        <div class="ld-switch" role="group" aria-label="Which answer to show">
+          <button type="button" class="ld-sw" data-side="wrong" aria-pressed="true"><span aria-hidden="true">&#10005;</span> The neighbour's answer</button>
+          <button type="button" class="ld-sw" data-side="right" aria-pressed="false"><span aria-hidden="true">&#10003;</span> What the clause says</button>
+        </div>
+        <div class="ld-face" id="fl-face" data-side="wrong">
+          <div class="ld-key">
+            <span class="ld-keyv" id="fl-key">24 hours</span>
+            <span class="ld-keyl" id="fl-keyl">Neighbour: the 24-hour deadline for hospitalization, amputation and eye loss</span>
+          </div>
+          <p class="ld-body" id="fl-body">The wrong answer gives 24 hours, which is the deadline for reporting an in-patient hospitalization, an amputation, or a loss of an eye, stated in the very next paragraph of the same section.</p>
+          <p class="ld-cite mono" id="fl-cite">Trap recorded in the item's answer key &middot; not the output of any model</p>
+        </div>
+        <div class="ld-why">
+          <span class="label">Why it matters on site</span>
+          <p id="fl-why">The two deadlines are consecutive sentences in one paragraph and are cited together in almost every training deck, so retrieval returns both and the generator picks one. A fatality reported at hour 20 is a late report and an independent citable violation on top of the underlying event.</p>
+        </div>
+      </div>
+    </div>
+    <p class="sy-src mono">Item text verbatim from docs/try-data.json (built from corpus/items/*.json). Highlights mark the quantity that differs. The neighbour's answer is the trap each item documents, not a model output.</p>
+
+    <div class="ld-take">
+      <div class="ld-mean">
+        <span class="label">What it means for a leader</span>
+        <p>Careful reading will not catch this. The neighbour's answer is internally consistent and cites a paragraph that exists. The only reliable check is to open the cited clause and confirm it governs the thing you asked about. If a tool cannot show you the clause, nobody on your team can do that check.</p>
+      </div>
+      <div class="ld-ask">
+        <span class="label">Ask your vendor</span>
+        <p>&ldquo;For every regulatory answer, will the tool show the exact clause it relied on, with a link, so we can confirm it is about our device and not the one next to it?&rdquo;</p>
       </div>
     </div>
   </div>
@@ -1686,6 +2012,23 @@ html.st-printing .st-chart text,html.st-printing .st-chart .sy-ent-t,html.st-pri
   </div>
 </section>
 
+<!-- ============ FINDING 2 (leader take) ============ -->
+<section class="sy-sec ld-find ld-find-tight" id="corpus-take" aria-label="Finding 2 for leaders">
+  <div class="wrap">
+    <div class="ld-take">
+      <div class="ld-mean">
+        <span class="label">What it means for a leader</span>
+        <p>One right answer proves very little: a coin flip gets half of these right. What separates a tool you can rely on is whether it answers <em>both</em> halves of a confusable pair correctly. On pairs, the coin flip falls to 28.7% and plain retrieval to 13.0%. Test any tool the same way, on the look-alike pairs in your own procedures.</p>
+      </div>
+      <div class="ld-ask">
+        <span class="label">Ask your team</span>
+        <p>&ldquo;When we piloted this tool, did we test it on look-alike pairs from our own work, like the 8-hour and 24-hour reporting deadlines, or only on one-off questions?&rdquo;</p>
+      </div>
+    </div>
+    <p class="sy-src mono">Paired accuracy: results/baselines_summary.csv (random_floor 28.7%, retrieval_tfidf and retrieval_bm25 13.0%)</p>
+  </div>
+</section>
+
 <!-- ============ INTERACTIVE ============ -->
 <section class="sy-sec sy-try" id="try">
   <div class="wrap">
@@ -1702,6 +2045,7 @@ html.st-printing .st-chart text,html.st-printing .st-chart .sy-ent-t,html.st-pri
       <div class="sy-actions">
         <button type="button" class="sy-btn sy-btn-p" id="try-commit">I have an answer</button>
         <button type="button" class="sy-btn" id="try-next">Another item</button>
+        <a class="sy-btn" href="try.html">Play a 6-question round &rarr;</a>
       </div>
       <div class="sy-reveal" id="try-reveal" hidden>
         <div class="sy-rev sy-rev-wrong">
@@ -1785,6 +2129,45 @@ html.st-printing .st-chart text,html.st-printing .st-chart .sy-ent-t,html.st-pri
   </div>
 </section>
 
+<!-- ============ FINDING 3 (leader): two framings ============ -->
+<section class="sy-sec ld-find" id="ranking" aria-labelledby="rank-h">
+  <div class="wrap">
+    <p class="label">Finding 3 &middot; how often it happens</p>
+    <h2 class="display sy-h2" id="rank-h">Rank by accuracy and guessing wins. Rank by wrong-entity answers and it <em class="ld-kw">comes last</em>.</h2>
+    <div class="ld-head">
+      <p class="ld-big ld-big-warn"><span data-count="47.3" data-dec="1">47.3</span>%<small>of guessed answers are the neighbour's, with a 95% interval of 40.4 to 53.5%</small></p>
+      <p class="sy-intro">Same four systems, same 63 factual items. Switch the yardstick and the order reverses. That reversal is the reason this benchmark reports more than accuracy.</p>
+    </div>
+    <div class="ld-rank" id="ld-rank">
+      <div class="ld-switch" role="group" aria-label="Rank the systems by">
+        <button type="button" class="ld-sw" data-m="acc" aria-pressed="true">Accuracy</button>
+        <button type="button" class="ld-sw" data-m="adj" aria-pressed="false">Wrong-entity answers</button>
+        <button type="button" class="ld-sw" data-m="cite" aria-pressed="false">Right clause cited</button>
+      </div>
+      <p class="ld-rank-note" id="rk-note">Higher is better. On this yardstick the coin flip beats both retrievers.</p>
+      <ol class="ld-bars" id="rk-bars" aria-live="polite">
+        <li data-k="oracle"><span class="ld-bn">Oracle <small>replays the answer key: a ceiling, not a system</small></span><span class="ld-bt"><span class="ld-bf"></span></span><span class="ld-bv mono"></span></li>
+        <li data-k="random"><span class="ld-bn">Guessing <small>picks one of the item's two answers</small></span><span class="ld-bt"><span class="ld-bf"></span></span><span class="ld-bv mono"></span></li>
+        <li data-k="bm25"><span class="ld-bn">BM25 retrieval <small>quotes the best-matching clause</small></span><span class="ld-bt"><span class="ld-bf"></span></span><span class="ld-bv mono"></span></li>
+        <li data-k="tfidf"><span class="ld-bn">TF-IDF retrieval <small>quotes the best-matching clause</small></span><span class="ld-bt"><span class="ld-bf"></span></span><span class="ld-bv mono"></span></li>
+        <li data-k="llm" class="ld-empty"><span class="ld-bn">Any language model <small>not yet run on this corpus</small></span><span class="ld-bt"></span><span class="ld-bv mono">no score</span></li>
+      </ol>
+    </div>
+    <p class="sy-src mono">n = 63 factual items; random floor averaged over 5 repeats. Source artifact: results/baselines_summary.csv (accuracy, adjacent_substitution_rate, citation_correct_clause_rate)</p>
+
+    <div class="ld-take">
+      <div class="ld-mean">
+        <span class="label">What it means for a leader</span>
+        <p>Judged on accuracy alone, you would buy the coin flip. A tool that is often unhelpful is a cost you can see; a tool that confidently answers the neighbour's question is a hazard you cannot. Never accept an accuracy figure without the wrong-entity rate and the citation rate beside it.</p>
+      </div>
+      <div class="ld-ask">
+        <span class="label">Ask your vendor</span>
+        <p>&ldquo;What is your wrong-entity (adjacent substitution) rate on confusable pairs, with an interval, and on what test set? What does the tool do when it is not sure: answer, or decline?&rdquo;</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ HONESTY ============ -->
 <section class="sy-sec sy-honest" id="honesty">
   <div class="wrap">
@@ -1820,6 +2203,21 @@ html.st-printing .st-chart text,html.st-printing .st-chart .sy-ent-t,html.st-pri
   </div>
 </section>
 
+<!-- ============ ASK (leader) ============ -->
+<section class="sy-sec ld-askall" id="ask" aria-labelledby="ask-h">
+  <div class="wrap">
+    <p class="label">Before you sign or renew</p>
+    <h2 class="display sy-h2" id="ask-h">Five questions that expose a grounding problem</h2>
+    <ol class="ld-qs">
+      <li><b>Show me the clause.</b> Does every regulatory answer carry the exact paragraph it relied on, with a link to the current text?</li>
+      <li><b>What is your wrong-entity rate?</b> Not accuracy: how often does the tool answer for the neighbouring device, deadline or table row? With an interval.</li>
+      <li><b>Was it tested on pairs?</b> Were look-alike pairs tested together, so one lucky answer cannot hide a miss on its twin?</li>
+      <li><b>Does it decline?</b> When a question does not apply (this corpus has 5 such items), does the tool say so, or answer anyway?</li>
+      <li><b>Who checked the source?</b> Can you trace every test item to a published source, as all 68 items here are?</li>
+    </ol>
+  </div>
+</section>
+
 <!-- ============ MONDAY ============ -->
 <section class="sy-sec sy-monday" id="monday">
   <div class="wrap sy-monday-grid">
@@ -1842,6 +2240,14 @@ html.st-printing .st-chart text,html.st-printing .st-chart .sy-ent-t,html.st-pri
         <li>Count how many carried no clause at all.</li>
       </ol>
     </div>
+  </div>
+  <div class="wrap ld-monday">
+    <p class="label">Three things to do on Monday</p>
+    <ol class="ld-acts">
+      <li><span class="ld-an mono">01</span><b>Run the one-hour check.</b> Five AI-assisted answers, five clauses opened. Record how many governed the right entity and how many carried no clause at all.</li>
+      <li><span class="ld-an mono">02</span><b>Add a clause field.</b> Any AI-assisted answer used in a permit, procedure or report records the clause it rests on and who opened it. No clause, no use.</li>
+      <li><span class="ld-an mono">03</span><b>Send the five questions.</b> Put the <a href="#ask">vendor questions</a> on the agenda of your next tool review, and ask for the wrong-entity rate in writing.</li>
+    </ol>
   </div>
 </section>
 
@@ -5167,6 +5573,220 @@ var baseScene=(function(){
 /* ============ page chrome ============ */
 S.reveal(document,{selector:'.sy-note,.sy-card,.sy-hero-text p,.sy-grid3,.sy-do,.sy-nextgrid h2,.sy-intro'});
 S.progressBar();
+})();
+</script>
+<script id="story-leader-js">
+/* ---------- leader briefing layer (independent of the story engine) ---------- */
+(function(){
+"use strict";
+var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches||/[?&]reduced=1/.test(location.search);
+
+/* count-up on view; the final value is already in the HTML, so no-JS and reduced motion show it */
+(function(){
+  var nodes=[].slice.call(document.querySelectorAll('[data-count]'));
+  if(reduce||!('IntersectionObserver' in window))return;
+  nodes.forEach(function(n){
+    var to=parseFloat(n.getAttribute('data-count')),dec=+n.getAttribute('data-dec')||0;
+    if(!to)return;
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(!e.isIntersecting)return; io.disconnect();
+        var t0=performance.now(),D=1100;
+        (function tick(t){var k=Math.min(1,(t-t0)/D),v=to*(1-Math.pow(1-k,3));n.textContent=v.toFixed(dec);if(k<1)requestAnimationFrame(tick);else n.textContent=to.toFixed(dec);})(t0);
+      });
+    },{threshold:.6});
+    io.observe(n);
+  });
+})();
+
+/* Finding 1: flip between the neighbour's answer and the clause.
+   All text below is verbatim from docs/try-data.json; `key` values restate the highlighted quantity. */
+var EX=[
+ {id:'rk-001',
+  q:'Within what time must an employer report a work-related employee fatality to OSHA under 29 CFR 1904.39?',
+  wrong:{key:'24 hours',lab:'Neighbour: the 24-hour deadline for hospitalization, amputation and eye loss',
+    body:'The wrong answer gives 24 hours, which is the deadline for reporting an in-patient hospitalization, an amputation, or a loss of an eye, stated in the very next paragraph of the same section.',hi:['24 hours']},
+  right:{key:'8 hours',lab:'Clause: 29 CFR 1904.39(a)(1)',url:'https://www.ecfr.gov/current/title-29/section-1904.39',
+    body:'Within eight hours after the death of any employee as a result of a work-related incident. Reporting is by telephone or in person to the nearest OSHA Area Office, by telephone to the OSHA toll-free central number, or by electronic submission using the reporting application on OSHA\'s public website.',hi:['eight hours']},
+  why:'The two deadlines are consecutive sentences in one paragraph and are cited together in almost every training deck, so retrieval returns both and the generator picks one. A fatality reported at hour 20 is a late report and an independent citable violation on top of the underlying event.'},
+ {id:'rp-001',
+  q:'What assigned protection factor does Table 1 to 29 CFR 1910.134 give for a half mask air-purifying respirator, and what does that number mean operationally?',
+  wrong:{key:'APF 50',lab:'Neighbour: APF 50, which belongs to a full facepiece APR and also to a half mask PAPR',
+    body:'The wrong answer gives 50. That value is correct for a full facepiece air-purifying respirator and for a half mask powered air-purifying respirator, both of which are siblings of the queried device in the same table.',hi:['gives 50']},
+  right:{key:'APF 10',lab:'Clause: 29 CFR 1910.134(d)(3)(i)(A), Table 1',url:'https://www.ecfr.gov/current/title-29/section-1910.134',
+    body:'10. The assigned protection factor is the workplace level of respiratory protection the respirator is expected to provide to properly fitted and trained users, so a half mask air-purifying respirator is credited with reducing the contaminant concentration reaching the wearer by a factor of ten. Employers must use the APFs in Table 1 to select a respirator that meets or exceeds the required level of protection.',hi:['10.','a factor of ten']},
+  why:'Selecting a respirator with an APF of 10 for an exposure that requires 50 means the wearer is exposed at five times the level assumed by the selection calculation. The failure is silent: the respirator fits, functions and passes its fit test.'},
+ {id:'psm-001',
+  q:'Under 29 CFR 1910.119, how often must a process hazard analysis be updated and revalidated, and by whom?',
+  wrong:{key:'3 years',lab:'Neighbour: compliance audit interval (three years) substituted for PHA revalidation',
+    body:'The wrong answer gives three years, which is the compliance audit interval in 1910.119(o)(1) and also the refresher training interval in 1910.119(g)(2). All three are recurring intervals in the same standard.',hi:['three years']},
+  right:{key:'5 years',lab:'Clause: 29 CFR 1910.119(e)(6)',url:'https://www.ecfr.gov/current/title-29/section-1910.119',
+    body:'At least every five years after completion of the initial process hazard analysis, the PHA must be updated and revalidated by a team meeting the requirements of 1910.119(e)(4), to assure that it is consistent with the current process.',hi:['every five years']},
+  why:'1910.119 contains at least three distinct recurring intervals. Retrieval on the phrase \'how often\' returns all three, and any of them reads as a plausible answer. A revalidation cycle set to the wrong period either wastes analyst effort or leaves the hazard analysis stale past its regulatory life.'},
+ {id:'prd-001',
+  q:'For a rupture disk installed as the overpressure protection device on an unfired pressure vessel under 46 CFR subpart 54.15, what relationship must hold between the normal maximum operating pressure of the vessel and the nominal burst pressure of the disk, and why does that relationship exist?',
+  wrong:{key:'Set pressure, blowdown, reseat',lab:'Neighbour: spring-loaded pressure relief valve (reclosing device)',
+    body:'A common wrong answer describes valve behaviour instead: it gives a set pressure at or below the maximum allowable working pressure, quotes a blowdown percentage, and describes the device reseating after the overpressure event. None of these quantities exist for a rupture disk, which is a one-shot non-reclosing device.',hi:['set pressure','blowdown percentage','reseating']},
+  right:{key:'1.3 × operating ≤ burst',lab:'Clause: 46 CFR 54.15-13(b)(3)',url:'https://www.ecfr.gov/current/title-46/section-54.15-13',
+    body:'The normal maximum operating pressure multiplied by 1.3 must not exceed the nominal disk burst pressure. The requirement exists so the disk is not operated close enough to its burst pressure to accumulate fatigue damage; 46 CFR 54.15-13(b)(3) notes that this restriction will usually require the vessel to be operated below its maximum allowable working pressure, which must be accounted for in design.',hi:['multiplied by 1.3','nominal disk burst pressure']},
+  why:'A rupture disk sized and installed against valve parameters has no defined operating margin. Running a disk at or near its marked burst pressure produces fatigue cracking and premature burst, which on a reactor is an uncontrolled release rather than a controlled relief event. The substituted answer is fluent, internally consistent, and contains no quantity that can be applied to the real device.'}
+];
+(function(){
+  var root=document.getElementById('ld-flip'); if(!root)return;
+  var face=document.getElementById('fl-face'),ex=0,side='wrong';
+  function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+  function highlight(text,terms){
+    var h=esc(text);
+    terms.forEach(function(t){var e=esc(t),i=h.indexOf(e);if(i>-1)h=h.slice(0,i)+'<mark>'+e+'</mark>'+h.slice(i+e.length);});
+    return h;
+  }
+  function paint(anim){
+    var E=EX[ex],F=E[side];
+    document.getElementById('fl-id').textContent=E.id;
+    document.getElementById('fl-q').textContent=E.q;
+    document.getElementById('fl-key').textContent=F.key;
+    document.getElementById('fl-keyl').textContent=F.lab;
+    document.getElementById('fl-body').innerHTML=highlight(F.body,F.hi);
+    document.getElementById('fl-cite').innerHTML=side==='right'
+      ?esc(F.lab.replace('Clause: ',''))+' &middot; <a href="'+esc(F.url)+'" target="_blank" rel="noopener">Read the clause on eCFR &#8599;</a>'
+      :'Trap recorded in the item\'s answer key &middot; not the output of any model';
+    document.getElementById('fl-why').textContent=E.why;
+    face.setAttribute('data-side',side);
+    root.querySelectorAll('.ld-sw').forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-side')===side?'true':'false');});
+    root.querySelectorAll('.ld-tab').forEach(function(b){var on=+b.getAttribute('data-ex')===ex;b.setAttribute('aria-selected',on?'true':'false');b.tabIndex=on?0:-1;});
+    if(anim&&!reduce){face.classList.remove('is-flipping');void face.offsetWidth;face.classList.add('is-flipping');}
+  }
+  root.querySelectorAll('.ld-sw').forEach(function(b){b.addEventListener('click',function(){side=b.getAttribute('data-side');paint(true);});});
+  var tabs=[].slice.call(root.querySelectorAll('.ld-tab'));
+  tabs.forEach(function(b){
+    b.addEventListener('click',function(){ex=+b.getAttribute('data-ex');side='wrong';paint(true);});
+    b.addEventListener('keydown',function(e){
+      var d=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0; if(!d)return;
+      e.preventDefault(); ex=(ex+d+tabs.length)%tabs.length; side='wrong'; paint(true); tabs[ex].focus();
+    });
+  });
+  paint(false);
+})();
+
+/* Finding 3: re-rank the same systems under three yardsticks.
+   Values from results/baselines_summary.csv (percent, one decimal). */
+(function(){
+  var root=document.getElementById('ld-rank'); if(!root)return;
+  var V={
+    acc:{oracle:100.0,random:52.1,bm25:28.6,tfidf:27.0},
+    adj:{oracle:0.0,random:47.3,bm25:0.0,tfidf:0.0},
+    cite:{oracle:100.0,random:5.0,bm25:75.0,tfidf:73.5}
+  };
+  var NOTE={
+    acc:'Higher is better. On this yardstick the coin flip beats both retrievers.',
+    adj:'Lower is safer: the share of answers that are the neighbouring rule\'s answer. The coin flip drops to last; the retrievers never do it.',
+    cite:'Higher is better: the share of answers that cite the clause that actually governs. The retrievers are near the top; the coin flip almost never cites it.'
+  };
+  var list=document.getElementById('rk-bars');
+  var rows=[].slice.call(list.querySelectorAll('li[data-k]:not(.ld-empty)'));
+  var empty=list.querySelector('.ld-empty');
+  var m='acc';
+  function order(){
+    var up=m!=='adj';
+    return rows.slice().sort(function(a,b){
+      var x=V[m][a.getAttribute('data-k')],y=V[m][b.getAttribute('data-k')];
+      if(x===y){ if(a.getAttribute('data-k')==='oracle')return -1; if(b.getAttribute('data-k')==='oracle')return 1; return 0; }
+      return up?y-x:x-y;
+    });
+  }
+  function paint(anim){
+    root.setAttribute('data-m',m);
+    root.querySelectorAll('.ld-sw').forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-m')===m?'true':'false');});
+    document.getElementById('rk-note').textContent=NOTE[m];
+    var first={}; rows.forEach(function(r){first[r.getAttribute('data-k')]=r.getBoundingClientRect().top;});
+    order().forEach(function(r){list.insertBefore(r,empty);});
+    rows.forEach(function(r){
+      var k=r.getAttribute('data-k'),v=V[m][k];
+      r.querySelector('.ld-bv').textContent=v.toFixed(1)+'%';
+      r.querySelector('.ld-bf').style.transform='scaleX('+(v/100)+')';
+      r.querySelector('.ld-bf').style.setProperty('--v',v/100);
+      if(anim&&!reduce){
+        var dy=first[k]-r.getBoundingClientRect().top;
+        if(dy){r.style.transition='none';r.style.transform='translateY('+dy+'px)';void r.offsetWidth;r.style.transition='';r.style.transform='';}
+      }
+    });
+  }
+  root.querySelectorAll('.ld-sw').forEach(function(b){b.addEventListener('click',function(){m=b.getAttribute('data-m');paint(true);});});
+  /* bars grow when first seen */
+  if(reduce||!('IntersectionObserver' in window)){paint(false);return;}
+  rows.forEach(function(r){r.querySelector('.ld-bv').textContent=V.acc[r.getAttribute('data-k')].toFixed(1)+'%';});
+  var io=new IntersectionObserver(function(es){if(es[0].isIntersecting){io.disconnect();paint(false);}},{threshold:.35});
+  io.observe(root);
+})();
+})();
+</script>
+<script id="story-opening-js">
+/* ---------- opening: kinetic clause, driven by scroll steps ---------- */
+(function(){
+"use strict";
+var stage=document.getElementById('kc-stage'); if(!stage)return;
+var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches||/[?&]reduced=1/.test(location.search);
+var chip=document.getElementById('kc-chip'),box=document.getElementById('kc-clauses');
+var a1=document.getElementById('kc-a1'),a2=document.getElementById('kc-a2');
+var waffle=document.getElementById('kc-waffle');
+/* results/baselines_summary.csv, rounded to whole squares */
+var RATES={
+  guess:{lab:'Guessing, 63 factual items',r:52.1,w:47.3,note:'Guessing: 52 right, 47 the neighbour\'s answer, 1 other.'},
+  bm25:{lab:'BM25 retrieval, 63 factual items',r:28.6,w:0.0,note:'BM25 retrieval: 29 right, none the neighbour\'s answer, 71 a different clause.'}
+};
+var cells=[];
+for(var i=0;i<100;i++){var c=document.createElement('span');c.className='kc-c';c.style.transitionDelay=reduce?'0s':((i%25)*12+Math.floor(i/25)*40)+'ms';waffle.appendChild(c);cells.push(c);}
+function setWaffle(k){
+  var R=RATES[k],nr=Math.round(R.r),nw=Math.round(R.w);
+  cells.forEach(function(c,i){c.className='kc-c '+(i<nr?'r':i<nr+nw?'w':'o');});
+  document.getElementById('kc-wlab').textContent=R.lab;
+  document.getElementById('kc-wr').textContent=R.r.toFixed(1)+'%';
+  document.getElementById('kc-ww').textContent=R.w.toFixed(1)+'%';
+  document.getElementById('kc-wo').textContent=(Math.round((100-R.r-R.w)*10)/10).toFixed(1)+'%';
+  waffle.setAttribute('aria-label','100 squares, one per percent of answers. '+R.note);
+}
+/* split the question into words for a staggered reveal */
+var q=document.getElementById('kc-q');
+q.innerHTML=q.textContent.split(' ').map(function(w,i){return '<span class="w pre" style="transition-delay:'+(reduce?0:i*45)+'ms">'+w.replace(/&/g,'&amp;').replace(/</g,'&lt;')+'</span>';}).join(' ');
+var words=[].slice.call(q.querySelectorAll('.w'));
+if(reduce)words.forEach(function(w){w.classList.remove('pre');});
+function place(target){
+  var bw=box.getBoundingClientRect(),t=target.getBoundingClientRect(),cw=chip.offsetWidth,ch=chip.offsetHeight;
+  var x=t.left-bw.left+(t.width-cw)/2,y=t.top-bw.top-ch-14;
+  chip.style.transform='translate('+Math.round(x)+'px,'+Math.round(y)+'px)';
+}
+var step=-1;
+function show(s){
+  if(s===step)return; step=s;
+  stage.setAttribute('data-step',s);
+  words.forEach(function(w){w.classList.remove('pre');});
+  document.getElementById('kc-chip-v').textContent=s===1?'24 hours':'8 hours';
+  document.getElementById('kc-chip-t').textContent=s===1?'the answer given':'the clause\'s answer';
+  place(s<=1?a2:a1);
+  setWaffle(s>=4?'bm25':'guess');
+  steps.forEach(function(el){el.classList.toggle('is-on',+el.getAttribute('data-s')===s);});
+}
+var steps=[].slice.call(document.querySelectorAll('#kc-steps .kc-step'));
+stage.classList.add('kc-armed');
+setWaffle('guess');
+if(!('IntersectionObserver' in window)){show(2);return;}
+/* start at step 0 with the words hidden, then let scroll drive */
+step=-1; stage.setAttribute('data-step','0'); place(a2);
+var io=new IntersectionObserver(function(es){
+  es.forEach(function(e){if(e.isIntersecting)show(+e.target.getAttribute('data-s'));});
+},{rootMargin:'-45% 0px -45% 0px'});
+steps.forEach(function(el){io.observe(el);});
+/* the question reveals once the stage is on screen */
+var io2=new IntersectionObserver(function(es){if(es[0].isIntersecting){io2.disconnect();if(step<0)show(0);}},{threshold:.3});
+io2.observe(stage);
+addEventListener('resize',function(){if(step>=0)place(step<=1?a2:a1);});
+/* keyword emphasis in finding headlines */
+var kws=[].slice.call(document.querySelectorAll('.ld-kw'));
+if(!reduce){
+  kws.forEach(function(k){k.classList.add('kw-pre');});
+  var io3=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.remove('kw-pre');io3.unobserve(e.target);}});},{threshold:1});
+  kws.forEach(function(k){io3.observe(k);});
+}
 })();
 </script>
 <script id="rs-header-js">
