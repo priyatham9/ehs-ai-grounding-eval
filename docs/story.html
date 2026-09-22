@@ -710,6 +710,7 @@ body{overflow-x:clip}
 .st-chart .st-region-edge{stroke:var(--warn);stroke-width:1.5;stroke-dasharray:4 4;fill:none}
 .st-chart .st-marker{stroke:var(--warn);stroke-width:2.5}
 .st-chart .st-node{stroke:var(--paper);stroke-width:1.5}
+.st-chart .st-node.is-dim{fill:none;stroke:var(--muted);stroke-width:2.5;stroke-dasharray:3 3}
 .st-chart .st-link{stroke:var(--rule-soft);stroke-width:1.4;fill:none}
 .st-chart .st-chart .st-link.is-hot,.st-chart .st-link.is-hot{stroke:var(--accent);stroke-width:2.8}
 .st-chart .st-path-edge{stroke:var(--ink-2);fill:none;marker-end:url(#st-arrow)}
@@ -5958,15 +5959,16 @@ var baseScene=(function(){
       if(m.p.k==='retrieval_bm25'&&annoB)annoB.place(sx(m.p.x),sy(v));
     }
     function show(step){
-      var acc=tokv('--accent'), warn=tokv('--warn'), soft=tokv('--rule-soft');
+      var acc=tokv('--accent'), warn=tokv('--warn'), mut=tokv('--muted');
       var want=(step===2)?'cite':'sub';
       ylab.textContent=want==='cite'?(p?'Citation correct rate':'Citation correct-clause rate'):(p?'Adjacent substitution':'Adjacent substitution rate');
       marks.forEach(function(m,ix){
         var on=(step===0)?(ix===0):(step===1)?(ix<3):true;
-        m.c.setAttribute('opacity',on?1:.14);
+        /* de-emphasised dots stay >=3:1 against the chart: a muted ring, not a 14% ghost */
+        m.c.setAttribute('opacity',1);m.c.classList.toggle('is-dim',!on);
         var direct=(ix===0||ix===3);
         m.t.setAttribute('opacity',(on&&direct)?1:0);
-        m.c.style.fill=(ix===0?(want==='sub'?warn:soft):ix===3?soft:acc);
+        m.c.style.fill=on?(ix===0?(want==='sub'?warn:mut):ix===3?mut:acc):'';
         var target=m.p[want];
         m.ttl.textContent=m.p.k+'\naccuracy '+m.p.x.toFixed(1)+'%\nadjacent substitution '+m.p.sub.toFixed(1)+'%\ncitation correct clause '+m.p.cite.toFixed(1)+'%';
         m.hit.setAttribute('aria-label',m.p.k+', accuracy '+m.p.x.toFixed(1)+' percent, adjacent substitution '+m.p.sub.toFixed(1)+' percent, citation correct clause '+m.p.cite.toFixed(1)+' percent');
