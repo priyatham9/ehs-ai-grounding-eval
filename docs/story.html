@@ -5885,9 +5885,11 @@ var baseScene=(function(){
     var region=el('rect',{'class':'st-region',x:sx(30),y:P.t,width:sx(99)-sx(30),height:ph});region.style.opacity='0';
     var regionE=el('rect',{'class':'st-region-edge',x:sx(30),y:P.t,width:sx(99)-sx(30),height:ph});regionE.style.opacity='0';
     g.appendChild(region);g.appendChild(regionE);
-    var regionT=el('text',{x:(sx(30)+sx(99))/2,y:P.t+ph*0.26,'text-anchor':'middle','class':'st-label-direct'});
-    (p?['No language model','scored']:['No language model scored']).forEach(function(s,ix){
-      var ts=el('tspan',{x:(sx(30)+sx(99))/2,dy:ix?26:0});ts.textContent=s;regionT.appendChild(ts);
+    /* centred right of the dashed floor line so the line never runs through the words */
+    var rcx=(sx(52.1)+sx(99))/2;
+    var regionT=el('text',{x:rcx,y:P.t+ph*(p?0.2:0.26),'text-anchor':'middle','class':'st-label-direct'});
+    (p?['No language','model','scored']:['No language model scored']).forEach(function(s,ix){
+      var ts=el('tspan',{x:rcx,dy:ix?26:0});ts.textContent=s;regionT.appendChild(ts);
     });
     regionT.style.opacity='0';g.appendChild(regionT);
 
@@ -5897,7 +5899,8 @@ var baseScene=(function(){
     g.appendChild(refFloorT);
     var refZero=el('line',{'class':'st-ref-line',x1:P.l,x2:P.l+pw,y1:sy(0),y2:sy(0),opacity:0});
     g.appendChild(refZero);
-    var refZeroT=txt(P.l+6,sy(0)-(p?14:12),'Never substitutes','st-ref-text','start');
+    /* phone: right-aligned, clear of the retriever dots and their leader */
+    var refZeroT=p?txt(P.l+pw-6,sy(0)-14,'Never substitutes','st-ref-text','end'):txt(P.l+6,sy(0)-12,'Never substitutes','st-ref-text','start');
     refZeroT.setAttribute('opacity',0);g.appendChild(refZeroT);
 
     g.appendChild(el('line',{'class':'st-axis-line',x1:P.l,x2:P.l+pw,y1:P.t+ph,y2:P.t+ph,'stroke-width':2}));
@@ -5917,7 +5920,13 @@ var baseScene=(function(){
       });
       gg.appendChild(lead);gg.appendChild(dot);gg.appendChild(t);g.appendChild(gg);
       return {g:gg,place:function(px,py){
-        var tx=px+dx, ty=py+dy, elbow=dx>=0?14:-14;
+        /* on the phone the callout flips below a point in the upper half so it never
+           leaves the plot, and the text keeps a wider gap from the leader's end */
+        var ddy=(p&&py<P.t+ph/2)?-dy*0.62:dy;
+        var tx=px+dx, ty=py+ddy, elbow=dx>=0?14:-14;
+        /* right-hand callouts start just right of the dashed floor line so it never
+           runs through their text; the leader stops 26 units short of the words */
+        if(dx>=0){elbow=26;tx=sx(52.1)+12-elbow;}
         lead.setAttribute('x1',px);lead.setAttribute('y1',py);
         lead.setAttribute('x2',tx);lead.setAttribute('y2',ty);
         dot.setAttribute('cx',px);dot.setAttribute('cy',py);
@@ -5927,7 +5936,7 @@ var baseScene=(function(){
       }};
     }
     /* on the phone the two retrievers share one callout: they sit on the same point */
-    var annoT=p?anno(54,-104,['TF-IDF 27.0%','BM25 28.6%, both 0%'])
+    var annoT=p?anno(54,-100,['TF-IDF 27.0%','BM25 28.6%','both 0%'])
                :anno(-46,-96,['TF-IDF 27.0%','quotes a clause or nothing']);
     var annoB=p?null:anno(96,-52,['BM25 28.6%','same behaviour, same zero']);
 

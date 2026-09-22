@@ -85,6 +85,19 @@ class TestPlotBaselinesValues(unittest.TestCase):
         self.assertIn("noLmHatch", self.svg)
         self.assertIn("no language model scored yet", self.svg)
 
+    def test_arm_labels_do_not_overlap(self):
+        pts = []
+        for arm_id in pb.ARM_ORDER:
+            row = self.rows[arm_id]
+            pts.append((arm_id, pb.fx(row["accuracy"]), pb.fy(row["adjacent_substitution_rate"])))
+        boxes = [
+            pb._label_box(tx, ty, anchor, pb.ARM_LABEL[a])
+            for a, tx, ty, anchor, _ in pb._place_labels(pts)
+        ]
+        for i in range(len(boxes)):
+            for j in range(i + 1, len(boxes)):
+                self.assertFalse(pb._overlaps(boxes[i], boxes[j]), (i, j))
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 460" role="img" aria-labelledby="bl-title bl-desc">
 <title id="bl-title">Baseline arms: accuracy vs. adjacent substitution rate</title>
 <desc id="bl-desc">Scatter of the four scored baselines. No language model has been evaluated on this corpus yet; the upper-right region where a strong, low-error system would land has no points.</desc>
-<style>:root{color-scheme:light dark}svg{background:var(--surface,#FFFFFF)}.axis-line{stroke:var(--rule,#101311);stroke-width:1}.grid-line{stroke:var(--rule-soft,#D6D7CE);stroke-width:1}.tick-label{font:11px var(--font-mono,monospace);fill:var(--muted,#666D68)}.axis-label{font:12px var(--font-sans,sans-serif);fill:var(--ink-2,#3A403C)}.arm-label{font:12px var(--font-sans,sans-serif);fill:var(--ink,#101311)}.hatch-label{font:11px var(--font-mono,monospace);fill:var(--muted,#666D68)}.ci-bar{stroke:var(--ink-2,#3A403C);stroke-width:1.5}@media (prefers-color-scheme: dark){svg{background:var(--surface,#12151C)}.axis-line{stroke:var(--rule,#EAECF2)}.grid-line{stroke:var(--rule-soft,#262B36)}.tick-label{fill:var(--muted,#838A99)}.axis-label{fill:var(--ink-2,#BFC4CF)}.arm-label{fill:var(--ink,#EAECF2)}.hatch-label{fill:var(--muted,#838A99)}.ci-bar{stroke:var(--ink-2,#BFC4CF)}}</style>
+<style>:root{color-scheme:light dark}svg{background:var(--surface,#FFFFFF)}.axis-line{stroke:var(--rule,#101311);stroke-width:1}.grid-line{stroke:var(--rule-soft,#D6D7CE);stroke-width:1}.tick-label{font:11px var(--font-mono,monospace);fill:var(--muted,#666D68)}.axis-label{font:12px var(--font-sans,sans-serif);fill:var(--ink-2,#3A403C)}.arm-label{font:12px var(--font-sans,sans-serif);fill:var(--ink,#101311)}.hatch-label{font:11px var(--font-mono,monospace);fill:var(--muted,#666D68)}.ci-bar{stroke:var(--ink-2,#3A403C);stroke-width:1.5}.leader{stroke:var(--muted,#666D68);stroke-width:1}@media (prefers-color-scheme: dark){svg{background:var(--surface,#12151C)}.axis-line{stroke:var(--rule,#EAECF2)}.grid-line{stroke:var(--rule-soft,#262B36)}.tick-label{fill:var(--muted,#838A99)}.axis-label{fill:var(--ink-2,#BFC4CF)}.arm-label{fill:var(--ink,#EAECF2)}.hatch-label{fill:var(--muted,#838A99)}.ci-bar{stroke:var(--ink-2,#BFC4CF)}.leader{stroke:var(--muted,#838A99)}}</style>
 <line class="grid-line" x1="78.00" y1="28" x2="78.00" y2="400"/>
 <text class="tick-label" x="78.00" y="418" text-anchor="middle">0</text>
 <line class="grid-line" x1="200.00" y1="28" x2="200.00" y2="400"/>
@@ -38,17 +38,17 @@
 <line class="ci-bar" x1="358.08" y1="106.73" x2="437.48" y2="106.73"/>
 <line class="ci-bar" x1="395.59" y1="149.71" x2="395.59" y2="68.11"/>
 <circle class="mark" data-arm="random_floor" cx="395.59" cy="106.73" r="6" fill="#2a78d6" stroke="var(--surface)" stroke-width="2"/>
-<text class="arm-label" x="405.59" y="96.73" text-anchor="start">Random floor</text>
 <line class="ci-bar" x1="171.85" y1="400.00" x2="322.00" y2="400.00"/>
 <line class="ci-bar" x1="242.60" y1="400.00" x2="242.60" y2="400.00"/>
 <circle class="mark" data-arm="retrieval_tfidf" cx="242.60" cy="400.00" r="6" fill="#eb6834" stroke="var(--surface)" stroke-width="2"/>
-<text class="arm-label" x="252.60" y="390.00" text-anchor="start">TF-IDF retrieval</text>
 <line class="ci-bar" x1="182.84" y1="400.00" x2="327.56" y2="400.00"/>
 <line class="ci-bar" x1="252.29" y1="400.00" x2="252.29" y2="400.00"/>
 <circle class="mark" data-arm="retrieval_bm25" cx="252.29" cy="400.00" r="6" fill="#1baf7a" stroke="var(--surface)" stroke-width="2"/>
-<text class="arm-label" x="262.29" y="390.00" text-anchor="start">BM25 retrieval</text>
 <line class="ci-bar" x1="688.00" y1="400.00" x2="688.00" y2="400.00"/>
 <line class="ci-bar" x1="688.00" y1="400.00" x2="688.00" y2="400.00"/>
 <polygon class="mark" data-arm="oracle" points="688.00,393.00 695.00,400.00 688.00,407.00 681.00,400.00" fill="#3A403C" stroke="var(--surface)" stroke-width="2"/>
+<text class="arm-label" x="405.59" y="96.73" text-anchor="start">Random floor</text>
+<text class="arm-label" x="232.60" y="390.00" text-anchor="end">TF-IDF retrieval</text>
+<text class="arm-label" x="262.29" y="390.00" text-anchor="start">BM25 retrieval</text>
 <text class="arm-label" x="678.00" y="390.00" text-anchor="end">Oracle ceiling</text>
 </svg>

@@ -121,6 +121,70 @@ def marker(shape, x, y, color, arm_id):
     )
 
 
+# Label placement. The SVG scales uniformly (fixed viewBox), so a layout that
+# is collision-free in viewBox units is collision-free at every rendered
+# width. Text width is estimated conservatively (12px sans, ~7px per char).
+LABEL_CHAR_W = 7.0
+LABEL_H = 14.0
+LABEL_GAP = 10.0
+LABEL_TIER = 18.0
+
+
+def _label_box(tx, ty, anchor, text):
+    w = LABEL_CHAR_W * len(text)
+    x0 = tx if anchor == "start" else tx - w
+    return (x0 - 2, ty - LABEL_H + 3, x0 + w + 2, ty + 4)
+
+
+def _overlaps(a, b):
+    return a[0] < b[2] and b[0] < a[2] and a[1] < b[3] and b[1] < a[3]
+
+
+def _place_labels(points):
+    """Greedy, deterministic, collision-aware label placement.
+
+    Points are labelled right to left. Each label tries, in order: right of
+    its point, left of its point, then rising tiers on the preferred side
+    with a leader line back to the point. A candidate is rejected if it
+    overlaps an already placed label, any marker, or leaves the plot area.
+    """
+    obstacles = [(px - 8, py - 8, px + 8, py + 8) for _, px, py in points]
+    hx0, hy0 = fx(HATCH_X_MIN), fy(Y_MAX)
+    hx1 = fx(X_MAX)
+    obstacles.append(((hx0 + hx1) / 2.0 - 110, hy0 + 3, (hx0 + hx1) / 2.0 + 110, hy0 + 20))
+    placed = []
+    order = sorted(points, key=lambda p: (-p[1], p[0]))
+    for arm_id, px, py in order:
+        text = ARM_LABEL[arm_id]
+        prefer = "end" if px > fx(0.85) else "start"
+        other = "start" if prefer == "end" else "end"
+        cands = []
+        for tier in range(0, 5):
+            for anchor in (prefer, other):
+                dx = LABEL_GAP if anchor == "start" else -LABEL_GAP
+                cands.append((px + dx, py - 10 - tier * LABEL_TIER, anchor, tier))
+        chosen = cands[0]
+        for tx, ty, anchor, tier in cands:
+            box = _label_box(tx, ty, anchor, text)
+            if box[0] < PLOT_X0 or box[2] > PLOT_X1 or box[1] < PLOT_Y0:
+                continue
+            if any(_overlaps(box, o) for o in obstacles):
+                continue
+            chosen = (tx, ty, anchor, tier)
+            break
+        tx, ty, anchor, tier = chosen
+        box = _label_box(tx, ty, anchor, text)
+        obstacles.append(box)
+        leader = None
+        if tier > 0:
+            lx = box[0] + 2 if anchor == "start" else box[2] - 2
+            leader = (px, py - 7, lx, ty + 3)
+        placed.append((arm_id, tx, ty, anchor, leader))
+    rank = dict((a, i) for i, a in enumerate(ARM_ORDER))
+    placed.sort(key=lambda r: rank[r[0]])
+    return placed
+
+
 def build_svg(rows):
     parts = []
     parts.append(
@@ -147,6 +211,7 @@ def build_svg(rows):
         ".arm-label{font:12px var(--font-sans,sans-serif);fill:var(--ink,#101311)}"
         ".hatch-label{font:11px var(--font-mono,monospace);fill:var(--muted,#666D68)}"
         ".ci-bar{stroke:var(--ink-2,#3A403C);stroke-width:1.5}"
+        ".leader{stroke:var(--muted,#666D68);stroke-width:1}"
         "@media (prefers-color-scheme: dark){"
         "svg{background:var(--surface,#12151C)}"
         ".axis-line{stroke:var(--rule,#EAECF2)}"
@@ -156,6 +221,7 @@ def build_svg(rows):
         ".arm-label{fill:var(--ink,#EAECF2)}"
         ".hatch-label{fill:var(--muted,#838A99)}"
         ".ci-bar{stroke:var(--ink-2,#BFC4CF)}"
+        ".leader{stroke:var(--muted,#838A99)}"
         "}"
         "</style>"
     )
@@ -227,6 +293,7 @@ def build_svg(rows):
     )
 
     # Data points, in fixed arm order.
+    points = []
     for arm_id in ARM_ORDER:
         row = rows[arm_id]
         ax = float(row["accuracy"])
@@ -252,14 +319,20 @@ def build_svg(rows):
 
         parts.append(marker(ARM_SHAPE[arm_id], px, py, color_l, arm_id))
 
-        label_dx = 10
-        label_anchor = "start"
-        if ax > 0.85:
-            label_dx = -10
-            label_anchor = "end"
+        points.append((arm_id, px, py))
+
+    # Labels, placed after every marker is known so they can avoid each
+    # other (see _place_labels). Leader lines are drawn first so the text
+    # sits on top of them.
+    for arm_id, tx, ty, anchor, leader in _place_labels(points):
+        if leader:
+            parts.append(
+                '<line class="leader" x1="%.2f" y1="%.2f" x2="%.2f" y2="%.2f"/>'
+                % leader
+            )
         parts.append(
             '<text class="arm-label" x="%.2f" y="%.2f" text-anchor="%s">%s</text>'
-            % (px + label_dx, py - 10, label_anchor, ARM_LABEL[arm_id])
+            % (tx, ty, anchor, ARM_LABEL[arm_id])
         )
 
     parts.append("</svg>")
