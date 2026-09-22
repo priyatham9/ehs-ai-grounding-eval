@@ -3,18 +3,18 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Try an item - ehs-ai-grounding-eval</title>
-<meta name="description" content="Pick an answer to a real item from the grounding benchmark and see why the wrong one is dangerous: it is the co-hyponym, the answer to a different but similar question, not a random guess." />
+<title>Try an item: beat the neighbour - ehs-ai-grounding-eval</title>
+<meta name="description" content="A short game on real items from the grounding benchmark: answer first, see the clause next to the neighbouring rule it is easy to confuse, mark yourself, and compare your trade-off with the benchmark baselines." />
 <link rel="canonical" href="https://priyatham9.github.io/ehs-ai-grounding-eval/try.html" />
 <meta property="og:title" content="Try an item - ehs-ai-grounding-eval" />
-<meta property="og:description" content="Pick an answer to a real item from the grounding benchmark and see why the wrong one is dangerous: it is the co-hyponym, the answer to a different but similar question, not a random guess." />
+<meta property="og:description" content="A short game on real items from the grounding benchmark: answer first, see the clause next to the neighbouring rule it is easy to confuse, mark yourself, and compare your trade-off with the benchmark baselines." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://priyatham9.github.io/ehs-ai-grounding-eval/try.html" />
 <meta property="og:image" content="https://priyatham9.github.io/ehs-ai-grounding-eval/og.png" />
 <meta property="og:site_name" content="Grounded" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Try an item - ehs-ai-grounding-eval" />
-<meta name="twitter:description" content="Pick an answer to a real item from the grounding benchmark and see why the wrong one is dangerous: it is the co-hyponym, the answer to a different but similar question, not a random guess." />
+<meta name="twitter:description" content="A short game on real items from the grounding benchmark: answer first, see the clause next to the neighbouring rule it is easy to confuse, mark yourself, and compare your trade-off with the benchmark baselines." />
 <meta name="twitter:image" content="https://priyatham9.github.io/ehs-ai-grounding-eval/og.png" />
 <meta name="theme-color" content="#F7F7F3" media="(prefers-color-scheme: light)" />
 <meta name="theme-color" content="#0A0C10" media="(prefers-color-scheme: dark)" />
@@ -173,6 +173,147 @@ main{padding:32px 0 60px}
 .footer-links a:hover{color:var(--accent)}
 .footer-note{margin-top:16px;font-size:.8125rem;line-height:1.6;color:var(--muted);max-width:64ch}
 @media print{.skip,.filters,.answers,footer.footer{display:none!important}body{background:#fff!important;color:#000!important}}
+</style>
+<style id="try-page-css">
+/* ---------- try page: "beat the neighbour" round ---------- */
+.hero .eyebrow{display:block;margin-bottom:12px;color:var(--accent)}
+.hero h1{font-stretch:125%;font-weight:900;text-transform:uppercase;font-size:clamp(2rem,5.4vw,3.4rem);max-width:18ch}
+.hero .lede{font-size:clamp(1.02rem,1.5vw,1.2rem);color:var(--ink);max-width:62ch}
+.crumb{font-family:var(--font-mono);font-size:.6875rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 18px}
+.crumb a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--rule-soft)}
+.crumb a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+.crumb i{font-style:normal;padding:0 8px;color:var(--rule-soft)}
+
+.howto{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border:2px solid var(--rule);background:var(--surface);margin:22px 0 0;padding:0;list-style:none;counter-reset:how}
+.howto li{padding:16px 18px;counter-increment:how;font-size:.9rem;color:var(--ink-2);line-height:1.5}
+.howto li+li{border-left:2px solid var(--rule-soft)}
+.howto li::before{content:counter(how);display:inline-grid;place-items:center;width:26px;height:26px;margin-right:10px;border:2px solid var(--accent);color:var(--accent);font-family:var(--font-mono);font-weight:700;font-size:.8rem;vertical-align:middle}
+.howto b{color:var(--ink)}
+@media (max-width:760px){.howto{grid-template-columns:1fr}.howto li+li{border-left:0;border-top:2px solid var(--rule-soft)}}
+
+/* setup */
+.setup{border:2px solid var(--rule-soft);background:var(--surface);margin:0 0 20px}
+.setup>summary{cursor:pointer;padding:12px 16px;font-family:var(--font-mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.setup>summary .cur{color:var(--accent);font-weight:700}
+.setup-body{padding:4px 16px 16px;display:grid;gap:14px}
+.seg{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.seg .label{min-width:84px}
+.setup-body .filters{margin:0;padding:0;border:0}
+
+/* scoreboard */
+.board{display:flex;flex-wrap:wrap;align-items:center;gap:10px 22px;border:2px solid var(--rule);background:var(--surface);padding:12px 16px;margin-bottom:0;border-bottom:0}
+.board .stat{font-family:var(--font-mono);font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:flex;align-items:baseline;gap:7px}
+.board .stat b{font-size:1.05rem;color:var(--ink);letter-spacing:0}
+.board .stat.s-right b{color:var(--good)}
+.board .stat.s-wrong b{color:var(--bad)}
+.dots{display:flex;flex-wrap:wrap;gap:4px;margin-left:auto;max-width:100%}
+.dot{width:20px;height:20px;border:2px solid var(--rule-soft);display:grid;place-items:center;font-family:var(--font-mono);font-size:.7rem;font-weight:700;line-height:1;color:var(--muted);background:var(--surface);padding:0;cursor:pointer}
+.dot[aria-current="step"]{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-wash)}
+.dot.k-clause{background:var(--good-wash);border-color:var(--good);color:var(--good)}
+.dot.k-neighbour{background:var(--bad-wash);border-color:var(--bad);color:var(--bad)}
+.dot.k-other{background:var(--surface-2);border-color:var(--muted);color:var(--ink-2)}
+.dots.many .dot{width:12px;height:12px;font-size:0;border-width:1.5px}
+
+/* card */
+.card{position:relative}
+.card .step-lab{font-family:var(--font-mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:700;margin:0 0 10px}
+.commit{display:grid;gap:10px;margin-bottom:6px}
+.commit label{font-family:var(--font-mono);font-size:.6875rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.commit textarea{width:100%;min-height:74px;resize:vertical;border:2px solid var(--rule-soft);background:var(--paper);color:var(--ink);font:inherit;font-size:.95rem;padding:10px 12px}
+.commit textarea:focus{border-color:var(--accent);outline:none}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.row .hint{font-family:var(--font-mono);font-size:.6875rem;color:var(--muted)}
+.btn-lg{padding:14px 20px;font-size:.8rem}
+
+.sides{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:4px 0 18px}
+@media (max-width:760px){.sides{grid-template-columns:1fr}}
+.side{border:2px solid var(--rule-soft);padding:16px 18px;background:var(--surface);font-size:.92rem;line-height:1.55;color:var(--ink-2)}
+.side h3{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;margin:0 0 8px;display:flex;align-items:center;gap:8px}
+.side h3 .ic{display:inline-grid;place-items:center;width:20px;height:20px;font-size:.8rem;border:2px solid currentColor}
+.side .lab{color:var(--ink);font-weight:700;margin-bottom:6px}
+.side p{margin:0 0 .6em}
+.side.ok{border-color:var(--good);background:var(--good-wash)}
+.side.ok h3{color:var(--good)}
+.side.trap{border-color:var(--bad);background:var(--bad-wash)}
+.side.trap h3{color:var(--bad)}
+.side code{font-family:var(--font-mono);font-size:.82rem;background:var(--surface);padding:1px 5px;overflow-wrap:anywhere}
+
+.mark{border-top:2px solid var(--rule-soft);padding-top:16px}
+.mark .q2{font-weight:700;margin:0 0 10px;color:var(--ink)}
+.marks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media (max-width:760px){.marks{grid-template-columns:1fr}}
+.mk{display:flex;gap:10px;align-items:flex-start;text-align:left;border:2px solid var(--rule);background:var(--surface);padding:12px 14px;cursor:pointer;font:inherit;font-size:.9rem;line-height:1.35;color:var(--ink);min-height:56px;transition:background .15s,border-color .15s,transform .15s}
+.mk:hover{background:var(--surface-2)}
+.mk .kk{flex:none;display:inline-grid;place-items:center;width:24px;height:24px;border:2px solid currentColor;font-family:var(--font-mono);font-size:.75rem;font-weight:700}
+.mk small{display:block;color:var(--muted);font-size:.78rem;margin-top:3px}
+.mk[data-k="clause"] .kk{color:var(--good)}
+.mk[data-k="neighbour"] .kk{color:var(--bad)}
+.mk[aria-pressed="true"]{border-width:3px}
+.mk[aria-pressed="true"][data-k="clause"]{background:var(--good-wash);border-color:var(--good)}
+.mk[aria-pressed="true"][data-k="neighbour"]{background:var(--bad-wash);border-color:var(--bad)}
+.mk[aria-pressed="true"][data-k="other"]{background:var(--surface-2)}
+.mk[disabled]{cursor:default}
+.mk[disabled]:not([aria-pressed="true"]){opacity:.5}
+
+.verdict{margin-top:16px;padding:14px 16px;border-left:4px solid var(--accent);background:var(--accent-wash);color:var(--ink);font-size:.95rem}
+.verdict b{font-family:var(--font-mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:4px}
+.verdict.v-clause{border-left-color:var(--good);background:var(--good-wash)}
+.verdict.v-clause b{color:var(--good)}
+.verdict.v-neighbour{border-left-color:var(--bad);background:var(--bad-wash)}
+.verdict.v-neighbour b{color:var(--bad)}
+.verdict.pop{animation:pop .32s cubic-bezier(.2,.8,.3,1.2)}
+@keyframes pop{from{transform:scale(.97);opacity:.2}to{transform:none;opacity:1}}
+.why{background:var(--warn-wash);border:2px solid var(--warn);padding:14px 16px;margin-top:14px;font-size:.9rem;color:var(--ink-2)}
+.why h3{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--warn);margin:0 0 6px}
+.why p{margin:0}
+.twin-note{margin-top:12px;font-size:.9rem;color:var(--ink-2)}
+.twin-note b{color:var(--accent)}
+
+/* summary */
+.summary{border:2px solid var(--rule);background:var(--surface);padding:clamp(18px,3vw,30px);margin-top:0}
+.summary h2{font-stretch:125%;font-weight:900;text-transform:uppercase;font-size:clamp(1.5rem,3.6vw,2.3rem);margin:6px 0 12px;max-width:26ch}
+.summary .lead{font-size:1.02rem;color:var(--ink);max-width:66ch}
+.you3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border:2px solid var(--rule-soft);margin:18px 0 22px}
+.you3>div{padding:14px 16px}
+.you3>div+div{border-left:2px solid var(--rule-soft)}
+.you3 .n{display:block;font-stretch:125%;font-weight:900;font-size:clamp(1.8rem,5vw,2.8rem);line-height:1;font-variant-numeric:tabular-nums}
+.you3 .t{font-family:var(--font-mono);font-size:.6875rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.you3 .c-right .n{color:var(--good)}
+.you3 .c-wrong .n{color:var(--bad)}
+@media (max-width:560px){.you3{grid-template-columns:1fr}.you3>div+div{border-left:0;border-top:2px solid var(--rule-soft)}}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,3vw,34px)}
+@media (max-width:760px){.cmp{grid-template-columns:1fr}}
+.cmp h3{font-size:1rem;margin:0 0 4px}
+.cmp .sub{font-family:var(--font-mono);font-size:.6875rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+.bars{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.bars li{display:grid;grid-template-columns:minmax(92px,34%) 1fr 54px;gap:10px;align-items:center;font-size:.82rem;color:var(--ink-2)}
+.bars .track{height:16px;background:var(--surface-2);position:relative;overflow:hidden}
+.bars .fill{position:absolute;left:0;top:0;bottom:0;background:var(--muted);transform-origin:left;transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.bars .v{font-family:var(--font-mono);font-variant-numeric:tabular-nums;text-align:right;color:var(--ink)}
+.bars li.you{color:var(--ink);font-weight:700}
+.bars li.you .fill{background:var(--accent)}
+.bars.wrong li:not(.you) .fill{background:var(--bad);opacity:.75}
+.bars.right li:not(.you) .fill{background:var(--good);opacity:.75}
+.bars li.ceil{color:var(--muted)}
+.bars li.ceil .fill{opacity:.35}
+.caveat{margin-top:20px;border:2px solid var(--warn);background:var(--warn-wash);padding:14px 16px;font-size:.86rem;color:var(--ink-2)}
+.caveat b{color:var(--warn);font-family:var(--font-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}
+.review{margin-top:18px}
+.review summary{cursor:pointer;font-family:var(--font-mono);font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.review ol{margin:10px 0 0;padding-left:22px;font-size:.88rem;color:var(--ink-2)}
+.review li{margin-bottom:6px}
+.review .tag{font-family:var(--font-mono);font-size:.7rem;font-weight:700;margin-right:6px}
+.review .tag.k-clause{color:var(--good)}
+.review .tag.k-neighbour{color:var(--bad)}
+
+.sr-live{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@media (prefers-reduced-motion: reduce){.verdict.pop{animation:none}.bars .fill{transition:none}}
+::view-transition-old(try-card),::view-transition-new(try-card){animation-duration:.42s;animation-timing-function:cubic-bezier(.65,0,.35,1)}
+#card{view-transition-name:try-card}
+@media (prefers-reduced-motion: reduce){#card{view-transition-name:none}}
+.you3 .n{transition:color .3s}
+@media (max-width:560px){.card{padding:18px 16px}.board{padding:10px 12px}.dots{margin-left:0}}
+@media print{.howto,.setup,.board,.mark,.row{display:none!important}}
 </style>
 <script type="application/json" id="try-data">{
  "generated_note": "Derived from corpus/items/*.json. 63 factual items (5 category_error items excluded, no adjacent-wrong answer to try).",
@@ -1202,61 +1343,140 @@ html.rs-lock,html.rs-lock body{overflow:hidden}
 <a class="skip" href="#main">Skip to content</a><header class="rs-header" id="rs-header"><div class="rs-bar"><div class="rs-row"><a class="rs-brand" href="https://priyatham9.github.io/grounded/" aria-label="Grounded research hub"><span class="rs-mark" aria-hidden="true"></span>Grounded</a><a class="rs-author" href="https://priyatham9.github.io/">Priyatham Chimmani&nbsp;&#8599;</a><nav class="rs-nav" aria-label="Research site"><a class="rs-item" href="https://priyatham9.github.io/grounded/">Overview</a><a class="rs-item" href="https://priyatham9.github.io/grounded/start.html">Start here</a><a class="rs-item" href="https://priyatham9.github.io/grounded/observatory.html">Observatory</a><details class="rs-menu" data-current="true"><summary class="rs-item" aria-haspopup="true">Projects<span class="rs-caret" aria-hidden="true"></span></summary><div class="rs-panel"><a class="rs-opt" href="https://priyatham9.github.io/ehs-osha-analysis/"><span class="rs-t">OSHA data quality</span><span class="rs-n">2.8M real filings</span></a><a class="rs-opt" href="https://priyatham9.github.io/ehs-ai-grounding-eval/" aria-current="page"><span class="rs-t">Grounding benchmark</span><span class="rs-n">first baselines</span></a><a class="rs-opt" href="https://priyatham9.github.io/ehs-human-factors-ontology/"><span class="rs-t">Human factors ontology</span><span class="rs-n">derivation traces</span></a><a class="rs-opt" href="https://priyatham9.github.io/ehs-risk-sem/"><span class="rs-t">SEM for safety risk</span><span class="rs-n">simulation studies</span></a><a class="rs-opt" href="https://priyatham9.github.io/ehs-capitals-calculator/"><span class="rs-t">Cost-benefit calculator</span><span class="rs-n">interactive tool</span></a><a class="rs-opt" href="https://priyatham9.github.io/ehs-benchmarks/"><span class="rs-t">OSHA benchmarks</span><span class="rs-n">TRIR/DART library</span></a></div></details><details class="rs-menu"><summary class="rs-item" aria-haspopup="true">Papers<span class="rs-caret" aria-hidden="true"></span></summary><div class="rs-panel"><a class="rs-opt" href="https://priyatham9.github.io/grounded/paper.html"><span class="rs-t">Grounded reasoning for safety-critical AI</span><span class="rs-n">bundled draft</span></a><a class="rs-opt" href="https://priyatham9.github.io/grounded/paper-osha.html"><span class="rs-t">The hours denominator</span><span class="rs-n">standalone OSHA paper</span></a></div></details></nav><span class="rs-sep" aria-hidden="true"></span><button class="rs-btn" id="rs-theme" type="button" aria-label="Toggle colour theme"><svg class="rs-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg><svg class="rs-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg></button><button class="rs-btn rs-burger" id="rs-menu-btn" type="button" aria-expanded="false" aria-controls="rs-sheet" aria-label="Open menu"><i></i></button></div></div><div class="rs-sheet" id="rs-sheet" hidden><a class="rs-item" href="https://priyatham9.github.io/grounded/">Overview</a><a class="rs-item" href="https://priyatham9.github.io/grounded/start.html">Start here</a><a class="rs-item" href="https://priyatham9.github.io/grounded/observatory.html">Observatory</a><span class="rs-group">Projects</span><a class="rs-opt" href="https://priyatham9.github.io/ehs-osha-analysis/"><span class="rs-t">OSHA data quality</span><span class="rs-n">2.8M real filings</span></a><a class="rs-opt" href="https://priyatham9.github.io/ehs-ai-grounding-eval/" aria-current="page"><span class="rs-t">Grounding benchmark</span><span class="rs-n">first baselines</span></a><a class="rs-opt" href="https://priyatham9.github.io/ehs-human-factors-ontology/"><span class="rs-t">Human factors ontology</span><span class="rs-n">derivation traces</span></a><a class="rs-opt" href="https://priyatham9.github.io/ehs-risk-sem/"><span class="rs-t">SEM for safety risk</span><span class="rs-n">simulation studies</span></a><a class="rs-opt" href="https://priyatham9.github.io/ehs-capitals-calculator/"><span class="rs-t">Cost-benefit calculator</span><span class="rs-n">interactive tool</span></a><a class="rs-opt" href="https://priyatham9.github.io/ehs-benchmarks/"><span class="rs-t">OSHA benchmarks</span><span class="rs-n">TRIR/DART library</span></a><span class="rs-group">Papers</span><a class="rs-opt" href="https://priyatham9.github.io/grounded/paper.html"><span class="rs-t">Grounded reasoning for safety-critical AI</span><span class="rs-n">bundled draft</span></a><a class="rs-opt" href="https://priyatham9.github.io/grounded/paper-osha.html"><span class="rs-t">The hours denominator</span><span class="rs-n">standalone OSHA paper</span></a><a class="rs-sheet-author" href="https://priyatham9.github.io/">Priyatham Chimmani&nbsp;&#8599;</a></div><span class="rs-progress" aria-hidden="true"></span></header>
 <section class="hero">
   <div class="wrap">
-    <h1>Try an item</h1>
-    <p>Pick an answer to a real question from the benchmark. One option is correct; the other is the adjacent wrong answer, the co-hyponym a retrieval system reaches for because it sits right next to the right answer in the source text. See how often you catch it, and how often plain retrieval does not.</p>
+    <p class="crumb"><a href="https://priyatham9.github.io/grounded/">Grounded</a><i>&rsaquo;</i><a href="index.html">ehs-ai-grounding-eval</a><i>&rsaquo;</i><a href="story.html">Story</a><i>&rsaquo;</i><b>Try an item</b></p>
+    <span class="label eyebrow">Play &middot; real items from the benchmark</span>
+    <h1>Beat the neighbour</h1>
+    <p class="lede">Every question below has a right answer in one clause, and a trap: the answer to the neighbouring rule, which reads just as well. Answer first, then see the clause and the trap side by side, and mark yourself honestly. At the end your round is set against the benchmark's own baselines.</p>
+    <ol class="howto" aria-label="How to play">
+      <li><b>Commit.</b> Read the question and settle on an answer. Type it if you like; it never leaves your browser.</li>
+      <li><b>Reveal.</b> See what the clause says next to the neighbour's answer the item was built to tempt you with.</li>
+      <li><b>Mark yourself.</b> Clause, neighbour, or neither. Those are the three outcomes the benchmark counts.</li>
+    </ol>
   </div>
 </section>
 <main id="main">
-<div class="wrap" style="padding-top:32px">
+<div class="wrap" style="padding-top:28px">
 
 <div id="notice" class="notice" hidden><p id="noticeText"></p></div>
 
-<div class="filters" id="filters" role="group" aria-label="Filter items">
-  <span class="label">Domain</span>
-  <div id="domainChips" style="display:flex;flex-wrap:wrap;gap:8px"></div>
-  <div class="toggle-wrap">
-    <span>Minimal pairs only</span>
-    <button class="toggle-sw" id="pairToggle" role="switch" aria-pressed="false" aria-label="Minimal pairs only"></button>
+<details class="setup" id="setup">
+  <summary><span>Round settings</span><span class="cur" id="setupCur">3 minimal pairs &middot; all domains</span></summary>
+  <div class="setup-body">
+    <div class="seg" role="group" aria-label="Round length">
+      <span class="label">Length</span>
+      <button type="button" class="chip" data-len="6" aria-pressed="true">6 questions (3 pairs)</button>
+      <button type="button" class="chip" data-len="10" aria-pressed="false">10 questions</button>
+      <button type="button" class="chip" data-len="all" aria-pressed="false">Every item in the domain</button>
+    </div>
+    <div class="filters seg" id="filters" role="group" aria-label="Filter items by domain">
+      <span class="label">Domain</span>
+      <div id="domainChips" style="display:flex;flex-wrap:wrap;gap:8px"></div>
+    </div>
+    <div class="row"><button type="button" class="btn btn-primary" id="newRound">Start a new round</button><span class="hint">Starting a new round clears this round's marks.</span></div>
   </div>
+</details>
+
+<div class="board" id="board" aria-label="Round score">
+  <span class="stat"><span>Question</span><b id="bPos">1/6</b></span>
+  <span class="stat s-right"><span>Clause</span><b id="bRight">0</b></span>
+  <span class="stat s-wrong"><span>Neighbour</span><b id="bWrong">0</b></span>
+  <span class="stat"><span>Neither</span><b id="bOther">0</b></span>
+  <div class="dots" id="dots" role="group" aria-label="Questions in this round"></div>
 </div>
 
-<div class="status-row">
-  <span>You: <span class="tally mono" id="tally">0 of 0</span></span>
-  <span class="mono" id="itemCounter"></span>
-</div>
-
-<div class="card" id="card">
+<section class="card" id="card" aria-labelledby="question">
   <div class="card-meta">
     <span class="badge" id="badgeId"></span>
     <span class="badge" id="badgeDomain"></span>
     <span class="badge pair" id="badgePair" hidden>minimal pair</span>
   </div>
+  <p class="step-lab" id="stepLab">Step 1 &middot; commit to an answer</p>
   <p class="q" id="question"></p>
-  <div class="answers" id="answers"></div>
-  <div class="reveal" id="reveal">
-    <h3>Clause</h3>
-    <p class="cite" id="cite"></p>
-    <div class="why" id="why" hidden>
-      <h3>Why it matters</h3>
-      <p id="whyText"></p>
+
+  <div id="phaseCommit">
+    <div class="commit">
+      <label for="yourAnswer">Your answer (optional, stays on this device)</label>
+      <textarea id="yourAnswer" rows="3" placeholder="e.g. a number, an interval, the provision you think applies"></textarea>
     </div>
-    <div class="twin" id="twin" hidden><a class="btn" id="twinLink" href="#">Now try its twin &rarr;</a></div>
+    <div class="row">
+      <button type="button" class="btn btn-primary btn-lg" id="revealBtn">Reveal the clause</button>
+      <span class="hint">or press <kbd>R</kbd></span>
+    </div>
   </div>
-</div>
+
+  <div id="phaseReveal" hidden>
+    <div class="sides">
+      <div class="side ok">
+        <h3><span class="ic" aria-hidden="true">&#10003;</span>What the clause says</h3>
+        <p id="rightText"></p>
+        <p class="cite" id="cite"></p>
+      </div>
+      <div class="side trap">
+        <h3><span class="ic" aria-hidden="true">&#10005;</span>The neighbour's answer (the trap)</h3>
+        <p class="lab" id="trapLabel"></p>
+        <p id="trapText"></p>
+      </div>
+    </div>
+    <div class="mark" id="markBox">
+      <p class="q2" id="markQ">Be honest: which one was yours?</p>
+      <div class="marks" role="group" aria-labelledby="markQ">
+        <button type="button" class="mk" data-k="clause" aria-pressed="false"><span class="kk" aria-hidden="true">1</span><span>I had the clause's answer<small>the substance, not the wording</small></span></button>
+        <button type="button" class="mk" data-k="neighbour" aria-pressed="false"><span class="kk" aria-hidden="true">2</span><span>I gave the neighbour's answer<small>or something close to it</small></span></button>
+        <button type="button" class="mk" data-k="other" aria-pressed="false"><span class="kk" aria-hidden="true">3</span><span>Neither, or I would have passed<small>a different answer, or no answer</small></span></button>
+      </div>
+      <div id="after" hidden>
+        <div class="verdict" id="verdict" role="status"></div>
+        <div class="why" id="why" hidden>
+          <h3>Why the swap matters on site</h3>
+          <p id="whyText"></p>
+        </div>
+        <p class="twin-note" id="twinNote" hidden></p>
+      </div>
+    </div>
+  </div>
+</section>
 
 <div class="nav-row">
-  <button class="btn" id="prevBtn">&larr; Previous</button>
+  <button class="btn" id="prevBtn" type="button">&larr; Previous</button>
   <span class="mid mono" id="navMid"></span>
-  <button class="btn" id="nextBtn">Next &rarr;</button>
+  <button class="btn btn-primary" id="nextBtn" type="button">Next &rarr;</button>
 </div>
-<p class="kbd">Keyboard: <kbd>&larr;</kbd>/<kbd>&rarr;</kbd> previous/next, <kbd>1</kbd>/<kbd>2</kbd> to answer</p>
+<p class="kbd">Keyboard: <kbd>R</kbd> reveal &middot; <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> mark &middot; <kbd>&larr;</kbd> <kbd>&rarr;</kbd> previous / next</p>
+
+<section class="summary" id="summary" hidden tabindex="-1" aria-labelledby="sumTitle">
+  <span class="label">Round complete</span>
+  <h2 id="sumTitle">Your trade-off</h2>
+  <p class="lead" id="sumLead"></p>
+  <div class="you3">
+    <div class="c-right"><span class="n mono" id="sAcc">0%</span><span class="t">You kept to the clause</span></div>
+    <div class="c-wrong"><span class="n mono" id="sAdj">0%</span><span class="t">You took the neighbour's answer</span></div>
+    <div><span class="n mono" id="sPair">&ndash;</span><span class="t" id="sPairT">Pairs with both halves right</span></div>
+  </div>
+  <div class="cmp">
+    <div>
+      <h3>Kept to the clause</h3>
+      <p class="sub">Accuracy &middot; higher is better</p>
+      <ul class="bars right" id="barsAcc"></ul>
+    </div>
+    <div>
+      <h3>Took the neighbour's answer</h3>
+      <p class="sub">Adjacent substitution &middot; lower is safer</p>
+      <ul class="bars wrong" id="barsAdj"></ul>
+    </div>
+  </div>
+  <div class="caveat"><b>Read this before you compare.</b> You marked yourself on a handful of items; the baselines were scored by the benchmark's lexical scorer on all 63 factual items (random floor averaged over 5 repeats). One answer moves your percentage by a lot. The comparison shows the shape of the trade, not a ranking. None of the baselines is a language model: <strong>no language model has been scored on this benchmark yet.</strong> The oracle replays the answer key and marks the ceiling.</div>
+  <details class="review" id="review">
+    <summary>Review this round's items</summary>
+    <ol id="reviewList"></ol>
+  </details>
+  <div class="row" style="margin-top:18px">
+    <button type="button" class="btn btn-primary" id="againBtn">Play another round</button>
+    <a class="btn" href="story.html#ranking">What the baselines show</a>
+  </div>
+</section>
+<p class="sr-live" id="live" aria-live="polite"></p>
 
 <div class="baselines">
-  <table>
-    <thead><tr><th>Arm</th><th class="n">Accuracy</th></tr></thead>
-    <tbody id="baselineRows"></tbody>
-  </table>
-
   <figure class="baselines-chart">
     <img src="baselines.svg" alt="" role="img"
       aria-label="Scatter of accuracy versus adjacent substitution rate for the random floor, TF-IDF, BM25 and oracle baselines, each with a 95% interval. No language model has been scored yet, so the high-accuracy, high-error upper-right region is empty." />
@@ -1264,23 +1484,24 @@ html.rs-lock,html.rs-lock body{overflow:hidden}
     <details>
       <summary>Data table</summary>
       <table>
-        <thead><tr><th>Arm</th><th class="n">Accuracy</th><th class="n">Accuracy 95% CI</th><th class="n">Adjacent substitution rate</th><th class="n">Adjacent 95% CI</th></tr></thead>
+        <thead><tr><th>Arm</th><th class="n">Accuracy</th><th class="n">Accuracy 95% CI</th><th class="n">Adjacent substitution rate</th><th class="n">Adjacent 95% CI</th><th class="n">Paired accuracy</th></tr></thead>
         <tbody>
-          <tr><td>Random floor</td><td class="n">52.1%</td><td class="n">45.9%&ndash;58.9%</td><td class="n">47.3%</td><td class="n">40.4%&ndash;53.5%</td></tr>
-          <tr><td>TF-IDF retrieval</td><td class="n">27.0%</td><td class="n">15.4%&ndash;40.0%</td><td class="n">0.0%</td><td class="n">0.0%&ndash;0.0%</td></tr>
-          <tr><td>BM25 retrieval</td><td class="n">28.6%</td><td class="n">17.2%&ndash;40.9%</td><td class="n">0.0%</td><td class="n">0.0%&ndash;0.0%</td></tr>
-          <tr><td>Oracle ceiling</td><td class="n">100.0%</td><td class="n">94.3%&ndash;100.0%</td><td class="n">0.0%</td><td class="n">0.0%&ndash;0.0%</td></tr>
+          <tr><td>Random floor</td><td class="n">52.1%</td><td class="n">45.9%&ndash;58.9%</td><td class="n">47.3%</td><td class="n">40.4%&ndash;53.5%</td><td class="n">28.7%</td></tr>
+          <tr><td>TF-IDF retrieval</td><td class="n">27.0%</td><td class="n">15.4%&ndash;40.0%</td><td class="n">0.0%</td><td class="n">0.0%&ndash;0.0%</td><td class="n">13.0%</td></tr>
+          <tr><td>BM25 retrieval</td><td class="n">28.6%</td><td class="n">17.2%&ndash;40.9%</td><td class="n">0.0%</td><td class="n">0.0%&ndash;0.0%</td><td class="n">13.0%</td></tr>
+          <tr><td>Oracle ceiling</td><td class="n">100.0%</td><td class="n">100.0%&ndash;100.0%</td><td class="n">0.0%</td><td class="n">0.0%&ndash;0.0%</td><td class="n">100.0%</td></tr>
         </tbody>
       </table>
+      <p style="font-size:.75rem;color:var(--muted);margin-top:8px">Intervals are cluster-bootstrap percentiles over item families, as in <span class="mono">results/baselines_table.md</span>.</p>
     </details>
   </figure>
 </div>
 
 <div class="explainer">
   <h2>What adjacent substitution is</h2>
-  <p>Every item in this corpus carries a reference answer and one plausible-but-wrong "adjacent" answer: a fact about a semantically close but operationally different entity, drawn from the same regulatory neighbourhood. A rupture disk answer where the question asked about a relief valve. A reclassification provision cited where the alternate-entry provision applies. The two are close enough that a system retrieving on term overlap alone regularly returns the wrong one with full confidence.</p>
-  <p>23 of the corpus's 68 items are built as minimal pairs: two questions whose correct answers diverge precisely because the device, or the regulatory trigger, differs. Answering one right while getting its partner wrong is the signal the benchmark is built to catch, which is why the primary outcome reported in the README is paired accuracy across those 23 pairs, not per-item accuracy.</p>
-  <p>No language model has been scored against this corpus yet. What exists are three non-LLM baselines (below) that show the items discriminate, and a real Anthropic adapter with a one-command run script. See <a href="https://github.com/priyatham9/ehs-ai-grounding-eval#running-a-real-system">"Running a real system" in the README</a> to run one.</p>
+  <p>Every item in this corpus carries a reference answer and one plausible-but-wrong "adjacent" answer: a fact about a semantically close but operationally different entity, drawn from the same regulatory neighbourhood. Relief-valve behaviour given where the question asked about a rupture disk. A reclassification provision cited where the alternate-entry provision applies. The two are close enough that a fluent answer about the wrong one reads as correct.</p>
+  <p>46 of the corpus's 68 items form 23 minimal pairs: two questions whose correct answers diverge precisely because the device, or the regulatory trigger, differs. Answering one right while getting its partner wrong is the signal the benchmark is built to catch, which is why the primary outcome reported in the README is paired accuracy across those 23 pairs, not per-item accuracy. Rounds here keep pair members next to each other so you can feel that.</p>
+  <p>No language model has been scored against this corpus yet. What exists are three non-LLM baselines (above) that show the items discriminate, and a real Anthropic adapter with a one-command run script. See <a href="https://github.com/priyatham9/ehs-ai-grounding-eval#running-a-real-system">"Running a real system" in the README</a> to run one.</p>
 </div>
 
 </div>
@@ -1298,249 +1519,325 @@ html.rs-lock,html.rs-lock body{overflow:hidden}
     </div>
     <p class="footer-note">Items, correct answers, adjacent-wrong answers, clause citations and eCFR links are read
     from <span class="mono">corpus/items/*.json</span> and reproduced here without edits via
-    <span class="mono">docs/try-data.json</span>. Baseline numbers are from <span class="mono">docs/results.md</span>.</p>
+    <span class="mono">docs/try-data.json</span>. Baseline numbers are from <span class="mono">results/baselines_summary.csv</span> (also in <span class="mono">docs/results.md</span>). Your marks are kept only in this browser tab's session storage.</p>
   </div>
 </footer>
-<script>
+<script id="try-page-js">
 (function () {
   'use strict';
 
+  /* Baselines, copied from results/baselines_summary.csv (n = 63 factual items).
+     acc = accuracy, adj = adjacent_substitution_rate, pair = paired_accuracy. */
   var BASELINES = [
-    { name: 'Random floor', v: '52.1%', you: false },
-    { name: 'TF-IDF retrieval', v: '27.0%', you: false },
-    { name: 'Oracle ceiling', v: '100.0%', you: false }
+    { name: 'Guessing (random floor)', acc: 52.1, adj: 47.3, pair: 28.7 },
+    { name: 'BM25 retrieval', acc: 28.6, adj: 0.0, pair: 13.0 },
+    { name: 'TF-IDF retrieval', acc: 27.0, adj: 0.0, pair: 13.0 },
+    { name: 'Oracle (answer key)', acc: 100.0, adj: 0.0, pair: 100.0, ceil: true }
   ];
+  var KEY = 'ehs-ai-try-round-v2';
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $ = function (id) { return document.getElementById(id); };
 
-  var state = { items: [], byId: {}, filtered: [], index: 0, domain: 'all', pairsOnly: false, answered: {} };
-  var TALLY_KEY = 'ehs-ai-try-tally';
+  var S = { items: [], byId: {}, domains: [], len: '6', domain: 'all',
+            queue: [], i: 0, marks: {}, revealed: {}, single: false };
 
-  function loadTally() {
-    try { return JSON.parse(sessionStorage.getItem(TALLY_KEY) || '{}'); } catch (e) { return {}; }
+  function save() {
+    try { sessionStorage.setItem(KEY, JSON.stringify({ len: S.len, domain: S.domain, queue: S.queue, i: S.i, marks: S.marks, revealed: S.revealed })); } catch (e) {}
   }
-  function saveTally(t) {
-    try { sessionStorage.setItem(TALLY_KEY, JSON.stringify(t)); } catch (e) {}
+  function load() {
+    try { return JSON.parse(sessionStorage.getItem(KEY) || 'null'); } catch (e) { return null; }
   }
+  function shuffle(a) {
+    for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; }
+    return a;
+  }
+  function short(t) { return t.split(':')[0].split(',')[0]; }
+  function pct(n, d) { return d ? Math.round(1000 * n / d) / 10 : 0; }
 
-  // deterministic shuffle of two options, seeded by item id
-  function hashSeed(str) {
-    var h = 2166136261;
-    for (var i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = (h * 16777619) >>> 0; }
-    return h;
-  }
-  function shuffledOrder(id) {
-    return (hashSeed(id) % 2 === 0) ? ['correct', 'wrong'] : ['wrong', 'correct'];
-  }
-
-  function applyFilters() {
-    state.filtered = state.items.filter(function (it) {
-      if (state.domain !== 'all' && it.domain !== state.domain) return false;
-      if (state.pairsOnly && !it.is_minimal_pair) return false;
-      return true;
+  /* groups: a minimal pair is one group of two, a single item a group of one */
+  function groups(pool) {
+    var seen = {}, out = [];
+    var inPool = {}; pool.forEach(function (it) { inPool[it.id] = true; });
+    pool.forEach(function (it) {
+      if (seen[it.id]) return;
+      seen[it.id] = true;
+      if (it.partner_id && inPool[it.partner_id] && !seen[it.partner_id]) {
+        seen[it.partner_id] = true;
+        out.push(shuffle([it.id, it.partner_id]));
+      } else out.push([it.id]);
     });
-    if (state.filtered.length === 0) state.filtered = state.items.slice();
+    return out;
+  }
+  function buildQueue() {
+    var pool = S.items.filter(function (it) { return S.domain === 'all' || it.domain === S.domain; });
+    var gs = shuffle(groups(pool));
+    var pairs = gs.filter(function (g) { return g.length === 2; });
+    var singles = gs.filter(function (g) { return g.length === 1; });
+    var q = [];
+    if (S.len === 'all') { gs.forEach(function (g) { q = q.concat(g); }); return q; }
+    var want = parseInt(S.len, 10);
+    pairs.concat(singles).forEach(function (g) { if (q.length + g.length <= want) q = q.concat(g); });
+    return q;
+  }
+  function newRound() {
+    S.queue = buildQueue(); S.i = 0; S.marks = {}; S.revealed = {}; S.single = false;
+    save(); render(true);
   }
 
-  function renderDomainChips() {
-    var wrap = document.getElementById('domainChips');
-    wrap.innerHTML = '';
-    var all = document.createElement('button');
-    all.className = 'chip'; all.textContent = 'All domains';
-    all.setAttribute('aria-pressed', state.domain === 'all' ? 'true' : 'false');
-    all.addEventListener('click', function () { setDomain('all'); });
-    wrap.appendChild(all);
-    state.domains.forEach(function (d) {
+  function cur() { return S.byId[S.queue[S.i]]; }
+  function counts() {
+    var c = { clause: 0, neighbour: 0, other: 0, n: 0 };
+    S.queue.forEach(function (id) { var m = S.marks[id]; if (m) { c[m]++; c.n++; } });
+    return c;
+  }
+  function done() { return S.queue.length > 0 && counts().n === S.queue.length; }
+
+  function renderSetup() {
+    document.querySelectorAll('[data-len]').forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-len') === S.len ? 'true' : 'false'); });
+    var wrap = $('domainChips'); wrap.innerHTML = '';
+    [{ id: 'all', title: 'All domains' }].concat(S.domains).forEach(function (d) {
       var b = document.createElement('button');
-      b.className = 'chip'; b.textContent = d.title.split(':')[0].split(',')[0];
-      b.title = d.title;
-      b.setAttribute('aria-pressed', state.domain === d.id ? 'true' : 'false');
-      b.addEventListener('click', function () { setDomain(d.id); });
+      b.type = 'button'; b.className = 'chip'; b.textContent = short(d.title); b.title = d.title;
+      b.setAttribute('aria-pressed', S.domain === d.id ? 'true' : 'false');
+      b.addEventListener('click', function () { S.domain = d.id; renderSetup(); });
       wrap.appendChild(b);
     });
+    var lenTxt = S.len === '6' ? '6 questions' : S.len === '10' ? '10 questions' : 'every item';
+    var dom = S.domain === 'all' ? 'all domains' : short((S.domains.filter(function (d) { return d.id === S.domain; })[0] || {}).title || S.domain);
+    $('setupCur').textContent = lenTxt + ' · ' + dom;
   }
 
-  function setDomain(d) {
-    state.domain = d;
-    applyFilters();
-    renderDomainChips();
-    state.index = 0;
-    render();
-  }
-
-  function renderBaselines() {
-    var tally = loadTally();
-    var total = state.items.length;
-    var correct = Object.keys(tally).filter(function (id) { return tally[id] === 'correct'; }).length;
-    var answeredN = Object.keys(tally).length;
-    var pct = answeredN ? (100 * correct / answeredN).toFixed(1) + '%' : '—';
-    var rows = document.getElementById('baselineRows');
-    rows.innerHTML = '';
-    var youRow = document.createElement('tr');
-    youRow.className = 'you';
-    youRow.innerHTML = '<td>You (this session)</td><td class="n">' + pct + '</td>';
-    rows.appendChild(youRow);
-    BASELINES.forEach(function (b) {
-      var tr = document.createElement('tr');
-      tr.innerHTML = '<td>' + b.name + '</td><td class="n">' + b.v + '</td>';
-      rows.appendChild(tr);
+  function renderBoard() {
+    var c = counts();
+    $('bPos').textContent = (S.i + 1) + '/' + S.queue.length;
+    $('bRight').textContent = c.clause; $('bWrong').textContent = c.neighbour; $('bOther').textContent = c.other;
+    var dots = $('dots'); dots.innerHTML = '';
+    dots.classList.toggle('many', S.queue.length > 14);
+    S.queue.forEach(function (id, k) {
+      var m = S.marks[id];
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'dot' + (m ? ' k-' + m : '');
+      b.textContent = m === 'clause' ? '✓' : m === 'neighbour' ? '✕' : m === 'other' ? '–' : '';
+      b.setAttribute('aria-label', 'Question ' + (k + 1) + ', ' + id + (m ? ', marked ' + label(m) : ', not answered'));
+      if (k === S.i) b.setAttribute('aria-current', 'step');
+      b.addEventListener('click', function () { go(k); });
+      dots.appendChild(b);
     });
-    document.getElementById('tally').textContent = correct + ' of ' + total;
+  }
+  function label(m) { return m === 'clause' ? 'clause' : m === 'neighbour' ? 'neighbour' : 'neither'; }
+
+  function render(focusQ) {
+    var it = cur(); if (!it) return;
+    renderSetup(); renderBoard();
+    $('badgeId').textContent = it.id;
+    $('badgeDomain').textContent = short(it.domain_title);
+    $('badgePair').hidden = !it.is_minimal_pair;
+    $('question').textContent = it.question;
+    $('yourAnswer').value = '';
+    var shown = !!S.revealed[it.id] || !!S.marks[it.id];
+    $('phaseCommit').hidden = shown;
+    $('phaseReveal').hidden = !shown;
+    $('stepLab').textContent = shown ? (S.marks[it.id] ? 'Marked' : 'Step 2 · compare and mark yourself') : 'Step 1 · commit to an answer';
+    if (shown) fillReveal(it, false);
+    $('navMid').textContent = it.id;
+    $('prevBtn').disabled = S.i === 0;
+    $('nextBtn').textContent = S.i === S.queue.length - 1 ? (done() ? 'See your score →' : 'Next →') : 'Next →';
+    try { history.replaceState(null, '', '#item=' + it.id); } catch (e) {}
+    $('summary').hidden = true;
+    if (focusQ) $('card').scrollIntoView({ block: 'nearest', behavior: reduce ? 'auto' : 'smooth' });
   }
 
-  function currentItem() {
-    return state.filtered[state.index];
-  }
+  function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
 
-  function render() {
-    var it = currentItem();
-    if (!it) return;
-    document.getElementById('badgeId').textContent = it.id;
-    document.getElementById('badgeDomain').textContent = it.domain_title.split(':')[0].split(',')[0];
-    var pairBadge = document.getElementById('badgePair');
-    pairBadge.hidden = !it.is_minimal_pair;
-    document.getElementById('question').textContent = it.question;
-
-    var order = shuffledOrder(it.id);
-    var answersWrap = document.getElementById('answers');
-    answersWrap.innerHTML = '';
-    order.forEach(function (kind, i) {
-      var btnEl = document.createElement('button');
-      btnEl.className = 'ans-btn';
-      btnEl.dataset.kind = kind;
-      var text = kind === 'correct' ? it.correct_answer : it.adjacent_wrong;
-      btnEl.innerHTML = '<span class="k">Option ' + (i + 1) + '</span>' + escapeHtml(text);
-      btnEl.addEventListener('click', function () { answer(kind); });
-      answersWrap.appendChild(btnEl);
+  function fillReveal(it, fresh) {
+    $('rightText').textContent = it.correct_answer;
+    $('cite').innerHTML = '<code>' + esc(it.clause) + '</code>' +
+      (it.url ? ' &middot; <a href="' + esc(it.url) + '" target="_blank" rel="noopener">Read it on eCFR &#8599;</a>' : '');
+    $('trapLabel').textContent = it.adjacent_label || 'The adjacent entity';
+    $('trapText').textContent = it.adjacent_wrong;
+    var m = S.marks[it.id];
+    document.querySelectorAll('.mk').forEach(function (b) {
+      b.setAttribute('aria-pressed', b.getAttribute('data-k') === m ? 'true' : 'false');
+      b.disabled = !!m;
     });
+    $('after').hidden = !m;
+    if (m) feedback(it, m, fresh);
+  }
 
-    var tally = loadTally();
-    var already = tally[it.id];
-    document.getElementById('reveal').classList.remove('show');
-    document.getElementById('why').hidden = true;
-    document.getElementById('twin').hidden = true;
-    if (already) {
-      revealAnswer(already === 'correct' ? 'correct' : 'wrong-shown', true);
+  function feedback(it, m, fresh) {
+    var v = $('verdict');
+    var c = counts();
+    v.className = 'verdict v-' + m + (fresh && !reduce ? ' pop' : '');
+    var msg;
+    if (m === 'clause') msg = '<b>&#10003; Kept to the clause</b>That is what the cited clause actually says. ' + c.clause + ' of ' + c.n + ' so far.';
+    else if (m === 'neighbour') msg = '<b>&#10005; The neighbour\'s answer</b>This is the substitution the benchmark counts: a real rule, for the wrong entity. Guessing between the two answers does it 47.3% of the time.';
+    else msg = '<b>&ndash; Neither</b>Wrong or silent, but not the neighbour. That is the profile of the retrieval baselines: 0.0% substitution, at the cost of many misses.';
+    v.innerHTML = msg;
+    $('why').hidden = !it.why_it_matters;
+    $('whyText').textContent = it.why_it_matters || '';
+    var nextId = S.queue[S.i + 1];
+    var tn = $('twinNote');
+    if (it.partner_id && nextId === it.partner_id) {
+      tn.hidden = false;
+      tn.innerHTML = '<b>Its twin is next.</b> Same vocabulary, the other entity. A system passes the pair only if it gets both.';
+    } else if (it.partner_id && S.queue.indexOf(it.partner_id) !== -1 && S.marks[it.partner_id]) {
+      var both = S.marks[it.partner_id] === 'clause' && m === 'clause';
+      tn.hidden = false;
+      tn.innerHTML = both ? '<b>Pair passed.</b> Both halves kept to their own clause.' : '<b>Pair not passed.</b> Only both halves right counts, which is why paired accuracy sits far below accuracy for every baseline.';
+    } else tn.hidden = true;
+  }
+
+  function reveal() {
+    var it = cur(); if (!it || S.revealed[it.id]) return;
+    S.revealed[it.id] = true; save();
+    $('phaseCommit').hidden = true; $('phaseReveal').hidden = false;
+    $('stepLab').textContent = 'Step 2 · compare and mark yourself';
+    fillReveal(it, false);
+    var first = document.querySelector('.mk[data-k="clause"]');
+    if (first) first.focus({ preventScroll: true });
+    $('phaseReveal').scrollIntoView({ block: 'nearest', behavior: reduce ? 'auto' : 'smooth' });
+    $('live').textContent = 'Revealed. Mark yourself: 1 clause, 2 neighbour, 3 neither.';
+  }
+
+  function mark(k) {
+    var it = cur(); if (!it || S.marks[it.id] || !S.revealed[it.id]) return;
+    S.marks[it.id] = k; save();
+    $('stepLab').textContent = 'Marked';
+    fillReveal(it, true);
+    renderBoard();
+    $('nextBtn').textContent = S.i === S.queue.length - 1 ? 'See your score →' : 'Next →';
+    $('live').textContent = 'Marked ' + label(k) + '. ' + (S.i === S.queue.length - 1 ? 'Press right arrow for your score.' : 'Press right arrow for the next question.');
+    $('nextBtn').focus({ preventScroll: true });
+  }
+
+  function go(k) {
+    if (k < 0) return;
+    if (k >= S.queue.length) { summary(); return; }
+    S.i = k; save();
+    /* View Transitions where supported: the card cross-fades between questions; instant otherwise */
+    if (document.startViewTransition && !reduce) document.startViewTransition(function () { render(true); });
+    else render(true);
+  }
+  function next() {
+    if (S.i === S.queue.length - 1) {
+      if (done()) summary();
+      else { var firstOpen = S.queue.findIndex(function (id) { return !S.marks[id]; }); go(firstOpen); }
+      return;
     }
-
-    document.getElementById('itemCounter').textContent = (state.index + 1) + ' / ' + state.filtered.length;
-    document.getElementById('navMid').textContent = it.id;
-    document.getElementById('prevBtn').disabled = state.filtered.length <= 1;
-    document.getElementById('nextBtn').disabled = state.filtered.length <= 1;
-
-    location.hash = 'item=' + it.id;
-    renderBaselines();
+    go(S.i + 1);
   }
 
-  function escapeHtml(s) {
-    var d = document.createElement('div');
-    d.textContent = s;
-    return d.innerHTML;
-  }
-
-  function answer(kind) {
-    var it = currentItem();
-    var tally = loadTally();
-    if (tally[it.id]) return; // already answered this item this session
-    tally[it.id] = kind === 'correct' ? 'correct' : 'wrong';
-    saveTally(tally);
-    revealAnswer(kind, false);
-    renderBaselines();
-  }
-
-  function revealAnswer(kind, isReplay) {
-    var it = currentItem();
-    var buttons = document.querySelectorAll('#answers .ans-btn');
-    buttons.forEach(function (b) {
-      b.disabled = true;
-      if (b.dataset.kind === 'correct') b.classList.add('correct');
-      if (b.dataset.kind === 'wrong') b.classList.add('wrong');
+  function bars(ul, key, you) {
+    ul.innerHTML = '';
+    var rows = [{ name: 'You, this round', v: you, you: true }].concat(BASELINES.map(function (b) { return { name: b.name, v: b[key], ceil: b.ceil }; }));
+    rows.forEach(function (r) {
+      var li = document.createElement('li');
+      if (r.you) li.className = 'you'; else if (r.ceil) li.className = 'ceil';
+      li.innerHTML = '<span>' + esc(r.name) + '</span><span class="track"><span class="fill"></span></span><span class="v">' + r.v.toFixed(1) + '%</span>';
+      var f = li.querySelector('.fill');
+      f.style.transform = 'scaleX(' + (reduce ? r.v / 100 : 0) + ')';
+      f.style.width = '100%';
+      ul.appendChild(li);
+      if (!reduce) requestAnimationFrame(function () { requestAnimationFrame(function () { f.style.transform = 'scaleX(' + (r.v / 100) + ')'; }); });
     });
-    document.getElementById('cite').innerHTML = '<code>' + escapeHtml(it.clause) + '</code>' +
-      (it.url ? ' &middot; <a href="' + escapeHtml(it.url) + '" target="_blank" rel="noopener">eCFR &rarr;</a>' : '');
-    if (it.why_it_matters) {
-      document.getElementById('whyText').textContent = it.why_it_matters;
-      document.getElementById('why').hidden = false;
-    }
-    if (it.partner_id) {
-      var twinLink = document.getElementById('twinLink');
-      twinLink.href = '#item=' + it.partner_id;
-      twinLink.textContent = 'Now try its twin (' + it.partner_id + ') →';
-      twinLink.onclick = function (e) {
-        e.preventDefault();
-        goToId(it.partner_id);
-      };
-      document.getElementById('twin').hidden = false;
-    }
-    document.getElementById('reveal').classList.add('show');
   }
 
-  function goToId(id) {
-    var idx = state.filtered.findIndex(function (r) { return r.id === id; });
-    if (idx === -1) {
-      // item exists but is filtered out: reset filters to show it
-      state.domain = 'all'; state.pairsOnly = false;
-      document.getElementById('pairToggle').setAttribute('aria-pressed', 'false');
-      applyFilters();
-      renderDomainChips();
-      idx = state.filtered.findIndex(function (r) { return r.id === id; });
-    }
-    if (idx === -1) return;
-    state.index = idx;
-    render();
+  function rollTo(node, to) {
+    if (reduce) { node.textContent = to.toFixed(0) + '%'; return; }
+    var t0 = performance.now(), D = 900;
+    (function tick(t) { var k = Math.min(1, (t - t0) / D), v = to * (1 - Math.pow(1 - k, 3)); node.textContent = v.toFixed(0) + '%'; if (k < 1) requestAnimationFrame(tick); })(t0);
   }
 
-  function step(delta) {
-    if (!state.filtered.length) return;
-    state.index = (state.index + delta + state.filtered.length) % state.filtered.length;
-    render();
+  function summary() {
+    var c = counts();
+    var acc = pct(c.clause, c.n), adj = pct(c.neighbour, c.n);
+    var pairsSeen = 0, pairsBoth = 0, seen = {};
+    S.queue.forEach(function (id) {
+      var it = S.byId[id];
+      if (!it.partner_id || seen[id] || S.queue.indexOf(it.partner_id) === -1) return;
+      seen[id] = seen[it.partner_id] = true; pairsSeen++;
+      if (S.marks[id] === 'clause' && S.marks[it.partner_id] === 'clause') pairsBoth++;
+    });
+    rollTo($('sAcc'), acc); rollTo($('sAdj'), adj);
+    $('sPair').textContent = pairsSeen ? pairsBoth + ' of ' + pairsSeen : '–';
+    $('sPairT').textContent = pairsSeen ? 'Pairs with both halves right (guessing: 28.7%)' : 'No complete pair in this round';
+    var lead;
+    if (c.neighbour === 0 && c.clause === c.n) lead = 'Every answer kept to its own clause. That is the oracle row: it replays the answer key. Try a longer round, or a domain you know less well.';
+    else if (c.neighbour === 0) lead = 'You never took the neighbour\'s answer. You missed or passed on ' + (c.n - c.clause) + ', which is the retrieval profile: often unhelpful, never misleading. In a regulated answer that is the safer trade.';
+    else if (adj >= 40) lead = 'You took the neighbour\'s answer on ' + c.neighbour + ' of ' + c.n + '. Guessing between the two answers lands at 47.3%. Each of those answers would have read as correct to anyone who did not open the clause.';
+    else lead = 'You took the neighbour\'s answer on ' + c.neighbour + ' of ' + c.n + '. Every one of those reads as correct until someone opens the clause. Retrieval never does this on the corpus (0.0%); guessing does it 47.3% of the time.';
+    $('sumLead').textContent = lead;
+    bars($('barsAcc'), 'acc', acc);
+    bars($('barsAdj'), 'adj', adj);
+    var list = $('reviewList'); list.innerHTML = '';
+    S.queue.forEach(function (id, k) {
+      var it = S.byId[id], m = S.marks[id];
+      var li = document.createElement('li');
+      li.innerHTML = '<span class="tag k-' + m + '">' + (m === 'clause' ? '✓ clause' : m === 'neighbour' ? '✕ neighbour' : '– neither') + '</span>' +
+        '<a href="#item=' + esc(id) + '" data-k="' + k + '">' + esc(id) + '</a> ' + esc(it.question.length > 110 ? it.question.slice(0, 108) + '…' : it.question);
+      li.querySelector('a').addEventListener('click', function (e) { e.preventDefault(); go(k); });
+      list.appendChild(li);
+    });
+    var sm = $('summary'); sm.hidden = false;
+    sm.scrollIntoView({ block: 'start', behavior: reduce ? 'auto' : 'smooth' });
+    sm.focus({ preventScroll: true });
+    $('live').textContent = 'Round complete. You kept to the clause on ' + c.clause + ' of ' + c.n + ' and took the neighbour\'s answer on ' + c.neighbour + '.';
   }
 
   function init(data) {
-    state.items = data.items;
-    state.domains = data.domains;
-    state.byId = {};
-    data.items.forEach(function (it) { state.byId[it.id] = it; });
-    applyFilters();
+    S.items = data.items; S.domains = data.domains;
+    data.items.forEach(function (it) { S.byId[it.id] = it; });
 
-    renderDomainChips();
-
-    document.getElementById('pairToggle').addEventListener('click', function () {
-      state.pairsOnly = !state.pairsOnly;
-      this.setAttribute('aria-pressed', state.pairsOnly ? 'true' : 'false');
-      applyFilters();
-      state.index = 0;
-      render();
+    document.querySelectorAll('[data-len]').forEach(function (b) {
+      b.addEventListener('click', function () { S.len = b.getAttribute('data-len'); renderSetup(); });
     });
-
-    document.getElementById('prevBtn').addEventListener('click', function () { step(-1); });
-    document.getElementById('nextBtn').addEventListener('click', function () { step(1); });
+    $('newRound').addEventListener('click', function () { newRound(); $('setup').open = false; });
+    $('againBtn').addEventListener('click', function () { newRound(); });
+    $('revealBtn').addEventListener('click', reveal);
+    document.querySelectorAll('.mk').forEach(function (b) { b.addEventListener('click', function () { mark(b.getAttribute('data-k')); }); });
+    $('prevBtn').addEventListener('click', function () { go(S.i - 1); });
+    $('nextBtn').addEventListener('click', next);
 
     document.addEventListener('keydown', function (e) {
-      if (e.target && /input|textarea/i.test(e.target.tagName)) return;
-      if (e.key === 'ArrowRight') step(1);
-      else if (e.key === 'ArrowLeft') step(-1);
-      else if (e.key === '1' || e.key === '2') {
-        var buttons = document.querySelectorAll('#answers .ans-btn');
-        var idx = e.key === '1' ? 0 : 1;
-        if (buttons[idx] && !buttons[idx].disabled) buttons[idx].click();
-      }
+      var t = e.target;
+      if (t && (/input|textarea|select/i.test(t.tagName) || t.isContentEditable)) return;
+      if (e.altKey || e.ctrlKey || e.metaKey) return;
+      if (e.key === 'ArrowRight') { next(); e.preventDefault(); }
+      else if (e.key === 'ArrowLeft') { go(S.i - 1); e.preventDefault(); }
+      else if (e.key === 'r' || e.key === 'R') reveal();
+      else if (e.key === '1') mark('clause');
+      else if (e.key === '2') mark('neighbour');
+      else if (e.key === '3') mark('other');
     });
 
+    var saved = load();
     var hash = location.hash.match(/item=([\w-]+)/);
-    if (hash && state.byId[hash[1]]) {
-      goToId(hash[1]);
-    } else {
-      render();
+    if (saved && saved.queue && saved.queue.every(function (id) { return S.byId[id]; }) && saved.queue.length) {
+      S.len = saved.len || '6'; S.domain = saved.domain || 'all';
+      S.queue = saved.queue; S.i = Math.min(saved.i || 0, saved.queue.length - 1);
+      S.marks = saved.marks || {}; S.revealed = saved.revealed || {};
     }
+    if (hash && S.byId[hash[1]]) {
+      var at = S.queue.indexOf(hash[1]);
+      if (at !== -1) S.i = at;
+      else {
+        /* a deep link to an item: play it and its twin as a short round */
+        var it = S.byId[hash[1]];
+        S.queue = [it.id].concat(it.partner_id && S.byId[it.partner_id] ? [it.partner_id] : []);
+        S.i = 0; S.marks = {}; S.revealed = {};
+      }
+      save(); render(false);
+    } else if (S.queue.length) {
+      render(false);
+    } else newRound();
+    renderSetup();
   }
 
   try {
-    var dataEl = document.getElementById('try-data');
-    var data = JSON.parse(dataEl.textContent);
-    init(data);
+    init(JSON.parse($('try-data').textContent));
   } catch (err) {
-    var n = document.getElementById('notice');
-    n.hidden = false;
-    document.getElementById('noticeText').textContent = 'Could not load item data (' + err.message + ').';
+    $('notice').hidden = false;
+    $('noticeText').textContent = 'Could not load item data (' + err.message + ').';
   }
 })();
 </script>
