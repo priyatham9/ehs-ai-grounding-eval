@@ -173,6 +173,20 @@ main{padding:32px 0 60px}
 .footer-links a:hover{color:var(--accent)}
 .footer-note{margin-top:16px;font-size:.8125rem;line-height:1.6;color:var(--muted);max-width:64ch}
 @media print{.skip,.filters,.answers,footer.footer{display:none!important}body{background:#fff!important;color:#000!important}}
+
+/* round 7B: baselines chapter + GSAP motion layer */
+.bl-chapter{margin-top:34px}
+.bl-h{font-stretch:125%;font-weight:900;text-transform:uppercase;font-size:clamp(1.3rem,2.6vw,2rem);max-width:24ch;margin:0 0 6px}
+.bl-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:26px;align-items:center}
+.bl-beats{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.bl-beat{display:grid;gap:4px;border:2px solid var(--rule-soft);background:var(--surface);padding:14px 16px;font-size:.9rem;color:var(--ink-2);line-height:1.5}
+.bl-n{font-size:1.7rem;font-weight:700;color:var(--accent);line-height:1.1}
+.bl-bad .bl-n{color:var(--bad)} .bl-good .bl-n{color:var(--good)}
+@media (max-width:899.98px){.bl-grid{grid-template-columns:1fr}}
+.tm-on .bl-chapter.is-pinned{min-height:100vh;display:flex;flex-direction:column;justify-content:center}
+.tm-on .btn,.tm-on .chip,.tm-on .mk,.tm-on .dot{transition-property:border-color,color,background,box-shadow}
+.tm-mask{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.06em}
+@media print{.bl-beat,.baselines-chart img{opacity:1!important;transform:none!important;clip-path:none!important}}
 </style>
 <style id="try-page-css">
 /* ---------- try page: "beat the neighbour" round ---------- */
@@ -1476,6 +1490,9 @@ html.rs-lock,html.rs-lock body{overflow:hidden}
 </section>
 <p class="sr-live" id="live" aria-live="polite"></p>
 
+<section class="bl-chapter" id="bl-chapter" aria-labelledby="bl-h">
+  <h2 class="bl-h" id="bl-h">What the baselines show</h2>
+  <div class="bl-grid">
 <div class="baselines">
   <figure class="baselines-chart">
     <img src="baselines.svg" alt="" role="img"
@@ -1496,6 +1513,13 @@ html.rs-lock,html.rs-lock body{overflow:hidden}
     </details>
   </figure>
 </div>
+    <ol class="bl-beats">
+      <li class="bl-beat bl-bad"><span class="bl-n mono">47.3%</span><span>Guessing between the two answers picks the neighbour's answer almost half the time, at 52.1% accuracy.</span></li>
+      <li class="bl-beat bl-good"><span class="bl-n mono">0.0%</span><span>Plain retrieval never gives the neighbour's answer, but it is right only 27.0 to 28.6% of the time.</span></li>
+      <li class="bl-beat"><span class="bl-n mono">0</span><span>Language models scored on this corpus so far. The high-accuracy, high-error corner stays empty until one is.</span></li>
+    </ol>
+  </div>
+</section>
 
 <div class="explainer">
   <h2>What adjacent substitution is</h2>
@@ -1839,6 +1863,156 @@ html.rs-lock,html.rs-lock body{overflow:hidden}
     $('notice').hidden = false;
     $('noticeText').textContent = 'Could not load item data (' + err.message + ').';
   }
+})();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.15.0/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.15.0/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.15.0/SplitText.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.15.0/Flip.min.js"></script>
+<script id="try-motion-js">
+/* Page motion layer (round 7B). GSAP 3.15 core + ScrollTrigger + SplitText + Flip from cdnjs.
+   Without GSAP, under reduced motion (OS or ?reduced=1) or in print, nothing here runs and
+   the page shows its final static state. Desktop (>= 900px) gets pins and scrub; phones get
+   one-shot reveals. Only transform, opacity and clip-path are animated. */
+var TM = (function () {
+  'use strict';
+  var g = window.gsap, ST = window.ScrollTrigger;
+  var RM = (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) || /[?&]reduced=1/.test(location.search);
+  var ok = !!(g && ST) && !RM && !/[?&]print=1/.test(location.search);
+  var api = { ok: ok, desk: false };
+  if (!ok) return api;
+  var plugins = [ST]; if (window.SplitText) plugins.push(window.SplitText); if (window.Flip) plugins.push(window.Flip);
+  g.registerPlugin.apply(g, plugins);
+  document.documentElement.classList.add('tm-on');
+  api.desk = matchMedia('(min-width: 900px)').matches;
+  var EASE = 'expo.out';
+
+  // masked word reveal; keeps the heading's text readable to assistive tech (SplitText sets aria)
+  api.split = function (el, delay, trigger) {
+    if (!el || !window.SplitText) return null;
+    var st = window.SplitText.create(el, { type: 'words', mask: 'words' });
+    g.from(st.words, { yPercent: 115, duration: 0.95, ease: EASE, stagger: 0.055, delay: delay || 0,
+      scrollTrigger: trigger ? { trigger: el, start: 'top 88%', once: true } : null });
+    return st;
+  };
+  // one-shot fade-up of a list of nodes when the first enters
+  api.reveal = function (nodes, opts) {
+    nodes = Array.prototype.slice.call(nodes || []).filter(Boolean);
+    if (!nodes.length) return;
+    opts = opts || {};
+    g.from(nodes, { autoAlpha: 0, y: opts.y == null ? 32 : opts.y, x: opts.x || 0, duration: 0.8, ease: EASE, stagger: opts.stagger || 0.08, delay: opts.delay || 0,
+      scrollTrigger: opts.now ? null : { trigger: nodes[0], start: opts.start || 'top 88%', once: true } });
+  };
+  // spring hover lift and press squash, delegated so rebuilt nodes keep it
+  api.spring = function (sel) {
+    if (!matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      document.addEventListener('pointerdown', function (e) { var t = e.target.closest(sel); if (t) g.fromTo(t, { scale: 0.95 }, { scale: 1, duration: 0.6, ease: 'elastic.out(1.1,0.45)', overwrite: 'auto' }); }, { passive: true });
+      return;
+    }
+    var last = null;
+    document.addEventListener('pointerover', function (e) {
+      var t = e.target.closest(sel); if (t === last) return;
+      if (last) g.to(last, { y: 0, scale: 1, duration: 0.7, ease: 'elastic.out(1,0.45)', overwrite: 'auto' });
+      last = t; if (t && !t.disabled) g.to(t, { y: -2, duration: 0.3, ease: 'power3.out', overwrite: 'auto' });
+    }, { passive: true });
+    document.addEventListener('pointerdown', function (e) { var t = e.target.closest(sel); if (t && !t.disabled) g.to(t, { scale: 0.95, duration: 0.12, ease: 'power2.out', overwrite: 'auto' }); }, { passive: true });
+    document.addEventListener('pointerup', function (e) { var t = e.target.closest(sel); if (t) g.to(t, { scale: 1, duration: 0.65, ease: 'elastic.out(1.1,0.4)', overwrite: 'auto' }); }, { passive: true });
+  };
+  // Flip layout transition around a DOM change
+  api.flip = function (targets, mutate, opts) {
+    if (!window.Flip) { mutate(); return; }
+    var state = window.Flip.getState(targets);
+    mutate();
+    window.Flip.from(state, Object.assign({ duration: 0.6, ease: EASE, nested: true, prune: true,
+      onEnter: function (els) { return g.fromTo(els, { autoAlpha: 0, scale: 0.9 }, { autoAlpha: 1, scale: 1, duration: 0.45, ease: EASE }); },
+      onLeave: function (els) { return g.to(els, { autoAlpha: 0, scale: 0.9, duration: 0.25 }); } }, opts || {}));
+  };
+  // pinned, scrubbed chapter on desktop when it fits the screen; phones and tall chapters get build(null)
+  api.pin = function (sec, len, build) {
+    if (!sec) return null;
+    if (!api.desk) { build(null); return null; }
+    sec.classList.add('is-pinned');
+    if (sec.getBoundingClientRect().height > innerHeight * 1.02) { sec.classList.remove('is-pinned'); build(null); return null; }
+    var tl = g.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: sec, start: 'top top', end: '+=' + len, pin: true, scrub: 0.8, anticipatePin: 1, invalidateOnRefresh: true } });
+    build(tl);
+    return tl;
+  };
+  // number roll from 0 to the node's own text (keeps prefix/suffix and decimals)
+  api.count = function (n, tl, at) {
+    var m = /(-?[\d,]*\.?\d+)/.exec(n.textContent); if (!m) return;
+    var raw = m[1], to = parseFloat(raw.replace(/,/g, '')), dec = (raw.split('.')[1] || '').length, pre = n.textContent.slice(0, m.index), post = n.textContent.slice(m.index + raw.length);
+    var o = { v: 0 }, fmt = function () { n.textContent = pre + o.v.toFixed(dec) + post; };
+    var vars = { v: to, duration: tl ? 0.8 : 1.4, ease: tl ? 'none' : 'power3.out', onUpdate: fmt, onComplete: fmt };
+    if (tl) tl.fromTo(o, { v: 0 }, vars, at || 0);
+    else { vars.scrollTrigger = { trigger: n, start: 'top 90%', once: true }; g.fromTo(o, { v: 0 }, vars); }
+  };
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { ST.refresh(); });
+  addEventListener('load', function () { ST.refresh(); });
+  return api;
+})();
+(function () {
+  'use strict';
+  if (!TM.ok) return;
+  var g = window.gsap, $ = function (id) { return document.getElementById(id); };
+  // hero: words rise out of a mask, then the lede and the three-step how-to follow
+  var hero = document.querySelector('.hero');
+  if (hero) {
+    TM.split(hero.querySelector('h1'), 0.1);
+    TM.reveal([hero.querySelector('.eyebrow'), hero.querySelector('.lede')], { now: true, delay: 0.25, stagger: 0.1, y: 22 });
+    TM.reveal(hero.querySelectorAll('.howto li'), { now: true, delay: 0.55, stagger: 0.12, y: 40 });
+  }
+  TM.spring('.btn, .chip, .mk, .dot');
+
+  // the reveal phase: clause slides in from the left, the trap from the right
+  function watchShown(el, fn) {
+    if (!el) return;
+    new MutationObserver(function () { if (!el.hidden) fn(); }).observe(el, { attributes: true, attributeFilter: ['hidden'] });
+  }
+  watchShown($('phaseReveal'), function () {
+    g.fromTo('#phaseReveal .side.ok', { x: -48, autoAlpha: 0 }, { x: 0, autoAlpha: 1, duration: 0.8, ease: 'expo.out', clearProps: 'transform' });
+    g.fromTo('#phaseReveal .side.trap', { x: 48, autoAlpha: 0 }, { x: 0, autoAlpha: 1, duration: 0.8, ease: 'expo.out', delay: 0.12, clearProps: 'transform' });
+    g.fromTo('#markBox .mk', { y: 18, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.6, ease: 'expo.out', stagger: 0.07, delay: 0.25, clearProps: 'transform' });
+  });
+  watchShown($('after'), function () {
+    g.fromTo('#verdict', { scale: 0.94, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: 0.7, ease: 'back.out(1.8)', clearProps: 'transform' });
+  });
+  watchShown($('summary'), function () {
+    g.fromTo('#summary .you3 > div', { y: 44, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.9, ease: 'expo.out', stagger: 0.1, clearProps: 'transform' });
+    g.fromTo('#summary .cmp > div', { y: 30, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.9, ease: 'expo.out', stagger: 0.12, delay: 0.25, clearProps: 'transform' });
+  });
+  // the dot for the item just marked pops with a spring
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('.mk')) return;
+    requestAnimationFrame(function () {
+      var d = document.querySelector('#dots .dot[aria-current="step"]');
+      if (d) g.fromTo(d, { scale: 1.6 }, { scale: 1, duration: 0.8, ease: 'elastic.out(1.2,0.35)' });
+    });
+  });
+  // opening and closing the round settings slides the board and card instead of jumping
+  var setup = $('setup');
+  if (setup && window.Flip) {
+    var state = null;
+    setup.querySelector('summary').addEventListener('click', function () { state = window.Flip.getState('#board, #card, .setup-body'); }, true);
+    setup.addEventListener('toggle', function () {
+      if (!state) return;
+      var st = state; state = null;
+      window.Flip.from(st, { duration: 0.55, ease: 'expo.out', onEnter: function (els) { return g.fromTo(els, { autoAlpha: 0, y: -12 }, { autoAlpha: 1, y: 0, duration: 0.45 }); } });
+    });
+  }
+  // pinned chapter: the scatter wipes in left to right while the three beats land
+  var sec = $('bl-chapter');
+  TM.split(sec && sec.querySelector('.bl-h'), 0, true);
+  TM.pin(sec, '170%', function (tl) {
+    var img = sec.querySelector('.baselines-chart img'), beats = sec.querySelectorAll('.bl-beat');
+    if (!tl) { TM.reveal([img], { y: 24 }); TM.reveal(beats, { x: 30, y: 0, stagger: 0.12 }); sec.querySelectorAll('.bl-n').forEach(function (n) { TM.count(n); }); return; }
+    tl.fromTo(img, { clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', duration: 1.2, ease: 'power2.inOut' }, 0);
+    beats.forEach(function (b, i) {
+      var at = 0.35 + i * 0.55;
+      tl.fromTo(b, { autoAlpha: 0, x: 60 }, { autoAlpha: 1, x: 0, duration: 0.5, ease: 'power3.out' }, at);
+      TM.count(b.querySelector('.bl-n'), tl, at);
+    });
+    tl.to({}, { duration: 0.3 });
+  });
 })();
 </script>
 <script id="rs-header-js">

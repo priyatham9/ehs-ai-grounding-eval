@@ -1285,6 +1285,15 @@ html:not(.m-desk) [data-m-progress]{transform:none}
 .m-desk [data-m-hero]{overflow:clip}
 @media (prefers-reduced-motion: reduce){[data-m-step],[data-m-hero-part],[data-m-reveal]{opacity:1!important;visibility:visible!important;transform:none!important;filter:none!important;clip-path:none!important}}
 .st-reduced [data-m-step],.st-reduced [data-m-hero-part],.st-printing [data-m-step]{opacity:1!important;visibility:visible!important;transform:none!important;filter:none!important;clip-path:none!important}
+/* v2.1 motion polish: nothing flashes in its final or unsplit state before GSAP takes it.
+   html.m-ready is set by story.js once the layer is set up (or found missing / reduced);
+   the 2.5s failsafe shows everything even if the script never runs. */
+@keyframes m-failsafe{to{visibility:visible}}
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference){
+  html:not(.m-ready):not(.st-reduced):not(.st-printing) :is([data-m-split]:not([data-m-split-done]),[data-m-hero-part],[data-m-pin] [data-m-step],[data-m-reveal]){visibility:hidden;animation:m-failsafe 0s 2.5s forwards}
+}
+[data-m-count]{font-variant-numeric:tabular-nums}
+.m-on [data-m-split-done]{font-variant-ligatures:none}
 /*STORY_CSS_END*/</style>
 <script id="rs-theme-init">try{var t=localStorage.getItem("pc-theme")||localStorage.getItem("ehs-ai-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);}catch(e){}</script><style id="rs-header-css">
 .rs-header{
@@ -1736,6 +1745,15 @@ html.st-printing .st-chart text,html.st-printing .st-chart .sy-ent-t,html.st-pri
 @media (prefers-reduced-motion: reduce){.ld-face.is-flipping{animation:none}.ld-bars li,.ld-bf,.ld-tile{transition:none}}
 @media print{.ld-switch,.ld-tabs,.ld-go{display:none!important}.ld-tile,.ld-flip,.ld-rank,.ld-mean,.ld-ask,.ld-qs li,.ld-acts li{border:.5pt solid #999!important;box-shadow:none!important;background:none!important}.ld-bf{transform:scaleX(var(--v,0))!important}}
 html.st-printing .ld-switch,html.st-printing .ld-tabs{display:none!important}
+
+/* round 7B motion layer: beat labels, pin progress, GSAP owns transforms on spring targets */
+.ld-beat{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:700}
+.ld-sixty .ld-warn .ld-beat{color:var(--ld-bad)}
+.m-prog{display:block;height:3px;width:100%;max-width:220px;margin:0 0 14px;background:var(--accent);border-radius:3px;transform:scaleX(0);transform-origin:0 50%}
+html:not(.m-desk) .m-prog{display:none}
+.m-on [data-m-spring]{transition-property:border-color,color,background,box-shadow!important}
+.m-desk .ld-sixty .ld-strip{gap:16px}
+.m-desk .ld-sixty .ld-n{font-size:clamp(1.9rem,2.5vw,2.5rem)}
 </style>
 <style id="story-opening-css">
 /* ---------- opening: kinetic clause ---------- */
@@ -1834,23 +1852,23 @@ html.st-printing .kc-step{min-height:0;opacity:1}
 <a class="skip" href="#main">Skip to content</a><header class="rs-header" id="rs-header"><div class="rs-bar"><div class="rs-row"><a class="rs-brand" href="https://priyatham9.github.io/grounded/" aria-label="Grounded research hub"><span class="rs-mark" aria-hidden="true"></span>Grounded</a><a class="rs-author" href="https://priyatham9.github.io/">Priyatham Chimmani&nbsp;&#8599;</a><nav class="rs-nav" aria-label="Research site"><a class="rs-item" href="https://priyatham9.github.io/grounded/">Overview</a><a class="rs-item" href="https://priyatham9.github.io/grounded/start.html">Start here</a><a class="rs-item" href="https://priyatham9.github.io/grounded/observatory.html">Observatory</a><details class="rs-menu" data-current="true"><summary class="rs-item" aria-haspopup="true">Projects<span class="rs-caret" aria-hidden="true"></span></summary><div class="rs-panel"><a class="rs-opt" href="https://priyatham9.github.io/ehs-osha-analysis/"><span class="rs-t">OSHA data quality</span><span class="rs-n">2.8M real filings</span></a><a class="rs-opt" href="https://priyatham9.github.io/ehs-ai-grounding-eval/" aria-current="page"><span class="rs-t">Grounding benchmark</span><span class="rs-n">first baselines</span></a><a class="rs-opt" href="https://priyatham9.github.io/ehs-human-factors-ontology/"><span class="rs-t">Human factors ontology</span><span class="rs-n">derivation traces</span></a><a class="rs-opt" href="https://priyatham9.github.io/ehs-risk-sem/"><span class="rs-t">SEM for safety risk</span><span class="rs-n">simulation studies</span></a><a class="rs-opt" href="https://priyatham9.github.io/ehs-capitals-calculator/"><span class="rs-t">Cost-benefit calculator</span><span class="rs-n">interactive tool</span></a><a class="rs-opt" href="https://priyatham9.github.io/ehs-benchmarks/"><span class="rs-t">OSHA benchmarks</span><span class="rs-n">TRIR/DART library</span></a></div></details><details class="rs-menu"><summary class="rs-item" aria-haspopup="true">Papers<span class="rs-caret" aria-hidden="true"></span></summary><div class="rs-panel"><a class="rs-opt" href="https://priyatham9.github.io/grounded/paper.html"><span class="rs-t">Grounded reasoning for safety-critical AI</span><span class="rs-n">bundled draft</span></a><a class="rs-opt" href="https://priyatham9.github.io/grounded/paper-osha.html"><span class="rs-t">The hours denominator</span><span class="rs-n">standalone OSHA paper</span></a></div></details><a class="rs-item rs-story" href="story.html">Read the story</a></nav><span class="rs-sep" aria-hidden="true"></span><button class="rs-btn" id="rs-theme" type="button" aria-label="Dark theme" aria-pressed="false" title="Switch colour theme"><svg class="rs-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg><svg class="rs-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg></button><button class="rs-btn rs-burger" id="rs-menu-btn" type="button" aria-expanded="false" aria-controls="rs-sheet" aria-label="Open menu"><i></i></button></div></div><div class="rs-sub"><div class="rs-row rs-subrow"><span class="rs-sublabel">On this page</span><nav class="rs-sections" id="rs-sections" aria-label="On this page"><a class="rs-sec" href="#substitution">The substitution</a><a class="rs-sec" href="#corpus">The corpus</a><a class="rs-sec" href="#try">You go first</a><a class="rs-sec" href="#baselines">Baselines</a><a class="rs-sec" href="#honesty">What it does not show</a><a class="rs-sec" href="#monday">Monday</a></nav><button class="rs-subbtn" id="rs-subbtn" type="button" aria-expanded="false" aria-controls="rs-sublist">On this page:<b id="rs-now">The substitution</b><span class="rs-caret" aria-hidden="true"></span></button></div><nav class="rs-sublist" id="rs-sublist" aria-label="On this page (list)" hidden><a class="rs-sec" href="#substitution">The substitution</a><a class="rs-sec" href="#corpus">The corpus</a><a class="rs-sec" href="#try">You go first</a><a class="rs-sec" href="#baselines">Baselines</a><a class="rs-sec" href="#honesty">What it does not show</a><a class="rs-sec" href="#monday">Monday</a></nav></div><div class="rs-sheet" id="rs-sheet" hidden><a class="rs-item" href="https://priyatham9.github.io/grounded/">Overview</a><a class="rs-item" href="https://priyatham9.github.io/grounded/start.html">Start here</a><a class="rs-item" href="https://priyatham9.github.io/grounded/observatory.html">Observatory</a><a class="rs-item rs-story" href="story.html">Read the story</a><span class="rs-group">Projects</span><a class="rs-opt" href="https://priyatham9.github.io/ehs-osha-analysis/"><span class="rs-t">OSHA data quality</span><span class="rs-n">2.8M real filings</span></a><a class="rs-opt" href="https://priyatham9.github.io/ehs-ai-grounding-eval/" aria-current="page"><span class="rs-t">Grounding benchmark</span><span class="rs-n">first baselines</span></a><a class="rs-opt" href="https://priyatham9.github.io/ehs-human-factors-ontology/"><span class="rs-t">Human factors ontology</span><span class="rs-n">derivation traces</span></a><a class="rs-opt" href="https://priyatham9.github.io/ehs-risk-sem/"><span class="rs-t">SEM for safety risk</span><span class="rs-n">simulation studies</span></a><a class="rs-opt" href="https://priyatham9.github.io/ehs-capitals-calculator/"><span class="rs-t">Cost-benefit calculator</span><span class="rs-n">interactive tool</span></a><a class="rs-opt" href="https://priyatham9.github.io/ehs-benchmarks/"><span class="rs-t">OSHA benchmarks</span><span class="rs-n">TRIR/DART library</span></a><span class="rs-group">Papers</span><a class="rs-opt" href="https://priyatham9.github.io/grounded/paper.html"><span class="rs-t">Grounded reasoning for safety-critical AI</span><span class="rs-n">bundled draft</span></a><a class="rs-opt" href="https://priyatham9.github.io/grounded/paper-osha.html"><span class="rs-t">The hours denominator</span><span class="rs-n">standalone OSHA paper</span></a><a class="rs-sheet-author" href="https://priyatham9.github.io/">Priyatham Chimmani&nbsp;&#8599;</a></div><span class="rs-progress" aria-hidden="true"></span></header>
 <main id="main">
 
-<section class="sy-hero" id="thesis">
+<section class="sy-hero" id="thesis" data-m-hero>
   <div class="wrap">
     <div class="st-hero" id="hero">
-      <div class="sy-hero-text">
+      <div class="sy-hero-text" data-m-hero-copy>
         <p class="sy-crumb"><a href="https://priyatham9.github.io/grounded/">Grounded</a><i>&rsaquo;</i><a href="index.html">ehs-ai-grounding-eval</a><i>&rsaquo;</i><b>Story</b></p>
-        <p class="label sy-eyebrow">Story 3 of 7 &middot; the adjacent clause</p>
-        <h1 class="display">The adjacent clause</h1>
-        <p class="sy-lede">A wrong answer about the next regulated entity over reads exactly like a right one. It is fluent, internally consistent, and it carries a citation. This benchmark was built to catch that one failure.</p>
-        <p class="sy-sub">68 questions. 23 minimal pairs. Three non-LLM baselines. No language model has been scored yet, and the page says so wherever that number would go.</p>
-        <div class="sy-cta">
-          <a class="sy-btn sy-btn-p" href="#ch1">Start the story</a>
-          <a class="sy-btn" href="#sixty">The 60-second version</a>
-          <a class="sy-btn" href="index.html">Project page</a>
+        <p class="label sy-eyebrow" data-m-hero-part="text">Story 3 of 7 &middot; the adjacent clause</p>
+        <h1 class="display" data-m-split="words">The adjacent clause</h1>
+        <p class="sy-lede" data-m-hero-part="text">A wrong answer about the next regulated entity over reads exactly like a right one. It is fluent, internally consistent, and it carries a citation. This benchmark was built to catch that one failure.</p>
+        <p class="sy-sub" data-m-hero-part="text">68 questions. 23 minimal pairs. Three non-LLM baselines. No language model has been scored yet, and the page says so wherever that number would go.</p>
+        <div class="sy-cta" data-m-hero-part="text">
+          <a data-m-spring class="sy-btn sy-btn-p" href="#ch1">Start the story</a>
+          <a data-m-spring class="sy-btn" href="#sixty">The 60-second version</a>
+          <a data-m-spring class="sy-btn" href="index.html">Project page</a>
           <span class="sy-hint mono">P for presenter mode &middot; M for the map</span>
         </div>
       </div>
-      <div class="st-hero-orb">
+      <div class="st-hero-orb" data-m-hero-part="visual">
         <canvas id="hero-orb" role="img" aria-label="Animated dot sphere standing for the system under review. It searches, drifts to the wrong clause, then settles when it is bound to a source."></canvas>
         <span class="label sy-orbcap">The system under review</span>
       </div>
@@ -1862,7 +1880,7 @@ html.st-printing .kc-step{min-height:0;opacity:1}
 <section class="sy-sec kc" id="opening" aria-labelledby="kc-h">
   <div class="wrap">
     <p class="label">Watch it happen &middot; item rk-001, 29 CFR 1904.39</p>
-    <h2 class="display sy-h2" id="kc-h">The answer lands one paragraph <em class="ld-kw">too far</em></h2>
+    <h2 class="display sy-h2" id="kc-h" data-m-split="words">The answer lands one paragraph <em class="ld-kw">too far</em></h2>
   </div>
   <div class="wrap kc-grid">
     <div class="kc-stage-col">
@@ -1899,33 +1917,39 @@ html.st-printing .kc-step{min-height:0;opacity:1}
 </section>
 
 <!-- ============ 60-SECOND VERSION ============ -->
-<section class="sy-sec ld-sixty" id="sixty" aria-labelledby="sixty-h">
+<section class="sy-sec ld-sixty" id="sixty" aria-labelledby="sixty-h" data-m-pin="260%">
   <div class="wrap">
     <p class="label">The 60-second version</p>
-    <h2 class="display sy-h2" id="sixty-h">Accuracy picks the coin flip. The clause picks retrieval.</h2>
+    <span class="m-prog" data-m-progress aria-hidden="true"></span>
+    <h2 class="display sy-h2" id="sixty-h" data-m-split="words">Accuracy picks the coin flip. The clause picks retrieval.</h2>
     <div class="ld-strip">
-      <a class="ld-tile ld-warn" href="#ranking">
-        <span class="ld-n"><span data-count="47.3" data-dec="1">47.3</span>%</span>
-        <span class="ld-t">of coin-flip answers are the neighbouring rule's answer, while the same coin flip scores 52.1% accuracy</span>
-        <span class="ld-go">Finding 3 &rarr;</span>
-      </a>
-      <a class="ld-tile ld-good" href="#ranking">
-        <span class="ld-n"><span data-count="0" data-dec="1">0.0</span>%</span>
-        <span class="ld-t">of plain retrieval answers do that, at only 27.0 to 28.6% accuracy: often unhelpful, never misleading</span>
-        <span class="ld-go">Finding 3 &rarr;</span>
-      </a>
-      <a class="ld-tile" href="#flip">
-        <span class="ld-n"><span data-count="63" data-dec="0">63</span></span>
+      <a data-m-step="0" data-m-from="up blur" data-m-spring class="ld-tile" href="#flip">
+        <span class="ld-beat mono">01 Problem</span>
+        <span class="ld-n"><span data-m-count data-m-at="0.2">63</span></span>
         <span class="ld-t">factual items, each built around a real neighbouring rule whose answer reads as correct</span>
         <span class="ld-go">Finding 1 &rarr;</span>
       </a>
-      <a class="ld-tile" href="#corpus">
-        <span class="ld-n"><span data-count="23" data-dec="0">23</span></span>
+      <a data-m-step="1" data-m-from="down blur" data-m-spring class="ld-tile ld-warn" href="#ranking">
+        <span class="ld-beat mono">02 Evidence</span>
+        <span class="ld-n"><span data-m-count data-m-at="1.2">47.3</span>%</span>
+        <span class="ld-t">of coin-flip answers are the neighbouring rule's answer, while the same coin flip scores 52.1% accuracy</span>
+        <span class="ld-go">Finding 3 &rarr;</span>
+      </a>
+      <a data-m-step="2" data-m-from="up blur" data-m-spring class="ld-tile" href="#corpus">
+        <span class="ld-beat mono">03 Method</span>
+        <span class="ld-n"><span data-m-count data-m-at="2.2">23</span></span>
         <span class="ld-t">minimal pairs cover 46 of the 68 items, so a lucky guess cannot pass both halves</span>
         <span class="ld-go">Finding 2 &rarr;</span>
       </a>
-      <a class="ld-tile ld-muted" href="#honesty">
-        <span class="ld-n"><span data-count="0" data-dec="0">0</span></span>
+      <a data-m-step="3" data-m-from="down blur" data-m-spring class="ld-tile ld-good" href="#ranking">
+        <span class="ld-beat mono">04 Finding</span>
+        <span class="ld-n"><span data-m-count data-m-at="3.2">0.0</span>%</span>
+        <span class="ld-t">of plain retrieval answers do that, at only 27.0 to 28.6% accuracy: often unhelpful, never misleading</span>
+        <span class="ld-go">Finding 3 &rarr;</span>
+      </a>
+      <a data-m-step="4" data-m-from="up blur" data-m-spring class="ld-tile ld-muted" href="#honesty">
+        <span class="ld-beat mono">05 So what</span>
+        <span class="ld-n"><span data-m-count data-m-at="4.2">0</span></span>
         <span class="ld-t">language models scored so far. No model number appears anywhere on this page</span>
         <span class="ld-go">What this does not establish &rarr;</span>
       </a>
@@ -1936,7 +1960,7 @@ html.st-printing .kc-step{min-height:0;opacity:1}
 
 <!-- ============ CHAPTER 1 ============ -->
 <section class="sy-chapter st-chapter" id="ch1" data-num="01" data-key="1.3&#215;">
-  <h2 class="display">The answer comes back about the wrong device</h2>
+  <h2 class="display" data-m-split="words">The answer comes back about the wrong device</h2>
   <p>It is fluent, it cites a real clause, and every quantity in it belongs to a different piece of equipment.</p>
 </section>
 
@@ -1993,24 +2017,24 @@ html.st-printing .kc-step{min-height:0;opacity:1}
 <section class="sy-sec ld-find" id="flip" aria-labelledby="flip-h">
   <div class="wrap">
     <p class="label">Finding 1 &middot; what the failure looks like</p>
-    <h2 class="display sy-h2" id="flip-h">The wrong answer quotes a real rule. It is <em class="ld-kw">the neighbour's</em>.</h2>
+    <h2 class="display sy-h2" id="flip-h" data-m-split="words">The wrong answer quotes a real rule. It is <em class="ld-kw">the neighbour's</em>.</h2>
     <div class="ld-head">
-      <p class="ld-big"><span data-count="63" data-dec="0">63</span><small>of 63 factual items carry a documented neighbour answer</small></p>
+      <p data-m-parallax="-14" class="ld-big"><span data-count="63" data-dec="0">63</span><small>of 63 factual items carry a documented neighbour answer</small></p>
       <p class="sy-intro">Nothing about a grounding failure looks broken. The number is real, the paragraph exists, the sentence is confident. It simply answers a question about the next device, deadline or table row over. Pick an item and flip between the two answers.</p>
     </div>
 
     <div class="ld-flip" id="ld-flip">
       <div class="ld-tabs" role="tablist" aria-label="Example items">
-        <button type="button" role="tab" class="ld-tab" data-ex="0" aria-selected="true">Fatality report</button>
-        <button type="button" role="tab" class="ld-tab" data-ex="1" aria-selected="false">Respirator APF</button>
-        <button type="button" role="tab" class="ld-tab" data-ex="2" aria-selected="false">PHA revalidation</button>
-        <button type="button" role="tab" class="ld-tab" data-ex="3" aria-selected="false">Rupture disk</button>
+        <button type="button" role="tab" data-m-spring="0.6" class="ld-tab" data-ex="0" aria-selected="true">Fatality report</button>
+        <button type="button" role="tab" data-m-spring="0.6" class="ld-tab" data-ex="1" aria-selected="false">Respirator APF</button>
+        <button type="button" role="tab" data-m-spring="0.6" class="ld-tab" data-ex="2" aria-selected="false">PHA revalidation</button>
+        <button type="button" role="tab" data-m-spring="0.6" class="ld-tab" data-ex="3" aria-selected="false">Rupture disk</button>
       </div>
       <div class="ld-flipcard" role="tabpanel" aria-live="polite">
         <p class="ld-q"><span class="mono ld-qid" id="fl-id">rk-001</span> <span id="fl-q">Within what time must an employer report a work-related employee fatality to OSHA under 29 CFR 1904.39?</span></p>
         <div class="ld-switch" role="group" aria-label="Which answer to show">
-          <button type="button" class="ld-sw" data-side="wrong" aria-pressed="true"><span aria-hidden="true">&#10005;</span> The neighbour's answer</button>
-          <button type="button" class="ld-sw" data-side="right" aria-pressed="false"><span aria-hidden="true">&#10003;</span> What the clause says</button>
+          <button type="button" data-m-spring="0.6" class="ld-sw" data-side="wrong" aria-pressed="true"><span aria-hidden="true">&#10005;</span> The neighbour's answer</button>
+          <button type="button" data-m-spring="0.6" class="ld-sw" data-side="right" aria-pressed="false"><span aria-hidden="true">&#10003;</span> What the clause says</button>
         </div>
         <div class="ld-face" id="fl-face" data-side="wrong">
           <div class="ld-key">
@@ -2028,7 +2052,7 @@ html.st-printing .kc-step{min-height:0;opacity:1}
     </div>
     <p class="sy-src mono">Item text verbatim from docs/try-data.json (built from corpus/items/*.json). Highlights mark the quantity that differs. The neighbour's answer is the trap each item documents, not a model output.</p>
 
-    <div class="ld-take">
+    <div class="ld-take" data-m-reveal data-m-stagger="0.14">
       <div class="ld-mean">
         <span class="label">What it means for a leader</span>
         <p>Careful reading will not catch this. The neighbour's answer is internally consistent and cites a paragraph that exists. The only reliable check is to open the cited clause and confirm it governs the thing you asked about. If a tool cannot show you the clause, nobody on your team can do that check.</p>
@@ -2043,7 +2067,7 @@ html.st-printing .kc-step{min-height:0;opacity:1}
 
 <!-- ============ CHAPTER 2 ============ -->
 <section class="sy-chapter st-chapter" id="ch2" data-num="02" data-key="68">
-  <h2 class="display">23 minimal pairs cover 46 of the 68 items</h2>
+  <h2 class="display" data-m-split="words">23 minimal pairs cover 46 of the 68 items</h2>
   <p>The corpus is built so that guessing well is not the same as reading the clause. A system has to get both members of a pair right.</p>
 </section>
 
@@ -2107,7 +2131,7 @@ html.st-printing .kc-step{min-height:0;opacity:1}
 <!-- ============ FINDING 2 (leader take) ============ -->
 <section class="sy-sec ld-find ld-find-tight" id="corpus-take" aria-label="Finding 2 for leaders">
   <div class="wrap">
-    <div class="ld-take">
+    <div class="ld-take" data-m-reveal data-m-stagger="0.14">
       <div class="ld-mean">
         <span class="label">What it means for a leader</span>
         <p>One right answer proves very little: a coin flip gets half of these right. What separates a tool you can rely on is whether it answers <em>both</em> halves of a confusable pair correctly. On pairs, the coin flip falls to 28.7% and plain retrieval to 13.0%. Test any tool the same way, on the look-alike pairs in your own procedures.</p>
@@ -2125,7 +2149,7 @@ html.st-printing .kc-step{min-height:0;opacity:1}
 <section class="sy-sec sy-try" id="try">
   <div class="wrap">
     <p class="label">Before the results &middot; answer one yourself</p>
-    <h2 class="display sy-h2">You go first</h2>
+    <h2 class="display sy-h2" data-m-split="words">You go first</h2>
     <p class="sy-intro">One real item from the corpus. Read it, settle on your answer, then open the reveal. Pick the one you would act on. One is what the clause says; the other is the adjacent answer a retriever reaches for. The point is not whether you get it right: it is how reasonable the wrong answer sounds.</p>
 
     <div class="sy-card" id="try-card" data-st-spotlight>
@@ -2137,9 +2161,9 @@ html.st-printing .kc-step{min-height:0;opacity:1}
       <div class="sy-opts" id="try-opts" role="group" aria-label="Pick the answer you would act on"></div>
       <p class="sy-verdict" id="try-verdict" role="status" hidden></p>
       <div class="sy-actions">
-        <button type="button" class="sy-btn sy-btn-p" id="try-commit">Just show me</button>
-        <button type="button" class="sy-btn" id="try-next">Another item</button>
-        <a class="sy-btn" href="try.html">Play a 6-question round &rarr;</a>
+        <button type="button" data-m-spring class="sy-btn sy-btn-p" id="try-commit">Just show me</button>
+        <button type="button" data-m-spring class="sy-btn" id="try-next">Another item</button>
+        <a data-m-spring class="sy-btn" href="try.html">Play a 6-question round &rarr;</a>
       </div>
       <div class="sy-reveal" id="try-reveal" hidden>
         <div class="sy-rev sy-rev-wrong">
@@ -2164,7 +2188,7 @@ html.st-printing .kc-step{min-height:0;opacity:1}
 
 <!-- ============ CHAPTER 3 ============ -->
 <section class="sy-chapter st-chapter" id="ch3" data-num="03" data-key="47.3%">
-  <h2 class="display">Retrieval substitutes 0.0 percent of the time, guessing 47.3 percent</h2>
+  <h2 class="display" data-m-split="words">Retrieval substitutes 0.0 percent of the time, guessing 47.3 percent</h2>
   <p>Accuracy is the number people quote. The substitution rate decides whether a wrong answer reaches the plant floor.</p>
 </section>
 
@@ -2227,16 +2251,16 @@ html.st-printing .kc-step{min-height:0;opacity:1}
 <section class="sy-sec ld-find" id="ranking" aria-labelledby="rank-h">
   <div class="wrap">
     <p class="label">Finding 3 &middot; how often it happens</p>
-    <h2 class="display sy-h2" id="rank-h">Rank by accuracy and guessing wins. Rank by wrong-entity answers and it <em class="ld-kw">comes last</em>.</h2>
+    <h2 class="display sy-h2" id="rank-h" data-m-split="words">Rank by accuracy and guessing wins. Rank by wrong-entity answers and it <em class="ld-kw">comes last</em>.</h2>
     <div class="ld-head">
-      <p class="ld-big ld-big-warn"><span data-count="47.3" data-dec="1">47.3</span>%<small>of guessed answers are the neighbour's, with a 95% interval of 40.4 to 53.5%</small></p>
+      <p data-m-parallax="-14" class="ld-big ld-big-warn"><span data-count="47.3" data-dec="1">47.3</span>%<small>of guessed answers are the neighbour's, with a 95% interval of 40.4 to 53.5%</small></p>
       <p class="sy-intro">Same four systems, same 63 factual items. Switch the yardstick and the order reverses. That reversal is the reason this benchmark reports more than accuracy.</p>
     </div>
-    <div class="ld-rank" id="ld-rank">
+    <div class="ld-rank" id="ld-rank" data-m-flip="#rk-bars > li">
       <div class="ld-switch" role="group" aria-label="Rank the systems by">
-        <button type="button" class="ld-sw" data-m="acc" aria-pressed="true">Accuracy</button>
-        <button type="button" class="ld-sw" data-m="adj" aria-pressed="false">Wrong-entity answers</button>
-        <button type="button" class="ld-sw" data-m="cite" aria-pressed="false">Right clause cited</button>
+        <button type="button" data-m-spring="0.6" class="ld-sw" data-m="acc" aria-pressed="true">Accuracy</button>
+        <button type="button" data-m-spring="0.6" class="ld-sw" data-m="adj" aria-pressed="false">Wrong-entity answers</button>
+        <button type="button" data-m-spring="0.6" class="ld-sw" data-m="cite" aria-pressed="false">Right clause cited</button>
       </div>
       <p class="ld-rank-note" id="rk-note">Higher is better. On this yardstick the coin flip beats both retrievers.</p>
       <ol class="ld-bars" id="rk-bars" aria-live="polite">
@@ -2249,7 +2273,7 @@ html.st-printing .kc-step{min-height:0;opacity:1}
     </div>
     <p class="sy-src mono">n = 63 factual items; random floor averaged over 5 repeats. Source artifact: results/baselines_summary.csv (accuracy, adjacent_substitution_rate, citation_correct_clause_rate)</p>
 
-    <div class="ld-take">
+    <div class="ld-take" data-m-reveal data-m-stagger="0.14">
       <div class="ld-mean">
         <span class="label">What it means for a leader</span>
         <p>Judged on accuracy alone, you would buy the coin flip. A tool that is often unhelpful is a cost you can see; a tool that confidently answers the neighbour's question is a hazard you cannot. Never accept an accuracy figure without the wrong-entity rate and the citation rate beside it.</p>
@@ -2263,32 +2287,33 @@ html.st-printing .kc-step{min-height:0;opacity:1}
 </section>
 
 <!-- ============ HONESTY ============ -->
-<section class="sy-sec sy-honest" id="honesty">
+<section class="sy-sec sy-honest" id="honesty" data-m-pin="240%">
   <div class="wrap">
     <p class="label">The honesty scene</p>
-    <h2 class="display sy-h2">What this does not establish</h2>
+    <span class="m-prog" data-m-progress aria-hidden="true"></span>
+    <h2 class="display sy-h2" data-m-split="words">What this does not establish</h2>
     <div class="sy-grid3" data-st-spotlight-group>
-      <div class="sy-note" data-st-spotlight>
+      <div class="sy-note" data-m-step="0" data-m-from="scale blur" data-st-spotlight>
         <span class="label">No model scored</span>
         <p>No LLM API was available on the machine these runs were made on. There is no language model arm anywhere in this repository, and any demonstration run carrying mock output is labelled mock in the artifact and on the page.</p>
       </div>
-      <div class="sy-note" data-st-spotlight>
+      <div class="sy-note" data-m-step="1" data-m-from="scale blur" data-st-spotlight>
         <span class="label">The corpus is a construct</span>
         <p>68 items across 8 domains is a built object, not a sample of the questions people ask. It cannot support a claim about how often substitution happens in the field, only about whether a system falls for it here.</p>
       </div>
-      <div class="sy-note" data-st-spotlight>
+      <div class="sy-note" data-m-step="2" data-m-from="scale blur" data-st-spotlight>
         <span class="label">The scorer is lexical</span>
         <p>Scoring matches signature terms; it does not read for meaning. The contrast heuristic that decides whether an answer substituted the adjacent entity is the weakest link in the pipeline, and it is documented as such.</p>
       </div>
-      <div class="sy-note" data-st-spotlight>
+      <div class="sy-note" data-m-step="3" data-m-from="scale blur" data-st-spotlight>
         <span class="label">Power is limited</span>
         <p>68 items is small. Intervals are cluster bootstraps over item families, so minimal pairs resample together. Per-domain claims are out of reach at this size.</p>
       </div>
-      <div class="sy-note" data-st-spotlight>
+      <div class="sy-note" data-m-step="4" data-m-from="scale blur" data-st-spotlight>
         <span class="label">Contamination is unmeasured</span>
         <p>The source clauses are public text. Whether a given model has seen them in training is unknown and untested here.</p>
       </div>
-      <div class="sy-note" data-st-spotlight>
+      <div class="sy-note" data-m-step="5" data-m-from="scale blur" data-st-spotlight>
         <span class="label">Single author, unreviewed</span>
         <p>Preregistration and limitations are written and committed, not refereed. The full list is docs/limitations.md, twelve entries long.</p>
       </div>
@@ -2298,16 +2323,17 @@ html.st-printing .kc-step{min-height:0;opacity:1}
 </section>
 
 <!-- ============ ASK (leader) ============ -->
-<section class="sy-sec ld-askall" id="ask" aria-labelledby="ask-h">
+<section class="sy-sec ld-askall" id="ask" aria-labelledby="ask-h" data-m-pin="220%">
   <div class="wrap">
     <p class="label">Before you sign or renew</p>
-    <h2 class="display sy-h2" id="ask-h">Five questions that expose a grounding problem</h2>
+    <h2 class="display sy-h2" id="ask-h" data-m-split="words">Five questions that expose a grounding problem</h2>
+    <span class="m-prog" data-m-progress aria-hidden="true"></span>
     <ol class="ld-qs">
-      <li><b>Show me the clause.</b> Does every regulatory answer carry the exact paragraph it relied on, with a link to the current text?</li>
-      <li><b>What is your wrong-entity rate?</b> Not accuracy: how often does the tool answer for the neighbouring device, deadline or table row? With an interval.</li>
-      <li><b>Was it tested on pairs?</b> Were look-alike pairs tested together, so one lucky answer cannot hide a miss on its twin?</li>
-      <li><b>Does it decline?</b> When a question does not apply (this corpus has 5 such items), does the tool say so, or answer anyway?</li>
-      <li><b>Who checked the source?</b> Can you trace every test item to a published source, as all 68 items here are?</li>
+      <li data-m-step="0" data-m-from="left"><b>Show me the clause.</b> Does every regulatory answer carry the exact paragraph it relied on, with a link to the current text?</li>
+      <li data-m-step="1" data-m-from="left"><b>What is your wrong-entity rate?</b> Not accuracy: how often does the tool answer for the neighbouring device, deadline or table row? With an interval.</li>
+      <li data-m-step="2" data-m-from="left"><b>Was it tested on pairs?</b> Were look-alike pairs tested together, so one lucky answer cannot hide a miss on its twin?</li>
+      <li data-m-step="3" data-m-from="left"><b>Does it decline?</b> When a question does not apply (this corpus has 5 such items), does the tool say so, or answer anyway?</li>
+      <li data-m-step="4" data-m-from="left"><b>Who checked the source?</b> Can you trace every test item to a published source, as all 68 items here are?</li>
     </ol>
   </div>
 </section>
@@ -2317,15 +2343,15 @@ html.st-printing .kc-step{min-height:0;opacity:1}
   <div class="wrap sy-monday-grid">
     <div>
       <p class="label">What a leader does Monday</p>
-      <h2 class="display sy-h2">Ask for the clause, not the answer</h2>
+      <h2 class="display sy-h2" data-m-split="words">Ask for the clause, not the answer</h2>
       <p class="sy-lede-2">Take the last five AI-assisted answers your team acted on in a regulated area. For each one, open the cited clause and check that it governs the entity in the question, not its neighbour. If an answer carries no clause, no one has checked it.</p>
       <p>That is a one-hour exercise and it is the same test this benchmark runs. A tool that can never show you the clause cannot be audited, whatever it scores.</p>
       <div class="sy-cta">
-        <a class="sy-btn sy-btn-p" href="try.html">Try the full item browser</a>
-        <a class="sy-btn" href="index.html">Methods and preregistration</a>
+        <a data-m-spring class="sy-btn sy-btn-p" href="try.html">Try the full item browser</a>
+        <a data-m-spring class="sy-btn" href="index.html">Methods and preregistration</a>
       </div>
     </div>
-    <div class="sy-do" data-st-spotlight>
+    <div class="sy-do" data-st-spotlight data-m-reveal>
       <span class="label">The one-hour check</span>
       <ol>
         <li>Pull five AI-assisted answers your team acted on.</li>
@@ -2337,7 +2363,7 @@ html.st-printing .kc-step{min-height:0;opacity:1}
   </div>
   <div class="wrap ld-monday">
     <p class="label">Three things to do on Monday</p>
-    <ol class="ld-acts">
+    <ol class="ld-acts" data-m-reveal data-m-stagger="0.12">
       <li><span class="ld-an mono">01</span><b>Run the one-hour check.</b> Five AI-assisted answers, five clauses opened. Record how many governed the right entity and how many carried no clause at all.</li>
       <li><span class="ld-an mono">02</span><b>Add a clause field.</b> Any AI-assisted answer used in a permit, procedure or report records the clause it rests on and who opened it. No clause, no use.</li>
       <li><span class="ld-an mono">03</span><b>Send the five questions.</b> Put the <a href="#ask">vendor questions</a> on the agenda of your next tool review, and ask for the wrong-entity rate in writing.</li>
@@ -2350,11 +2376,11 @@ html.st-printing .kc-step{min-height:0;opacity:1}
   <div class="wrap sy-nextgrid">
     <div>
       <p class="label">Story 4 of 7 &middot; next in the path</p>
-      <h2 class="display">Why people err, as a graph</h2>
+      <h2 class="display" data-m-split="words">Why people err, as a graph</h2>
       <p class="sy-lede-2">The performance influencing factors behind the error, as a network, with one rule derivation traced edge by edge.</p>
       <div class="sy-cta">
-        <a class="sy-btn sy-btn-p" href="https://priyatham9.github.io/ehs-human-factors-ontology/story.html">Read the next story</a>
-        <button type="button" class="sy-btn" id="sy-map">or open the map</button>
+        <a data-m-spring class="sy-btn sy-btn-p" href="https://priyatham9.github.io/ehs-human-factors-ontology/story.html">Read the next story</a>
+        <button type="button" data-m-spring class="sy-btn" id="sy-map">or open the map</button>
       </div>
     </div>
   </div>
@@ -2427,6 +2453,20 @@ html.st-printing .kc-step{min-height:0;opacity:1}
                                filters or re-orders the children
    Aliases: data-st-kinetic -> data-m-split="words" when GSAP is present.
    JS: Story.motion.scan(root) re-applies after DOM changes; Story.motion.kill().
+
+   Rules the engine enforces (v2.1):
+   - Until the layer is ready, split headlines, hero parts, pinned steps and
+     reveals are hidden by story.css (no flash of the unsplit/final state);
+     html gets .m-ready once set up. A 2.5s CSS failsafe shows them anyway.
+   - An element GSAP animates must not also carry a page CSS animation or a
+     CSS transition on transform/opacity/visibility/filter: the engine turns
+     those off inline on that element while motion runs (they fight GSAP and
+     can leave it stuck at opacity 0). Put page animations on a wrapper.
+   - One ease vocabulary (M_EASE) and one scrub lag (M_SCRUB = 0.8s).
+   - Pinned chapters shorter than the screen are centred in it (no dead strip).
+   - ScrollTrigger re-measures after fonts, images (load) and bfcache restore;
+     a #hash in the URL, or an in-page link into a pinned chapter, lands on
+     the chapter's pin start.
    ============================================================ */
 (function (global) {
   "use strict";
@@ -5828,8 +5868,35 @@ html.st-printing .kc-step{min-height:0;opacity:1}
      Nothing here animates layout properties: transforms, opacity, clip-path
      and stroke-dashoffset only.
      --------------------------------------------------------- */
-  var M = { ready: false, mm: null, scanned: [] };
-  var M_EASE = { out: "expo.out", soft: "power3.out", io: "power2.inOut", back: "back.out(1.6)" };
+  var M = { ready: false, mm: null, mms: [], scanned: [] };
+  var M_EASE = { out: "expo.out", soft: "power3.out", io: "power2.inOut", back: "back.out(1.6)", spring: "elastic.out(1.1,0.5)" };
+  var M_SCRUB = 0.8; // one catch-up lag for every scrubbed timeline
+  // an element GSAP drives must not also run a page CSS animation, or a CSS
+  // transition on the properties GSAP tweens: turn those off inline (restored on revert)
+  var M_TAMED = [];
+  function mTame(n) {
+    if (!n || n.__mTamed || !(n instanceof Element)) return;
+    var cs = getComputedStyle(n), fix = {};
+    if (cs.animationName && cs.animationName !== "none") fix.animation = "none";
+    var props = (cs.transitionProperty || "").split(/\s*,\s*/);
+    var durs = (cs.transitionDuration || "0s").split(/\s*,\s*/);
+    var live = props.filter(function (p, i) { return parseFloat(durs[i % durs.length]) > 0; });
+    if (live.some(function (p) { return /^(all|transform|translate|scale|rotate|opacity|visibility|filter)$/.test(p); })) {
+      var keep = live.filter(function (p) { return !/^(transform|translate|scale|rotate|opacity|visibility|filter)$/.test(p); });
+      if (keep.indexOf("all") >= 0) keep = keep.filter(function (p) { return p !== "all"; }).concat(["color", "background-color", "border-color", "box-shadow", "outline-color", "text-decoration-color"]);
+      fix.transitionProperty = keep.length ? keep.join(",") : "none";
+    }
+    if (!fix.animation && !fix.transitionProperty) return;
+    n.__mTamed = { animation: n.style.animation, transitionProperty: n.style.transitionProperty };
+    if (fix.animation) n.style.animation = "none";
+    if (fix.transitionProperty) n.style.transitionProperty = fix.transitionProperty;
+    M_TAMED.push(n);
+  }
+  function mUntameAll() {
+    M_TAMED.forEach(function (n) { var o = n.__mTamed; if (!o) return; n.style.animation = o.animation; n.style.transitionProperty = o.transitionProperty; n.__mTamed = null; });
+    M_TAMED = [];
+  }
+  function mTameAll(list) { list.forEach(mTame); return list; }
   function gsapOK() {
     var g = global.gsap;
     return !!(g && global.ScrollTrigger);
@@ -5870,6 +5937,7 @@ html.st-printing .kc-step{min-height:0;opacity:1}
   function mSplit(n, phone) {
     if (!global.SplitText || n.__mSplit) return;
     n.__mSplit = 1;
+    mTame(n);
     // soft hyphens do not survive a split (the word breaks mid-line): reveal the block whole
     if ((n.textContent || "").indexOf("\u00AD") >= 0) {
       global.gsap.from(n, { autoAlpha: 0, y: 40, duration: 1, ease: M_EASE.out, delay: n.closest("[data-m-hero]") ? 0.15 : 0,
@@ -5886,6 +5954,7 @@ html.st-printing .kc-step{min-height:0;opacity:1}
       autoSplit: type === "lines",
       onSplit: function (self) {
         var parts = self[type];
+        n.setAttribute("data-m-split-done", "");
         var hero = n.closest("[data-m-hero]");
         var t = global.gsap.from(parts, {
           yPercent: 110, autoAlpha: type === "chars" ? 1 : 0, rotate: type === "chars" && !phone ? 6 : 0,
@@ -5912,10 +5981,13 @@ html.st-printing .kc-step{min-height:0;opacity:1}
       mSel(sec, "[data-m-count]").forEach(function (c) { mCount(c); });
       return null;
     }
+    mTameAll(steps);
+    mCenterPin(sec);
     var len = sec.getAttribute("data-m-pin") || (100 + steps.length * 60) + "%";
     var tl = g.timeline({
       defaults: { ease: "none" },
-      scrollTrigger: { trigger: sec, start: "top top", end: "+=" + len, pin: true, scrub: 0.8, anticipatePin: 1, invalidateOnRefresh: true }
+      scrollTrigger: { trigger: sec, start: "top top", end: "+=" + len, pin: true, scrub: M_SCRUB, anticipatePin: 1, invalidateOnRefresh: true,
+        onRefreshInit: function () { mCenterPin(sec); } }
     });
     steps.sort(function (a, b) { return mNum(a.getAttribute("data-m-step"), 0) - mNum(b.getAttribute("data-m-step"), 0); });
     steps.forEach(function (s, i) {
@@ -5934,8 +6006,29 @@ html.st-printing .kc-step{min-height:0;opacity:1}
     return tl;
   }
 
+  // a pinned chapter shorter than the screen would leave a dead strip under it:
+  // centre its content in a screen-tall box. Uses the section's own layout mode,
+  // set inline so page CSS cannot undo it; restored when motion is reverted.
+  function mCenterPin(sec) {
+    if (!sec.__mPinOrig) sec.__mPinOrig = { display: sec.style.display, fd: sec.style.flexDirection, jc: sec.style.justifyContent, ac: sec.style.alignContent, mh: sec.style.minHeight };
+    var o = sec.__mPinOrig;
+    sec.style.minHeight = o.mh; sec.style.justifyContent = o.jc; sec.style.alignContent = o.ac; sec.style.display = o.display; sec.style.flexDirection = o.fd;
+    var cs = getComputedStyle(sec), d = cs.display;
+    sec.style.minHeight = innerHeight + "px";
+    if (/grid/.test(d)) sec.style.alignContent = "center";
+    else if (/flex/.test(d)) { if (/column/.test(cs.flexDirection)) sec.style.justifyContent = "center"; else sec.style.alignItems = sec.style.alignItems || "center"; }
+    else { sec.style.display = "flex"; sec.style.flexDirection = "column"; sec.style.justifyContent = "center"; }
+  }
+  function mUncenterPins() {
+    els("[data-m-pin]").forEach(function (sec) {
+      var o = sec.__mPinOrig; if (!o) return;
+      sec.style.display = o.display; sec.style.flexDirection = o.fd; sec.style.justifyContent = o.jc; sec.style.alignContent = o.ac; sec.style.minHeight = o.mh;
+      sec.__mPinOrig = null;
+    });
+  }
   // phone (or an over-tall chapter): the chapter scrolls normally and each step reveals once
   function mStepsOnce(steps) {
+    mTameAll(steps);
     steps.forEach(function (s) {
       global.gsap.from(s, { autoAlpha: 0, y: 24, duration: 0.7, ease: M_EASE.out, scrollTrigger: { trigger: s, start: "top 88%", once: true } });
     });
@@ -5969,7 +6062,7 @@ html.st-printing .kc-step{min-height:0;opacity:1}
     var vars = { strokeDashoffset: 0, duration: 1, ease: "none", stagger: 0.08 };
     var from = { strokeDashoffset: function (i, p) { return p.__mLen; } };
     if (tl) { tl.fromTo(live, from, vars, at || 0); return; }
-    vars.scrollTrigger = { trigger: n, start: n.getAttribute("data-m-start") || "top 80%", end: n.getAttribute("data-m-end") || "bottom 45%", scrub: 0.6 };
+    vars.scrollTrigger = { trigger: n, start: n.getAttribute("data-m-start") || "top 80%", end: n.getAttribute("data-m-end") || "bottom 45%", scrub: M_SCRUB };
     g.fromTo(live, from, vars);
   }
   // --- bars grow from their baseline: data-m-bars="y" (default) or "x" ---
@@ -5987,7 +6080,8 @@ html.st-printing .kc-step{min-height:0;opacity:1}
     var to = { scaleY: 1, scaleX: 1, duration: 0.8, ease: M_EASE.soft, stagger: 0.06 };
     bars.forEach(function (b) { if (b instanceof SVGElement) b.style.transformBox = "fill-box"; });
     if (tl) { tl.fromTo(bars, from, to, at || 0); return; }
-    to.scrollTrigger = { trigger: n, start: "top 82%", end: "bottom 50%", scrub: 0.6 };
+    mTameAll(bars.filter(function (b) { return !(b instanceof SVGElement); }));
+    to.scrollTrigger = { trigger: n, start: "top 82%", end: "bottom 50%", scrub: M_SCRUB };
     g.fromTo(bars, from, to);
   }
   // --- counters: the element's own text is the final value ---
@@ -5998,8 +6092,10 @@ html.st-printing .kc-step{min-height:0;opacity:1}
     var final = n.textContent;
     var o = { v: 0 };
     n.setAttribute("aria-label", final.trim());
-    function upd() { n.textContent = mFmtNum(p, o.v); }
-    var vars = { v: p.value, duration: 1.6, ease: "power2.out", onUpdate: upd, onComplete: function () { n.textContent = final; } };
+    // land on the page's own text exactly (formatting, spaces, units), never a rounded neighbour
+    var step = Math.pow(10, -p.dec) / 2;
+    function upd() { n.textContent = Math.abs(p.value - o.v) < step ? final : mFmtNum(p, o.v); }
+    var vars = { v: p.value, duration: 1.6, ease: M_EASE.soft, onUpdate: upd, onComplete: function () { n.textContent = final; } };
     upd();
     if (tl) { vars.duration = 1; vars.ease = "none"; tl.to(o, vars, at || 0); return; }
     vars.scrollTrigger = { trigger: n, start: "top 88%", once: true };
@@ -6009,6 +6105,7 @@ html.st-printing .kc-step{min-height:0;opacity:1}
   function mReveal(n) {
     if (n.__mRev) return; n.__mRev = 1;
     var kids = n.hasAttribute("data-m-stagger") ? Array.prototype.slice.call(n.children) : [n];
+    mTameAll(kids);
     var from = mFrom(n); from.duration = 0.9; from.ease = M_EASE.out;
     from.stagger = mNum(n.getAttribute("data-m-stagger"), 0.08) || 0.08;
     from.scrollTrigger = { trigger: n, start: n.getAttribute("data-m-start") || "top 85%", once: true };
@@ -6023,8 +6120,9 @@ html.st-printing .kc-step{min-height:0;opacity:1}
   function mSpring(n) {
     if (n.__mSpring) return; n.__mSpring = 1;
     var g = global.gsap, amt = mNum(n.getAttribute("data-m-spring"), 1) || 1;
-    var qs = g.quickTo(n, "scale", { duration: 0.55, ease: "elastic.out(1.1,0.5)" });
-    var qy = g.quickTo(n, "y", { duration: 0.55, ease: "elastic.out(1.1,0.5)" });
+    mTame(n);
+    var qs = g.quickTo(n, "scale", { duration: 0.55, ease: M_EASE.spring });
+    var qy = g.quickTo(n, "y", { duration: 0.55, ease: M_EASE.spring });
     function on(e) { if (e.pointerType === "touch") return; qs(1 + 0.035 * amt); qy(-3 * amt); }
     function off() { qs(1); qy(0); }
     n.addEventListener("pointerenter", on);
@@ -6054,13 +6152,13 @@ html.st-printing .kc-step{min-height:0;opacity:1}
   // --- cinematic hero: headline chars, then lede, actions and visual ---
   function mHero(h, phone) {
     var g = global.gsap, tl = g.timeline({ defaults: { ease: M_EASE.out } });
-    var parts = els("[data-m-hero-part]", h);
+    var parts = mTameAll(els("[data-m-hero-part]", h));
     if (!parts.length) return tl;
     parts.forEach(function (p, i) {
       var kind = p.getAttribute("data-m-hero-part");
       var at = i === 0 ? 0.1 : "-=0.55";
-      if (kind === "visual") tl.from(p, { autoAlpha: 0, scale: phone ? 0.96 : 0.82, rotate: phone ? 0 : -8, duration: 1.4, ease: "expo.out" }, i === 0 ? 0 : "-=1.0");
-      else if (kind === "rule") tl.from(p, { scaleX: 0, transformOrigin: "0 50%", duration: 1.1, ease: "expo.inOut" }, at);
+      if (kind === "visual") tl.from(p, { autoAlpha: 0, scale: phone ? 0.96 : 0.82, rotate: phone ? 0 : -8, duration: 1.4, ease: M_EASE.out }, i === 0 ? 0 : "-=1.0");
+      else if (kind === "rule") tl.from(p, { scaleX: 0, transformOrigin: "0 50%", duration: 1.1, ease: M_EASE.io }, at);
       else tl.from(p, { autoAlpha: 0, y: 28, duration: 0.9 }, at);
     });
     if (!phone) {
@@ -6073,19 +6171,23 @@ html.st-printing .kc-step{min-height:0;opacity:1}
     return tl;
   }
 
+  // set up a root added after boot (new DOM); elements already set up are skipped by their guards
   function motionScan(root) {
     root = root || document;
     if (!gsapOK() || !M.mm) return false;
     M.scanned.push(root);
+    motionSetup(root, true);
     return true;
   }
-  function motionSetup(root) {
+  function motionSetup(root, extra) {
     var g = global.gsap;
     root = root || document;
     var desk = "(min-width: 900px) and (prefers-reduced-motion: no-preference)";
     var phone = "(max-width: 899.98px) and (prefers-reduced-motion: no-preference)";
-    M.mm = g.matchMedia();
-    M.mm.add({ desk: desk, phone: phone }, function (ctx) {
+    var mm = g.matchMedia();
+    M.mms.push(mm);
+    if (!extra) M.mm = mm;
+    mm.add({ desk: desk, phone: phone }, function (ctx) {
       if (forceReduced || printing) return;
       var isPhone = !!ctx.conditions.phone;
       document.documentElement.classList.add("m-on", isPhone ? "m-phone" : "m-desk");
@@ -6101,20 +6203,95 @@ html.st-printing .kc-step{min-height:0;opacity:1}
       if (!isPhone) mSel(root, "[data-m-parallax]").forEach(mParallax);
       mSel(root, "[data-m-spring]").forEach(mSpring);
       mSel(root, "[data-m-flip]").forEach(mFlip);
+      // triggers were created by kind, not in page order: order them by position so
+      // everything below a pin accounts for its spacer
+      global.ScrollTrigger.sort();
       return function () {
         // leaving a breakpoint: gsap.matchMedia reverts tweens; clear our guards so the next tier rebuilds
         mSel(root, "[data-m-split],[data-m-draw],[data-m-bars],[data-m-count],[data-m-reveal],[data-m-spring],[data-m-flip]").forEach(function (n) {
           n.__mSplit = n.__mDraw = n.__mBars = n.__mCount = n.__mRev = n.__mSpring = n.__mFlip = 0;
         });
+        mUntameAll();
+        mUncenterPins();
         document.documentElement.classList.remove("m-on", "m-phone", "m-desk");
       };
     });
-    // late fonts and images change heights: re-measure pins once everything has settled
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { global.ScrollTrigger.refresh(); }, function () { });
-    addEventListener("load", function () { global.ScrollTrigger.refresh(); });
+    if (!extra) mSettle();
   }
+  // late fonts and images change heights: re-measure once each has settled, then
+  // land any #hash on its final position (pins add spacer height after first layout)
+  var mSettled = false, mUserScrolled = false;
+  function mSettle() {
+    if (mSettled) return; mSettled = true;
+    var ST = global.ScrollTrigger;
+    ST.config({ ignoreMobileResize: true });
+    ["wheel", "touchstart", "keydown", "pointerdown"].forEach(function (ev) {
+      addEventListener(ev, function () { mUserScrolled = true; }, { passive: true, once: true });
+    });
+    var fontsDone = !(document.fonts && document.fonts.ready), loadDone = document.readyState === "complete";
+    function settle() { if (!(fontsDone && loadDone)) return; ST.refresh(); mLandHash(); }
+    if (!fontsDone) document.fonts.ready.then(function () { fontsDone = true; ST.refresh(); settle(); }, function () { fontsDone = true; settle(); });
+    if (!loadDone) addEventListener("load", function () { loadDone = true; settle(); }, { once: true });
+    settle();
+    // content above a pin that grows later (charts drawn on idle, lazy images, late
+    // widgets) would leave every trigger below it stale: re-measure when the page
+    // height changes by itself, debounced, and ignore the change a refresh makes
+    if (global.ResizeObserver && document.body) {
+      var lastH = -1, tid = 0;
+      ST.addEventListener("refresh", function () { lastH = document.body.offsetHeight; });
+      new ResizeObserver(function () {
+        clearTimeout(tid);
+        tid = setTimeout(function () {
+          var h = document.body.offsetHeight;
+          if (lastH < 0 || Math.abs(h - lastH) < 2) return;
+          ST.refresh();
+        }, 180);
+      }).observe(document.body);
+    }
+    // back/forward cache: layout may have changed while the page was frozen
+    addEventListener("pageshow", function (e) { if (e.persisted) ST.refresh(); });
+    // in-page links whose target sits inside a pinned chapter go to the pin start
+    document.addEventListener("click", function (e) {
+      if (e.defaultPrevented || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      var a = e.target.closest && e.target.closest("a[href^='#']");
+      if (!a || a.getAttribute("href").length < 2) return;
+      var t = mHashTarget(a.getAttribute("href"));
+      if (!t || !mPinOf(t)) return;
+      e.preventDefault();
+      var smooth = !reduced() && getComputedStyle(document.documentElement).scrollBehavior === "smooth";
+      scrollTo({ top: mAnchorY(t), behavior: smooth ? "smooth" : "auto" });
+      if (history.pushState) history.pushState(null, "", a.getAttribute("href"));
+      // the target may still be hidden by the chapter's first step: focus the chapter then
+      var f = getComputedStyle(t).visibility === "hidden" ? mPinOf(t).pin : t;
+      if (!f.hasAttribute("tabindex") && !/^(A|BUTTON|INPUT|SELECT|TEXTAREA)$/.test(f.tagName)) f.setAttribute("tabindex", "-1");
+      try { f.focus({ preventScroll: true }); } catch (e2) { }
+    });
+  }
+  function mHashTarget(h) {
+    if (!h || h.length < 2) return null;
+    try { return document.getElementById(decodeURIComponent(h.slice(1))); } catch (e) { return null; }
+  }
+  function mPinOf(t) {
+    var hit = null;
+    global.ScrollTrigger.getAll().forEach(function (s) { if (!hit && s.pin && (s.pin === t || s.pin.contains(t))) hit = s; });
+    return hit;
+  }
+  function mAnchorY(t) {
+    var s = mPinOf(t);
+    if (s) return Math.ceil(s.start) + 1;
+    var sm = parseFloat(getComputedStyle(t).scrollMarginTop) || 0;
+    return Math.max(0, t.getBoundingClientRect().top + scrollY - sm);
+  }
+  function mLandHash() {
+    if (mUserScrolled) return;
+    var t = mHashTarget(location.hash);
+    if (!t) return;
+    var y = mAnchorY(t);
+    if (Math.abs(scrollY - y) > 2) scrollTo(0, y);
+  }
+  function mReady() { document.documentElement.classList.add("m-ready"); }
   function autoGsap() {
-    if (!gsapOK()) { document.documentElement.classList.add("m-off"); return; }
+    if (!gsapOK()) { document.documentElement.classList.add("m-off"); mReady(); return; }
     var plugins = [global.ScrollTrigger];
     if (global.SplitText) plugins.push(global.SplitText);
     if (global.Flip) plugins.push(global.Flip);
@@ -6123,11 +6300,12 @@ html.st-printing .kc-step{min-height:0;opacity:1}
     els("[data-st-kinetic]").forEach(function (n) { if (!n.hasAttribute("data-m-split")) n.setAttribute("data-m-split", "words"); });
     motionSetup(document);
     M.ready = true;
+    mReady();
   }
-  function motionKill() { if (M.mm) M.mm.revert(); M.mm = null; }
+  function motionKill() { M.mms.forEach(function (mm) { mm.revert(); }); M.mms = []; M.mm = null; mUntameAll(); mUncenterPins(); }
 
   var Story = {
-    version: "1.4.0",
+    version: "2.1.0",
     orb: orb,
     orbInline: orbInline,
     companion: companion,
@@ -6158,7 +6336,7 @@ html.st-printing .kc-step{min-height:0;opacity:1}
     marks: marks,
     kinetic: kinetic,
     viewTransition: viewTransition,
-    motion: { scan: function (r) { motionKill(); motionSetup(r || document); }, kill: motionKill, get on() { return M.ready; } },
+    motion: { scan: function (r) { if (r && r !== document && M.mm) { motionScan(r); return; } motionKill(); motionSetup(document); }, kill: motionKill, refresh: function () { if (gsapOK()) global.ScrollTrigger.refresh(); }, get on() { return M.ready; } },
     stagger: stagger,
     trail: trail,
     draw: draw,
@@ -6793,7 +6971,7 @@ var EX=[
       r.querySelector('.ld-bv').textContent=v.toFixed(1)+'%';
       r.querySelector('.ld-bf').style.transform='scaleX('+(v/100)+')';
       r.querySelector('.ld-bf').style.setProperty('--v',v/100);
-      if(anim&&!reduce){
+      if(anim&&!reduce&&!(window.Flip&&document.documentElement.classList.contains('m-on'))){
         var dy=first[k]-r.getBoundingClientRect().top;
         if(dy){r.style.transition='none';r.style.transform='translateY('+dy+'px)';void r.offsetWidth;r.style.transition='';r.style.transform='';}
       }
@@ -6944,6 +7122,19 @@ if(!reduce){
  if(nav)nav.addEventListener('scroll',fades,{passive:true});
  addEventListener('scroll',onScroll,{passive:true});addEventListener('resize',function(){pad();onScroll();});
  pad();frame();
+})();
+</script>
+<script id="pin-anchor-js">
+/* In-page links to a pinned chapter land at the end of its pin, so every number in it is already on screen */
+(function(){
+  document.addEventListener('click',function(e){
+    var a=e.target.closest&&e.target.closest('a[href^="#"]'); if(!a||!window.ScrollTrigger)return;
+    var id=a.getAttribute('href').slice(1); if(!id)return;
+    var t=ScrollTrigger.getAll().filter(function(s){return s.pin&&s.trigger&&s.trigger.id===id;})[0]; if(!t)return;
+    e.preventDefault();
+    window.scrollTo({top:Math.max(0,t.end-4),behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+    if(history.replaceState)history.replaceState(null,'','#'+id);
+  });
 })();
 </script>
 </body>
