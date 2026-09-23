@@ -616,6 +616,9 @@ body{overflow-x:clip}
    --rule-soft --accent --accent-2 --accent-ink --accent-wash
    --warn --warn-wash --font-sans --font-mono
    ============================================================ */
+/* shared motion tokens (v1.4): out-eases for entrances, shorter in-eases for exits, inOut for scrubbed moves */
+:root{--ease-out:cubic-bezier(.22,1,.36,1);--ease-p1o:cubic-bezier(.25,.46,.45,.94);--ease-p2o:cubic-bezier(.215,.61,.355,1);--ease-p3o:cubic-bezier(.165,.84,.44,1);--ease-p4o:cubic-bezier(.23,1,.32,1);--ease-io:cubic-bezier(.65,0,.35,1);--ease-back:cubic-bezier(.34,1.56,.64,1);--d-fast:150ms;--d-base:300ms;--d-slow:600ms;--d-hero:1000ms}
+
 
 /* ---------- orb ---------- */
 .st-orb{display:block;width:100%;height:100%;touch-action:manipulation}
@@ -737,7 +740,7 @@ body{overflow-x:clip}
 .st-tip.is-on{opacity:1}
 
 /* ---------- reveal ---------- */
-.st-reveal{opacity:0;transform:translateY(14px);transition:opacity .6s cubic-bezier(.22,.7,.2,1),transform .6s cubic-bezier(.22,.7,.2,1)}
+.st-reveal{opacity:0;transform:translateY(24px);transition:opacity .7s var(--ease-out),transform .7s var(--ease-out)}
 .st-reveal.is-in{opacity:1;transform:none}
 
 /* ---------- progress bar ---------- */
@@ -1447,6 +1450,21 @@ html.rs-lock,html.rs-lock body{overflow:hidden}
 .sy-id{font-size:.6875rem;color:var(--muted)}
 .sy-q{font-size:clamp(1.1rem,2vw,1.4rem);color:var(--ink);max-width:70ch;margin-bottom:20px;line-height:1.45}
 .sy-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+/* round 7: pick one of the two answers before the reveal */
+.sy-opts{display:grid;gap:12px;margin:0 0 16px}
+@media (min-width:720px){.sy-opts{grid-template-columns:1fr 1fr}}
+.sy-opt{text-align:left;font:inherit;font-size:.92rem;line-height:1.5;color:var(--ink);background:var(--surface);border:var(--st-hair);border-radius:var(--st-radius-sm);padding:14px 16px;cursor:pointer;transition:transform .18s cubic-bezier(.22,1,.36,1),border-color .15s,background .15s}
+.sy-opt .k{display:block;font-family:var(--font-mono);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+@media (hover:hover){.sy-opt:not([disabled]):hover{transform:translateY(-2px);border-color:var(--accent)}}
+.sy-opt:not([disabled]):active{transform:scale(.97);transition-duration:.08s}
+.sy-opt:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.sy-opt[disabled]{cursor:default}
+.sy-opt.is-right{border:2px solid var(--accent);background:var(--accent-wash)}
+.sy-opt.is-adj{border:2px solid var(--warn);background:var(--warn-wash)}
+.sy-opt.is-picked .k::after{content:' \00b7 your pick'}
+.sy-verdict{margin:0 0 4px;font-weight:700;color:var(--ink)}
+.sy-verdict.is-adj{color:var(--warn)}
+@media (prefers-reduced-motion:reduce){.sy-opt{transition:none}.sy-opt:hover,.sy-opt:active{transform:none!important}}
 .sy-reveal{margin-top:24px;display:grid;gap:16px}
 .sy-rev{border-left:3px solid var(--rule-soft);border-radius:0 var(--st-radius-sm) var(--st-radius-sm) 0;padding:2px 0 2px 16px}
 .sy-rev p{margin:6px 0 0;color:var(--ink-2);max-width:72ch}
@@ -1545,7 +1563,7 @@ html.rs-lock,html.rs-lock body{overflow:hidden}
   .sy-stagenum{min-height:0!important;margin-bottom:4pt!important}
   .sy-fig figcaption{display:block!important;font-size:8pt!important;color:#333!important}
   .sy-card{border:.5pt solid #999!important;border-radius:0!important;box-shadow:none!important;padding:10pt!important;break-inside:avoid}
-  .sy-actions{display:none!important}
+  .sy-actions,.sy-opts,.sy-verdict{display:none!important}
   #try-reveal[hidden],#try-reveal{display:block!important}
   .sy-reveal{gap:0!important}
   .sy-rev{border-left:2pt solid #999!important;border-radius:0!important;background:none!important;padding:2pt 0 6pt 8pt!important;margin-bottom:6pt}
@@ -2091,7 +2109,7 @@ html.st-printing .kc-step{min-height:0;opacity:1}
   <div class="wrap">
     <p class="label">Before the results &middot; answer one yourself</p>
     <h2 class="display sy-h2">You go first</h2>
-    <p class="sy-intro">One real item from the corpus. Read it, settle on your answer, then open the reveal. The point is not whether you get it right: it is how reasonable the wrong answer sounds once you see it.</p>
+    <p class="sy-intro">One real item from the corpus. Read it, settle on your answer, then open the reveal. Pick the one you would act on. One is what the clause says; the other is the adjacent answer a retriever reaches for. The point is not whether you get it right: it is how reasonable the wrong answer sounds.</p>
 
     <div class="sy-card" id="try-card" data-st-spotlight>
       <div class="sy-card-head">
@@ -2099,8 +2117,10 @@ html.st-printing .kc-step{min-height:0;opacity:1}
         <span class="mono sy-id" id="try-id">id</span>
       </div>
       <p class="sy-q" id="try-q">Question</p>
+      <div class="sy-opts" id="try-opts" role="group" aria-label="Pick the answer you would act on"></div>
+      <p class="sy-verdict" id="try-verdict" role="status" hidden></p>
       <div class="sy-actions">
-        <button type="button" class="sy-btn sy-btn-p" id="try-commit">I have an answer</button>
+        <button type="button" class="sy-btn sy-btn-p" id="try-commit">Just show me</button>
         <button type="button" class="sy-btn" id="try-next">Another item</button>
         <a class="sy-btn" href="try.html">Play a 6-question round &rarr;</a>
       </div>
@@ -2501,8 +2521,12 @@ html.st-printing .kc-step{min-height:0;opacity:1}
      3. motion primitives: spring, tween, flip, countUp, reveal
      --------------------------------------------------------- */
   // Critically damped by default: no overshoot on data.
+  // react-spring style named configs (tension/friction, mass 1); damping ratio
+  // near 1 for data, lower only for delight moments
+  var SPRING = { "default": [170, 26], gentle: [120, 14], wobbly: [180, 12], stiff: [210, 20], slow: [280, 60], molasses: [280, 120], snappy: [500, 30] };
   function spring(from, to, cb, opts) {
     opts = opts || {};
+    if (opts.config && SPRING[opts.config] && opts.stiffness == null) { opts.stiffness = SPRING[opts.config][0]; opts.damping = SPRING[opts.config][1]; }
     var k = opts.stiffness == null ? 170 : opts.stiffness;
     var d = opts.damping == null ? 2 * Math.sqrt(k) : opts.damping; // critical
     var prec = opts.precision == null ? 0.0008 : opts.precision;
@@ -2540,6 +2564,7 @@ html.st-printing .kc-step{min-height:0;opacity:1}
   }
   var EASE = {
     out: function (t) { return 1 - Math.pow(1 - t, 3); },
+    expo: function (t) { return t >= 1 ? 1 : 1 - Math.pow(2, -10 * t); },
     inOut: function (t) { return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; },
     linear: function (t) { return t; }
   };
@@ -2610,7 +2635,7 @@ html.st-printing .kc-step{min-height:0;opacity:1}
           if (grp) s = s.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
           tickerPaint(n, pre + s + post, !reduced());
         }
-        : function () { tween(opts.from == null ? 0 : opts.from, target, function (v) { paint(v); }, { duration: opts.duration || 1100 }); };
+        : function () { tween(opts.from == null ? 0 : opts.from, target, function (v) { paint(v); }, { duration: opts.duration || 1400, ease: "expo" }); };
       if (opts.now) run(); else inView(n, run, { once: true });
     });
   }
@@ -2620,14 +2645,14 @@ html.st-printing .kc-step{min-height:0;opacity:1}
     var sel = opts.selector || "[data-st-reveal]";
     if (!root || root.nodeType === 9) root = document.body;
     var nodes = isEl(root) ? (root.matches && root.matches(sel) ? [root] : els(sel, root)) : Array.prototype.slice.call(root);
-    var step = opts.stagger == null ? 70 : opts.stagger;
+    var step = opts.stagger == null ? 60 : opts.stagger;
     nodes.forEach(function (n) { n.classList.add("st-reveal"); });
     var groups = new Map();
     nodes.forEach(function (n) {
       var p = n.parentNode;
       if (!groups.has(p)) groups.set(p, 0);
       var i = groups.get(p); groups.set(p, i + 1);
-      inView(n, function () { setTimeout(function () { n.classList.add("is-in"); }, reduced() ? 0 : i * step); }, { once: true, margin: "0px 0px -8% 0px" });
+      inView(n, function () { setTimeout(function () { n.classList.add("is-in"); }, reduced() ? 0 : Math.min(i, 10) * step); }, { once: true, margin: "0px 0px -8% 0px" });
     });
     return nodes;
   }
@@ -5172,6 +5197,152 @@ html.st-printing .kc-step{min-height:0;opacity:1}
   addEventListener("beforeprint", printPrepare);
   addEventListener("afterprint", printRestore);
 
+
+  /* ---------------------------------------------------------
+     8b. motion kit (v1.4): stagger, trail, draw, scrub, hover
+     Ideas from anime.js (stagger grids, line drawing), react-spring
+     (trails), GSAP (scrubbed scroll timelines, batch reveals) and
+     motion.dev (whileInView, spring gestures). Vanilla, no deps.
+     Every effect lands its final state under reduced motion / print.
+     --------------------------------------------------------- */
+  // stagger(step, {from:'first'|'last'|'center'|index, grid:[cols,rows], start}) -> fn(i, n)
+  function stagger(step, o) {
+    o = o || {}; step = step == null ? 60 : step;
+    return function (i, n) {
+      var from = o.from == null ? 0 : o.from, d;
+      if (o.grid) {
+        var c = o.grid[0], r = o.grid[1];
+        var fi = from === "center" ? [(c - 1) / 2, (r - 1) / 2] : from === "last" ? [c - 1, r - 1] : [(from | 0) % c, Math.floor((from | 0) / c)];
+        d = Math.hypot(i % c - fi[0], Math.floor(i / c) - fi[1]);
+      } else {
+        var f = from === "center" ? (n - 1) / 2 : from === "last" ? n - 1 : from === "first" ? 0 : +from;
+        d = Math.abs(i - f);
+      }
+      return (o.start || 0) + d * step;
+    };
+  }
+  // trail: children spring in one after another when the container enters view
+  function trail(root, opts) {
+    opts = opts || {};
+    var kids = opts.items ? Array.prototype.slice.call(opts.items) : Array.prototype.slice.call(root.children);
+    if (!kids.length || root.__stTrail) return;
+    root.__stTrail = 1;
+    var fromAttr = root.getAttribute && root.getAttribute("data-st-stagger");
+    var base = typeof opts.delay === "function" ? opts.delay : stagger(opts.step || 60, { from: fromAttr && fromAttr !== "" ? fromAttr : "first" });
+    // cap the cascade so a long list never takes more than ~0.6s to settle
+    var del = function (i, n) { return base(Math.min(i, 10), Math.min(n, 11)); };
+    if (reduced()) return;
+    var dy = opts.y == null ? 24 : opts.y;
+    kids.forEach(function (k) { k.style.opacity = "0"; k.style.transform = "translateY(" + dy + "px)"; });
+    function land(k) { k.style.opacity = ""; k.style.transform = ""; }
+    inView(root, function () {
+      kids.forEach(function (k, i) {
+        setTimeout(function () {
+          spring(0, 1, function (v, done) {
+            if (done) return land(k);
+            k.style.opacity = clamp(v * 1.4, 0, 1).toFixed(3);
+            k.style.transform = "translateY(" + ((1 - v) * dy).toFixed(2) + "px)";
+          }, { config: opts.config || "default", stiffness: opts.stiffness, damping: opts.damping });
+        }, document.hidden ? 0 : del(i, kids.length));
+      });
+      // safety net: a background tab or dropped frames must never leave items hidden
+      setTimeout(function () { kids.forEach(land); }, del(kids.length - 1, kids.length) + 2200);
+    }, { once: true, margin: "0px 0px -8% 0px" });
+  }
+  // draw: strokes of an SVG (or [data-st-draw] svgs in root) draw themselves in view
+  function draw(node, opts) {
+    opts = opts || {};
+    var list = isEl(node) && node.tagName.toLowerCase() === "svg" ? [node] : els("svg[data-st-draw], [data-st-draw] svg", node || document);
+    list.forEach(function (svg) {
+      if (svg.__stDraw) return; svg.__stDraw = 1;
+      if (reduced()) return;
+      var paths = els("path,line,polyline,circle,rect,ellipse,polygon", svg).filter(function (p) {
+        var st = getComputedStyle(p);
+        return st.stroke && st.stroke !== "none" && (st.fill === "none" || p.tagName === "line" || p.tagName === "polyline") && p.getTotalLength;
+      });
+      var lens = paths.map(function (p) { var l = 0; try { l = p.getTotalLength(); } catch (e) { } return l; });
+      paths.forEach(function (p, i) { if (lens[i]) { p.style.strokeDasharray = lens[i]; p.style.strokeDashoffset = lens[i]; } });
+      var del = stagger(opts.step || 150);
+      inView(svg, function () {
+        paths.forEach(function (p, i) {
+          if (!lens[i]) return;
+          tween(lens[i], 0, function (v, done) {
+            p.style.strokeDashoffset = done ? "" : v.toFixed(1);
+            if (done) p.style.strokeDasharray = "";
+          }, { duration: opts.duration || 1600, delay: del(Math.min(i, 8), paths.length), ease: "inOut" });
+        });
+      }, { once: true });
+    });
+  }
+  // scrub: GSAP-style scroll-linked progress. Writes --st-scrub (0..1) as the element
+  // travels from entering the bottom of the viewport to leaving the top. One shared
+  // scroll listener, only for elements currently on screen.
+  var scrubSet = [], scrubOn = [], scrubBound = false, scrubQueued = false;
+  function scrubPaint() {
+    scrubQueued = false;
+    var vh = innerHeight;
+    scrubOn.forEach(function (n) {
+      var r = n.getBoundingClientRect();
+      var p = reduced() ? 1 : clamp((vh - r.top) / (vh + r.height), 0, 1);
+      n.style.setProperty("--st-scrub", p.toFixed(4));
+    });
+  }
+  function scrubQueue() { if (!scrubQueued) { scrubQueued = true; requestAnimationFrame(scrubPaint); } }
+  function scrub(node) {
+    if (!node || node.__stScrub) return; node.__stScrub = 1;
+    scrubSet.push(node);
+    node.style.setProperty("--st-scrub", reduced() ? "1" : "0");
+    if (!global.IntersectionObserver) { scrubOn.push(node); }
+    else new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        var i = scrubOn.indexOf(e.target);
+        if (e.isIntersecting && i < 0) scrubOn.push(e.target);
+        else if (!e.isIntersecting && i >= 0) scrubOn.splice(i, 1);
+      });
+      scrubQueue();
+    }).observe(node);
+    if (!scrubBound) { scrubBound = true; addEventListener("scroll", scrubQueue, { passive: true }); addEventListener("resize", scrubQueue); }
+    scrubQueue();
+  }
+  // hover: motion.dev-style spring gesture - lift, slight tilt toward the pointer,
+  // press dip. Transform only (no layout shift); off for touch and reduced motion.
+  function hover(node, opts) {
+    opts = opts || {};
+    if (!node || node.__stHover) return; node.__stHover = 1;
+    if (reduced() || (global.matchMedia && matchMedia("(hover: none)").matches)) return;
+    var lift = opts.lift == null ? 2 : opts.lift, tilt = opts.tilt == null ? 3 : opts.tilt;
+    var st = { y: 0, rx: 0, ry: 0, s: 1 }, sp = {};
+    function paint() { node.style.transform = (st.y || st.rx || st.ry || st.s !== 1) ? "perspective(700px) translateY(" + st.y.toFixed(2) + "px) rotateX(" + st.rx.toFixed(2) + "deg) rotateY(" + st.ry.toFixed(2) + "deg) scale(" + st.s.toFixed(4) + ")" : ""; }
+    function to(k, v) {
+      if (sp[k]) sp[k].setTarget(v);
+      else sp[k] = spring(st[k], v, function (x, done) { st[k] = x; paint(); if (done) sp[k] = null; }, { config: "stiff", force: true });
+    }
+    var queued = false, lx = 0, ly = 0;
+    node.addEventListener("pointerenter", function (e) { if (e.pointerType === "touch") return; to("y", -lift); });
+    node.addEventListener("pointermove", function (e) {
+      if (e.pointerType === "touch") return;
+      lx = e.clientX; ly = e.clientY;
+      if (queued) return; queued = true;
+      requestAnimationFrame(function () {
+        queued = false;
+        var r = node.getBoundingClientRect();
+        to("ry", ((lx - r.left) / r.width - 0.5) * 2 * tilt);
+        to("rx", -((ly - r.top) / r.height - 0.5) * 2 * tilt);
+      });
+    });
+    node.addEventListener("pointerleave", function () { to("y", 0); to("rx", 0); to("ry", 0); to("s", 1); });
+    node.addEventListener("pointerdown", function () { to("s", 0.97); });
+    node.addEventListener("pointerup", function () { to("s", 1); });
+  }
+  function autoMotion() {
+    els("[data-st-stagger]").forEach(function (n) { trail(n); });
+    draw(document);
+    els("[data-st-scrub]").forEach(scrub);
+    els("[data-st-count]").forEach(function (n) { countUp(n); });
+    els("[data-st-hover], .doors > a, .st-findings li").forEach(function (n) { hover(n); });
+    if (document.body && document.body.hasAttribute("data-st-progress")) progressBar();
+  }
+
   function boot() {
     autoChapters(); autoFindings();
     try { autoGloss(); } catch (e) { if (global.console) console.error(e); }
@@ -5179,6 +5350,7 @@ html.st-printing .kc-step{min-height:0;opacity:1}
     try { autoKinetic(); } catch (e) { if (global.console) console.error(e); }
     autoWayfinder();
     try { spotlight(document); } catch (e) { if (global.console) console.error(e); }
+    try { autoMotion(); } catch (e) { if (global.console) console.error(e); }
     // ?print=1 previews the handout layout on screen; reload or call Story._printRestore() to leave it
     if (/[?&]print=1/.test(location.search)) printPrepare();
   }
@@ -5584,6 +5756,8 @@ html.st-printing .kc-step{min-height:0;opacity:1}
     scenes: scenes,
     chart: chart,
     spring: spring,
+    springs: SPRING,
+    ease: EASE,
     tween: tween,
     flip: flip,
     countUp: countUp,
@@ -5659,6 +5833,17 @@ function figure(id,box,phoneBox,make){
 }
 
 /* ============ hero ============ */
+/* line draw (anime.js createDrawable idea): stroke-dashoffset from full length to 0.
+   Reduced motion and print land the drawn state immediately. */
+function drawIn(path,delay,dur){
+  if(reduce||!path||!path.animate||!path.getTotalLength||document.documentElement.classList.contains('st-printing'))return;
+  var L;try{L=path.getTotalLength();}catch(e){return;}
+  if(!L)return;
+  path.style.strokeDasharray=L+' '+L;
+  var an=path.animate([{strokeDashoffset:L},{strokeDashoffset:0}],
+    {duration:dur||900,delay:delay||0,easing:'cubic-bezier(.65,0,.35,1)',fill:'backwards'});
+  an.onfinish=function(){path.style.strokeDasharray='';};
+}
 var heroOrb = S.orb(document.getElementById('hero-orb'),{density:2200,state:'breathing',
   label:'The system under review, drawn as a dot sphere.'});
 if(S.field){ try{ S.field(document.getElementById('hero'),{density:1.1}); }catch(e){} }
@@ -5728,6 +5913,7 @@ var pairScene=(function(){
       beam.setAttribute('d','M'+L.cx+' '+L.beamY0+' C'+L.cx+' '+(L.beamY0+bend)+', '+x+' '+(L.beamY1-bend)+', '+x+' '+L.beamY1);
       beam.style.stroke=colour;
       beam.setAttribute('opacity',1);
+      if(beam.getAttribute('data-to')!==String(x)){beam.setAttribute('data-to',String(x));drawIn(beam,0,800);}
     }
     function show(step){
       var warn=tokv('--warn'), acc=tokv('--accent'), rule=tokv('--rule');
@@ -5753,7 +5939,7 @@ var pairScene=(function(){
           chipR.style.stroke=acc;
         }
       }else{
-        beam.setAttribute('opacity',0);chip.setAttribute('opacity',0);
+        beam.setAttribute('opacity',0);beam.removeAttribute('data-to');chip.setAttribute('opacity',0);
       }
     }
     return {show:show};
@@ -5849,7 +6035,12 @@ var corpusScene=(function(){
       }
       dots.forEach(function(d){d.c.style.fill=colour(d.kind);});
       if(key)[].slice.call(key.querySelectorAll('.sy-key-dot')).forEach(function(c){c.style.fill=colour(c.getAttribute('data-kind'));});
-      links.forEach(function(pa){pa.setAttribute('opacity',step===1?1:step>=2?.22:0);pa.style.stroke=(step===1?acc:soft);});
+      links.forEach(function(pa,k){
+        var was=pa.getAttribute('opacity');
+        pa.setAttribute('opacity',step===1?1:step>=2?.22:0);pa.style.stroke=(step===1?acc:soft);
+        /* arcs draw one after another the first time the pairs light up; total stagger under 0.7s */
+        if(step===1&&was==='0')drawIn(pa,Math.min(k,23)*30,700);
+      });
     }
     return {show:show};
   });
@@ -6017,7 +6208,9 @@ var baseScene=(function(){
   var items=window.__TRY_ITEMS||[]; if(!items.length)return;
   var i=Math.floor(Math.random()*items.length);
   var q=document.getElementById('try-q'),dom=document.getElementById('try-domain'),id=document.getElementById('try-id'),
-      rev=document.getElementById('try-reveal'),commit=document.getElementById('try-commit'),next=document.getElementById('try-next');
+      rev=document.getElementById('try-reveal'),commit=document.getElementById('try-commit'),next=document.getElementById('try-next'),
+      opts=document.getElementById('try-opts'),verdict=document.getElementById('try-verdict');
+  function h(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
   function render(){
     var it=items[i];
     dom.textContent=it.domain_title;id.textContent=it.id;q.textContent=it.question;
@@ -6027,16 +6220,47 @@ var baseScene=(function(){
     document.getElementById('try-clause').textContent=it.clause;
     var a=document.getElementById('try-url');a.href=it.url;a.target='_blank';a.rel='noopener';
     document.getElementById('try-why').textContent=it.why_it_matters;
-    rev.hidden=true;commit.textContent='I have an answer';commit.disabled=false;
+    /* option order is seeded by the item id so it is stable across reloads */
+    var hsh=0;for(var c=0;c<it.id.length;c++)hsh=(hsh*31+it.id.charCodeAt(c))>>>0;
+    var order=hsh%2?['right','adj']:['adj','right'];
+    opts.innerHTML='';
+    order.forEach(function(kind,k){
+      var b=document.createElement('button');b.type='button';b.className='sy-opt';b.setAttribute('data-kind',kind);
+      b.innerHTML='<span class="k">Option '+(k+1)+'</span>'+h(kind==='right'?it.correct_answer:it.adjacent_wrong);
+      b.addEventListener('click',function(){reveal(kind);});
+      opts.appendChild(b);
+      /* staggered fade-up: 24px, 60ms apart, expo-out */
+      if(!reduce&&b.animate)b.animate([{opacity:0,transform:'translateY(24px)'},{opacity:1,transform:'none'}],
+        {duration:600,delay:k*60,easing:'cubic-bezier(.22,1,.36,1)',fill:'backwards'});
+    });
+    verdict.hidden=true;
+    rev.hidden=true;commit.textContent='Just show me';commit.disabled=false;
   }
-  commit.addEventListener('click',function(){
+  function reveal(picked){
+    [].slice.call(opts.children).forEach(function(b){
+      var k=b.getAttribute('data-kind');b.disabled=true;
+      b.classList.add(k==='right'?'is-right':'is-adj');
+      if(k===picked)b.classList.add('is-picked');
+    });
+    if(picked){
+      verdict.hidden=false;
+      verdict.className='sy-verdict'+(picked==='adj'?' is-adj':'');
+      verdict.textContent=picked==='right'?'You held the clause. Now read how close the other one came.'
+        :'You picked the adjacent answer. So does a retriever that matches on words, and it reads just as confidently.';
+    }
     rev.hidden=false;commit.disabled=true;commit.textContent='Answer shown';
+    if(!reduce&&rev.animate){
+      [].slice.call(rev.children).forEach(function(ch,k){
+        ch.animate([{opacity:0,transform:'translateY(20px)'},{opacity:1,transform:'none'}],
+          {duration:600,delay:Math.min(k,10)*70,easing:'cubic-bezier(.22,1,.36,1)',fill:'backwards'});
+      });
+    }
     rev.scrollIntoView({block:'nearest',behavior:reduce?'auto':'smooth'});
-  });
+  }
+  commit.addEventListener('click',function(){reveal(null);});
   next.addEventListener('click',function(){ i=(i+1)%items.length; render(); });
   render();
 })();
-
 /* ============ the closing card ============ */
 (function(){
   var b=document.getElementById('sy-map');
