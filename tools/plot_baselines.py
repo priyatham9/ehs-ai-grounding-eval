@@ -236,7 +236,7 @@ def build_svg(rows):
         )
         parts.append(
             '<text class="tick-label" x="%.2f" y="%d" text-anchor="middle">%s</text>'
-            % (px, PLOT_Y1 + 18, fmt(gx))
+            % (px, PLOT_Y1 + 18, "%d%%" % round(gx * 100))
         )
     for i in range(7):
         gy = Y_MIN + i * 0.1
@@ -247,7 +247,7 @@ def build_svg(rows):
         )
         parts.append(
             '<text class="tick-label" x="%d" y="%.2f" text-anchor="end">%s</text>'
-            % (PLOT_X0 - 8, py + 4, fmt(gy))
+            % (PLOT_X0 - 8, py + 4, "%d%%" % round(gy * 100))
         )
 
     # Axes.
@@ -260,12 +260,12 @@ def build_svg(rows):
         % (PLOT_X0, PLOT_Y0, PLOT_X0, PLOT_Y1)
     )
     parts.append(
-        '<text class="axis-label" x="%.2f" y="%d" text-anchor="middle">Accuracy</text>'
+        '<text class="axis-label" x="%.2f" y="%d" text-anchor="middle">Accuracy (%% of items)</text>'
         % ((PLOT_X0 + PLOT_X1) / 2.0, H - 12)
     )
     parts.append(
         '<text class="axis-label" x="-%.2f" y="16" text-anchor="middle" '
-        'transform="rotate(-90)">Adjacent substitution rate</text>'
+        'transform="rotate(-90)">Adjacent substitution rate (%% of items)</text>'
         % ((PLOT_Y0 + PLOT_Y1) / 2.0)
     )
 
