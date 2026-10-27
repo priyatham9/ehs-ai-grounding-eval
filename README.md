@@ -23,7 +23,7 @@ artifact it writes carries the string `MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS`.
 |---|---|
 | Status | no language model has been evaluated; mock demonstration fixture only |
 | Data | simulated (mock adapter's outcome probabilities fixed in advance) |
-| Tests | 204 (`python3 -m unittest discover -s tests -v`) |
+| Tests | 212 (`python3 -m unittest discover -s tests -v`) |
 | Quickstart | `python3 -m grounding_eval.cli demo` |
 | Licence | MIT |
 
@@ -378,7 +378,7 @@ Python 3.9+, pandas and numpy. No other dependencies, no build step.
 python3 -m grounding_eval.cli corpus      # describe the corpus
 python3 -m grounding_eval.cli validate    # corpus + stored source verification
 python3 -m grounding_eval.cli demo        # labelled demonstration run
-python3 -m unittest discover -s tests -v  # 204 tests
+python3 -m unittest discover -s tests -v  # 212 tests
 ```
 
 The demo prints the mock banner, a per-adapter summary and a paired comparison.
@@ -524,8 +524,10 @@ tools/verify_sources.py  eCFR re-verification (the only networked code)
 docs/methodology.md      construction and scoring, in reconstructable detail
 docs/preregistration.md  analysis plan, frozen before any real evaluation
 docs/limitations.md      what could change a conclusion, ordered by likelihood
+docs/manuscript/         unsubmitted IMRaD preprint draft; every number sourced in its Appendix A
+tools/check_manuscript.py re-derives each manuscript number from its source file
 synthetic/               the demonstration fixture generator and its output
-tests/                   204 tests
+tests/                   212 tests
 ```
 
 Four mock profiles are available - `ungrounded`, `pseudo_grounded`, `grounded`,
