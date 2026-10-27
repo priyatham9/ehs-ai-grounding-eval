@@ -1,0 +1,7 @@
+adapter,n_items,n_with_confidence,n_bins,accuracy,mean_confidence,brier,brier_constant,ece,brier_ci_low,brier_ci_high,ece_ci_low,ece_ci_high,has_confidence,computed
+random_floor,315,0,10,0.5206349206349207,,,,,,,,,False,False
+retrieval_tfidf,63,63,10,0.2698412698412698,0.4472857142857143,0.20176567015873018,0.19702695893172084,0.19227301587301587,0.18161147346477274,0.22111797149999995,0.12768162546271816,0.3069599963407495,True,True
+retrieval_bm25,63,0,10,0.2857142857142857,,,,,,,,,True,False
+retrieval_bm25plus,63,0,10,0.2698412698412698,,,,,,,,,True,False
+retrieval_rrf,63,0,10,0.2698412698412698,,,,,,,,,True,False
+oracle,63,0,10,1.0,,,,,,,,,False,False

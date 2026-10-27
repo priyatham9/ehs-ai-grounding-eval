@@ -214,8 +214,8 @@ Choices made here, fixed before the results were read:
   imputed. For the retrievers the confidence is the top retrieval score (cosine,
   BM25, BM25+ or fused-rank score), which is a similarity, not a probability.
   These metrics measure how well a score ranks correct above incorrect answers;
-  they say nothing about whether the score is calibrated, and no calibration
-  claim (for example expected calibration error) is made.
+  they say nothing about whether the score is calibrated; calibration is
+  measured separately in section 5b.
 
 References, each checked against the publisher or proceedings page:
 
@@ -228,6 +228,55 @@ References, each checked against the publisher or proceedings page:
 * Y. Geifman, G. Uziel and R. El-Yaniv. Bias-Reduced Uncertainty Estimation for
   Deep Neural Classifiers. ICLR 2019 (arXiv:1805.08206).
   https://arxiv.org/abs/1805.08206
+
+## 5b. Calibration (methods note)
+
+Section 5a asks whether a confidence ranks correct answers above incorrect ones.
+Calibration asks whether the number itself means what it says: among answers
+reported at confidence 0.4, are about 40 percent correct? Three quantities are
+reported, in `grounding_eval/calibration.py`. The **Brier score** is the mean of
+`(c - y)^2`, with `y` 1 for a correct answer and 0 otherwise (Brier, 1950; lower
+is better). Its reference value is `p(1 - p)` for a system that always reports the
+observed accuracy `p`, and a score above that is worse than reporting the base
+rate. The **expected calibration error (ECE)** groups answers into equal-width
+confidence bins and sums `(n_bin / n) |accuracy_bin - mean confidence_bin|` over
+bins (Naeini, Cooper and Hauskrecht, 2015; equal-width form as in Guo, Pleiss,
+Sun and Weinberger, 2017). The **reliability table** lists each bin's count, mean
+confidence and accuracy.
+
+Choices made here:
+
+* Same item set as 5a: the 63 factual items, correct meaning the scorer's CORRECT
+  outcome, intervals from the same item-family cluster bootstrap and seed.
+* Ten equal-width bins over [0, 1], the last including 1.0. ECE depends on the bin
+  count and is biased upward on small samples; with 63 items, 6 of the 10 bins are
+  occupied and the two highest hold 3 and 2 items, so the ECE is a coarse summary.
+  The bin count is printed with the result.
+* The metrics treat the confidence as a probability, so the code rejects values
+  outside [0, 1] instead of rescaling them. Of the retrievers only TF-IDF reports a
+  score bounded to [0, 1] by construction (cosine similarity). Okapi BM25 and BM25+
+  scores are unbounded weight sums (observed here from -4.69 to 49.20 and from 16.47
+  to 145.53), and reciprocal rank fusion scores are rank-based and observed between
+  0.032 and 0.033. Brier and ECE are therefore not computed for BM25, BM25+ or RRF,
+  and a rescaling (for example min-max or a logistic fit to the outcomes) is not
+  applied because it would be a calibration procedure chosen after seeing the data,
+  not a property of the system. random_floor and oracle report no confidence and
+  are n/a.
+* A cosine similarity is not a probability of correctness, so a large ECE for
+  TF-IDF is expected and is a statement about that mismatch, not a defect in the
+  retriever. The numbers say nothing about any language model: none was run.
+
+References (citation details given from the authors' published records; not
+re-fetched from the publisher pages in the sandbox that built this repository):
+
+* G. W. Brier. Verification of forecasts expressed in terms of probability.
+  Monthly Weather Review 78(1) (1950) 1-3.
+* M. P. Naeini, G. F. Cooper and M. Hauskrecht. Obtaining Well Calibrated
+  Probabilities Using Bayesian Binning. Proceedings of the AAAI Conference on
+  Artificial Intelligence 29 (2015).
+* C. Guo, G. Pleiss, Y. Sun and K. Q. Weinberger. On Calibration of Modern Neural
+  Networks. Proceedings of the 34th International Conference on Machine Learning
+  (2017), PMLR 70, 1321-1330.
 
 ## 6. Policies, not estimates
 

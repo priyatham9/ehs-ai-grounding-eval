@@ -148,6 +148,52 @@ What the table supports, and no more:
 * **random_floor and oracle report no confidence**, so no curve exists for them;
   an LLM arm that reports none likewise has nothing to threshold.
 
+## Calibration: Brier score, ECE, reliability bins
+
+Method and references: `docs/methodology.md` section 5b. Computed on the 63
+factual items by `grounding_eval/calibration.py`; `results/calibration_summary.md`
+verbatim below (also `results/calibration_summary.csv` and
+`results/calibration_reliability.csv`). Brier and ECE treat the confidence as a
+probability, so they are computed only where the score is bounded to [0, 1] by
+construction: TF-IDF cosine similarity. BM25, BM25+ and RRF scores are not on that
+scale and random_floor and oracle report no confidence, so those rows are n/a, not
+imputed. 95 percent cluster bootstrap CIs.
+
+| adapter | accuracy | mean confidence | Brier [95% CI] | Brier, constant at accuracy | ECE (10 bins) [95% CI] |
+|---|---|---|---|---|---|
+| random_floor | 52.1% | n/a | n/a (no confidence reported) | n/a | n/a |
+| retrieval_tfidf | 27.0% | 0.447 | 0.202 [0.182, 0.221] | 0.197 | 0.192 [0.128, 0.307] |
+| retrieval_bm25 | 28.6% | n/a | n/a (not on a [0, 1] scale) | n/a | n/a |
+| retrieval_bm25plus | 27.0% | n/a | n/a (not on a [0, 1] scale) | n/a | n/a |
+| retrieval_rrf | 27.0% | n/a | n/a (not on a [0, 1] scale) | n/a | n/a |
+| oracle | 100.0% | n/a | n/a (no confidence reported) | n/a | n/a |
+
+Reliability bins, retrieval_tfidf:
+
+| bin | items | mean confidence | accuracy |
+|---|---|---|---|
+| [0.2, 0.3) | 8 | 0.272 | 12.5% |
+| [0.3, 0.4) | 15 | 0.364 | 0.0% |
+| [0.4, 0.5) | 21 | 0.452 | 33.3% |
+| [0.5, 0.6) | 14 | 0.540 | 42.9% |
+| [0.6, 0.7) | 3 | 0.657 | 33.3% |
+| [0.7, 0.8) | 2 | 0.766 | 100.0% |
+
+What the table supports, and no more:
+
+* **TF-IDF's score is over-confident as a probability.** Mean confidence is 0.447
+  against 27.0 percent accuracy. Its Brier score, 0.202, is above the 0.197 of
+  reporting the 27.0 percent base rate for every item, so the score is no better
+  than a constant as a probability forecast (the intervals overlap; the
+  difference is 0.005). ECE is 0.192 [0.128, 0.307].
+* **The bins are sparse.** Two bins hold 3 and 2 items, so the 33.3 percent and
+  100 percent accuracies there rest on those counts. The two lowest-scoring
+  occupied bins, [0.2, 0.3) and [0.3, 0.4), are 12.5 percent (1 of 8) and 0.0
+  percent (0 of 15) correct; the reliability curve is not monotone.
+* **Not computable for the other systems.** Without a probability-scale
+  confidence, calibration cannot be assessed for BM25, BM25+, RRF, random_floor or
+  oracle, and an LLM arm that reports no confidence would likewise be n/a.
+
 ## What this shows
 
 * **The items discriminate.** Floor and ceiling are separated on every axis the
