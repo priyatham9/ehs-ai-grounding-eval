@@ -19,7 +19,9 @@ Outputs: ``results/baselines_<adapter>.json`` (every run, every response, every
 score), ``results/baselines_summary.csv`` (one row per adapter),
 ``results/baselines_table.md`` (the same table rendered for docs/results.md) and
 ``results/baselines_breakdown.csv`` / ``results/baselines_breakdown.md``
-(factual accuracy by domain and on minimal-pair items, with cluster-bootstrap CIs).
+(factual accuracy by domain and on minimal-pair items, with cluster-bootstrap CIs) and
+``results/selective_summary.csv`` / ``.md`` / ``selective_curves.csv`` (answer-or-abstain
+scoring from each system's confidence; see ``grounding_eval/selective.py``).
 No language model is involved anywhere in this script.
 """
 
@@ -43,6 +45,7 @@ from .report import arm_summary, runs_frame
 from .schema import ItemType
 from .scoring import ScoringConfig
 from .scoring.score import utility_of
+from .selective import risk_coverage_points, summarize_selective
 from .stats import cluster_bootstrap_ci
 
 BASE_SEED = 20260907
@@ -198,6 +201,54 @@ def render_breakdown(table: pd.DataFrame) -> str:
     return "\n".join(lines) + "\n"
 
 
+def selective(runs_by_adapter: Dict[str, List[RunResult]]) -> "tuple[pd.DataFrame, pd.DataFrame]":
+    """Answer-or-abstain scoring on factual items: summary rows and curve points.
+
+    Abstaining means declining the items whose confidence falls below a threshold.
+    Only systems that report a confidence can be scored; random_floor and oracle
+    report none, so their rows carry no curve (stated, not imputed).
+    """
+    frame = runs_frame([r for runs in runs_by_adapter.values() for r in runs])
+    factual = frame[frame["item_type"] == ItemType.FACTUAL.value]
+    summary_rows: List[Dict[str, object]] = []
+    curve_rows: List[Dict[str, object]] = []
+    for adapter in [a for a in ADAPTER_ORDER if a in runs_by_adapter]:
+        g = factual[factual["adapter"] == adapter]
+        conf = [None if pd.isna(c) else float(c) for c in g["confidence"]]
+        ok = g["correct"].astype(bool).tolist()
+        row = summarize_selective(conf, ok, g["family"].tolist(), seed=BOOT_SEED)
+        row["adapter"] = adapter
+        summary_rows.append(row)
+        for p in risk_coverage_points(conf, ok):
+            curve_rows.append({"adapter": adapter, **p})
+    cols = ["adapter"]
+    summary = pd.DataFrame(summary_rows)
+    summary = summary[cols + [c for c in summary.columns if c != "adapter"]]
+    return summary, pd.DataFrame(curve_rows)
+
+
+def render_selective(summary: pd.DataFrame) -> str:
+    def f(x: float) -> str:
+        return "n/a" if pd.isna(x) else "%.3f" % x
+
+    def pct(x: float, lo: float, hi: float, cov: float) -> str:
+        if pd.isna(x):
+            return "n/a"
+        return "%.1f%% [%.1f, %.1f] (answers %.0f%%)" % (100 * x, 100 * lo, 100 * hi, 100 * cov)
+
+    lines = [
+        "| adapter | accuracy at full coverage | AURC [95% CI] | AURC, uninformative score | AURC, best ordering | E-AURC | selective accuracy at 25% coverage | at 50% | at 75% |",
+        "|---|---|---|---|---|---|---|---|---|",
+    ]
+    for _, r in summary.iterrows():
+        aurc_cell = "n/a" if pd.isna(r["aurc"]) else "%s [%s, %s]" % (f(r["aurc"]), f(r["aurc_ci_low"]), f(r["aurc_ci_high"]))
+        cells = [pct(r["sel_acc_at_%d" % c], r["sel_acc_at_%d_ci_low" % c], r["sel_acc_at_%d_ci_high" % c], r["achieved_cov_at_%d" % c]) for c in (25, 50, 75)]
+        lines.append("| %s | %.1f%% | %s | %s | %s | %s | %s |" % (
+            r["adapter"], 100 * r["accuracy_full_coverage"], aurc_cell,
+            f(r["aurc_random"]), f(r["aurc_optimal"]), f(r["e_aurc"]), " | ".join(cells)))
+    return "\n".join(lines) + "\n"
+
+
 def main(argv: Sequence[str] = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--out", default=os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "results"))
@@ -223,6 +274,13 @@ def main(argv: Sequence[str] = None) -> int:
     with open(os.path.join(args.out, "baselines_breakdown.md"), "w") as fh:
         fh.write(detail_md)
     print(detail_md)
+    sel, curves = selective(runs_by_adapter)
+    sel.to_csv(os.path.join(args.out, "selective_summary.csv"), index=False)
+    curves.to_csv(os.path.join(args.out, "selective_curves.csv"), index=False)
+    sel_md = render_selective(sel)
+    with open(os.path.join(args.out, "selective_summary.md"), "w") as fh:
+        fh.write(sel_md)
+    print(sel_md)
     # Retrieval diagnostics: how often the top document was the item's own source.
     for adapter_name in RETRIEVERS:
         if adapter_name in runs_by_adapter:
