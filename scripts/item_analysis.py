@@ -1,0 +1,220 @@
+#!/usr/bin/env python3
+"""Item difficulty, discrimination and inter-retriever agreement (backlog D3).
+
+Reads only the committed run files ``results/baselines_retrieval_*.json``
+(factual items, one run each) and writes ``results/item_analysis.csv`` and
+``results/item_analysis.md``. Standard library only, no network, no model calls,
+no timestamps: regenerating gives byte-identical files.
+
+Usage: python3 scripts/item_analysis.py [--check]
+``--check`` exits 1 if the committed files differ from regenerated output.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import math
+import os
+import sys
+from typing import Dict, List, Optional, Sequence
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+RESULTS = os.path.join(ROOT, "results")
+RETRIEVERS = ["retrieval_tfidf", "retrieval_bm25", "retrieval_bm25plus", "retrieval_rrf"]
+FILES = {r: os.path.join(RESULTS, "baselines_%s.json" % r) for r in RETRIEVERS}
+
+
+def load() -> Dict[str, Dict[str, dict]]:
+    """adapter -> item_id -> score row, factual items of the (single) run."""
+    out: Dict[str, Dict[str, dict]] = {}
+    for name, path in FILES.items():
+        with open(path) as fh:
+            runs = json.load(fh)["runs"]
+        if len(runs) != 1:
+            raise SystemExit("%s: expected exactly 1 run, found %d" % (path, len(runs)))
+        out[name] = {s["item_id"]: s for s in runs[0]["scores"] if s["item_type"] == "factual"}
+    ids = [set(v) for v in out.values()]
+    if any(i != ids[0] for i in ids):
+        raise SystemExit("retrievers disagree on the factual item set")
+    return out
+
+
+def point_biserial(x: Sequence[int], y: Sequence[float]) -> Optional[float]:
+    """Pearson r between a binary x and numeric y; None if either has zero variance."""
+    n = len(x)
+    mx, my = sum(x) / n, sum(y) / n
+    sxx = sum((a - mx) ** 2 for a in x)
+    syy = sum((b - my) ** 2 for b in y)
+    if sxx == 0 or syy == 0:
+        return None
+    return sum((a - mx) * (b - my) for a, b in zip(x, y)) / math.sqrt(sxx * syy)
+
+
+def cohen_kappa(a: Sequence[int], b: Sequence[int]) -> Optional[float]:
+    n = len(a)
+    po = sum(1 for x, y in zip(a, b) if x == y) / n
+    pa, pb = sum(a) / n, sum(b) / n
+    pe = pa * pb + (1 - pa) * (1 - pb)
+    return None if pe == 1 else (po - pe) / (1 - pe)
+
+
+def fleiss_kappa(matrix: Sequence[Sequence[int]]) -> Optional[float]:
+    """matrix[item][rater] in {0, 1}."""
+    n_items, m = len(matrix), len(matrix[0])
+    p1 = sum(sum(r) for r in matrix) / (n_items * m)
+    pe = p1 ** 2 + (1 - p1) ** 2
+    pbar = 0.0
+    for r in matrix:
+        k = sum(r)
+        pbar += (k * (k - 1) + (m - k) * (m - k - 1)) / (m * (m - 1))
+    pbar /= n_items
+    return None if pe == 1 else (pbar - pe) / (1 - pe)
+
+
+def f3(x: Optional[float]) -> str:
+    return "n/a" if x is None else "%.3f" % x
+
+
+def analyse() -> dict:
+    data = load()
+    ids = sorted(data[RETRIEVERS[0]])
+    mat = [[1 if data[r][i]["outcome"] == "correct" else 0 for r in RETRIEVERS] for i in ids]
+    totals = [sum(mat[k][j] for k in range(len(ids))) for j in range(len(RETRIEVERS))]
+    items = []
+    for k, i in enumerate(ids):
+        row = data[RETRIEVERS[0]][i]
+        # corrected item-total: retriever total score excluding this item
+        rest = [totals[j] - mat[k][j] for j in range(len(RETRIEVERS))]
+        items.append({
+            "item_id": i, "domain": row["domain"], "pair_id": row["pair_id"] or "",
+            "n_correct": sum(mat[k]), "difficulty": sum(mat[k]) / len(RETRIEVERS),
+            "discrimination": point_biserial(mat[k], rest),
+            **{r: mat[k][j] for j, r in enumerate(RETRIEVERS)},
+        })
+    cols = [[row[j] for row in mat] for j in range(len(RETRIEVERS))]
+    pair_k = {(a, b): cohen_kappa(cols[a], cols[b])
+              for a in range(len(RETRIEVERS)) for b in range(a + 1, len(RETRIEVERS))}
+    return {"items": items, "totals": totals, "fleiss": fleiss_kappa(mat), "pair_kappa": pair_k,
+            "pair_agree": {k: sum(1 for x, y in zip(cols[k[0]], cols[k[1]]) if x == y) for k in pair_k}}
+
+
+def render_csv(res: dict) -> str:
+    head = ["item_id", "domain", "pair_id", "n_correct", "difficulty", "discrimination"] + RETRIEVERS
+    lines = [",".join(head)]
+    for it in res["items"]:
+        lines.append(",".join([
+            it["item_id"], it["domain"], it["pair_id"], str(it["n_correct"]),
+            "%.2f" % it["difficulty"], f3(it["discrimination"]),
+        ] + [str(it[r]) for r in RETRIEVERS]))
+    return "\n".join(lines) + "\n"
+
+
+def render_md(res: dict) -> str:
+    items = res["items"]
+    n = len(items)
+    by_k = {k: [it for it in items if it["n_correct"] == k] for k in range(5)}
+    disc = [it for it in items if it["discrimination"] is not None]
+    nonconst = [it for it in items if 0 < it["n_correct"] < 4]
+    L: List[str] = []
+    L.append("# Item analysis of the non-LLM baselines")
+    L.append("")
+    L.append("Generated by `scripts/item_analysis.py` from the committed `results/baselines_retrieval_*.json` "
+             "(%d factual items, one run per retriever). Per-item values are in `results/item_analysis.csv`." % n)
+    L.append("")
+    L.append("## Difficulty")
+    L.append("")
+    L.append("Difficulty is the share of the 4 retrievers that answer the item correctly (higher is easier).")
+    L.append("")
+    L.append("| retrievers correct | difficulty | items | share of items |")
+    L.append("|---|---|---|---|")
+    for k in range(5):
+        L.append("| %d of 4 | %.2f | %d | %.1f%% |" % (k, k / 4, len(by_k[k]), 100.0 * len(by_k[k]) / n))
+    L.append("")
+    L.append("Mean difficulty is %.3f. Items no retriever solves: %s." % (
+        sum(it["difficulty"] for it in items) / n,
+        "%d of %d" % (len(by_k[0]), n)))
+    L.append("")
+    if nonconst:
+        L.append("Items on which retrievers disagree: " + ", ".join(
+            "%s (%d of 4 correct; correct: %s)" % (
+                it["item_id"], it["n_correct"],
+                ", ".join(r.replace("retrieval_", "") for r in RETRIEVERS if it[r])) for it in nonconst) + ".")
+    else:
+        L.append("The retrievers never disagree on any item.")
+    L.append("")
+    L.append("Difficulty by domain (mean share of retrievers correct):")
+    L.append("")
+    L.append("| domain | items | mean difficulty |")
+    L.append("|---|---|---|")
+    for d in sorted({it["domain"] for it in items}):
+        g = [it for it in items if it["domain"] == d]
+        L.append("| %s | %d | %.3f |" % (d, len(g), sum(it["difficulty"] for it in g) / len(g)))
+    L.append("")
+    L.append("## Discrimination")
+    L.append("")
+    L.append("Item-total discrimination is the point-biserial correlation, across the 4 retrievers, between "
+             "the item's 0/1 result and each retriever's total score on the other %d items (corrected item-total). "
+             "It is undefined (n/a) when the item has zero variance across retrievers (all correct or all wrong) "
+             "or when the rest scores are all equal." % (n - 1))
+    L.append("")
+    L.append("Retriever totals (correct of %d): %s." % (n, ", ".join(
+        "%s %d" % (r.replace("retrieval_", ""), t) for r, t in zip(RETRIEVERS, res["totals"]))))
+    L.append("")
+    L.append("Discrimination is defined for %d of %d items; the other %d are n/a." % (len(disc), n, n - len(disc)))
+    for it in disc:
+        L.append("")
+        L.append("- %s: r = %s" % (it["item_id"], f3(it["discrimination"])))
+    L.append("")
+    L.append("## Agreement across retrievers")
+    L.append("")
+    L.append("Fleiss kappa over 4 retrievers and %d items (binary correct/incorrect): %s." % (n, f3(res["fleiss"])))
+    L.append("")
+    L.append("| retriever A | retriever B | items agreeing | Cohen kappa |")
+    L.append("|---|---|---|---|")
+    for (a, b), kap in res["pair_kappa"].items():
+        L.append("| %s | %s | %d of %d | %s |" % (
+            RETRIEVERS[a].replace("retrieval_", ""), RETRIEVERS[b].replace("retrieval_", ""),
+            res["pair_agree"][(a, b)], n, f3(kap)))
+    L.append("")
+    L.append("## Limitations")
+    L.append("")
+    L.append("- The 4 retrievers are not independent raters. TF-IDF, BM25, BM25+ and RRF (which fuses TF-IDF and "
+             "BM25) share one tokenizer and one 68-document index, so high agreement is expected by construction "
+             "and says little about item quality.")
+    L.append("- With 4 respondents a corrected item-total correlation rests on 4 data points and takes only a few "
+             "values; it is a descriptive flag, not an estimate with a usable confidence interval. No interval is reported.")
+    L.append("- Difficulty is on a 5-level scale (0, 0.25, 0.5, 0.75, 1) because there are 4 retrievers, and it is "
+             "dominated by the 0 level.")
+    L.append("- Kappa is undefined when a retriever is constant, and is unstable when agreement is near-total "
+             "and the base rate is low (the kappa paradox); read the raw agreement counts alongside it.")
+    L.append("- Factual items only (%d), one run per retriever; category-error items are scored by declining and are excluded." % n)
+    L.append("- No language model has been evaluated, so these item statistics describe difficulty for lexical "
+             "retrieval only and must not be read as difficulty for an LLM. Item parameters (IRT, Rasch) are not fitted: "
+             "4 respondents cannot support them.")
+    L.append("")
+    return "\n".join(L)
+
+
+def main(argv: Optional[Sequence[str]] = None) -> int:
+    p = argparse.ArgumentParser()
+    p.add_argument("--check", action="store_true")
+    args = p.parse_args(argv)
+    res = analyse()
+    outs = {"item_analysis.csv": render_csv(res), "item_analysis.md": render_md(res)}
+    bad = 0
+    for name, text in outs.items():
+        path = os.path.join(RESULTS, name)
+        if args.check:
+            with open(path) as fh:
+                if fh.read() != text:
+                    print("DRIFT: %s" % name)
+                    bad = 1
+        else:
+            with open(path, "w", newline="\n") as fh:
+                fh.write(text)
+    return bad
+
+
+if __name__ == "__main__":
+    sys.exit(main())
