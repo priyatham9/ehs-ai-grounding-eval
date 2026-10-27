@@ -1,0 +1,11 @@
+adapter,bin,low,high,count,mean_confidence,accuracy
+retrieval_tfidf,0,0.0,0.1,0,,
+retrieval_tfidf,1,0.1,0.2,0,,
+retrieval_tfidf,2,0.2,0.3,8,0.271775,0.125
+retrieval_tfidf,3,0.3,0.4,15,0.36366666666666675,0.0
+retrieval_tfidf,4,0.4,0.5,21,0.451852380952381,0.3333333333333333
+retrieval_tfidf,5,0.5,0.6,14,0.5397714285714285,0.42857142857142855
+retrieval_tfidf,6,0.6,0.7,3,0.6570666666666666,0.3333333333333333
+retrieval_tfidf,7,0.7,0.8,2,0.76645,1.0
+retrieval_tfidf,8,0.8,0.9,0,,
+retrieval_tfidf,9,0.9,1.0,0,,

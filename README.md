@@ -23,7 +23,7 @@ artifact it writes carries the string `MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS`.
 |---|---|
 | Status | no language model has been evaluated; mock demonstration fixture only |
 | Data | simulated (mock adapter's outcome probabilities fixed in advance) |
-| Tests | 182 (`python3 -m unittest discover -s tests -v`) |
+| Tests | 193 (`python3 -m unittest discover -s tests -v`) |
 | Quickstart | `python3 -m grounding_eval.cli demo` |
 | Licence | MIT |
 

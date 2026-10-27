@@ -21,7 +21,9 @@ score), ``results/baselines_summary.csv`` (one row per adapter),
 ``results/baselines_breakdown.csv`` / ``results/baselines_breakdown.md``
 (factual accuracy by domain and on minimal-pair items, with cluster-bootstrap CIs) and
 ``results/selective_summary.csv`` / ``.md`` / ``selective_curves.csv`` (answer-or-abstain
-scoring from each system's confidence; see ``grounding_eval/selective.py``).
+scoring from each system's confidence; see ``grounding_eval/selective.py``), and
+``results/calibration_summary.csv`` / ``.md`` / ``calibration_reliability.csv`` (Brier,
+ECE and reliability bins; see ``grounding_eval/calibration.py``).
 No language model is involved anywhere in this script.
 """
 
@@ -45,6 +47,7 @@ from .report import arm_summary, runs_frame
 from .schema import ItemType
 from .scoring import ScoringConfig
 from .scoring.score import utility_of
+from .calibration import reliability_table, summarize_calibration
 from .selective import risk_coverage_points, summarize_selective
 from .stats import cluster_bootstrap_ci
 
@@ -249,6 +252,66 @@ def render_selective(summary: pd.DataFrame) -> str:
     return "\n".join(lines) + "\n"
 
 
+# Systems whose confidence is on a probability scale by construction. TF-IDF
+# cosine similarity lies in [0, 1]. Okapi BM25 and BM25+ scores are unbounded
+# sums of weights (observed ranges -4.69 to 49.20 and 16.47 to 145.53), and reciprocal rank fusion
+# scores are bounded by 2 / (k + 1) = 0.033 (observed 0.032 to 0.033), so neither is a probability and
+# calibration metrics are not computed for them.
+CALIBRATION_SCORED = ("retrieval_tfidf",)
+
+
+def calibration(runs_by_adapter: Dict[str, List[RunResult]]) -> "tuple[pd.DataFrame, pd.DataFrame]":
+    """Brier, ECE and reliability bins on factual items, for systems on a [0, 1] scale."""
+    frame = runs_frame([r for runs in runs_by_adapter.values() for r in runs])
+    factual = frame[frame["item_type"] == ItemType.FACTUAL.value]
+    summary_rows: List[Dict[str, object]] = []
+    bin_rows: List[Dict[str, object]] = []
+    for adapter in [a for a in ADAPTER_ORDER if a in runs_by_adapter]:
+        g = factual[factual["adapter"] == adapter]
+        ok = g["correct"].astype(bool).tolist()
+        scored = adapter in CALIBRATION_SCORED
+        conf = [None if (pd.isna(c) or not scored) else float(c) for c in g["confidence"]]
+        row = summarize_calibration(conf, ok, g["family"].tolist(), seed=BOOT_SEED)
+        row["adapter"] = adapter
+        row["has_confidence"] = bool(g["confidence"].notna().any())
+        row["computed"] = scored and row["n_with_confidence"] > 0
+        summary_rows.append(row)
+        if row["computed"]:
+            for b in reliability_table(conf, ok):
+                bin_rows.append({"adapter": adapter, **b})
+    summary = pd.DataFrame(summary_rows)
+    summary = summary[["adapter"] + [c for c in summary.columns if c != "adapter"]]
+    return summary, pd.DataFrame(bin_rows)
+
+
+def render_calibration(summary: pd.DataFrame, bins: pd.DataFrame) -> str:
+    def f(x: float) -> str:
+        return "n/a" if pd.isna(x) else "%.3f" % x
+
+    why = {True: "no confidence reported"}
+    lines = [
+        "| adapter | accuracy | mean confidence | Brier [95% CI] | Brier, constant at accuracy | ECE (10 bins) [95% CI] |",
+        "|---|---|---|---|---|---|",
+    ]
+    for _, r in summary.iterrows():
+        if r["computed"]:
+            lines.append("| %s | %.1f%% | %s | %s [%s, %s] | %s | %s [%s, %s] |" % (
+                r["adapter"], 100 * r["accuracy"], f(r["mean_confidence"]),
+                f(r["brier"]), f(r["brier_ci_low"]), f(r["brier_ci_high"]), f(r["brier_constant"]),
+                f(r["ece"]), f(r["ece_ci_low"]), f(r["ece_ci_high"])))
+        else:
+            reason = "not on a [0, 1] scale" if r["has_confidence"] else why[True]
+            lines.append("| %s | %.1f%% | n/a | n/a (%s) | n/a | n/a |" % (r["adapter"], 100 * r["accuracy"], reason))
+    out = "\n".join(lines) + "\n"
+    for adapter in bins["adapter"].unique() if len(bins) else []:
+        out += "\nReliability bins, %s:\n\n| bin | items | mean confidence | accuracy |\n|---|---|---|---|\n" % adapter
+        for _, b in bins[bins["adapter"] == adapter].iterrows():
+            if b["count"]:
+                out += "| [%.1f, %.1f%s | %d | %.3f | %.1f%% |\n" % (
+                    b["low"], b["high"], "]" if b["high"] >= 1.0 else ")", b["count"], b["mean_confidence"], 100 * b["accuracy"])
+    return out
+
+
 def main(argv: Sequence[str] = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--out", default=os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "results"))
@@ -281,6 +344,13 @@ def main(argv: Sequence[str] = None) -> int:
     with open(os.path.join(args.out, "selective_summary.md"), "w") as fh:
         fh.write(sel_md)
     print(sel_md)
+    cal, cal_bins = calibration(runs_by_adapter)
+    cal.to_csv(os.path.join(args.out, "calibration_summary.csv"), index=False)
+    cal_bins.to_csv(os.path.join(args.out, "calibration_reliability.csv"), index=False)
+    cal_md = render_calibration(cal, cal_bins)
+    with open(os.path.join(args.out, "calibration_summary.md"), "w") as fh:
+        fh.write(cal_md)
+    print(cal_md)
     # Retrieval diagnostics: how often the top document was the item's own source.
     for adapter_name in RETRIEVERS:
         if adapter_name in runs_by_adapter:
