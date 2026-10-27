@@ -57,7 +57,7 @@ Every item asserts that a specific paragraph of a specific federal regulation sa
 - Cited paragraph markers appear in the section with case preserved
 - The anchor is located inside the paragraph cited, not merely somewhere in the same section
 
-All 68 items are verified. Six drafted items were excluded from the corpus because their provenance could not be verified (corpus/quarantine/unverified.json).
+All 68 items are verified. Six drafted items were excluded from the corpus because their provenance could not be verified (corpus/quarantine/unverified.json). A further four regulatory-currency drafts (answers that changed with a dated Federal Register amendment: three Hazard Communication items and one 29 CFR 1904.41 item) are quarantined in the same file until their current eCFR text is confirmed; each records the amending Federal Register document that was fetched.
 
 Verification status is committed in corpus/verification/source_verification.json with a dated eCFR report.
 
