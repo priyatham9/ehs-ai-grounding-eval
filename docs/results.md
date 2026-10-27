@@ -148,6 +148,57 @@ What the table supports, and no more:
 * **random_floor and oracle report no confidence**, so no curve exists for them;
   an LLM arm that reports none likewise has nothing to threshold.
 
+## Paired significance between arms
+
+Method and references: `docs/methodology.md` section 5c. Every arm answers the
+same 63 factual items, so arms are compared on the items they disagree about:
+exact McNemar test on the discordant items, a paired cluster-bootstrap 95 percent
+interval for the accuracy difference (families resampled, 2000 resamples, seed
+20260904), and Holm adjustment across all 10 comparisons (the 6 pairs among the
+four retrievers plus each retriever against random_floor). Computed by
+`grounding_eval/significance.py`; `results/significance_pairwise.md` verbatim below
+(also `results/significance_pairwise.csv`, which adds the sensitivity columns).
+random_floor is compared at repeat 0 (35 of 63 correct, 55.6 percent; the five
+repeats give 30 to 36 correct, mean 52.1 percent). The oracle is not compared.
+
+| A | B | accuracy A | accuracy B | difference A-B [95% paired cluster CI] | A only right | B only right | McNemar exact p | Holm-adjusted p | significant at 0.05 |
+|---|---|---|---|---|---|---|---|---|---|
+| retrieval_tfidf | retrieval_bm25 | 27.0% | 28.6% | -1.6 pts [-4.8, +0.0] | 0 | 1 | 1.000 | 1.000 | no |
+| retrieval_tfidf | retrieval_bm25plus | 27.0% | 27.0% | +0.0 pts [+0.0, +0.0] | 0 | 0 | 1.000 | 1.000 | no |
+| retrieval_tfidf | retrieval_rrf | 27.0% | 27.0% | +0.0 pts [+0.0, +0.0] | 0 | 0 | 1.000 | 1.000 | no |
+| retrieval_bm25 | retrieval_bm25plus | 28.6% | 27.0% | +1.6 pts [+0.0, +4.8] | 1 | 0 | 1.000 | 1.000 | no |
+| retrieval_bm25 | retrieval_rrf | 28.6% | 27.0% | +1.6 pts [+0.0, +4.8] | 1 | 0 | 1.000 | 1.000 | no |
+| retrieval_bm25plus | retrieval_rrf | 27.0% | 27.0% | +0.0 pts [+0.0, +0.0] | 0 | 0 | 1.000 | 1.000 | no |
+| retrieval_tfidf | random_floor | 27.0% | 55.6% | -28.6 pts [-47.6, -9.7] | 7 | 25 | 0.002 | 0.021 | yes |
+| retrieval_bm25 | random_floor | 28.6% | 55.6% | -27.0 pts [-46.0, -8.2] | 8 | 25 | 0.005 | 0.032 | yes |
+| retrieval_bm25plus | random_floor | 27.0% | 55.6% | -28.6 pts [-47.6, -9.7] | 7 | 25 | 0.002 | 0.021 | yes |
+| retrieval_rrf | random_floor | 27.0% | 55.6% | -28.6 pts [-47.6, -9.7] | 7 | 25 | 0.002 | 0.021 | yes |
+
+What the table supports, and no more:
+
+* **The four retrievers are not distinguishable from each other.** All six
+  retriever-retriever differences are not significant (raw and Holm-adjusted p =
+  1.000). Across the 63 factual items the retrievers disagree on at most one item
+  per pair (BM25 answers one item that each of the other three misses; TF-IDF,
+  BM25+ and RRF agree on every item). With 0 or 1 discordant items the test has no
+  power: it cannot show the retrievers are equivalent, only that this corpus
+  cannot separate them. The BM25 versus TF-IDF point estimate of 1.6 points is
+  one item.
+* **Each retriever is significantly below the random floor at repeat 0.** Holm-adjusted
+  p = 0.021 (TF-IDF, BM25+, RRF) and 0.032 (BM25), differences of -27.0 to -28.6
+  points with paired intervals that exclude zero. This is a statement about
+  retrievers scoring below a coin flip between the two answer options on this
+  item set, not about retrieval in general.
+* **That comparison depends on which random_floor repeat is used.** Raw McNemar p
+  across the five repeats ranges from 0.0005 to 0.035 for TF-IDF, BM25+ and RRF,
+  and from 0.0014 to 0.058 for BM25, so for BM25 the weakest repeat is not
+  significant even before Holm adjustment. The conclusion that retrievers are
+  below the floor is consistent in direction on every repeat but not uniformly
+  significant at 0.05 once the correction is applied.
+* **The test treats items as independent.** Families (minimal pairs) cluster, so
+  the McNemar p-values are optimistic; the cluster-bootstrap intervals are the
+  cluster-aware check, and for the random-floor contrasts they exclude zero too.
+
 ## Calibration: Brier score, ECE, reliability bins
 
 Method and references: `docs/methodology.md` section 5b. Computed on the 63

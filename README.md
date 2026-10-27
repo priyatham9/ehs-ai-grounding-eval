@@ -23,7 +23,7 @@ artifact it writes carries the string `MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS`.
 |---|---|
 | Status | no language model has been evaluated; mock demonstration fixture only |
 | Data | simulated (mock adapter's outcome probabilities fixed in advance) |
-| Tests | 193 (`python3 -m unittest discover -s tests -v`) |
+| Tests | 204 (`python3 -m unittest discover -s tests -v`) |
 | Quickstart | `python3 -m grounding_eval.cli demo` |
 | Licence | MIT |
 
@@ -378,7 +378,7 @@ Python 3.9+, pandas and numpy. No other dependencies, no build step.
 python3 -m grounding_eval.cli corpus      # describe the corpus
 python3 -m grounding_eval.cli validate    # corpus + stored source verification
 python3 -m grounding_eval.cli demo        # labelled demonstration run
-python3 -m unittest discover -s tests -v  # 158 tests
+python3 -m unittest discover -s tests -v  # 204 tests
 ```
 
 The demo prints the mock banner, a per-adapter summary and a paired comparison.
@@ -525,7 +525,7 @@ docs/methodology.md      construction and scoring, in reconstructable detail
 docs/preregistration.md  analysis plan, frozen before any real evaluation
 docs/limitations.md      what could change a conclusion, ordered by likelihood
 synthetic/               the demonstration fixture generator and its output
-tests/                   158 tests
+tests/                   204 tests
 ```
 
 Four mock profiles are available - `ungrounded`, `pseudo_grounded`, `grounded`,
@@ -569,5 +569,5 @@ accuracy; standard parameters fixed in code, not tuned), and an oracle ceiling.
 They show the items discriminate (floor and ceiling CIs do not overlap on any
 axis) and where plain retrieval lands; a per-domain and minimal-pair breakdown
 is in `results/baselines_breakdown.md`. No language model has been evaluated
-yet. See [docs/results.md](docs/results.md) and `results/`; regenerate with
+yet. Paired McNemar tests with Holm correction (`results/significance_pairwise.md`) find no significant difference between any two of the four retrievers (at most one discordant item per pair) and find each retriever significantly below the random floor at repeat 0 (Holm-adjusted p 0.021 to 0.032), a result that is not significant for BM25 on the weakest random-floor repeat. See [docs/results.md](docs/results.md) and `results/`; regenerate with
 `python3 -m grounding_eval.run_baselines`.
