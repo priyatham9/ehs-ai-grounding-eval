@@ -278,6 +278,50 @@ re-fetched from the publisher pages in the sandbox that built this repository):
   Networks. Proceedings of the 34th International Conference on Machine Learning
   (2017), PMLR 70, 1321-1330.
 
+## 5c. Paired significance and multiple-comparison correction (methods note)
+
+Section 5 names McNemar's exact test and the cluster bootstrap; this section
+records how they are applied to arm-versus-arm comparisons on the committed
+per-item results. Each arm answers the same items, so for arms A and B the item
+outcomes form a 2x2 table and only the discordant items (A right and B wrong, or
+the reverse) carry information about a difference. McNemar (1947) tests whether
+the two discordant counts are equal; the exact version used here is the two-sided
+binomial test with p = 0.5 on the discordant count, chosen because discordant
+counts on 63 items are small, where the chi-square approximation is unreliable.
+The accuracy difference is reported with a percentile bootstrap interval
+(Efron and Tibshirani, 1993) in which the per-item difference (+1, 0 or -1) is
+resampled by whole question family, so both the pairing and the clustering of
+minimal pairs are kept.
+
+Ten comparisons are made on the same data (6 among the four retrievers, 4 of a
+retriever against random_floor), so the raw p-values are adjusted by the Holm
+(1979) step-down procedure, which controls the family-wise error rate without
+any assumption about dependence between the tests and is never less powerful
+than Bonferroni. Choices fixed before the results were read:
+
+* The family of comparisons is the ten listed above, on the 63 factual items;
+  the oracle is excluded as the ceiling by construction, and category-error
+  items are excluded as in sections 5a and 5b. Significance is declared at a
+  Holm-adjusted p below 0.05 on the McNemar test; the bootstrap interval is
+  reported alongside and is not folded into the decision.
+* random_floor is stochastic, so one repeat (repeat 0) enters the family and the
+  range of raw p over all five repeats is reported as a sensitivity check rather
+  than hidden.
+* The exact test treats items as independent. Because families cluster, its
+  p-values can be optimistic; no cluster-adjusted exact test is claimed.
+* With 0 or 1 discordant items a non-significant result means the item set cannot
+  separate the arms, not that the arms are equivalent.
+
+References (cited from memory of the published records; not re-fetched in this
+environment):
+
+* Q. McNemar. Note on the sampling error of the difference between correlated
+  proportions or percentages. Psychometrika 12 (1947) 153-157.
+* S. Holm. A simple sequentially rejective multiple test procedure.
+  Scandinavian Journal of Statistics 6 (1979) 65-70.
+* B. Efron and R. J. Tibshirani. An Introduction to the Bootstrap. Chapman and
+  Hall (1993).
+
 ## 6. Policies, not estimates
 
 Two sets of numbers in this repository are **stated policies**, not measured or

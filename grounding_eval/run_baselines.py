@@ -22,6 +22,8 @@ score), ``results/baselines_summary.csv`` (one row per adapter),
 (factual accuracy by domain and on minimal-pair items, with cluster-bootstrap CIs) and
 ``results/selective_summary.csv`` / ``.md`` / ``selective_curves.csv`` (answer-or-abstain
 scoring from each system's confidence; see ``grounding_eval/selective.py``), and
+``results/significance_pairwise.csv`` / ``.md`` (paired McNemar, cluster-bootstrap
+difference CI and Holm correction; see ``grounding_eval/significance.py``), and
 ``results/calibration_summary.csv`` / ``.md`` / ``calibration_reliability.csv`` (Brier,
 ECE and reliability bins; see ``grounding_eval/calibration.py``).
 No language model is involved anywhere in this script.
@@ -49,7 +51,8 @@ from .scoring import ScoringConfig
 from .scoring.score import utility_of
 from .calibration import reliability_table, summarize_calibration
 from .selective import risk_coverage_points, summarize_selective
-from .stats import cluster_bootstrap_ci
+from .significance import compare_arms
+from .stats import cluster_bootstrap_ci, mcnemar_exact
 
 BASE_SEED = 20260907
 BOOT_SEED = 20260904
@@ -252,6 +255,56 @@ def render_selective(summary: pd.DataFrame) -> str:
     return "\n".join(lines) + "\n"
 
 
+def significance(runs_by_adapter: Dict[str, List[RunResult]]) -> pd.DataFrame:
+    """Paired comparisons between arms on the factual items, Holm-adjusted.
+
+    Family of comparisons: every pair among the four retrievers (6) and each
+    retriever against random_floor (4), 10 in all. random_floor is stochastic and
+    has several repeats; repeat 0 is the one compared, and the min and max of the
+    raw McNemar p over all repeats are reported as a sensitivity check. The oracle
+    is not compared (it is the ceiling by construction).
+    """
+    frame = runs_frame([r for runs in runs_by_adapter.values() for r in runs])
+    factual = frame[frame["item_type"] == ItemType.FACTUAL.value]
+
+    def aligned(adapter: str, repeat: int) -> pd.DataFrame:
+        g = factual[(factual["adapter"] == adapter) & (factual["repeat"] == repeat)]
+        return g.sort_values("item_id").reset_index(drop=True)
+
+    base = {a: aligned(a, 0) for a in RETRIEVERS + ["random_floor"]}
+    ids = base["retrieval_tfidf"]["item_id"].tolist()
+    for a, g in base.items():
+        if g["item_id"].tolist() != ids:
+            raise ValueError("arm %s does not cover the same factual items" % a)
+    clusters = base["retrieval_tfidf"]["family"].tolist()
+    success = {a: g["correct"].astype(bool).tolist() for a, g in base.items()}
+    pairs = [(a, b) for i, a in enumerate(RETRIEVERS) for b in RETRIEVERS[i + 1:]]
+    pairs += [(a, "random_floor") for a in RETRIEVERS]
+    repeats = sorted(factual[factual["adapter"] == "random_floor"]["repeat"].unique())
+    extra = {}
+    for a in RETRIEVERS:
+        ps = []
+        for k in repeats:
+            rf = aligned("random_floor", int(k))
+            ps.append(mcnemar_exact(success[a], rf["correct"].astype(bool).tolist()).p_value)
+        extra["%s|random_floor" % a] = ps
+    return pd.DataFrame(compare_arms(success, clusters, pairs, seed=BOOT_SEED, extra_p=extra))
+
+
+def render_significance(table: pd.DataFrame) -> str:
+    lines = [
+        "| A | B | accuracy A | accuracy B | difference A-B [95% paired cluster CI] | A only right | B only right | McNemar exact p | Holm-adjusted p | significant at 0.05 |",
+        "|---|---|---|---|---|---|---|---|---|---|",
+    ]
+    for _, r in table.iterrows():
+        lines.append("| %s | %s | %.1f%% | %.1f%% | %+.1f pts [%+.1f, %+.1f] | %d | %d | %.3f | %.3f | %s |" % (
+            r["arm_a"], r["arm_b"], 100 * r["acc_a"], 100 * r["acc_b"],
+            100 * r["diff"], 100 * r["diff_ci_low"], 100 * r["diff_ci_high"],
+            r["n_a_only"], r["n_b_only"], r["p_mcnemar"], r["p_holm"],
+            "yes" if r["significant"] else "no"))
+    return "\n".join(lines) + "\n"
+
+
 # Systems whose confidence is on a probability scale by construction. TF-IDF
 # cosine similarity lies in [0, 1]. Okapi BM25 and BM25+ scores are unbounded
 # sums of weights (observed ranges -4.69 to 49.20 and 16.47 to 145.53), and reciprocal rank fusion
@@ -344,6 +397,12 @@ def main(argv: Sequence[str] = None) -> int:
     with open(os.path.join(args.out, "selective_summary.md"), "w") as fh:
         fh.write(sel_md)
     print(sel_md)
+    sig = significance(runs_by_adapter)
+    sig.to_csv(os.path.join(args.out, "significance_pairwise.csv"), index=False)
+    sig_md = render_significance(sig)
+    with open(os.path.join(args.out, "significance_pairwise.md"), "w") as fh:
+        fh.write(sig_md)
+    print(sig_md)
     cal, cal_bins = calibration(runs_by_adapter)
     cal.to_csv(os.path.join(args.out, "calibration_summary.csv"), index=False)
     cal_bins.to_csv(os.path.join(args.out, "calibration_reliability.csv"), index=False)
