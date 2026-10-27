@@ -11,3 +11,11 @@ url: "https://priyatham9.github.io/ehs-ai-grounding-eval/"
 license: MIT
 date-released: "2026-09-07"
 version: 0.1.0
+keywords:
+  - AI evaluation
+  - grounding
+  - benchmark
+  - retrieval
+  - safety-critical
+  - EHS
+  - large language models
