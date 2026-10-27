@@ -179,6 +179,56 @@ The analysis matches both facts.
   reported next to the centre, because in a safety setting an answer that is
   correct only sometimes is not a correct answer.
 
+## 5a. Answer-or-abstain scoring (methods note)
+
+The headline accuracy treats every answer as final. A deployed system can instead
+decline, and for safety questions the useful question is how much accuracy it
+buys by declining the answers it is least sure of. This is selective
+classification: a confidence score `kappa` per answer and a threshold turn the
+system into one that answers when `kappa` is at or above the threshold and
+abstains otherwise. **Coverage** is the fraction of items answered; **selective
+risk** is the error rate on the answered items and **selective accuracy** is one
+minus it. Sweeping the threshold traces the risk-coverage curve, the trade-off
+formalised for selective classification by El-Yaniv and Wiener (2010) and used
+to build selective classifiers from trained networks by Geifman and El-Yaniv
+(2017). Following Geifman, Uziel and El-Yaniv (2019), the curve is summarised by
+the **area under the risk-coverage curve (AURC)**, here the mean selective risk
+over answered-set sizes 1 to n (lower is better), and by **E-AURC**, the AURC
+minus the AURC of the best possible ordering of the same answers (all correct
+answers ranked first). An uninformative score has an AURC equal to the overall
+error rate.
+
+Choices made here, fixed before the results were read:
+
+* Scored on the 63 factual items only; a correct answer is the scorer's CORRECT
+  outcome. Category-error items are excluded because their correct behaviour is
+  already a decline.
+* Ties in confidence cannot be separated by a threshold. Tied items are answered
+  together in the curve and in selective accuracy at a coverage target (so
+  achieved coverage can exceed the target, and the tables print it). In the AURC
+  a tie group is evaluated at the expected number correct under a random order
+  within the group.
+* Intervals are percentile cluster bootstraps resampling item families (2000
+  resamples, the same seed as the headline table).
+* A system with no confidence (random_floor, oracle) is reported as n/a, not
+  imputed. For the retrievers the confidence is the top retrieval score (cosine,
+  BM25, BM25+ or fused-rank score), which is a similarity, not a probability.
+  These metrics measure how well a score ranks correct above incorrect answers;
+  they say nothing about whether the score is calibrated, and no calibration
+  claim (for example expected calibration error) is made.
+
+References, each checked against the publisher or proceedings page:
+
+* R. El-Yaniv and Y. Wiener. On the Foundations of Noise-free Selective
+  Classification. Journal of Machine Learning Research 11 (2010) 1605-1641.
+  https://jmlr.org/papers/v11/el-yaniv10a.html
+* Y. Geifman and R. El-Yaniv. Selective Classification for Deep Neural Networks.
+  Advances in Neural Information Processing Systems 30 (2017).
+  https://proceedings.neurips.cc/paper/2017/hash/4a8423d5e91fda00bb7e46540e2b0cf1-Abstract.html
+* Y. Geifman, G. Uziel and R. El-Yaniv. Bias-Reduced Uncertainty Estimation for
+  Deep Neural Classifiers. ICLR 2019 (arXiv:1805.08206).
+  https://arxiv.org/abs/1805.08206
+
 ## 6. Policies, not estimates
 
 Two sets of numbers in this repository are **stated policies**, not measured or

@@ -109,6 +109,45 @@ in pressure_relief_devices. On minimal pairs all four get both members right
 for 3 of 23 pairs (13.0 percent), below the random floor's 28.7 percent.
 None of them answers a machine_electrical_fire item correctly.
 
+## Answer or abstain: risk-coverage
+
+Method and references: `docs/methodology.md` section 5a. Each retriever's
+confidence is its top retrieval score; the system answers the items scoring at
+or above a threshold and abstains on the rest. Computed on the 63 factual items
+by `grounding_eval/selective.py`; `results/selective_summary.md` verbatim below
+(full curves in `results/selective_curves.csv`). AURC is mean selective risk, so
+lower is better; "uninformative" is the overall error rate and "best ordering"
+puts every correct answer first. 95 percent cluster bootstrap CIs. Parentheses
+give the coverage actually reached, because tied scores are answered together.
+
+| adapter | accuracy at full coverage | AURC [95% CI] | AURC, uninformative score | AURC, best ordering | E-AURC | selective accuracy at 25% coverage | at 50% | at 75% |
+|---|---|---|---|---|---|---|---|---|
+| random_floor | 52.1% | n/a | n/a | n/a | n/a | n/a | n/a | n/a |
+| retrieval_tfidf | 27.0% | 0.564 [0.385, 0.751] | 0.730 | 0.382 | 0.182 | 50.0% [22.2, 75.0] (answers 25%) | 40.6% [20.6, 59.4] (answers 51%) | 33.3% [18.4, 50.0] (answers 76%) |
+| retrieval_bm25 | 28.6% | 0.571 [0.393, 0.765] | 0.714 | 0.362 | 0.209 | 56.2% [26.7, 81.2] (answers 25%) | 40.6% [21.9, 61.3] (answers 51%) | 31.2% [18.0, 46.0] (answers 76%) |
+| retrieval_bm25plus | 27.0% | 0.602 [0.401, 0.807] | 0.730 | 0.382 | 0.219 | 43.8% [18.8, 76.5] (answers 25%) | 40.6% [20.0, 61.3] (answers 51%) | 29.2% [14.9, 44.2] (answers 76%) |
+| retrieval_rrf | 27.0% | 0.699 [0.555, 0.827] | 0.730 | 0.382 | 0.316 | 30.4% [17.5, 45.0] (answers 89%) | 30.4% [17.5, 45.0] (answers 89%) | 30.4% [17.5, 45.0] (answers 89%) |
+| oracle | 100.0% | n/a | n/a | n/a | n/a | n/a | n/a | n/a |
+
+What the table supports, and no more:
+
+* **The retrieval score is a weak abstention signal.** For TF-IDF, BM25 and BM25+
+  the AURC is below the uninformative value (0.564 vs 0.730, 0.571 vs 0.714, 0.602
+  vs 0.730), so answering only the highest-scoring items does raise accuracy. But
+  the AURC intervals (for example TF-IDF [0.385, 0.751]) include the uninformative
+  value, and the gap to the best possible ordering (E-AURC 0.18 to 0.22) is large.
+* **Fused-rank scores carry almost no signal.** Reciprocal rank fusion scores take
+  few distinct values, so most items tie; its AURC (0.699) is close to the
+  uninformative 0.730, and at 25 and 50 percent targets it must already answer 89
+  percent of items.
+* **Abstaining on the lower-scoring half does not make a retriever safe.** At
+  about 25 percent coverage the point estimates of selective accuracy are 43.8 to
+  56.2 percent for the three scored-ranking retrievers, with intervals spanning
+  roughly 19 to 81 percent, from 16 answered items; no claim of a difference
+  between retrievers is supported.
+* **random_floor and oracle report no confidence**, so no curve exists for them;
+  an LLM arm that reports none likewise has nothing to threshold.
+
 ## What this shows
 
 * **The items discriminate.** Floor and ceiling are separated on every axis the
