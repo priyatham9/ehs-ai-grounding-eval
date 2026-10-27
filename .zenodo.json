@@ -1,0 +1,76 @@
+{
+  "title": "ehs-ai-grounding-eval: a benchmark for grounding of AI answers to safety-critical questions",
+  "upload_type": "software",
+  "description": "A benchmark for measuring whether an AI system's answers to safety-critical technical questions are grounded in authoritative sources. Its items are built so that co-hyponym substitution, a semantically adjacent wrong answer, is plausible and dangerous. The repository contains a question corpus, a scoring harness, an adapter interface, a mock adapter and non-LLM baselines; it contains no experimental results for any language model.",
+  "creators": [
+    {
+      "name": "Chimmani, Priyatham"
+    }
+  ],
+  "license": "mit",
+  "keywords": [
+    "AI evaluation",
+    "grounding",
+    "benchmark",
+    "retrieval",
+    "safety-critical",
+    "EHS",
+    "large language models"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://priyatham9.github.io/grounded/",
+      "relation": "isPartOf",
+      "scheme": "url",
+      "resource_type": "other"
+    },
+    {
+      "identifier": "https://github.com/priyatham9/grounded",
+      "relation": "isPartOf",
+      "scheme": "url",
+      "resource_type": "software"
+    },
+    {
+      "identifier": "https://priyatham9.github.io/ehs-ai-grounding-eval/",
+      "relation": "isDocumentedBy",
+      "scheme": "url",
+      "resource_type": "other"
+    },
+    {
+      "identifier": "https://github.com/priyatham9/ehs-osha-analysis",
+      "relation": "references",
+      "scheme": "url",
+      "resource_type": "software"
+    },
+    {
+      "identifier": "https://github.com/priyatham9/ehs-chemical-peers",
+      "relation": "references",
+      "scheme": "url",
+      "resource_type": "software"
+    },
+    {
+      "identifier": "https://github.com/priyatham9/ehs-human-factors-ontology",
+      "relation": "references",
+      "scheme": "url",
+      "resource_type": "software"
+    },
+    {
+      "identifier": "https://github.com/priyatham9/ehs-risk-sem",
+      "relation": "references",
+      "scheme": "url",
+      "resource_type": "software"
+    },
+    {
+      "identifier": "https://github.com/priyatham9/ehs-capitals-calculator",
+      "relation": "references",
+      "scheme": "url",
+      "resource_type": "software"
+    },
+    {
+      "identifier": "https://github.com/priyatham9/ehs-benchmarks",
+      "relation": "references",
+      "scheme": "url",
+      "resource_type": "software"
+    }
+  ]
+}
