@@ -6,6 +6,7 @@ Keep a Changelog and this project uses semantic versioning.
 ## [Unreleased]
 
 ### Added
+- Four regulatory-currency drafts in `corpus/quarantine/unverified.json` (`q-rc-hcs-001` to `-003`, `q-rc-rk-001`), each recording the amending Federal Register document that was fetched (91 FR 1695, 89 FR 81829, 88 FR 47254). They stay excluded from scoring because the current eCFR text could not be fetched to run `tools/verify_sources.py`; no scored count changes
 - Two more non-LLM retrieval baselines in `grounding_eval/adapters/bm25plus.py`: `retrieval_bm25plus` (BM25+, k1=1.2, b=0.75, delta=1.0, non-negative IDF) and `retrieval_rrf` (reciprocal rank fusion, k=60, of the TF-IDF and Okapi BM25 rankings). Parameters were fixed in code at the published defaults before either was run; one configuration each, nothing tuned. Factual accuracy: BM25+ 27.0% [15.4, 40.0], RRF 27.0% [15.4, 40.0], against TF-IDF 27.0% and Okapi BM25 28.6% [17.2, 40.9]. Neither new arm beats the existing retrievers
 - `results/baselines_breakdown.csv` / `.md`: factual accuracy by domain, on minimal-pair items, and pairs-both-correct for every baseline, with cluster-bootstrap 95% CIs (fixed seed). All four retrievers get both members right for 3 of 23 minimal pairs (13.0%)
 - Okapi BM25 baseline (`retrieval_bm25`, k1=1.2, b=0.75) documented in `docs/results.md` and the README (it was already in the results table)

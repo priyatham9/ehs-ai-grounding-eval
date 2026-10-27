@@ -94,7 +94,7 @@ semantically adjacent wrong answer is plausible and dangerous.
 | Domains | 8 |
 | Question families | 44 |
 | Primary sources | 29 CFR, 40 CFR, 46 CFR - all public |
-| Items whose source could not be verified | 0 (6 drafts quarantined) |
+| Items whose source could not be verified | 0 (6 paywalled-standard drafts and 4 regulatory-currency drafts quarantined) |
 
 Domains: pressure relief devices, lockout/tagout, confined space, process safety
 management, injury recordkeeping, hazard communication, respiratory protection
@@ -243,6 +243,8 @@ cannot be picked up as an item. None of them asserts a clause identifier - the
 `source` field is null in every case, precisely because the identifier is the part
 that could not be checked. They are kept in the repository so the exclusions are
 visible rather than silent.
+
+Four further drafts (`item_class: regulatory_currency`) are about answers that changed with a dated amendment: the 2026 extension of the Hazard Communication compliance dates (91 FR 1695), the October 2024 HCS correction (89 FR 81829) and the 2023 29 CFR 1904.41 amendment (88 FR 47254). The amending Federal Register document was fetched for each, but the current eCFR text could not be, so they wait for `tools/verify_sources.py` before promotion.
 
 ---
 
@@ -505,7 +507,7 @@ retrieved. Corpus curation, metadata filtering and evaluation do that work.
 
 ```
 corpus/items/            68 verified items, eight JSON files by domain
-corpus/quarantine/       6 drafted items excluded for unverifiable provenance
+corpus/quarantine/       10 drafted items excluded (6 paywalled-standard, 4 regulatory-currency)
 corpus/verification/     dated eCFR verification report, committed
 grounding_eval/
   schema.py              typed item / response / score model
