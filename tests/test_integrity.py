@@ -189,6 +189,7 @@ class TestPackagingHygiene(unittest.TestCase):
             "textwrap", "time", "typing", "unicodedata", "unittest", "urllib",
             "warnings", "corpus_stats", "grounding_eval", "verify_sources", "__future__",
             "csv", "glob", "check_manuscript", "item_analysis",
+            "build_assistant_page", "run_assistant_eval",
         }
         offenders = []
         for root, dirs, files in os.walk(REPO_ROOT):
