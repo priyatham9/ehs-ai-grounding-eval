@@ -28,7 +28,10 @@ RUN_ARTIFACT_DIRS = (
 
 #: Provenance labels a non-LLM baseline run may carry. Anything else stored
 #: under a run directory must be a labelled mock demonstration.
-BASELINE_PROVENANCES = {"random_floor_baseline", "retrieval_tfidf_baseline", "retrieval_bm25_baseline", "oracle_ceiling"}
+BASELINE_PROVENANCES = {
+    "random_floor_baseline", "retrieval_tfidf_baseline", "retrieval_bm25_baseline",
+    "retrieval_bm25plus_baseline", "retrieval_rrf_baseline", "oracle_ceiling",
+}
 
 #: Standards bodies whose text may not be redistributed. Naming a clause is
 #: fine and necessary; reproducing its text is not.

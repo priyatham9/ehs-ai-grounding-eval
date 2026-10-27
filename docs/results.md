@@ -2,7 +2,7 @@
 
 **No language model has been evaluated on this benchmark yet.** No LLM API was
 available on the machine these runs were made on, and no LLM arm is reported
-anywhere in this repository. The three arms below are non-LLM baselines. They
+anywhere in this repository. The six arms below are non-LLM baselines. They
 exist to show that the 68 items discriminate, that is, that the scoring
 procedure separates a system that knows nothing from one that knows everything,
 and to show where a plain lexical retriever lands between them.
@@ -27,6 +27,17 @@ verbatim; the full per-item responses and scores are in
   clause, section title and the verified source excerpt. The question is the
   query; the answer is the best-matching excerpt, cited by its clause. It never
   reads the answer key or the adjacent-wrong entry. Deterministic, run once.
+* **retrieval_bm25** (grounded, no generation). Okapi BM25 over the same
+  documents, same answer format. k1 = 1.2, b = 0.75 (the textbook defaults;
+  not tuned on this corpus). IDF is the Robertson-Sparck Jones form
+  ln((N - df + 0.5) / (df + 0.5)), which is negative for a term found in more
+  than half of the 68 documents.
+* **retrieval_bm25plus** (grounded, no generation). BM25+ (Lv and Zhai, CIKM
+  2011): k1 = 1.2, b = 0.75, delta = 1.0, IDF ln((N + 1) / df), which is never
+  negative. Same documents and answer format.
+* **retrieval_rrf** (grounded, no generation). Reciprocal rank fusion
+  (Cormack, Clarke and Buettcher, SIGIR 2009) of the TF-IDF and BM25 rankings,
+  k = 60, ties broken by corpus order.
 * **oracle** (fixture). Reference answer plus gold citation. The ceiling.
 
 Confidence intervals are 95 percent percentile cluster bootstraps resampling
@@ -51,10 +62,52 @@ a stated policy, not a measurement.
 |---|---|---|---|---|---|---|---|
 | random_floor | fixture | 5 | 52.1% [45.9%, 58.9%] | 47.3% [40.4%, 53.5%] | 5.0% [2.1%, 8.2%] | 12.0% | 0.03 [-0.09, 0.14] |
 | retrieval_tfidf | grounded | 1 | 27.0% [15.4%, 40.0%] | 0.0% [0.0%, 0.0%] | 73.5% [61.2%, 85.1%] | 0.0% | -0.12 [-0.29, 0.06] |
+| retrieval_bm25 | grounded | 1 | 28.6% [17.2%, 40.9%] | 0.0% [0.0%, 0.0%] | 75.0% [63.8%, 85.3%] | 0.0% | -0.10 [-0.27, 0.07] |
+| retrieval_bm25plus | grounded | 1 | 27.0% [15.4%, 40.0%] | 0.0% [0.0%, 0.0%] | 70.6% [57.6%, 81.8%] | 0.0% | -0.12 [-0.29, 0.06] |
+| retrieval_rrf | grounded | 1 | 27.0% [15.4%, 40.0%] | 0.0% [0.0%, 0.0%] | 73.5% [61.3%, 84.6%] | 0.0% | -0.12 [-0.29, 0.06] |
 | oracle | fixture | 1 | 100.0% [100.0%, 100.0%] | 0.0% [0.0%, 0.0%] | 100.0% [100.0%, 100.0%] | 20.0% | 1.00 [1.00, 1.00] |
 
-The runner also reports that the retriever's top document was the item's own
-source clause for 48 of 68 items.
+The parameters of retrieval_bm25plus and retrieval_rrf were written into
+`grounding_eval/adapters/bm25plus.py`, at the values the cited papers
+recommend, before either was run on the corpus, and one configuration of each
+was run. Nothing was tuned on the 68 items, so these rows are not an upper
+bound on what lexical retrieval can do here; they are what standard settings do.
+
+The runner also reports how often each retriever's top document was the item's
+own source clause: TF-IDF 48 of 68, BM25 49, BM25+ 47, RRF 47.
+
+## By domain and on minimal pairs
+
+`results/baselines_breakdown.md` verbatim (full rows in
+`results/baselines_breakdown.csv`). Factual accuracy with 95 percent cluster
+bootstrap CIs (same seed and resample count as the table above); `n` is the
+number of factual items, or of pairs for the last row. `minimal_pair_items` are
+the 46 factual items that belong to one of the 23 complete minimal pairs;
+`pairs_both_correct` is the share of pairs where both members are correct
+(one value per pair and repeat, resampled by pair). Per-domain intervals rest
+on 5 to 10 items and are very wide; they are reported so nothing is hidden,
+not because any domain-level difference is established.
+
+| subset | n | random_floor | retrieval_tfidf | retrieval_bm25 | retrieval_bm25plus | retrieval_rrf | oracle |
+|---|---|---|---|---|---|---|---|
+| all_factual | 63 | 52.1% [45.9, 58.9] | 27.0% [15.4, 40.0] | 28.6% [17.2, 40.9] | 27.0% [15.4, 40.0] | 27.0% [15.4, 40.0] | 100.0% [100.0, 100.0] |
+| confined_space | 8 | 50.0% [26.7, 72.5] | 25.0% [0.0, 66.7] | 25.0% [0.0, 66.7] | 25.0% [0.0, 66.7] | 25.0% [0.0, 66.7] | 100.0% [100.0, 100.0] |
+| hazard_communication | 5 | 48.0% [40.0, 55.0] | 20.0% [0.0, 75.0] | 20.0% [0.0, 75.0] | 20.0% [0.0, 75.0] | 20.0% [0.0, 75.0] | 100.0% [100.0, 100.0] |
+| injury_recordkeeping | 9 | 48.9% [37.8, 62.9] | 44.4% [14.3, 72.7] | 44.4% [14.3, 72.7] | 44.4% [14.3, 72.7] | 44.4% [14.3, 72.7] | 100.0% [100.0, 100.0] |
+| lockout_tagout | 9 | 57.8% [46.0, 71.1] | 44.4% [20.0, 71.4] | 44.4% [20.0, 71.4] | 44.4% [20.0, 71.4] | 44.4% [20.0, 71.4] | 100.0% [100.0, 100.0] |
+| machine_electrical_fire | 7 | 60.0% [40.0, 73.3] | 0.0% [0.0, 0.0] | 0.0% [0.0, 0.0] | 0.0% [0.0, 0.0] | 0.0% [0.0, 0.0] | 100.0% [100.0, 100.0] |
+| pressure_relief_devices | 10 | 48.0% [32.7, 75.0] | 40.0% [7.7, 80.0] | 50.0% [22.2, 81.8] | 40.0% [7.7, 80.0] | 40.0% [7.7, 80.0] | 100.0% [100.0, 100.0] |
+| process_safety_management | 8 | 47.5% [42.5, 53.3] | 12.5% [0.0, 37.5] | 12.5% [0.0, 37.5] | 12.5% [0.0, 37.5] | 12.5% [0.0, 37.5] | 100.0% [100.0, 100.0] |
+| respiratory_protection_and_noise | 7 | 57.1% [40.0, 80.0] | 14.3% [0.0, 37.5] | 14.3% [0.0, 37.5] | 14.3% [0.0, 37.5] | 14.3% [0.0, 37.5] | 100.0% [100.0, 100.0] |
+| minimal_pair_items | 46 | 52.2% [45.3, 59.6] | 28.3% [14.9, 41.7] | 30.4% [17.0, 43.8] | 28.3% [14.9, 41.7] | 28.3% [14.9, 41.7] | 100.0% [100.0, 100.0] |
+| unpaired_items | 17 | 51.8% [40.0, 63.5] | 23.5% [5.9, 47.1] | 23.5% [5.9, 47.1] | 23.5% [5.9, 47.1] | 23.5% [5.9, 47.1] | 100.0% [100.0, 100.0] |
+| pairs_both_correct | 23 | 28.7% [20.0, 38.3] | 13.0% [0.0, 26.1] | 13.0% [0.0, 26.1] | 13.0% [0.0, 26.1] | 13.0% [0.0, 26.1] | 100.0% [100.0, 100.0] |
+
+The four retrievers are within one item of each other everywhere: BM25 answers
+18 of 63 factual items correctly, the other three 17, and the one extra item is
+in pressure_relief_devices. On minimal pairs all four get both members right
+for 3 of 23 pairs (13.0 percent), below the random floor's 28.7 percent.
+None of them answers a machine_electrical_fire item correctly.
 
 ## What this shows
 
@@ -66,12 +119,19 @@ source clause for 48 of 68 items.
   system that guesses is not confusable with a system that knows.
 * **Citing the right clause is not the same as answering.** The retriever finds
   the governing clause for most items (73.5 percent clause-level citation) but
-  its excerpt satisfies the answer key for only 27.0 percent of factual items,
+  its excerpt satisfies the answer key for only 27.0 percent of factual items
+  (BM25 28.6, BM25+ 27.0, RRF 27.0; the CIs of all four overlap almost
+  entirely),
   because a one-sentence source excerpt rarely carries every required concept.
   Retrieval without generation therefore sits below the random floor on accuracy
   and on safety utility, and above it on citation. Any grounded LLM arm should
   be expected to beat this on accuracy while at least matching it on citation;
   one that does not has failed to use what it retrieved.
+* **A better lexical ranker does not fix this.** BM25, BM25+ and rank fusion
+  move clause-level citation between 70.6 and 75.0 percent and accuracy by at
+  most one item (28.6 percent for BM25, 27.0 for the others). The ceiling on
+  excerpt-only answers is set by how much of the answer key a single source
+  sentence carries, not by which lexical scoring function picks it.
 * **Adjacent substitution is a generation failure, not a retrieval failure.**
   The retriever never substitutes the adjacent entity because it never
   paraphrases. The 47.3 percent rate of the floor is what a system that flips
