@@ -23,7 +23,7 @@ artifact it writes carries the string `MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS`.
 |---|---|
 | Status | no language model has been evaluated; mock demonstration fixture only |
 | Data | simulated (mock adapter's outcome probabilities fixed in advance) |
-| Tests | 212 (`python3 -m unittest discover -s tests -v`) |
+| Tests | 217 (`python3 -m unittest discover -s tests -v`) |
 | Quickstart | `python3 -m grounding_eval.cli demo` |
 | Licence | MIT |
 
@@ -378,7 +378,7 @@ Python 3.9+, pandas and numpy. No other dependencies, no build step.
 python3 -m grounding_eval.cli corpus      # describe the corpus
 python3 -m grounding_eval.cli validate    # corpus + stored source verification
 python3 -m grounding_eval.cli demo        # labelled demonstration run
-python3 -m unittest discover -s tests -v  # 212 tests
+python3 -m unittest discover -s tests -v  # 217 tests
 ```
 
 The demo prints the mock banner, a per-adapter summary and a paired comparison.
@@ -527,7 +527,7 @@ docs/limitations.md      what could change a conclusion, ordered by likelihood
 docs/manuscript/         unsubmitted IMRaD preprint draft; every number sourced in its Appendix A
 tools/check_manuscript.py re-derives each manuscript number from its source file
 synthetic/               the demonstration fixture generator and its output
-tests/                   212 tests
+tests/                   217 tests
 ```
 
 Four mock profiles are available - `ungrounded`, `pseudo_grounded`, `grounded`,
@@ -570,6 +570,6 @@ BM25 28.6%, BM25+ 27.0%, TF-IDF/BM25 reciprocal rank fusion 27.0% factual
 accuracy; standard parameters fixed in code, not tuned), and an oracle ceiling.
 They show the items discriminate (floor and ceiling CIs do not overlap on any
 axis) and where plain retrieval lands; a per-domain and minimal-pair breakdown
-is in `results/baselines_breakdown.md`. No language model has been evaluated
+is in `results/baselines_breakdown.md`. Item difficulty and inter-retriever agreement are in `results/item_analysis.md` (`python3 scripts/item_analysis.py`): 45 of 63 factual items are solved by no retriever, 17 by all four, Fleiss kappa 0.980. No language model has been evaluated
 yet. Paired McNemar tests with Holm correction (`results/significance_pairwise.md`) find no significant difference between any two of the four retrievers (at most one discordant item per pair) and find each retriever significantly below the random floor at repeat 0 (Holm-adjusted p 0.021 to 0.032), a result that is not significant for BM25 on the weakest random-floor repeat. See [docs/results.md](docs/results.md) and `results/`; regenerate with
 `python3 -m grounding_eval.run_baselines`.
