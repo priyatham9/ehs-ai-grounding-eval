@@ -7,7 +7,7 @@ authors:
     given-names: Priyatham
     email: priyatham9@gmail.com
 repository-code: "https://github.com/priyatham9/ehs-ai-grounding-eval"
-url: "https://priyatham9.github.io/ehs-ai-grounding-eval/"
+url: "https://ehs-ai-grounding-eval.vercel.app/"
 license: MIT
 date-released: "2026-09-07"
 version: 0.1.0

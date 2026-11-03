@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://priyatham9.github.io/ehs-ai-grounding-eval/sitemap.xml
+Sitemap: https://ehs-ai-grounding-eval.vercel.app/sitemap.xml

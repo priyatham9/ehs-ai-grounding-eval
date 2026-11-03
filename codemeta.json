@@ -12,7 +12,7 @@
   ],
   "license": "https://spdx.org/licenses/MIT",
   "codeRepository": "https://github.com/priyatham9/ehs-ai-grounding-eval",
-  "url": "https://priyatham9.github.io/ehs-ai-grounding-eval/",
+  "url": "https://ehs-ai-grounding-eval.vercel.app/",
   "version": "0.1.0",
   "programmingLanguage": [
     "Python"
@@ -26,5 +26,5 @@
     "EHS",
     "large language models"
   ],
-  "isPartOf": "https://priyatham9.github.io/grounded/"
+  "isPartOf": "https://grounded-chi-five.vercel.app/"
 }

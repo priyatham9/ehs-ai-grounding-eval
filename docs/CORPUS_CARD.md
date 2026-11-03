@@ -98,6 +98,6 @@ MIT License. Copyright (c) 2026 Priyatham Chimmani. See LICENSE file in reposito
 
 **Repository:** https://github.com/priyatham9/ehs-ai-grounding-eval
 
-**Published site:** https://priyatham9.github.io/ehs-ai-grounding-eval/
+**Published site:** https://ehs-ai-grounding-eval.vercel.app/
 
 **Version:** 0.1.0 (2026-09-07)

@@ -1,8 +1,8 @@
 # ehs-ai-grounding-eval
 
-[![tests](https://github.com/priyatham9/ehs-ai-grounding-eval/actions/workflows/tests.yml/badge.svg)](https://github.com/priyatham9/ehs-ai-grounding-eval/actions/workflows/tests.yml) [![site](https://img.shields.io/badge/site-priyatham9.github.io-blue)](https://priyatham9.github.io/ehs-ai-grounding-eval/)
+[![tests](https://github.com/priyatham9/ehs-ai-grounding-eval/actions/workflows/tests.yml/badge.svg)](https://github.com/priyatham9/ehs-ai-grounding-eval/actions/workflows/tests.yml) [![site](https://img.shields.io/badge/site-priyatham-personal-site.vercel.app-blue)](https://ehs-ai-grounding-eval.vercel.app/)
 
-Part of the Grounded research programme: https://priyatham9.github.io/grounded/
+Part of the Grounded research programme: https://grounded-chi-five.vercel.app/
 
 A benchmark for measuring whether an AI system's answers to safety-critical technical questions are grounded in authoritative sources. It contains 68 items built so that co-hyponym substitution, a semantically adjacent wrong answer, is plausible and dangerous; non-LLM baselines show 27.0% accuracy for TF-IDF retrieval and 28.6% for BM25.
 
