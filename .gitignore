@@ -38,6 +38,11 @@ results/*
 !results/published/*.json
 !results/published/README.md
 
+# Pairwise significance tables are cited by the manuscript appendix and
+# checked by tests/test_manuscript.py and tests/test_significance.py.
+!results/significance_pairwise.csv
+!results/significance_pairwise.md
+
 # Locally cached primary-source snapshots pulled by tools/verify_sources.py.
 # These are re-fetchable; the committed verification report is the durable
 # record. The report itself (corpus/verification/) IS committed.
