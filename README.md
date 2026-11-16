@@ -1,19 +1,19 @@
 # ehs-ai-grounding-eval
 
-[![tests](https://github.com/priyatham9/ehs-ai-grounding-eval/actions/workflows/tests.yml/badge.svg)](https://github.com/priyatham9/ehs-ai-grounding-eval/actions/workflows/tests.yml) [![site](https://img.shields.io/badge/site-priyatham-personal-site.vercel.app-blue)](https://ehs-ai-grounding-eval.vercel.app/)
+[![tests](https://github.com/priyatham9/ehs-ai-grounding-eval/actions/workflows/tests.yml/badge.svg)](https://github.com/priyatham9/ehs-ai-grounding-eval/actions/workflows/tests.yml) [![site](https://img.shields.io/badge/site-live%20audit-blue)](https://ehs-ai-grounding-eval.vercel.app/)
 
 Part of the Grounded research programme: https://grounded-chi-five.vercel.app/
 
 [![Exhaustive lexical-scoring audit with inspectable sources](docs/audit-preview.jpg)](https://ehs-ai-grounding-eval.vercel.app/evidence-audit.html)
 
-[Open the interactive project](https://ehs-ai-grounding-eval.vercel.app/try.html) · [Data and methods](https://ehs-ai-grounding-eval.vercel.app/)
+[Open the evidence audit](https://ehs-ai-grounding-eval.vercel.app/evidence-audit.html) · [Original case explorer](https://ehs-ai-grounding-eval.vercel.app/try.html) · [Data and methods](https://ehs-ai-grounding-eval.vercel.app/)
 
 **Research question:** Can an answer distinguish the correct safety concept from a plausible adjacent one?
 
 **New finding:** Across all 4,284 factual-question/indexed-excerpt combinations,
 only 27 of 63 questions can pass the unchanged lexical scorer in the fixed
-single-excerpt format. BM25 passes 18: nine misses are recoverable by reranking,
-while 36 have no scorer-passing indexed excerpt. This is a score ceiling for
+single-excerpt format. BM25 passes 18: nine further questions have a scorer-passing indexed excerpt available,
+while 36 have none. No deployable reranker is evaluated in this exhaustive audit. This is a score ceiling for
 this answer space, not a bound on semantic answerability or language models.
 [Inspect the evidence](https://ehs-ai-grounding-eval.vercel.app/evidence-audit.html)
 or [reproduce the analysis](results/answerability.md).
