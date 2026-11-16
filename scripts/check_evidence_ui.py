@@ -102,6 +102,28 @@ def main():
             page.locator('[data-mode="compare"]').click()
             assert "Counterexample view closed" in page.locator("#toast").text_content()
             no_overflow(page)
+        # Bypass the 63-row ledger and retain the selected evidence state.
+        page.goto(base + "evidence-audit.html#question=cs-004&view=compare&compare=metadata")
+        page.wait_for_selector("html[data-audit-ready]")
+        selected_url = page.url
+        page.locator("#question-search").focus()
+        page.keyboard.press("Tab")
+        assert page.locator("#skip-to-evidence").evaluate("e => e === document.activeElement")
+        page.keyboard.press("Enter")
+        assert page.locator("#inspector").evaluate("e => e === document.activeElement")
+        assert page.url == selected_url
+        page.keyboard.press("Tab")
+        assert page.locator("#copy-link").evaluate("e => e === document.activeElement")
+        page.keyboard.press("Tab")
+        assert page.locator("#tab-compare").evaluate("e => e === document.activeElement")
+        page.keyboard.press("Home")
+        assert page.locator("#tab-bm25").get_attribute("aria-selected") == "true"
+        page.keyboard.press("End")
+        assert page.locator("#tab-compare").get_attribute("aria-selected") == "true"
+        page.locator('[data-question="hc-005"]').focus()
+        page.keyboard.press("Enter")
+        assert page.locator("#inspector").evaluate("e => e === document.activeElement")
+        assert "question=hc-005" in page.url
         for name, payload in (("http", None), ("schema", {"schema": "invalid"})):
             page.route(
                 "**/evidence-audit-data.json",

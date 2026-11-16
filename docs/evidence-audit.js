@@ -460,7 +460,12 @@
     setTimeout(() => URL.revokeObjectURL(url), 1000);
     toast(`Downloaded ${filename}`);
   }
+  function focusEvidence() {
+    $("inspector").focus({ preventScroll: true });
+    $("inspector").scrollIntoView({ block: "start" });
+  }
   function wireEvents() {
+    $("skip-to-evidence").addEventListener("click", focusEvidence);
     document
       .querySelectorAll("[data-filter]")
       .forEach((button) =>
@@ -486,7 +491,10 @@
     );
     $("question-rows").addEventListener("click", (event) => {
       const button = event.target.closest("[data-question]");
-      if (button) selectQuestion(button.dataset.question);
+      if (button) {
+        selectQuestion(button.dataset.question);
+        if (event.detail === 0) focusEvidence();
+      }
     });
     $("question-search").addEventListener("input", (event) => {
       state.query = event.target.value;
