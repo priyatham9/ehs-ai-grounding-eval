@@ -3,11 +3,20 @@
 **No language model has been evaluated on this benchmark yet.** No LLM API was
 available on the machine these runs were made on, and no LLM arm is reported
 anywhere in this repository. The six arms below are non-LLM baselines. They
-exist to show that the 68 items discriminate, that is, that the scoring
-procedure separates a system that knows nothing from one that knows everything,
-and to show where a plain lexical retriever lands between them.
+exercise the scoring procedure and report lexical retrieval over a finite source
+index. The random and oracle fixtures read the answer key; their separation is
+not validation that the benchmark distinguishes knowledgeable systems from
+unknowledgeable ones.
 
-All numbers are produced by `python3 -m grounding_eval.run_baselines` and
+**Updated interpretation:** [the exhaustive excerpt analysis](../results/answerability.md)
+tests all 4,284 factual-question/indexed-excerpt combinations. Only 27/63 questions
+have any scorer-passing answer in this fixed format. BM25 passes 18, leaving nine
+recoverable ranking misses and 36 questions for which no indexed excerpt passes.
+The corresponding joint-pair ceiling is 7/23. These findings replace the earlier
+inference that the baseline scores by themselves identified a generation failure
+or established a general retrieval ceiling. [Inspect the experiment](evidence-audit.html).
+
+The original baseline numbers are produced by `python3 -m grounding_eval.run_baselines` and
 written to `results/`. The table below is `results/baselines_table.md`
 verbatim; the full per-item responses and scores are in
 `results/baselines_<adapter>.json` and the summary row set is
@@ -19,9 +28,10 @@ verbatim; the full per-item responses and scores are in
   answer options the item carries (the reference answer and a sentence built
   from the adjacent-wrong entity's signature terms), and cites a clause drawn
   uniformly from the pool of clauses cited across the corpus. Run with 5 seeds.
-  Its accuracy is about one half by construction; what it calibrates is the
-  adjacent-substitution rate, the citation rate a guesser achieves, and the
-  policy utility of coin-flipping.
+  Its accuracy is about one half by construction. It reads the reference answer
+  and adjacent-wrong vocabulary, unlike the retrievers. It illustrates the
+  scorer's response to prepared alternatives; it is not an information-matched
+  chance floor for retrieving excerpts.
 * **retrieval_tfidf** (grounded, no generation). TF-IDF cosine retrieval,
   implemented in numpy, over the authoritative text each item carries: standard,
   clause, section title and the verified source excerpt. The question is the
@@ -106,7 +116,9 @@ not because any domain-level difference is established.
 The four retrievers are within one item of each other everywhere: BM25 answers
 18 of 63 factual items correctly, the other three 17, and the one extra item is
 in pressure_relief_devices. On minimal pairs all four get both members right
-for 3 of 23 pairs (13.0 percent), below the random floor's 28.7 percent.
+for 3 of 23 pairs (13.0 percent). The answer-key-assisted random fixture reaches
+28.7 percent from a different answer space, so this is not a fair chance comparison.
+The fixed excerpt format permits at most 7 of 23 both-pass pairs under the scorer.
 None of them answers a machine_electrical_fire item correctly.
 
 ## Answer or abstain: risk-coverage
@@ -184,44 +196,49 @@ What the table supports, and no more:
   power: it cannot show the retrievers are equivalent, only that this corpus
   cannot separate them. The BM25 versus TF-IDF point estimate of 1.6 points is
   one item.
-* **Each retriever is significantly below the random floor at repeat 0.** Holm-adjusted
+* **Each retriever scores below the answer-key-assisted fixture at repeat 0.** Holm-adjusted
   p = 0.021 (TF-IDF, BM25+, RRF) and 0.032 (BM25), differences of -27.0 to -28.6
   points with paired intervals that exclude zero. This is a statement about
   retrievers scoring below a coin flip between the two answer options on this
-  item set, not about retrieval in general.
+  item set. The fixture has access to full reference answers and the retrievers
+  do not; statistical significance cannot remove this information mismatch.
 * **That comparison depends on which random_floor repeat is used.** Raw McNemar p
   across the five repeats ranges from 0.0005 to 0.035 for TF-IDF, BM25+ and RRF,
   and from 0.0014 to 0.058 for BM25, so for BM25 the weakest repeat is not
   significant even before Holm adjustment. The conclusion that retrievers are
-  below the floor is consistent in direction on every repeat but not uniformly
+  below the fixture is consistent in direction on every repeat but not uniformly
   significant at 0.05 once the correction is applied.
 * **The test treats items as independent.** Families (minimal pairs) cluster, so
   the McNemar p-values are optimistic; the cluster-bootstrap intervals are the
   cluster-aware check, and for the random-floor contrasts they exclude zero too.
 
-## Calibration: Brier score, ECE, reliability bins
+## Hypothetical score-as-probability diagnostic
 
 Method and references: `docs/methodology.md` section 5b. Computed on the 63
 factual items by `grounding_eval/calibration.py`; `results/calibration_summary.md`
 verbatim below (also `results/calibration_summary.csv` and
-`results/calibration_reliability.csv`). Brier and ECE treat the confidence as a
-probability, so they are computed only where the score is bounded to [0, 1] by
-construction: TF-IDF cosine similarity. BM25, BM25+ and RRF scores are not on that
-scale and random_floor and oracle report no confidence, so those rows are n/a, not
-imputed. 95 percent cluster bootstrap CIs.
+`results/calibration_reliability.csv`). None of the retrievers declares a
+probability of correctness. The retained TF-IDF calculation asks what happens
+if its raw cosine score is interpreted as one; being bounded to [0, 1] does not
+justify that interpretation. RRF scores are also within [0, 1], so their omission
+is a diagnostic scope choice, not a mathematical range restriction. BM25 and
+BM25+ have unbounded weight scores, and the fixtures report no confidence.
+Intervals are 95 percent cluster bootstraps.
 
-| adapter | accuracy | mean confidence | Brier [95% CI] | Brier, constant at accuracy | ECE (10 bins) [95% CI] |
+Hypothetical raw-score diagnostic: TF-IDF cosine is treated as a probability solely for this calculation. No retriever declares a correctness probability; bounded scores do not establish probabilistic calibration.
+
+| adapter | accuracy | mean retrieval score | Brier [95% CI] | Brier, constant at accuracy | ECE (10 bins) [95% CI] |
 |---|---|---|---|---|---|
 | random_floor | 52.1% | n/a | n/a (no confidence reported) | n/a | n/a |
 | retrieval_tfidf | 27.0% | 0.447 | 0.202 [0.182, 0.221] | 0.197 | 0.192 [0.128, 0.307] |
-| retrieval_bm25 | 28.6% | n/a | n/a (not on a [0, 1] scale) | n/a | n/a |
-| retrieval_bm25plus | 27.0% | n/a | n/a (not on a [0, 1] scale) | n/a | n/a |
-| retrieval_rrf | 27.0% | n/a | n/a (not on a [0, 1] scale) | n/a | n/a |
+| retrieval_bm25 | 28.6% | n/a | n/a (raw-score diagnostic not computed) | n/a | n/a |
+| retrieval_bm25plus | 27.0% | n/a | n/a (raw-score diagnostic not computed) | n/a | n/a |
+| retrieval_rrf | 27.0% | n/a | n/a (raw-score diagnostic not computed) | n/a | n/a |
 | oracle | 100.0% | n/a | n/a (no confidence reported) | n/a | n/a |
 
-Reliability bins, retrieval_tfidf:
+Raw-score bins, retrieval_tfidf:
 
-| bin | items | mean confidence | accuracy |
+| bin | items | mean retrieval score | accuracy |
 |---|---|---|---|
 | [0.2, 0.3) | 8 | 0.272 | 12.5% |
 | [0.3, 0.4) | 15 | 0.364 | 0.0% |
@@ -232,47 +249,42 @@ Reliability bins, retrieval_tfidf:
 
 What the table supports, and no more:
 
-* **TF-IDF's score is over-confident as a probability.** Mean confidence is 0.447
-  against 27.0 percent accuracy. Its Brier score, 0.202, is above the 0.197 of
-  reporting the 27.0 percent base rate for every item, so the score is no better
-  than a constant as a probability forecast (the intervals overlap; the
-  difference is 0.005). ECE is 0.192 [0.128, 0.307].
+* **Raw cosine is a poor substitute for a correctness probability in this diagnostic.**
+  Mean score is 0.447 against 27.0 percent scorer accuracy. Treating the score as
+  a probability gives Brier 0.202, compared with 0.197 for the constant observed
+  base rate, and ECE 0.192 [0.128, 0.307]. These are descriptive in-sample values;
+  they neither measure calibration of a declared probability forecast nor show a
+  statistically established difference from the constant predictor.
 * **The bins are sparse.** Two bins hold 3 and 2 items, so the 33.3 percent and
   100 percent accuracies there rest on those counts. The two lowest-scoring
   occupied bins, [0.2, 0.3) and [0.3, 0.4), are 12.5 percent (1 of 8) and 0.0
   percent (0 of 15) correct; the reliability curve is not monotone.
-* **Not computable for the other systems.** Without a probability-scale
-  confidence, calibration cannot be assessed for BM25, BM25+, RRF, random_floor or
-  oracle, and an LLM arm that reports no confidence would likewise be n/a.
+* **No system here reports a correctness probability.** Probabilistic calibration
+  would require such a forecast or a separately fitted and held-out calibration
+  procedure. Selective ranking can still be evaluated using raw retrieval scores.
 
 ## What this shows
 
-* **The items discriminate.** Floor and ceiling are separated on every axis the
-  benchmark cares about: adjacent substitution goes from 47.3 percent to 0,
-  clause-level citation from 5.0 percent to 100, safety utility from 0.03 to
-  1.00 (the oracle's unrounded utility is 0.9985, because one category-error
-  reference answer scores as an acceptable abstention at 0.9). The CIs of the floor and the ceiling do not overlap on any column. A
-  system that guesses is not confusable with a system that knows.
-* **Citing the right clause is not the same as answering.** The retriever finds
-  the governing clause for most items (73.5 percent clause-level citation) but
-  its excerpt satisfies the answer key for only 27.0 percent of factual items
-  (BM25 28.6, BM25+ 27.0, RRF 27.0; the CIs of all four overlap almost
-  entirely),
-  because a one-sentence source excerpt rarely carries every required concept.
-  Retrieval without generation therefore sits below the random floor on accuracy
-  and on safety utility, and above it on citation. Any grounded LLM arm should
-  be expected to beat this on accuracy while at least matching it on citation;
-  one that does not has failed to use what it retrieved.
-* **A better lexical ranker does not fix this.** BM25, BM25+ and rank fusion
-  move clause-level citation between 70.6 and 75.0 percent and accuracy by at
-  most one item (28.6 percent for BM25, 27.0 for the others). The ceiling on
-  excerpt-only answers is set by how much of the answer key a single source
-  sentence carries, not by which lexical scoring function picks it.
-* **Adjacent substitution is a generation failure, not a retrieval failure.**
-  The retriever never substitutes the adjacent entity because it never
-  paraphrases. The 47.3 percent rate of the floor is what a system that flips
-  between the two entities produces, and it is the axis on which an ungrounded
-  LLM arm would be expected to differ most from a grounded one.
+* **The fixed answer space limits the attainable score.** Exhausting all 68
+  indexed excerpts for each of 63 factual questions yields 27 possible passes.
+  For BM25, 18 pass now, nine can be recovered by selecting another indexed
+  excerpt, and 36 cannot pass through reranking alone. This is conditional on
+  the source index, response template and lexical rubric; it is not a semantic
+  answerability bound or a result about full-document retrieval or synthesis.
+* **Retrieving the designated source does not guarantee a scorer pass.** TF-IDF
+  retrieves its own item source for 47/63 factual questions; 31 of those still
+  fail. Missing lexical groups can reflect incomplete evidence or an inadequate
+  match rule. The analysis records those groups and does not adjudicate which.
+* **The scorer itself admits counterexamples.** The pictogram question `hc-005`
+  accepts unrelated eight-hour excerpts `hn-001` and `rk-001`. Its numeric-only
+  key does not check the number's referent. Removing clause/title metadata
+  changes the attainable score from 27/63 to 24/63; that format sensitivity is
+  not automatically an error, because headings can contribute relevant content.
+* **The absence of adjacent-substitution labels does not locate a cause.** These
+  four excerpt retrievers receive zero such labels on this corpus. No generative
+  system was tested, and returning a wrong-entity passage is possible without
+  paraphrasing. The random fixture's 47.3 percent rate comes from deliberately
+  prepared adjacent answers; it is not an observed language-model failure rate.
 * **Category-error items are not yet well served by any arm.** The oracle's
   reference answers for the 5 category-error items are scored CORRECT on
   concept coverage but only 1 of 5 trips the abstention detector, because the

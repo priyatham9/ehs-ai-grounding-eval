@@ -102,6 +102,15 @@ class TestNoResultsClaimed(unittest.TestCase):
                     with open(path, "r", encoding="utf-8") as handle:
                         payload = json.load(handle)
                     checked += 1
+                    if payload.get("schema") == "excerpt_answerability_v1":
+                        # A deterministic reanalysis of the finite source-answer
+                        # space is neither a model run nor a mock demonstration.
+                        self.assertEqual(name, "answerability.json", msg=path)
+                        self.assertEqual(payload.get("evidence_type"), "deterministic_non_llm_analysis", msg=path)
+                        self.assertIn("no language model evaluated", payload.get("scope", "").lower(), msg=path)
+                        self.assertTrue(payload.get("input_sha256"), msg=path)
+                        self.assertNotIn("runs", payload, msg=path)
+                        continue
                     if payload.get("schema") == "grounding_eval.baselines/1":
                         # Non-LLM baseline runs (random floor, TF-IDF retrieval,
                         # oracle ceiling) are honest runs, not mock demonstrations.
@@ -186,7 +195,7 @@ class TestPackagingHygiene(unittest.TestCase):
             "abc", "argparse", "ast", "collections", "dataclasses", "datetime", "enum",
             "functools", "gzip", "hashlib", "io", "itertools", "json", "math",
             "os", "pathlib", "platform", "random", "re", "string", "sys", "tempfile",
-            "textwrap", "time", "typing", "unicodedata", "unittest", "urllib",
+            "textwrap", "time", "types", "typing", "unicodedata", "unittest", "urllib",
             "warnings", "corpus_stats", "grounding_eval", "verify_sources", "__future__",
             "csv", "glob", "check_manuscript", "item_analysis",
             "build_assistant_page", "run_assistant_eval",

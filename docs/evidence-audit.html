@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f3f0e8" />
+    <meta
+      name="description"
+      content="An exhaustive audit of 63 questions and 68 excerpts separates retrieval headroom from a fixed lexical score ceiling. Compare original responses, scoring gates, and provenance."
+    />
+    <title>
+      When better retrieval cannot improve the score · Evidence audit
+    </title>
+    <link rel="stylesheet" href="evidence-audit.css" />
+    <script src="evidence-audit.js" defer></script>
+
+    <link
+      rel="canonical"
+      href="https://ehs-ai-grounding-eval.vercel.app/evidence-audit.html"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Priyatham · Research" />
+    <meta
+      property="og:title"
+      content="When better retrieval cannot improve the score · Evidence audit"
+    />
+    <meta
+      property="og:description"
+      content="An exhaustive audit of 63 questions and 68 excerpts separates retrieval headroom from a fixed lexical score ceiling. Compare original responses, scoring gates, and provenance."
+    />
+    <meta
+      property="og:url"
+      content="https://ehs-ai-grounding-eval.vercel.app/evidence-audit.html"
+    />
+    <meta
+      property="og:image"
+      content="https://ehs-ai-grounding-eval.vercel.app/audit-preview.jpg"
+    />
+    <meta
+      property="og:image:alt"
+      content="When better retrieval cannot improve the score · Evidence audit — interactive research page"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="When better retrieval cannot improve the score · Evidence audit"
+    />
+    <meta
+      name="twitter:description"
+      content="An exhaustive audit of 63 questions and 68 excerpts separates retrieval headroom from a fixed lexical score ceiling. Compare original responses, scoring gates, and provenance."
+    />
+    <meta
+      name="twitter:image"
+      content="https://ehs-ai-grounding-eval.vercel.app/audit-preview.jpg"
+    />
+    <meta property="og:image:width" content="1440" />
+    <meta property="og:image:height" content="980" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta
+      name="twitter:image:alt"
+      content="When better retrieval cannot improve the score · Evidence audit — interactive research page"
+    />
+  </head>
+  <body>
+    <a class="skip-link" href="#experiment">Skip to the evidence</a>
+    <header class="masthead wrap">
+      <a class="wordmark" href="./">PRIYATHAM <span>/ RESEARCH</span></a>
+      <nav aria-label="Page navigation">
+        <a href="#experiment">The experiment</a
+        ><a href="#method"
+          >Method & provenance
+          <span class="external-arrow" aria-hidden="true"></span
+        ></a>
+      </nav>
+    </header>
+    <main>
+      <section class="opening wrap" aria-labelledby="title">
+        <div class="issue-line">
+          <span><i aria-hidden="true"></i> EVIDENCE AUDIT / 001</span
+          ><span>SAFETY-CRITICAL RETRIEVAL</span>
+        </div>
+        <div class="opening-grid">
+          <div class="opening-copy">
+            <h1 id="title">
+              When better retrieval cannot improve the <em>score.</em>
+            </h1>
+            <p class="dek">
+              A better ranker can find a different passage. In this fixed
+              excerpt-returning benchmark, 36 questions have no passage that
+              passes the scoring rule.
+            </p>
+            <p class="scope">
+              An exhaustive experiment across
+              <strong>63 factual questions × 68 indexed excerpts</strong> in a
+              safety benchmark. A fixed benchmark score ceiling, not a universal
+              limit on retrieval or AI.
+            </p>
+            <a class="text-link" href="#experiment"
+              >Follow the evidence <span aria-hidden="true">↓</span></a
+            >
+          </div>
+          <aside class="headline-finding" aria-label="Principal finding">
+            <div class="eyebrow">EVEN WITH ANSWER-KEY-AWARE SELECTION</div>
+            <div class="ceiling-number">
+              <span id="ceiling-count">27</span
+              ><span class="denominator">/ 63</span>
+            </div>
+            <p class="finding-label">
+              questions have an indexed excerpt that earns a lexical pass.
+            </p>
+            <div
+              id="ceiling-dots"
+              class="ceiling-dots"
+              aria-hidden="true"
+            ></div>
+            <p class="finding-note">
+              Every excerpt tried. Same answer wrapper.<br />
+              Same scoring rule. No generated answers.
+            </p>
+            <div class="finding-foot">
+              <span id="combination-count">4,284</span> combinations evaluated
+              <span class="external-arrow" aria-hidden="true"></span>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section
+        id="experiment"
+        class="experiment wrap"
+        aria-labelledby="experiment-title"
+      >
+        <div class="section-kicker">
+          <span>01 / THE EXPERIMENT</span><span>FROM A SCORE TO ITS CAUSE</span>
+        </div>
+        <div class="section-heading">
+          <h2 id="experiment-title">How much can ranking recover?</h2>
+          <p>
+            Start with BM25. Then let every passage compete against the answer
+            key. The space between those results is the measured headroom.
+          </p>
+        </div>
+        <div
+          class="decomposition"
+          role="group"
+          aria-label="Filter questions by decomposition"
+        >
+          <button
+            class="decomp-part baseline"
+            data-filter="baseline"
+            style="--share: 18"
+          >
+            <span class="decomp-number" id="baseline-count">18</span
+            ><span class="decomp-title">Already pass under BM25</span
+            ><span class="decomp-detail">The current baseline</span>
+          </button>
+          <button
+            class="decomp-part recoverable"
+            data-filter="recoverable"
+            style="--share: 9"
+          >
+            <span class="decomp-number" id="recoverable-count">9</span
+            ><span class="decomp-title">Recoverable by selection</span
+            ><span class="decomp-detail">A passing excerpt exists</span>
+          </button>
+          <button
+            class="decomp-part unreachable"
+            data-filter="unreachable"
+            style="--share: 36"
+          >
+            <span class="decomp-number" id="unreachable-count">36</span
+            ><span class="decomp-title">No indexed excerpt passes</span
+            ><span class="decomp-detail"
+              >Ranking alone cannot close this gap</span
+            >
+          </button>
+        </div>
+        <p class="chart-caption">
+          <span class="caption-arrow" aria-hidden="true">↑</span> Select a
+          segment to inspect its questions. “Pass” means the fixed lexical
+          scorer accepts the returned text; it does not establish semantic
+          correctness.
+        </p>
+
+        <div class="experiment-toolbar">
+          <div class="path-tabs" role="group" aria-label="Evidence views">
+            <button data-filter="all" class="active" aria-pressed="true">
+              All questions <span>63</span>
+            </button>
+            <button data-filter="own-fails" aria-pressed="false">
+              Right source, failed score
+            </button>
+            <button data-filter="metadata" aria-pressed="false">
+              Metadata changes the result
+            </button>
+          </div>
+          <button id="reset-view" class="reset-button" type="button">
+            Reset view <span aria-hidden="true">↺</span>
+          </button>
+        </div>
+        <div class="investigation">
+          <section class="ledger" aria-labelledby="ledger-title">
+            <div class="ledger-top">
+              <div>
+                <div class="eyebrow">QUESTION LEDGER</div>
+                <h3 id="ledger-title">One question. Four tests.</h3>
+              </div>
+              <span id="visible-count" class="count-tag">63 / 63</span>
+            </div>
+            <label class="search-field"
+              ><svg aria-hidden="true" viewBox="0 0 24 24">
+                <circle cx="10" cy="10" r="6"></circle>
+                <path d="m15 15 5 5"></path></svg
+              ><input
+                id="question-search"
+                type="search"
+                placeholder="Find a question, topic, or clause"
+                aria-label="Search questions, topics, or clauses"
+            /></label>
+            <div class="ledger-legend">
+              <span
+                ><i class="status-dot pass" aria-hidden="true"></i> lexical
+                pass</span
+              ><span
+                ><i class="status-dot fail" aria-hidden="true"></i> no
+                pass</span
+              ><span class="metadata-legend">△ metadata-sensitive</span>
+            </div>
+            <div
+              class="ledger-scroll"
+              tabindex="0"
+              role="region"
+              aria-label="Question comparison table, scroll to see all questions"
+            >
+              <table class="question-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Question</th>
+                    <th scope="col">
+                      <abbr
+                        title="BM25's top-ranked excerpt, with metadata wrapper"
+                        >BM25</abbr
+                      >
+                    </th>
+                    <th scope="col">
+                      <abbr
+                        title="The source excerpt attached to the question, with metadata wrapper"
+                        >Own</abbr
+                      >
+                    </th>
+                    <th scope="col">
+                      <abbr
+                        title="Any indexed excerpt can pass, with metadata wrapper"
+                        >Best</abbr
+                      >
+                    </th>
+                    <th scope="col">
+                      <abbr
+                        title="Any bare excerpt can pass, without metadata wrapper"
+                        >Bare</abbr
+                      >
+                    </th>
+                  </tr>
+                </thead>
+                <tbody id="question-rows"></tbody>
+              </table>
+              <p id="empty-state" hidden>
+                No questions match this view. Clear the search or reset the
+                filters.
+              </p>
+            </div>
+            <div class="ledger-foot">
+              <span id="filter-summary">Showing all factual questions</span
+              ><span>SELECT A ROW <span aria-hidden="true">→</span></span>
+            </div>
+          </section>
+
+          <article
+            id="inspector"
+            class="inspector"
+            aria-labelledby="selected-question"
+          >
+            <div class="inspector-top">
+              <span class="eyebrow">02 / INSIDE THE EVIDENCE</span
+              ><button id="copy-link" type="button" class="quiet-button">
+                Copy question link
+                <span class="external-arrow" aria-hidden="true"></span>
+              </button>
+            </div>
+            <div id="question-meta" class="question-meta"></div>
+            <h3 id="selected-question">Loading the reproducible audit…</h3>
+            <p id="question-diagnosis" class="question-diagnosis"></p>
+            <div
+              class="mode-tabs"
+              role="tablist"
+              aria-label="Choose a passage selection method"
+            >
+              <button
+                id="tab-bm25"
+                data-mode="bm25"
+                role="tab"
+                aria-selected="false"
+                aria-controls="evidence-panel"
+                tabindex="-1"
+              >
+                BM25 <span>Retrieved</span>
+              </button>
+              <button
+                id="tab-own"
+                data-mode="own"
+                role="tab"
+                aria-selected="true"
+                aria-controls="evidence-panel"
+              >
+                Own source <span>Question-linked</span>
+              </button>
+              <button
+                id="tab-best"
+                data-mode="best"
+                role="tab"
+                aria-selected="false"
+                aria-controls="evidence-panel"
+                tabindex="-1"
+              >
+                Best indexed <span>Key-aware</span>
+              </button>
+              <button
+                id="tab-bare"
+                data-mode="bare"
+                role="tab"
+                aria-selected="false"
+                aria-controls="evidence-panel"
+                tabindex="-1"
+              >
+                Best bare <span>Text only</span>
+              </button>
+              <button
+                id="tab-compare"
+                data-mode="compare"
+                role="tab"
+                aria-selected="false"
+                aria-controls="comparison-panel"
+                tabindex="-1"
+              >
+                Compare <span>Two responses</span>
+              </button>
+            </div>
+            <div
+              id="evidence-panel"
+              role="tabpanel"
+              aria-labelledby="tab-own"
+              tabindex="0"
+            >
+              <div class="evidence-status">
+                <span id="passage-label"></span
+                ><span id="passage-outcome" class="outcome"></span>
+              </div>
+              <div id="passage-notice" class="passage-notice" hidden></div>
+              <div class="source-sheet">
+                <div class="source-sheet-header">
+                  <span>TEXT SENT TO THE SCORER</span
+                  ><span id="source-id"></span>
+                </div>
+                <p id="source-metadata" class="source-metadata"></p>
+                <blockquote id="source-excerpt"></blockquote>
+                <p id="source-suffix" class="source-metadata source-suffix"></p>
+                <div class="source-sheet-footer">
+                  <a id="source-link" target="_blank" rel="noopener noreferrer"
+                    >Read source standard
+                    <span class="external-arrow" aria-hidden="true"></span></a
+                  ><span id="source-kind"></span>
+                </div>
+              </div>
+              <div class="rubric-heading">
+                <h4>The scoring contract</h4>
+                <span>FIXED RULES, VISIBLE GATES</span>
+              </div>
+              <div id="score-gates" class="score-gates"></div>
+              <details class="rubric-details" open>
+                <summary>
+                  Required concepts <span id="concept-count"></span>
+                </summary>
+                <div id="concept-groups" class="concept-groups"></div>
+              </details>
+              <details class="rubric-details">
+                <summary>Numbers & forbidden concepts</summary>
+                <div id="other-rules"></div>
+              </details>
+              <details class="rubric-details">
+                <summary>
+                  Reference answer <span>benchmark author’s text</span>
+                </summary>
+                <p id="reference-answer" class="reference-answer"></p>
+              </details>
+            </div>
+            <div
+              id="comparison-panel"
+              role="tabpanel"
+              aria-labelledby="tab-compare"
+              tabindex="0"
+              hidden
+            >
+              <div class="compare-controls">
+                <label for="comparison-pair">Compare the same question</label
+                ><select id="comparison-pair">
+                  <option value="metadata">
+                    Own source: with metadata / bare
+                  </option>
+                  <option value="ranking">
+                    BM25 response / own source response
+                  </option>
+                </select>
+              </div>
+              <p id="comparison-reading" class="comparison-reading"></p>
+              <div id="comparison-responses" class="comparison-responses"></div>
+              <details class="rubric-details">
+                <summary>Shared rubric: all accepted alternatives</summary>
+                <div id="comparison-rubric" class="comparison-rubric"></div>
+              </details>
+              <details class="rubric-details">
+                <summary>
+                  Reference answer <span>benchmark author’s text</span>
+                </summary>
+                <p id="comparison-reference" class="reference-answer"></p>
+              </details>
+            </div>
+            <div class="inspector-footer">
+              <span id="selection-provenance"></span
+              ><button id="export-question" class="text-link" type="button">
+                Export this evidence <span aria-hidden="true">↓</span>
+              </button>
+            </div>
+          </article>
+        </div>
+        <p class="measurement-note">
+          <strong>What changes across the columns?</strong> BM25 chooses by
+          lexical relevance; Own uses the question’s attached source; Best
+          checks whether any of the 68 wrapped excerpts passes; Bare repeats
+          that search without the metadata wrapper. The two “Best” columns
+          inspect the answer key and are diagnostic ceilings, not deployable
+          rankers.
+        </p>
+      </section>
+
+      <section
+        class="counterexample wrap"
+        aria-labelledby="counterexample-title"
+      >
+        <div class="counterexample-copy">
+          <div class="eyebrow">A PASS WORTH DISPUTING / hc-005 × hn-001</div>
+          <h2 id="counterexample-title">
+            Eight is the right number.<br />
+            Hours are the wrong thing.
+          </h2>
+          <p>
+            A question asks how many hazard pictograms OSHA designates. An
+            unrelated noise-exposure excerpt mentions eight hours. The
+            numeric-only key accepts it.
+          </p>
+          <button id="open-counterexample" class="text-link">
+            Inspect the passing mismatch
+            <span class="external-arrow" aria-hidden="true"></span>
+          </button>
+        </div>
+        <div class="counterexample-evidence">
+          <div class="witness-label">THE QUESTION ASKS ABOUT</div>
+          <p>hazard <em>pictograms</em></p>
+          <div class="witness-connector">
+            <span>8</span><i aria-hidden="true"></i><b>same numeric match</b
+            ><i aria-hidden="true"></i><span>8</span>
+          </div>
+          <div class="witness-label">THE PASSING EXCERPT DESCRIBES</div>
+          <p>exposure over <em>hours</em></p>
+          <div class="witness-verdict">
+            LEXICAL PASS <span>≠</span> ANSWER TO THE QUESTION
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="interpretation wrap"
+        aria-labelledby="interpretation-title"
+      >
+        <div class="section-kicker">
+          <span>03 / WHAT THE EXPERIMENT CHANGES</span
+          ><span>THREE DISTINCTIONS WORTH KEEPING</span>
+        </div>
+        <h2 id="interpretation-title">A retrieval miss is not one problem.</h2>
+        <div class="interpretation-grid">
+          <article>
+            <span class="note-index">I.</span>
+            <h3>
+              Finding a source ≠<br />
+              answering a question.
+            </h3>
+            <p>
+              An attached source can be authoritative and still be too short for
+              a multi-part question. Inspect the LOTO inspection item: the
+              excerpt supplies the interval, but omits who may inspect.
+            </p>
+            <button data-example="loto-001" class="text-link">
+              Trace the missing evidence
+              <span class="external-arrow" aria-hidden="true"></span>
+            </button>
+          </article>
+          <article>
+            <span class="note-index">II.</span>
+            <h3>
+              The wrapper is part<br />
+              of the experiment.
+            </h3>
+            <p>
+              The returned text includes a section title and clause reference.
+              Removing this metadata changes which questions can pass. A title
+              can supply relevant context; clause numbers also enter the numeric
+              matcher. Format sensitivity alone is not proof of contamination.
+            </p>
+            <button data-filter-jump="metadata" class="text-link">
+              Inspect the changed outcomes
+              <span class="external-arrow" aria-hidden="true"></span>
+            </button>
+          </article>
+          <article>
+            <span class="note-index">III.</span>
+            <h3>
+              A ceiling is conditional.<br />
+              So is a pass.
+            </h3>
+            <p>
+              These results hold for this excerpt set, response template, and
+              scorer. Longer passages, synthesized answers, or different scoring
+              rules require a new experiment. No LLM was evaluated here.
+            </p>
+            <a href="#method" class="text-link"
+              >Read the exact boundary <span aria-hidden="true">↓</span></a
+            >
+          </article>
+        </div>
+      </section>
+
+      <section id="method" class="method wrap" aria-labelledby="method-title">
+        <div class="section-kicker">
+          <span>04 / METHOD & PROVENANCE</span
+          ><span>TAKE THE FINDING APART</span>
+        </div>
+        <div class="method-grid">
+          <div>
+            <h2 id="method-title">
+              Reproducible.<br />
+              And deliberately bounded.
+            </h2>
+            <p>
+              All results are derived from the committed corpus and
+              deterministic scoring code. The answer-key-aware search is an
+              audit instrument: it asks what the current index could possibly
+              score, given these rules.
+            </p>
+            <button id="export-audit" class="download-button" type="button">
+              Download complete audit <span aria-hidden="true">↓</span></button
+            ><a
+              id="report-link"
+              class="text-link"
+              href="https://github.com/priyatham9/ehs-ai-grounding-eval"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Inspect the source repository
+              <span class="external-arrow" aria-hidden="true"></span
+            ></a>
+          </div>
+          <dl class="method-facts">
+            <div>
+              <dt>Scope</dt>
+              <dd>
+                63 factual questions; 68 indexed excerpts. Five category-error
+                questions excluded from the question set, retained in the index.
+              </dd>
+            </div>
+            <div>
+              <dt>Experiment</dt>
+              <dd id="method-experiment">
+                Every factual question scored against every excerpt, with and
+                without the adapter’s metadata wrapper.
+              </dd>
+            </div>
+            <div>
+              <dt>Acceptance rule</dt>
+              <dd>
+                At least 75% concept coverage, all required numeric facts, and
+                no asserted forbidden concept. Earlier scorer gates also apply.
+              </dd>
+            </div>
+            <div>
+              <dt>Not a ranker comparison</dt>
+              <dd>
+                The random floor reads the answer key when constructing
+                responses. It is not a comparable retrieval baseline and is
+                excluded here.
+              </dd>
+            </div>
+            <div>
+              <dt>Provenance</dt>
+              <dd id="audit-provenance">Loading artifact details…</dd>
+            </div>
+            <div>
+              <dt>Limits</dt>
+              <dd>
+                No entailment check, no human correctness adjudication, no
+                generated model answers. A lexical pass is not a safety
+                assurance.
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+    </main>
+    <footer class="footer wrap">
+      <a class="wordmark" href="./">PRIYATHAM <span>/ RESEARCH</span></a
+      ><span>Evidence before confidence.</span
+      ><a href="#title"
+        >Back to the question <span aria-hidden="true">↑</span></a
+      >
+    </footer>
+    <div
+      id="live-status"
+      class="sr-only"
+      role="status"
+      aria-live="polite"
+    ></div>
+    <div id="toast" class="toast" role="status" hidden></div>
+    <noscript
+      ><div class="noscript">
+        The interactive audit requires JavaScript. Read the
+        <a href="https://github.com/priyatham9/ehs-ai-grounding-eval"
+          >source repository</a
+        >
+        for the corpus and reproducible analysis.
+      </div></noscript
+    >
+  </body>
+</html>
