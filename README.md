@@ -4,6 +4,12 @@
 
 Part of the Grounded research programme: https://grounded-chi-five.vercel.app/
 
+[Open the interactive project](https://ehs-ai-grounding-eval.vercel.app/try.html) · [Data and methods](https://ehs-ai-grounding-eval.vercel.app/)
+
+**Research question:** Can an answer distinguish the correct safety concept from a plausible adjacent one?
+
+**Evidence and limits:** A committed question corpus, source verification and non-LLM baselines. No language model has been evaluated.
+
 A benchmark for measuring whether an AI system's answers to safety-critical technical questions are grounded in authoritative sources. It contains 68 items built so that co-hyponym substitution, a semantically adjacent wrong answer, is plausible and dangerous; non-LLM baselines show 27.0% accuracy for TF-IDF retrieval and 28.6% for BM25.
 
 No experimental results for any language model have been evaluated; the mock adapter's demonstration outcome probabilities were fixed in advance.
