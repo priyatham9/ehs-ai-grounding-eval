@@ -90,7 +90,7 @@ class CalibrationMetricTests(unittest.TestCase):
 
 
 class CalibrationBaselineTests(unittest.TestCase):
-    def test_only_probability_scale_systems_are_scored(self) -> None:
+    def test_only_declared_raw_score_diagnostic_is_computed(self) -> None:
         runs = run_all(load_corpus(), n_seeds=1)
         summary, bins = calibration(runs)
         by = summary.set_index("adapter")
@@ -104,7 +104,8 @@ class CalibrationBaselineTests(unittest.TestCase):
         self.assertEqual(int(bins[bins["adapter"] == "retrieval_tfidf"]["count"].sum()), 63)
         self.assertGreaterEqual(row["ece"], 0.0)
         md = render_calibration(summary, bins)
-        self.assertIn("not on a [0, 1] scale", md)
+        self.assertIn("raw-score diagnostic not computed", md)
+        self.assertIn("No retriever declares a correctness probability", md)
         self.assertIn("no confidence reported", md)
 
     def test_committed_results_match_the_runner(self) -> None:

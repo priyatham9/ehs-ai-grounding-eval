@@ -252,19 +252,17 @@ Choices made here:
   count and is biased upward on small samples; with 63 items, 6 of the 10 bins are
   occupied and the two highest hold 3 and 2 items, so the ECE is a coarse summary.
   The bin count is printed with the result.
-* The metrics treat the confidence as a probability, so the code rejects values
-  outside [0, 1] instead of rescaling them. Of the retrievers only TF-IDF reports a
-  score bounded to [0, 1] by construction (cosine similarity). Okapi BM25 and BM25+
-  scores are unbounded weight sums (observed here from -4.69 to 49.20 and from 16.47
-  to 145.53), and reciprocal rank fusion scores are rank-based and observed between
-  0.032 and 0.033. Brier and ECE are therefore not computed for BM25, BM25+ or RRF,
-  and a rescaling (for example min-max or a logistic fit to the outcomes) is not
-  applied because it would be a calibration procedure chosen after seeing the data,
-  not a property of the system. random_floor and oracle report no confidence and
-  are n/a.
-* A cosine similarity is not a probability of correctness, so a large ECE for
-  TF-IDF is expected and is a statement about that mismatch, not a defect in the
-  retriever. The numbers say nothing about any language model: none was run.
+* The metrics require numbers in [0, 1], but that numerical condition does not
+  establish probability semantics. No retriever here declares a correctness
+  probability. The historical TF-IDF calculation is retained as an explicitly
+  hypothetical diagnostic of treating raw cosine as one. BM25 and BM25+ have
+  unbounded weight sums. RRF scores (roughly 0.032 to 0.033 here) are also within
+  [0, 1]; excluding them is a diagnostic scope choice, not a range restriction.
+  The fixtures report no confidence. No probabilities are imputed or fitted.
+* These in-sample diagnostic values do not assess calibration of a declared
+  probabilistic forecast. A meaningful learned score-to-probability mapping
+  would need separate fitting and held-out evaluation. The numbers say nothing
+  about any language model: none was run.
 
 References (citation details given from the authors' published records; not
 re-fetched from the publisher pages in the sandbox that built this repository):

@@ -43,6 +43,10 @@ results/*
 !results/significance_pairwise.csv
 !results/significance_pairwise.md
 
+# Deterministic finite-answer-space analysis, its provenance and counterexamples.
+!results/answerability.json
+!results/answerability.md
+
 # Locally cached primary-source snapshots pulled by tools/verify_sources.py.
 # These are re-fetchable; the committed verification report is the durable
 # record. The report itself (corpus/verification/) IS committed.

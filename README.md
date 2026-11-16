@@ -4,9 +4,19 @@
 
 Part of the Grounded research programme: https://grounded-chi-five.vercel.app/
 
+[![Exhaustive lexical-scoring audit with inspectable sources](docs/audit-preview.jpg)](https://ehs-ai-grounding-eval.vercel.app/evidence-audit.html)
+
 [Open the interactive project](https://ehs-ai-grounding-eval.vercel.app/try.html) · [Data and methods](https://ehs-ai-grounding-eval.vercel.app/)
 
 **Research question:** Can an answer distinguish the correct safety concept from a plausible adjacent one?
+
+**New finding:** Across all 4,284 factual-question/indexed-excerpt combinations,
+only 27 of 63 questions can pass the unchanged lexical scorer in the fixed
+single-excerpt format. BM25 passes 18: nine misses are recoverable by reranking,
+while 36 have no scorer-passing indexed excerpt. This is a score ceiling for
+this answer space, not a bound on semantic answerability or language models.
+[Inspect the evidence](https://ehs-ai-grounding-eval.vercel.app/evidence-audit.html)
+or [reproduce the analysis](results/answerability.md).
 
 **Evidence and limits:** A committed question corpus, source verification and non-LLM baselines. No language model has been evaluated.
 
@@ -32,9 +42,9 @@ the answer and baseline outcomes.
 
 | | |
 |---|---|
-| Status | no language model has been evaluated; mock demonstration fixture only |
-| Data | simulated (mock adapter's outcome probabilities fixed in advance) |
-| Tests | 222 (`python3 -m unittest discover -s tests -v`) |
+| Status | no language model evaluated; deterministic baseline and excerpt analyses plus a labelled mock demonstration |
+| Data | 68 authored, source-backed items; lexical retrieval runs; simulated mock outputs kept separate |
+| Tests | 230 (`python3 -m unittest discover -s tests -v`) |
 | Quickstart | `python3 -m grounding_eval.cli demo` |
 | Licence | MIT |
 
@@ -60,9 +70,11 @@ a system answers about the semantically adjacent wrong entity. It is more
 dangerous than an obviously wrong answer precisely because it survives casual
 review.
 
-### Why it happens, and why it is not bad luck
+### Candidate mechanisms, not measured causes
 
-Four mechanisms converge, and the fourth is the one worth dwelling on.
+Four proposed mechanisms motivate the benchmark. The non-LLM baselines do not
+establish any of them as the cause of a language-model error; no language model
+or embedding retriever has been evaluated here.
 
 1. **There was no retrieval.** A system prompt plus pasted reference text is
    parametric conditioning, not retrieval-augmented generation. There is no
@@ -80,16 +92,19 @@ Four mechanisms converge, and the fourth is the one worth dwelling on.
    shared definitions section, and the word *disc/disk* is polysemous inside it:
    in a relief valve the "disc" is the closure element whose travel defines lift
    and whose contact with the seat defines reseating, while a rupture disk is an
-   entire device. Chunk-and-embed an index over that document and the nearest
-   neighbours of a rupture-disk passage are relief-valve passages. ISO splits the
+   entire device. This shared vocabulary could make relief-valve passages rank
+   near rupture-disk passages, but no embedding experiment has tested that
+   hypothesis here. ISO splits the
    two across separate parts (4126-1 safety valves, 4126-2 bursting discs);
-   ASME and API co-locate them. **Which standards family you index is a
+   ASME and API co-locate them. **Which standards family you index could be a
    safety-relevant corpus design decision**, and it argues for device-type
    metadata filtering over undifferentiated top-k retrieval.
 
-The consequence: this failure is a predictable interaction between embedding
-geometry and the terminology of the source corpus, not a random model defect.
-Naming it that way is the substantive claim this repository is organised around.
+The proposed interaction between source terminology and retrieval geometry is
+a hypothesis for a future experiment. The measured finding here is narrower:
+the fixed excerpt format and lexical rubric limit the attainable score, and the
+rubric admits unrelated numeric matches. Neither finding locates a cause in a
+language model or demonstrates an embedding failure.
 
 ---
 
@@ -576,15 +591,38 @@ MIT. See `LICENSE`.
 
 ## Results
 
-Six non-LLM baselines have been run over the 68 items: a seeded random floor,
+Six non-LLM baselines have been run over the 68 items: an answer-key-assisted
+random fixture (historically named `random_floor`),
 four lexical retrievers over the verified source excerpts (TF-IDF 27.0%, Okapi
 BM25 28.6%, BM25+ 27.0%, TF-IDF/BM25 reciprocal rank fusion 27.0% factual
 accuracy; standard parameters fixed in code, not tuned), and an oracle ceiling.
-They show the items discriminate (floor and ceiling CIs do not overlap on any
-axis) and where plain retrieval lands; a per-domain and minimal-pair breakdown
-is in `results/baselines_breakdown.md`. Item difficulty and inter-retriever agreement are in `results/item_analysis.md` (`python3 scripts/item_analysis.py`): 45 of 63 factual items are solved by no retriever, 17 by all four, Fleiss kappa 0.980. No language model has been evaluated
-yet. Paired McNemar tests with Holm correction (`results/significance_pairwise.md`) find no significant difference between any two of the four retrievers (at most one discordant item per pair) and find each retriever significantly below the random floor at repeat 0 (Holm-adjusted p 0.021 to 0.032), a result that is not significant for BM25 on the weakest random-floor repeat. See [docs/results.md](docs/results.md) and `results/`; regenerate with
-`python3 -m grounding_eval.run_baselines`.
+The two fixtures exercise the scoring scale; their separation does not validate
+system discrimination. `random_floor` can select a full reference answer, while
+the retrievers can only return a source excerpt, so their score difference is
+not evidence that retrieval performs worse than an information-matched guesser.
+The four retrievers differ on at most one factual item; their similar scores
+alone cannot locate the bottleneck. No language model has been evaluated.
+
+The [exhaustive excerpt analysis](results/answerability.md) supplies the missing
+intervention: selecting each question's designated source reaches 27/63 scorer
+passes, and testing every indexed excerpt reaches exactly the same ceiling.
+Only 7/23 minimal pairs can have both members pass in this fixed format, compared
+with the retrievers' 3/23. These findings separate ranking misses from limitations
+of the indexed answer space and rubric; they do not establish model confusion.
+
+The measuring instrument also matters. Two unrelated excerpts about eight-hour
+intervals pass the question asking for eight pictograms. Bare excerpts reach
+24/63 rather than 27/63 when clause and title text are removed. A scorer pass is
+therefore not proof of a semantically correct answer. Retrieval scores rank
+these passes; bounded cosine similarity does not make them correctness
+probabilities, and the published Brier/ECE values are only a hypothetical
+score-as-probability diagnostic.
+
+Per-domain results are in `results/baselines_breakdown.md`; per-item agreement is
+in `results/item_analysis.md`. Full counts, scope and interpretation are in
+[docs/results.md](docs/results.md). Reproduce the original baselines with
+`python3 -m grounding_eval.run_baselines`, and the new finite-space analysis with
+`python3 -m grounding_eval.answerability`.
 
 ### Grounded assistant (demo project)
 

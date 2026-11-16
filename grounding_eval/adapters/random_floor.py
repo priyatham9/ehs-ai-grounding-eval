@@ -2,8 +2,10 @@
 
 Picks uniformly, per item, between the two answer options the corpus item
 carries (the reference answer and the adjacent-wrong answer) and cites a clause
-drawn uniformly from the pool of clauses cited anywhere in the corpus. It is a
-floor: a system that knows nothing but the shape of the item scores here.
+drawn uniformly from the pool of clauses cited anywhere in the corpus. The
+historical name is retained, but this is an answer-key-assisted fixture, not a
+chance floor for retrieval: it can emit a complete reference answer unavailable
+to a retriever restricted to source excerpts.
 
 Like the mock fixture, this adapter reads the item beyond ``question`` and
 ``id``. It is a baseline for calibrating the scale, not a system under test, and

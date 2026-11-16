@@ -1,0 +1,5 @@
+
+# Deterministic scorer audit artifacts.
+results/answerability.json linguist-generated=true
+results/answerability.md linguist-generated=true
+docs/evidence-audit-data.json linguist-generated=true

@@ -305,16 +305,19 @@ def render_significance(table: pd.DataFrame) -> str:
     return "\n".join(lines) + "\n"
 
 
-# Systems whose confidence is on a probability scale by construction. TF-IDF
-# cosine similarity lies in [0, 1]. Okapi BM25 and BM25+ scores are unbounded
-# sums of weights (observed ranges -4.69 to 49.20 and 16.47 to 145.53), and reciprocal rank fusion
-# scores are bounded by 2 / (k + 1) = 0.033 (observed 0.032 to 0.033), so neither is a probability and
-# calibration metrics are not computed for them.
+# Retained for the historical raw-score-as-probability diagnostic. TF-IDF cosine
+# is numerically admissible in [0, 1], but it is NOT a correctness probability.
+# None of these retrievers declares a probabilistic forecast. RRF is also bounded
+# within [0, 1]; excluding it is a diagnostic scope choice, not a range restriction.
+# The name is retained for compatibility with existing analysis callers.
 CALIBRATION_SCORED = ("retrieval_tfidf",)
 
 
 def calibration(runs_by_adapter: Dict[str, List[RunResult]]) -> "tuple[pd.DataFrame, pd.DataFrame]":
-    """Brier, ECE and reliability bins on factual items, for systems on a [0, 1] scale."""
+    """Historical diagnostic if raw TF-IDF cosine were treated as a probability.
+
+    Computed values do not establish probability semantics or model calibration.
+    """
     frame = runs_frame([r for runs in runs_by_adapter.values() for r in runs])
     factual = frame[frame["item_type"] == ItemType.FACTUAL.value]
     summary_rows: List[Dict[str, object]] = []
@@ -343,7 +346,9 @@ def render_calibration(summary: pd.DataFrame, bins: pd.DataFrame) -> str:
 
     why = {True: "no confidence reported"}
     lines = [
-        "| adapter | accuracy | mean confidence | Brier [95% CI] | Brier, constant at accuracy | ECE (10 bins) [95% CI] |",
+        "Hypothetical raw-score diagnostic: TF-IDF cosine is treated as a probability solely for this calculation. No retriever declares a correctness probability; bounded scores do not establish probabilistic calibration.",
+        "",
+        "| adapter | accuracy | mean retrieval score | Brier [95% CI] | Brier, constant at accuracy | ECE (10 bins) [95% CI] |",
         "|---|---|---|---|---|---|",
     ]
     for _, r in summary.iterrows():
@@ -353,11 +358,11 @@ def render_calibration(summary: pd.DataFrame, bins: pd.DataFrame) -> str:
                 f(r["brier"]), f(r["brier_ci_low"]), f(r["brier_ci_high"]), f(r["brier_constant"]),
                 f(r["ece"]), f(r["ece_ci_low"]), f(r["ece_ci_high"])))
         else:
-            reason = "not on a [0, 1] scale" if r["has_confidence"] else why[True]
+            reason = "raw-score diagnostic not computed" if r["has_confidence"] else why[True]
             lines.append("| %s | %.1f%% | n/a | n/a (%s) | n/a | n/a |" % (r["adapter"], 100 * r["accuracy"], reason))
     out = "\n".join(lines) + "\n"
     for adapter in bins["adapter"].unique() if len(bins) else []:
-        out += "\nReliability bins, %s:\n\n| bin | items | mean confidence | accuracy |\n|---|---|---|---|\n" % adapter
+        out += "\nRaw-score bins, %s:\n\n| bin | items | mean retrieval score | accuracy |\n|---|---|---|---|\n" % adapter
         for _, b in bins[bins["adapter"] == adapter].iterrows():
             if b["count"]:
                 out += "| [%.1f, %.1f%s | %d | %.3f | %.1f%% |\n" % (
