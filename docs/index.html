@@ -6728,8 +6728,20 @@ html body{overflow-x:clip}
   /* =================== GROUNDING =================== */
   function ground(root) {
     var D = data('ix-ground-data'); if (!D) return;
-    var dom = 'all', cur = null;
+    var dom = 'all', cur = null, query = '';
+    var requested = new URLSearchParams(location.search).get('item');
+    if (requested) cur = D.items.filter(function (item) { return item.id.toLowerCase() === requested.trim().toLowerCase(); })[0] || null;
     var list = $('#gx-list', root), card = $('#gx-card', root), chips = $('#gx-domains', root), grid = $('#gx-acc', root);
+    var tools = h('div', { class: 'gx-tools' });
+    var searchId = 'gx-search';
+    var searchLabel = h('label', { for: searchId, text: 'Find a question or item ID' });
+    var search = h('input', { id: searchId, type: 'search', placeholder: 'Search this corpus', 'aria-controls': 'gx-list' });
+    var reset = h('button', { type: 'button', class: 'btn', text: 'Clear filters' });
+    var count = h('p', { class: 'note gx-count', role: 'status', 'aria-live': 'polite' });
+    tools.appendChild(searchLabel); tools.appendChild(search); tools.appendChild(reset); tools.appendChild(count);
+    list.parentNode.parentNode.insertBefore(tools, list.parentNode);
+    search.addEventListener('input', function () { query = search.value.trim().toLowerCase(); paintList(); });
+    reset.addEventListener('click', function () { query = ''; search.value = ''; setDom('all'); search.focus(); });
     // per-domain accuracy small multiples
     D.domains.forEach(function (d, di) {
       var cell = h('button', { type: 'button', class: 'gx-dom', 'aria-pressed': 'false', 'data-d': di });
@@ -6754,7 +6766,9 @@ html body{overflow-x:clip}
     var OUT = { correct: 'correct', adjacent_substitution: 'adjacent substitution', other_incorrect: 'incorrect', abstained: 'abstained', unscorable: 'unscorable' };
     function paintList() {
       clear(list);
-      var shown = D.items.filter(function (it) { return dom === 'all' || it.d === dom; });
+      var shown = D.items.filter(function (it) { return (dom === 'all' || it.d === dom) && (!query || (it.id + ' ' + it.q).toLowerCase().indexOf(query) >= 0); });
+      count.textContent = 'Showing ' + shown.length + ' of ' + D.items.length + ' items.';
+      if (!shown.length) { cur = null; clear(card); list.appendChild(h('p', { class: 'gx-empty', text: 'No matching questions. Try a shorter search or clear filters.' })); return; }
       shown.forEach(function (it) {
         var b = h('button', { type: 'button', class: 'gx-item', 'aria-pressed': String(cur === it) }, [
           h('span', { class: 'gx-id', text: it.id }),
@@ -6763,14 +6777,32 @@ html body{overflow-x:clip}
         b.addEventListener('click', function () { cur = it; $$('.gx-item', list).forEach(function (x) { x.setAttribute('aria-pressed', 'false'); }); b.setAttribute('aria-pressed', 'true'); paintCard(); });
         list.appendChild(b);
       });
-      if (!cur || shown.indexOf(cur) < 0) { cur = shown[0]; if (list.firstChild) list.firstChild.setAttribute('aria-pressed', 'true'); paintCard(); }
+      if (!cur || shown.indexOf(cur) < 0) { cur = shown[0]; if (list.firstChild) list.firstChild.setAttribute('aria-pressed', 'true'); }
+      paintCard();
     }
     function paintCard() {
       clear(card); if (!cur) return;
       var it = cur;
+      var shown = D.items.filter(function (item) { return (dom === 'all' || item.d === dom) && (!query || (item.id + ' ' + item.q).toLowerCase().indexOf(query) >= 0); });
+      var position = shown.indexOf(it);
+      var actions = h('div', { class: 'gx-actions', 'aria-label': 'Question navigation' });
+      function move(delta) { cur = shown[position + delta]; paintList(); var selected = $('.gx-item[aria-pressed="true"]', list); if (selected) selected.scrollIntoView({ block: 'nearest' }); var nav = $(delta < 0 ? '.gx-prev' : '.gx-next', card); if (nav && nav.disabled) nav = $(delta < 0 ? '.gx-next' : '.gx-prev', card); if (nav) nav.focus(); }
+      var prev = h('button', { type: 'button', class: 'btn gx-prev', text: 'Previous item' });
+      var next = h('button', { type: 'button', class: 'btn gx-next', text: 'Next item' });
+      prev.disabled = position <= 0; next.disabled = position >= shown.length - 1;
+      prev.addEventListener('click', function () { move(-1); }); next.addEventListener('click', function () { move(1); });
+      var share = h('button', { type: 'button', class: 'btn', text: 'Copy item link' });
+      var feedback = h('span', { class: 'gx-share-status', role: 'status' });
+      share.addEventListener('click', function () {
+        var url = new URL(location.href); url.searchParams.set('item', it.id); url.hash = 'explore';
+        function fallback() { var field = h('input', { type: 'text', readonly: '', value: url.href, 'aria-label': 'Item link: select and copy' }); feedback.textContent = 'Copy this link:'; feedback.appendChild(field); field.focus(); field.select(); }
+        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url.href).then(function () { feedback.textContent = 'Item link copied.'; }, fallback); else fallback();
+      });
+      actions.appendChild(prev); actions.appendChild(h('span', { class: 'gx-position', text: 'Item ' + (position + 1) + ' of ' + shown.length })); actions.appendChild(next); actions.appendChild(share); actions.appendChild(feedback); card.appendChild(actions);
       card.appendChild(h('div', { class: 'gx-meta' }, [
         h('span', { class: 'label', text: it.id + ' - ' + D.domains[it.d].short + ' - ' + (it.type === 'factual' ? 'factual' : 'category error') + (it.pair ? ' - pair ' + it.pair : '') })]));
       card.appendChild(h('p', { class: 'gx-question', text: it.q }));
+      card.appendChild(h('p', { class: 'note gx-limits', text: 'Research benchmark item, not operational safety guidance. Outcomes below are non-LLM baselines; no language model has been evaluated.' }));
       card.appendChild(h('div', { class: 'gx-block ok' }, [h('span', { class: 'label', text: 'Answer key' }), h('p', { text: it.a }), it.cite ? h('span', { class: 'src', text: it.cite }) : null]));
       var trap = h('div', { class: 'gx-block trap', id: 'gx-trap', hidden: '' }, [
         h('span', { class: 'label', text: 'The trap: ' + it.trap.label }), h('p', { text: it.trap.answer }),

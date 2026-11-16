@@ -87,3 +87,10 @@ input,select,textarea{font-family:var(--font-sans);accent-color:var(--accent)}
  .prog-grid{grid-template-columns:1fr}.prog-next{grid-column:auto}.hero-not{font-size:.875rem}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* Corpus browsing workflow */
+.gx-tools{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px 14px;padding:22px 24px;border-bottom:1px solid var(--rule-soft)}
+.gx-tools label{grid-column:1/-1;font-weight:600;font-size:.9rem}.gx-tools input,.gx-share-status input{width:100%;min-height:46px;padding:10px 12px;background:var(--surface);color:var(--ink);border:1px solid var(--rule-soft);border-radius:7px;font:inherit}
+.gx-count{grid-column:1/-1;margin:0;color:var(--muted);font-size:.875rem}.gx-actions{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:24px}.gx-position{font-size:.8rem;color:var(--muted)}
+.gx-actions .btn{font-size:.8rem;padding:9px 12px;min-height:44px}.gx-actions .btn:disabled{opacity:.45;cursor:default;transform:none}.gx-share-status{flex-basis:100%;font-size:.875rem;color:var(--accent)}.gx-empty{padding:24px}.gx-limits{font-size:.85rem;line-height:1.6;color:var(--muted);padding:12px 0;border-block:1px solid var(--rule-soft);margin-bottom:20px}
+@media(max-width:600px){.gx-tools{padding:18px 14px;grid-template-columns:1fr}.gx-tools label,.gx-count{grid-column:auto}}

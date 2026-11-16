@@ -23,6 +23,11 @@ model or vendor product has been evaluated here. The mock adapter's numbers come
 from a simulation whose outcome probabilities were fixed in advance, and every
 artifact it writes carries the string `MOCK_DEMONSTRATION_FIXTURE_NOT_RESULTS`.
 
+The [corpus browser](https://ehs-ai-grounding-eval.vercel.app/#explore) supports
+question or item-ID search, domain filters, previous/next navigation and direct
+links to selected items. Each item keeps the research-only limitations beside
+the answer and baseline outcomes.
+
 **At a glance**
 
 | | |
