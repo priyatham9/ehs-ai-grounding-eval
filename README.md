@@ -627,3 +627,18 @@ in `results/item_analysis.md`. Full counts, scope and interpretation are in
 ### Grounded assistant (demo project)
 
 A citation-first Q&A demo over the same corpus: BM25+ retrieval, an extractive `MockModel` (no language model, no keys), mandatory clause citation, an abstain rule (threshold 0.30) and an audit record per answer. Run through this benchmark (`python3 scripts/run_assistant_eval.py`, output in `results/assistant_eval.md`): 22.2% factual accuracy, 34.9% factual abstention, 5 of 5 false-premise items declined, 78.0% citation precision on answered items, 0 adjacent substitutions. Its release gate **fails** (citation precision 0.780 < 0.80). Try it in the browser at `docs/assistant.html` (self-contained); design, governance and limitations in [docs/assistant.md](docs/assistant.md).
+
+## Browser regression checks
+
+The research interface is tested against its checked-in evidence artifacts, including
+exports, restored links, mobile layout, and unavailable-data states. No simulation or
+external service is needed. After installing the test-only browser dependency, run:
+
+```bash
+python -m pip install playwright==1.62.0
+python -m playwright install chromium
+python scripts/check_evidence_ui.py
+```
+
+The script starts an isolated local server and closes it on exit. The same command
+runs in the read-only `research interface` GitHub Actions workflow.

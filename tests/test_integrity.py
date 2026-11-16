@@ -37,6 +37,14 @@ BASELINE_PROVENANCES = {
 #: fine and necessary; reproducing its text is not.
 COPYRIGHTED_BODIES = ("ASME", "API", "NFPA", "ISO", "ANSI", "IEC")
 
+# Browser automation is installed by its separate CI job, never by the runtime.
+RUNTIME_THIRD_PARTY_IMPORTS = {"pandas", "numpy"}
+TEST_ONLY_IMPORTS = {"scripts/check_evidence_ui.py": {"playwright"}}
+
+
+def _permitted_third_party_import(module: str, relative_path: str) -> bool:
+    return module in RUNTIME_THIRD_PARTY_IMPORTS or module in TEST_ONLY_IMPORTS.get(relative_path, set())
+
 
 def _corpus_files() -> list:
     return [
@@ -183,13 +191,11 @@ class TestPackagingHygiene(unittest.TestCase):
         self.assertTrue(os.path.exists(os.path.join(REPO_ROOT, ".gitignore")))
 
     def test_only_permitted_third_party_imports_are_used(self) -> None:
-        """The environment has pandas and numpy and nothing else installed.
+        """Runtime dependencies remain limited to pandas and numpy.
 
-        An import of anything outside the standard library plus those two would
-        make the repository unrunnable as documented, so it is checked rather
-        than assumed.
+        The standalone browser regression script has an exact-path exception
+        for its documented, test-only Playwright installation.
         """
-        allowed = {"pandas", "numpy"}
         pattern = re.compile(r"^\s*(?:import|from)\s+([a-zA-Z_][\w]*)", re.MULTILINE)
         stdlib_ok = {
             "abc", "argparse", "ast", "collections", "dataclasses", "datetime", "enum",
@@ -199,6 +205,7 @@ class TestPackagingHygiene(unittest.TestCase):
             "warnings", "corpus_stats", "grounding_eval", "verify_sources", "__future__",
             "csv", "glob", "check_manuscript", "item_analysis",
             "build_assistant_page", "run_assistant_eval",
+            "contextlib", "http", "threading",
         }
         offenders = []
         for root, dirs, files in os.walk(REPO_ROOT):
@@ -207,13 +214,20 @@ class TestPackagingHygiene(unittest.TestCase):
                 if not name.endswith(".py"):
                     continue
                 path = os.path.join(root, name)
+                relative_path = os.path.relpath(path, REPO_ROOT).replace(os.sep, "/")
                 with open(path, "r", encoding="utf-8") as handle:
                     source = handle.read()
                 for module in pattern.findall(source):
-                    if module in allowed or module in stdlib_ok:
+                    if _permitted_third_party_import(module, relative_path) or module in stdlib_ok:
                         continue
                     offenders.append("%s imports %s" % (os.path.relpath(path, REPO_ROOT), module))
         self.assertEqual(offenders, [], msg="disallowed imports: %s" % offenders)
+
+    def test_browser_dependency_exception_is_scoped_to_its_script(self) -> None:
+        self.assertTrue(_permitted_third_party_import("playwright", "scripts/check_evidence_ui.py"))
+        for path in ("grounding_eval/scoring.py", "scripts/run_assistant_eval.py", "tests/test_integrity.py"):
+            self.assertFalse(_permitted_third_party_import("playwright", path), msg=path)
+        self.assertEqual(RUNTIME_THIRD_PARTY_IMPORTS, {"numpy", "pandas"})
 
 
 if __name__ == "__main__":
