@@ -217,6 +217,9 @@
                 placeholder="Find a question, topic, or clause"
                 aria-label="Search questions, topics, or clauses"
             /></label>
+            <button id="skip-to-evidence" class="text-link" type="button">
+              Skip to selected evidence →
+            </button>
             <div class="ledger-legend">
               <span
                 ><i class="status-dot pass" aria-hidden="true"></i> lexical
@@ -277,6 +280,7 @@
 
           <article
             id="inspector"
+            tabindex="-1"
             class="inspector"
             aria-labelledby="selected-question"
           >
